@@ -15,7 +15,7 @@ public class MonsterStats : MonoBehaviour
     public float AttackPower => _currentAttackPower;
     public float MoveSpeed => _currentMoveSpeed;
 
-    private void Awake()
+    private void OnEnable()
     {
         Init();
     }
