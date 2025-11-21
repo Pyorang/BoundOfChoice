@@ -15,4 +15,6 @@ MonoBehaviour:
   MaxHealth: 100
   MaxMana: 100
   Speed: 1
+  MaxSpeed: 1
+  AttackPower: 1
   JumpHeight: 1

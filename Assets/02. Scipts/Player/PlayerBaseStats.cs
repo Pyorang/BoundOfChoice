@@ -3,9 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Stats/PlayerBaseStats")]
 public class PlayerBaseStats : ScriptableObject
 {
-    public float MaxHealth;
-    public float MaxMana;
-    public float Speed;
+    public int MaxHealth;
+    public int MaxMana;
+    public float MinSpeed;
+    public float MaxSpeed;
     public float AttackPower;
     public float JumpHeight;
 }
