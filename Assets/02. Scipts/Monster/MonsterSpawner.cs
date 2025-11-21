@@ -39,7 +39,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         if (_player == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(PlayerTag);
-            if(player != null)
+            if (player != null)
             {
                 _player = player;
             }
