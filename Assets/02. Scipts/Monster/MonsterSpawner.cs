@@ -8,7 +8,7 @@ public struct MonsterPrefabInfo
     public GameObject Prefab;
 }
 
-public class MonsterSpawner : MonoBehaviour
+public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 {
     [SerializeField] private List<MonsterPrefabInfo> _monsterPrefabInfos;
     private Dictionary<int, GameObject> _monsterPrefabDict;
@@ -29,7 +29,7 @@ public class MonsterSpawner : MonoBehaviour
         _monsterPrefabInfos.Clear();
     }
 
-    public GameObject CreateMonster(int id, Vector2 position, Quaternion rotation)
+    public GameObject CreateMonster(int id, Vector2 position)
     {
         if (!_monsterPrefabDict.TryGetValue(id, out GameObject prefab) || prefab == null)
         {
@@ -37,7 +37,7 @@ public class MonsterSpawner : MonoBehaviour
             return null;
         }
 
-        GameObject monster  = Instantiate(prefab, position, rotation, transform);
+        GameObject monster  = Instantiate(prefab, position, Quaternion.identity, transform);
         
         if (monster.TryGetComponent<MonsterController>(out var controller))
         {
