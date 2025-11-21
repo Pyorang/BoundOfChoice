@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(MonsterMovement))]
 public abstract class MonsterController : MonoBehaviour
@@ -8,11 +9,15 @@ public abstract class MonsterController : MonoBehaviour
     [SerializeField] protected float _stopDistance;
 
     protected MonsterMovement _movement;
-    protected GameObject _player;
+    protected MonsterAnimator _animator;
+    protected SpriteRenderer _spriteRenderer;
+    [SerializeField] protected GameObject _player;
 
     private void Awake()
     {
         _movement = GetComponent<MonsterMovement>();
+        _animator = GetComponent<MonsterAnimator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -34,12 +39,18 @@ public abstract class MonsterController : MonoBehaviour
         {
             direction = Vector2.zero;
             // NOTE : 스킬 시전 로직을 추가한다.
+            _animator.PlayAttackAnimation();
+            _spriteRenderer.flipX = distance > 0;
         }
         else
         {
             direction = GetMoveDirection();
+            _spriteRenderer.flipX = direction.x > 0;
         }
 
+        bool isMoving = direction != Vector2.zero;
+
+        _animator.PlayMoveAnimation(isMoving);
         _movement.SetMoveDirection(direction);
     }
 

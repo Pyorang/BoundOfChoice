@@ -6,6 +6,7 @@ public class PatrollMonsterController : MonsterController
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
     private float _nextPosition;
+    private const float STOP_THRESHOLD = 0.1f;
 
     protected override void Init()
     {
@@ -17,7 +18,7 @@ public class PatrollMonsterController : MonsterController
         float distance = _nextPosition - transform.position.x;
         float absDistance = Mathf.Abs(distance);
 
-        if (absDistance < Mathf.Epsilon)
+        if (absDistance < STOP_THRESHOLD)
         {
             _nextPosition = Random.Range(_minX, _maxX);
         }
