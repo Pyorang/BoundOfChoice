@@ -29,6 +29,8 @@ public class AudioManager : SingletonBehaviour<AudioManager>
 
         AudioSource bgm = _audioSources[(int)AudioType.BGM];
         bgm.loop = true;
+
+        SyncUserSettings();
     }
 
     public void Play(AudioType audioType, string fileName)
@@ -89,7 +91,6 @@ public class AudioManager : SingletonBehaviour<AudioManager>
     public void SyncUserSettings()
     {
         var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
-        Debug.Assert(userSettingsData != null);
         SetVolume(AudioType.BGM, userSettingsData.BGMvalue);
         SetVolume(AudioType.SFX, userSettingsData.SFXvalue);
     }
