@@ -32,7 +32,7 @@ public class MonsterSpawner : MonoBehaviour
 
     public GameObject CreateMonster(int id, Vector2 position, Quaternion rotation)
     {
-        if (_monsterPrefabDict.TryGetValue(id, out GameObject prefab) || prefab == null)
+        if (!_monsterPrefabDict.TryGetValue(id, out GameObject prefab) || prefab == null)
         {
             Debug.LogError($"몬스터 ID({id})가 없거나 프리팹이 null 입니다.");
             return null;
