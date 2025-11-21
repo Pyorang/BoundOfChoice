@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour
 
     private float _attackPower = 1;
 
-    private float _jumpForce = 1;
+    private float _jumpForce = 5;
 
     public int Health => _health;
     public int Mana => _mana;
