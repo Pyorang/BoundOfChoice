@@ -41,7 +41,7 @@ public class InGameSettingsUI : BaseUI
     public void OnSFXValueChanged()
     {
         AudioManager.Instance.SetVolume(AudioType.SFX, _sfxSlider.value);
-        UserDataManager.Instance.GetUserData<UserSettingsData>().SFXvalue = _bgmSlider.value;
+        UserDataManager.Instance.GetUserData<UserSettingsData>().SFXvalue = _sfxSlider.value;
         Save();
     }
 
