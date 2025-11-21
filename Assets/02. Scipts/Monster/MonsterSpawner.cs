@@ -16,11 +16,14 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
     [SerializeField] private Transform _player;
     private const string PlayerTag = "player";
 
-    private void Awake()
+    protected override void Init()
     {
+        IsDestroyOnLoad = true;
+        base.Init();
+
         // NOTE : 인스펙터 창에서 입력된 프리팹 정보를 Dictionary로 저장한다. 
         _monsterPrefabDict = new Dictionary<int, GameObject>();
-        foreach(var info in _monsterPrefabInfos)
+        foreach (var info in _monsterPrefabInfos)
         {
             if (!_monsterPrefabDict.TryAdd(info.ID, info.Prefab))
             {
@@ -42,7 +45,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
             }
             else
             {
-                Debug.LogError("몬스터 스포너에서 플레이어를 찾을 수 없습니다.");
+                Debug.LogError($"'{PlayerTag}' 태그를 가진 플레이어를 찾을 수 없습니다. Player 오브젝트에 태그가 올바르게 설정되었는지 확인해주세요. ");
             }
         }
     }
