@@ -27,38 +27,49 @@ public class PlayerStats : MonoBehaviour
 
     public void SpeedUp(float amount)
     {
+        if (amount < 0) return;
         _moveSpeed = Mathf.Min(_moveSpeed + amount, _baseStats.MaxSpeed);
     }
 
     public void SpeedDown(float amount)
     {
+        if (amount < 0) return;
         _moveSpeed = Mathf.Max(_moveSpeed - amount, _baseStats.MinSpeed);
     }
 
-    public void IncreaseAttackPower(float amount) => _attackPower += amount;
-
-    public void DecreaseAttackPower(float amount)
+    public void PowerUp(float amount)
     {
+        if (amount < 0) return;
+        _attackPower += amount;
+    }
+
+    public void PowerDown(float amount)
+    {
+        if (amount < 0) return;
         _attackPower = Mathf.Max(_attackPower - amount, 0);
     }
 
     public void TakeDamage(int amount)
     {
+        if (amount < 0) return;
         _health = Mathf.Max(_health - amount, 0);
     }
 
     public void Heal(int amount)
     {
+        if (amount < 0) return;
         _health = Mathf.Min(_health + amount, _baseStats.MaxHealth);
     }
 
     public void UseMana(int amount)
     {
+        if (amount < 0) return;
         _mana = Mathf.Max(_mana - amount, 0);
     }
 
     public void RegenerateMana(int amount)
     {
+        if (amount < 0) return;
         _mana = Mathf.Min(_mana + amount, _baseStats.MaxMana);
     }
 }
