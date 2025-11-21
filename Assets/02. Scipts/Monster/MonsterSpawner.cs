@@ -11,35 +11,33 @@ public struct MonsterPrefabInfo
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] private List<MonsterPrefabInfo> _monsterPrefabInfos;
+    private Dictionary<int, GameObject> _monsterPrefabDict;
+
+    private void Awake()
+    {
+        _monsterPrefabDict = new Dictionary<int, GameObject>();
+        foreach(var info in _monsterPrefabInfos)
+        {
+            if (_monsterPrefabDict.ContainsKey(info.ID))
+            {
+                Debug.LogWarning($"중복된 몬스터 ID({info.ID})가 존재합니다.");
+            }
+            else
+            {
+                _monsterPrefabDict.Add(info.ID, info.Prefab);
+            }
+        }
+        _monsterPrefabInfos.Clear();
+    }
 
     public GameObject CreateMonster(int id, Vector2 position, Quaternion rotation)
     {
-        if (_monsterPrefabInfos == null)
+        if (_monsterPrefabDict.TryGetValue(id, out GameObject prefab) || prefab == null)
         {
-            Debug.LogError("Monster Prefab list is null.");
+            Debug.LogError($"몬스터 ID({id})가 없거나 프리팹이 null 입니다.");
             return null;
         }
 
-        GameObject prefab = null;
-        foreach (var info in _monsterPrefabInfos)
-        {
-            if (info.ID == id)
-            {
-                prefab = info.Prefab;
-                break;
-            }
-        }
-
-        if (prefab == null)
-        {
-            Debug.LogError($"Monster ID : {id} not found or prefab is null.");
-            return null;
-        }
-
-        GameObject monster = Instantiate(prefab, transform);
-        monster.transform.position = position;
-        monster.transform.rotation = rotation;
-
-        return monster;
+        return Instantiate(prefab, position, rotation, transform);
     }
 }
