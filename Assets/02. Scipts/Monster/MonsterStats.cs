@@ -22,7 +22,7 @@ public class MonsterStats : MonoBehaviour
 
     public void Init()
     {
-        if(_baseData == null)
+        if (_baseData == null)
         {
             Debug.LogError("MonsterData is missing!");
             return;
