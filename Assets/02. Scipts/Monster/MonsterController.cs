@@ -18,7 +18,7 @@ public class MonsterController : MonoBehaviour
 
     private void Start()
     {
-        // 타겟을 찾아 Transform을 참조한다.
+        // NOTE : 타겟을 찾아 Transform을 참조한다.
         GameObject player = GameObject.FindGameObjectWithTag(TargetTag);
         if (player != null)
         {
@@ -44,7 +44,7 @@ public class MonsterController : MonoBehaviour
         if (absDistance < _stopDistance)
         {
             direction = Vector2.zero;
-            // 공격을 실행하는 로직을 추가한다.
+            // NOTE : 공격을 실행하는 로직을 추가한다.
         }
         else
         {
