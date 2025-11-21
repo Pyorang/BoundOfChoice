@@ -7,7 +7,6 @@ public class MonsterMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector2 _direction;
 
-
     private void Awake()
     {
         _stats = GetComponent<MonsterStats>();
