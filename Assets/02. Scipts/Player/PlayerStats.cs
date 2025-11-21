@@ -2,12 +2,19 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    private PlayerBaseStats _baseStats;
-    private int _health;
-    private int _mana;
-    private float _moveSpeed;
-    private float _attackPower;
-    private float _jumpForce;
+    private int _health = 100;
+    private int _maxHealth = 100;
+
+    private int _mana = 100;
+    private int _maxMana = 100;
+
+    private float _moveSpeed = 1;
+    private float _minMoveSpeed = 1;
+    private float _maxMoveSpeed = 10;
+
+    private float _attackPower = 1;
+
+    private float _jumpForce = 1;
 
     public int Health => _health;
     public int Mana => _mana;
@@ -15,35 +22,25 @@ public class PlayerStats : MonoBehaviour
     public float AttackPower => _attackPower;
     public float JumpForce => _jumpForce;
 
-    private void Awake()
-    {
-        _baseStats = Resources.Load<PlayerBaseStats>("DataTable/PlayerBaseStats");
-        _moveSpeed = _baseStats.MinSpeed;
-        _jumpForce = _baseStats.JumpHeight;
-        _attackPower = _baseStats.AttackPower;
-        _health = _baseStats.MaxHealth;
-        _mana = _baseStats.MaxMana;
-    }
-
-    public void SpeedUp(float amount)
+    public void MoveSpeedUp(float amount)
     {
         if (amount < 0) return;
-        _moveSpeed = Mathf.Min(_moveSpeed + amount, _baseStats.MaxSpeed);
+        _moveSpeed = Mathf.Min(_moveSpeed + amount, _maxMoveSpeed);
     }
 
-    public void SpeedDown(float amount)
+    public void MoveSpeedDown(float amount)
     {
         if (amount < 0) return;
-        _moveSpeed = Mathf.Max(_moveSpeed - amount, _baseStats.MinSpeed);
+        _moveSpeed = Mathf.Max(_moveSpeed - amount, _minMoveSpeed);
     }
 
-    public void PowerUp(float amount)
+    public void AttakPowerUp(float amount)
     {
         if (amount < 0) return;
         _attackPower += amount;
     }
 
-    public void PowerDown(float amount)
+    public void AttackPowerDown(float amount)
     {
         if (amount < 0) return;
         _attackPower = Mathf.Max(_attackPower - amount, 0);
@@ -58,7 +55,7 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int amount)
     {
         if (amount < 0) return;
-        _health = Mathf.Min(_health + amount, _baseStats.MaxHealth);
+        _health = Mathf.Min(_health + amount, _maxHealth);
     }
 
     public void UseMana(int amount)
@@ -70,6 +67,6 @@ public class PlayerStats : MonoBehaviour
     public void RegenerateMana(int amount)
     {
         if (amount < 0) return;
-        _mana = Mathf.Min(_mana + amount, _baseStats.MaxMana);
+        _mana = Mathf.Min(_mana + amount, _maxMana);
     }
 }
