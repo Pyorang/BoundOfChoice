@@ -7,21 +7,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private float _xMovement = 0.0f;
 
-    [Header("충돌 처리")]
-    [SerializeField] private LayerMask _groundLayer;
-    private float _groundDistance = 0.1f;
-
-    [SerializeField] private LayerMask _wallLayer;
-    private float _wallDistance = 0.1f;
+    private bool _isOnGround = false;
 
     private void Awake()
     {
         _playerStats = GetComponent<PlayerStats>();
         _rigidBody = GetComponent<Rigidbody2D>();
-
-        Collider2D myCollider = GetComponent<Collider2D>();
-        _groundDistance += myCollider.bounds.extents.y;
-        _wallDistance += myCollider.bounds.extents.x;
     }
 
     private void Update()
@@ -40,29 +31,30 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!CheckOnGround()) return;
             Jump();
         }
     }
 
-    private bool CheckOnGround()
-    {
-        return Physics2D.Raycast(transform.position, Vector2.down, _groundDistance, _groundLayer);
-    }
-
     private void Jump()
     {
+        if (!_isOnGround) return;
         _rigidBody.AddForce(Vector2.up * _playerStats.JumpForce, ForceMode2D.Impulse);
-    }
-
-    private bool CheckReachedToWall()
-    {
-        return Physics2D.Raycast(transform.position, Vector2.right * _xMovement, _wallDistance, _wallLayer);
     }
 
     private void MoveHorizontal()
     {
-        if (CheckReachedToWall()) return;
         _rigidBody.linearVelocityX = _xMovement * _playerStats.MoveSpeed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!other.gameObject.CompareTag("Ground")) return;
+        _isOnGround = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (!other.gameObject.CompareTag("Ground")) return;
+        _isOnGround = false;
     }
 }
