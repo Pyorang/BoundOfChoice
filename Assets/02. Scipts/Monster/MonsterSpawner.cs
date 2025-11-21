@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public struct MonsterPrefabInfo
@@ -13,8 +13,11 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] private List<MonsterPrefabInfo> _monsterPrefabInfos;
     private Dictionary<int, GameObject> _monsterPrefabDict;
 
+    [SerializeField] private Transform _player;
+
     private void Awake()
     {
+        // NOTE : 인스펙터 창에서 입력된 프리팹 정보를 Dictionary로 저장한다. 
         _monsterPrefabDict = new Dictionary<int, GameObject>();
         foreach(var info in _monsterPrefabInfos)
         {
@@ -38,6 +41,14 @@ public class MonsterSpawner : MonoBehaviour
             return null;
         }
 
-        return Instantiate(prefab, position, rotation, transform);
+        GameObject monster  = Instantiate(prefab, position, rotation, transform);
+        monster.GetComponent<MonsterController>().SetTargetTransform(_player);
+
+        return monster;
+    }
+
+    public void TestButton()
+    {
+        CreateMonster(0, new Vector2(-3, 0), Quaternion.identity);
     }
 }
