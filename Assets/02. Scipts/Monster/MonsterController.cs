@@ -9,21 +9,10 @@ public class MonsterController : MonoBehaviour
 
     private MonsterMovement _movement;
     private Transform _target;
-    private const string TargetTag = "Player";
 
     private void Awake()
     {
         _movement = GetComponent<MonsterMovement>();
-    }
-
-    private void Start()
-    {
-        // NOTE : 타겟을 찾아 Transform을 참조한다.
-        GameObject player = GameObject.FindGameObjectWithTag(TargetTag);
-        if (player != null)
-        {
-            _target = player.transform;
-        }
     }
 
     private void Update()
@@ -53,5 +42,10 @@ public class MonsterController : MonoBehaviour
         }
 
         _movement.SetMoveDirection(direction);
+    }
+
+    public void SetTargetTransform(Transform target)
+    {
+        _target = target;
     }
 }
