@@ -21,13 +21,9 @@ public class MonsterSpawner : MonoBehaviour
         _monsterPrefabDict = new Dictionary<int, GameObject>();
         foreach(var info in _monsterPrefabInfos)
         {
-            if (_monsterPrefabDict.ContainsKey(info.ID))
+            if (!_monsterPrefabDict.TryAdd(info.ID, info.Prefab))
             {
                 Debug.LogWarning($"중복된 몬스터 ID({info.ID})가 존재합니다.");
-            }
-            else
-            {
-                _monsterPrefabDict.Add(info.ID, info.Prefab);
             }
         }
         _monsterPrefabInfos.Clear();
@@ -42,13 +38,18 @@ public class MonsterSpawner : MonoBehaviour
         }
 
         GameObject monster  = Instantiate(prefab, position, rotation, transform);
-        monster.GetComponent<MonsterController>().SetTargetTransform(_player);
+        
+        if (monster.TryGetComponent<MonsterController>(out var controller))
+        {
+            controller.SetTargetTransform(_player);
+        }
+        else
+        {
+            Debug.LogError($"몬스터 프리팹(ID : {id})에 MonsterController 컴포넌트가 없습니다.");
+            Destroy(monster);
+            return null;
+        }
 
         return monster;
-    }
-
-    public void TestButton()
-    {
-        CreateMonster(0, new Vector2(-3, 0), Quaternion.identity);
     }
 }
