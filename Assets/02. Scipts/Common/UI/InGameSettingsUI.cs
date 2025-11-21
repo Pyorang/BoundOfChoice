@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class InGameSettingsUI : BaseUI
 {
+    private UserSettingsData _userSettingsData;
+
     [Header("환경설정 버튼")]
     [Space]
     [SerializeField] private Button _settingsButton;
@@ -27,29 +29,27 @@ public class InGameSettingsUI : BaseUI
     {
         base.SetData(data);
 
-        var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
-        SetSoundSetting(userSettingsData);
+        _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
+        SetSoundSetting(_userSettingsData);
+        _vibrationToggle.isOn = _userSettingsData.IsVibrationOn;
     }
 
     public void OnBGMValueChanged()
     {
         AudioManager.Instance.SetVolume(AudioType.BGM, _bgmSlider.value);
         UserDataManager.Instance.GetUserData<UserSettingsData>().BGMvalue = _bgmSlider.value;
-        Save();
     }
 
     public void OnSFXValueChanged()
     {
         AudioManager.Instance.SetVolume(AudioType.SFX, _sfxSlider.value);
         UserDataManager.Instance.GetUserData<UserSettingsData>().SFXvalue = _sfxSlider.value;
-        Save();
     }
 
     public void OnVibrationToggleChanged()
     {
         CameraController.Instance.SetShakerOn(_vibrationToggle.isOn);
         UserDataManager.Instance.GetUserData<UserSettingsData>().IsVibrationOn = _vibrationToggle.isOn;
-        Save();
     }
 
     public void OnClickSettingsButton()
@@ -75,6 +75,7 @@ public class InGameSettingsUI : BaseUI
 
     public void OnClickReturnButton()
     {
+        Save();
         UIManager.Instance.CloseUI(this);
     }
 
