@@ -8,19 +8,16 @@ public class PlayerMovement : MonoBehaviour
     private float _xMovement = 0.0f;
 
     [Header("충돌 처리")]
-    private LayerMask _groundLayer;
+    [SerializeField] private LayerMask _groundLayer;
     private float _groundDistance = 0.1f;
-    
-    private LayerMask _wallLayer;
+
+    [SerializeField] private LayerMask _wallLayer;
     private float _wallDistance = 0.1f;
 
     private void Awake()
     {
         _playerStats = GetComponent<PlayerStats>();
         _rigidBody = GetComponent<Rigidbody2D>();
-
-        _groundLayer = LayerMask.GetMask("Ground");
-        _wallLayer = LayerMask.GetMask("Wall");
 
         Collider2D myCollider = GetComponent<Collider2D>();
         _groundDistance += myCollider.bounds.extents.y;
@@ -43,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (CheckOnGround() == false) return;
+            if (!CheckOnGround()) return;
             Jump();
         }
     }
@@ -65,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveHorizontal()
     {
-        if (CheckReachedToWall() == true) return;
+        if (CheckReachedToWall()) return;
         _rigidBody.linearVelocityX = _xMovement * _playerStats.MoveSpeed;
     }
 }
