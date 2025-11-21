@@ -13,7 +13,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
     [SerializeField] private List<MonsterPrefabInfo> _monsterPrefabInfos;
     private Dictionary<int, GameObject> _monsterPrefabDict;
 
-    [SerializeField] private Transform _player;
+    [SerializeField] private GameObject _player;
     private const string PlayerTag = "player";
 
     protected override void Init()
@@ -41,7 +41,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
             GameObject player = GameObject.FindGameObjectWithTag(PlayerTag);
             if(player != null)
             {
-                _player = player.transform;
+                _player = player;
             }
             else
             {
@@ -62,7 +62,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         
         if (monster.TryGetComponent<MonsterController>(out var controller))
         {
-            controller.SetTargetTransform(_player);
+            controller.SetPlayer(_player);
         }
         else
         {

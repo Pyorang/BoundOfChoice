@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1587285398578119679}
   - component: {fileID: 8329196450079901554}
   - component: {fileID: 4035274018117088914}
-  - component: {fileID: 4352147600117608774}
   - component: {fileID: 4237834397978374595}
+  - component: {fileID: 7126068191087829366}
   m_Layer: 6
-  m_Name: Monster
+  m_Name: ChaseMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,19 +178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseData: {fileID: 11400000, guid: e2719356459d57942a73c7acb54ffd5e, type: 2}
---- !u!114 &4352147600117608774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8301200592662856278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3101e852d5c3974fa06c863dce2d717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stopDistance: 1
 --- !u!114 &4237834397978374595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,3 +190,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025022b3e82af5746800a8c3dbae27fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7126068191087829366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8301200592662856278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d384b2f7db0d146a6e74f1c41770c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stopDistance: 3
