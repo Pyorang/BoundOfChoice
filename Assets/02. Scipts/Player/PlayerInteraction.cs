@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    private List<(InteractObjectBase, Transform)> _interactableObjects = new List<(InteractObjectBase, Transform)>();
+    private List<InteractObjectBase> _interactableObjects = new List<InteractObjectBase>();
 
     private void Update()
     {
@@ -20,19 +20,17 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    public void AddInteractableObject(InteractObjectBase interactableObject, Transform transform)
+    public void AddInteractableObject(InteractObjectBase interactableObject)
     {
         if (interactableObject == null) return; 
-        var objectTuple = (interactableObject, transform);
-        if (_interactableObjects.Contains(objectTuple)) return;
-        _interactableObjects.Add(objectTuple);
+        if (_interactableObjects.Contains(interactableObject)) return;
+        _interactableObjects.Add(interactableObject);
     }
 
-    public void RemoveInteractableObject(InteractObjectBase interactableObject, Transform transform)
-    {
-        var objectTuple = (interactableObject, transform);
-        if (_interactableObjects.Contains(objectTuple) == false) return;
-        _interactableObjects.Remove(objectTuple);
+    public void RemoveInteractableObject(InteractObjectBase interactableObject)
+    { 
+        if (_interactableObjects.Contains(interactableObject) == false) return;
+        _interactableObjects.Remove(interactableObject);
     }
 
     private float GetDistance(Transform other)
@@ -47,10 +45,11 @@ public class PlayerInteraction : MonoBehaviour
         float minDistance = float.MaxValue;
         foreach (var interactableObject in _interactableObjects)
         {
-            float currentDistance = GetDistance(interactableObject.Item2);
+            Transform transform = interactableObject.transform;
+            float currentDistance = GetDistance(transform);
             if (currentDistance < minDistance)
             {
-                target = interactableObject.Item1;
+                target = interactableObject;
                 minDistance = currentDistance;
             }
         }

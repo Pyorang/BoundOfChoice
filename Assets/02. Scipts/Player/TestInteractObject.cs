@@ -4,7 +4,7 @@ public class TestInteractObject : InteractObjectBase
 {
     protected override void TriggerEnter(Collider2D other)
     {
-        other.GetComponent<PlayerInteraction>()?.AddInteractableObject(this, transform);
+        other.GetComponent<PlayerInteraction>()?.AddInteractableObject(this);
     }
 
     public override void Execute()
@@ -16,6 +16,6 @@ public class TestInteractObject : InteractObjectBase
 
     protected override void TriggerExit(Collider2D other)
     {
-        other.GetComponent<PlayerInteraction>()?.RemoveInteractableObject(this, transform);
+        other.GetComponent<PlayerInteraction>()?.RemoveInteractableObject(this);
     }
 }
