@@ -6,6 +6,7 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private Button _inGameSettingsButton;
 
     [SerializeField] private Slider _healthBarSlider;
+    [SerializeField] private Slider _manaBarSlider;
 
     public void OnClickInGameSettingsButton()
     {
@@ -17,5 +18,10 @@ public class InGameUIController : MonoBehaviour
     public void OnUpdateHealthUI(int health, int maxHealth)
     {
         _healthBarSlider.value = (float)health / maxHealth;
+    }
+
+    public void OnUpdateManaUI(int mana, int maxMana)
+    {
+        _manaBarSlider.value = (float)mana / maxMana;
     }
 }
