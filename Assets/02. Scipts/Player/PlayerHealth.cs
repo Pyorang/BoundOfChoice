@@ -3,10 +3,16 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private PlayerStats _playerStats;
+    private InGameUIController _inGameUIController;
 
     private void Awake()
     {
         _playerStats = GetComponent<PlayerStats>();
+    }
+
+    private void Start()
+    {
+        _inGameUIController = FindAnyObjectByType<InGameUIController>();
     }
 
     public void TakeDamage(int amount)
@@ -24,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void UpdateHealthUI()
     {
-
+        _inGameUIController.OnUpdateHealthUI(_playerStats.Health, _playerStats.MaxHealth);
     }
 
     private void CheckDeath()
