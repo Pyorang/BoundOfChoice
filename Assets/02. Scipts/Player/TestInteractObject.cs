@@ -1,9 +1,21 @@
 using UnityEngine;
 
-public class TestInteractObject : MonoBehaviour, IInteractable
+public class TestInteractObject : InteractObjectBase
 {
-    public void Execute()
+    protected override void TriggerEnter(Collider2D other)
     {
-        Debug.Log("Interacted with " + gameObject.name);
+        other.GetComponent<PlayerInteraction>()?.AddInteractableObject(this, transform);
+    }
+
+    public override void Execute()
+    {
+#if UNITY_EDITOR
+        Debug.Log($"Interact with {gameObject.name}");
+#endif
+    }
+
+    protected override void TriggerExit(Collider2D other)
+    {
+        other.GetComponent<PlayerInteraction>()?.RemoveInteractableObject(this, transform);
     }
 }

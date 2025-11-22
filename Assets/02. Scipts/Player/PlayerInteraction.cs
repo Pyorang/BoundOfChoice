@@ -1,9 +1,9 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    private List<IInteractable> _interactableObjects = new List<IInteractable>();
+    private List<(InteractObjectBase, Transform)> _interactableObjects = new List<(InteractObjectBase, Transform)>();
 
     private void Update()
     {
@@ -14,48 +14,46 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            IInteractable interactObject = GetNearestObject();
-            if (interactObject == null) return;
-            interactObject.Execute();
+            InteractObjectBase targetObject = UpdateTarget();
+            if (targetObject == null) return;
+            targetObject.Execute();
         }
     }
 
-    private IInteractable GetNearestObject()
+    public void AddInteractableObject(InteractObjectBase interactableObject, Transform transform)
     {
-        IInteractable nearest = null;
+        if (interactableObject == null) return; 
+        var objectTuple = (interactableObject, transform);
+        if (_interactableObjects.Contains(objectTuple)) return;
+        _interactableObjects.Add(objectTuple);
+    }
+
+    public void RemoveInteractableObject(InteractObjectBase interactableObject, Transform transform)
+    {
+        var objectTuple = (interactableObject, transform);
+        if (_interactableObjects.Contains(objectTuple) == false) return;
+        _interactableObjects.Remove(objectTuple);
+    }
+
+    private float GetDistance(Transform other)
+    {
+        float distance = (other.position - transform.position).sqrMagnitude;
+        return distance;
+    }
+
+    private InteractObjectBase UpdateTarget()
+    {
+        InteractObjectBase target = null;
         float minDistance = float.MaxValue;
-        Vector3 myPosition = transform.position;
-
-        for (int i = _interactableObjects.Count - 1; i >= 0; i--)
+        foreach (var interactableObject in _interactableObjects)
         {
-            MonoBehaviour monoObject = _interactableObjects[i] as MonoBehaviour;
-            if (monoObject == null)
+            float currentDistance = GetDistance(interactableObject.Item2);
+            if (currentDistance < minDistance)
             {
-                _interactableObjects.RemoveAt(i);
-                continue;
-            }
-
-            float distance = (monoObject.transform.position - myPosition).sqrMagnitude;
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                nearest = _interactableObjects[i];
+                target = interactableObject.Item1;
+                minDistance = currentDistance;
             }
         }
-        return nearest;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        IInteractable interactableObject = other.GetComponent<IInteractable>();
-        if (interactableObject == null) return;
-        _interactableObjects.Add(interactableObject);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        IInteractable interactableObject = other.GetComponent<IInteractable>();
-        if (interactableObject == null) return;
-        _interactableObjects.Remove(interactableObject);
+        return target;
     }
 }
