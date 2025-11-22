@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private PlayerStats _playerStats;
-
     private Rigidbody2D _rigidBody;
-    private float _xMovement = 0.0f;
 
+    [Header("이동 설정")]
+    private float _xMovement = 0.0f;
+    private float _moveSpeed = 1;
+    private readonly float _minMoveSpeed = 1;
+    private readonly float _maxMoveSpeed = 10;
+
+    [Header("점프 설정")]
+    private float _jumpForce = 5;
     private bool _isOnGround = false;
 
     private void Awake()
     {
-        _playerStats = GetComponent<PlayerStats>();
         _rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -38,12 +42,24 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         if (!_isOnGround) return;
-        _rigidBody.AddForce(Vector2.up * _playerStats.JumpForce, ForceMode2D.Impulse);
+        _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 
     private void MoveHorizontal()
     {
-        _rigidBody.linearVelocityX = _xMovement * _playerStats.MoveSpeed;
+        _rigidBody.linearVelocityX = _xMovement * _moveSpeed;
+    }
+
+    public void MoveSpeedUp(int amount)
+    {
+        if (amount < 0) return;
+        _moveSpeed = Mathf.Min(_moveSpeed + amount, _maxMoveSpeed);
+    }
+
+    public void MoveSpeedDown(int amount)
+    {
+        if (amount < 0) return;
+        _moveSpeed = Mathf.Max(_moveSpeed - amount, _minMoveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
