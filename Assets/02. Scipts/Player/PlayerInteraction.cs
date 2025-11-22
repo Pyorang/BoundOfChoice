@@ -22,21 +22,17 @@ public class PlayerInteraction : MonoBehaviour
 
     public void AddInteractableObject(InteractObjectBase interactableObject)
     {
-        if (interactableObject == null) return; 
-        if (_interactableObjects.Contains(interactableObject)) return;
         _interactableObjects.Add(interactableObject);
     }
 
     public void RemoveInteractableObject(InteractObjectBase interactableObject)
-    { 
-        if (_interactableObjects.Contains(interactableObject) == false) return;
+    {
         _interactableObjects.Remove(interactableObject);
     }
 
     private float GetDistance(Transform other)
     {
-        float distance = (other.position - transform.position).sqrMagnitude;
-        return distance;
+        return (other.position - transform.position).sqrMagnitude;
     }
 
     private InteractObjectBase UpdateTarget()
@@ -45,8 +41,7 @@ public class PlayerInteraction : MonoBehaviour
         float minDistance = float.MaxValue;
         foreach (var interactableObject in _interactableObjects)
         {
-            Transform transform = interactableObject.transform;
-            float currentDistance = GetDistance(transform);
+            float currentDistance = GetDistance(interactableObject.transform);
             if (currentDistance < minDistance)
             {
                 target = interactableObject;
