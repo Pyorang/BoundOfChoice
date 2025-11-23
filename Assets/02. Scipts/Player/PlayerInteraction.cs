@@ -35,7 +35,7 @@ public class PlayerInteraction : MonoBehaviour
         return (other.position - transform.position).sqrMagnitude;
     }
 
-    private InteractObjectBase UpdateTarget()
+    private InteractObjectBase UpdateNearestTarget()
     {
         InteractObjectBase target = null;
         float minDistance = float.MaxValue;
