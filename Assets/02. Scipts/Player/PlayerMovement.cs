@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("이동 설정")]
     private float _xMovement = 0.0f;
-    private float _moveSpeed = 1;
-    private readonly float _minMoveSpeed = 1;
-    private readonly float _maxMoveSpeed = 10;
+    private float _moveSpeed = 1.0f;
+    private readonly float _minMoveSpeed = 1.0f;
+    private readonly float _maxMoveSpeed = 10.0f;
 
     [Header("점프 설정")]
     private float _jumpForce = 5;
@@ -50,15 +50,15 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody.linearVelocityX = _xMovement * _moveSpeed;
     }
 
-    public void MoveSpeedUp(int amount)
+    public void MoveSpeedUp(float amount)
     {
-        if (amount < 0) return;
+        if (amount < 0.0f) return;
         _moveSpeed = Mathf.Min(_moveSpeed + amount, _maxMoveSpeed);
     }
 
-    public void MoveSpeedDown(int amount)
+    public void MoveSpeedDown(float amount)
     {
-        if (amount < 0) return;
+        if (amount < 0.0f) return;
         _moveSpeed = Mathf.Max(_moveSpeed - amount, _minMoveSpeed);
     }
 
