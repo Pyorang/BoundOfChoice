@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
-    private InGameUIController _inGameUIController;
 
     [Header("이동 설정")]
     private float _xMovement = 0.0f;
@@ -29,11 +28,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
-        _inGameUIController = FindAnyObjectByType<InGameUIController>();
     }
 
     private void Update()

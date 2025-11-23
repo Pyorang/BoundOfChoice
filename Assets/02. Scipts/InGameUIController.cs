@@ -12,7 +12,7 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private Image _manaBarImage;
     [SerializeField] private TextMeshProUGUI _manaText;
     [SerializeField] private TextMeshProUGUI _speedText;
-    [SerializeField] private TextMeshProUGUI _DamageText;
+    [SerializeField] private TextMeshProUGUI _damageText;
 
     private void Start()
     {
@@ -54,6 +54,6 @@ public class InGameUIController : MonoBehaviour
 
     public void OnUpdateDamageUI(int damage)
     {
-        _DamageText.text = $"{damage}";
+        _damageText.text = $"{damage}";
     }
 }
