@@ -14,6 +14,13 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _speedText;
     [SerializeField] private TextMeshProUGUI _DamageText;
 
+    private void Start()
+    {
+        PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
+        PlayerMana.OnManaChanged += OnUpdateManaUI;
+        PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
+    }
+
     public void OnClickInGameSettingsButton()
     {
         var uiData = new BaseUIData();

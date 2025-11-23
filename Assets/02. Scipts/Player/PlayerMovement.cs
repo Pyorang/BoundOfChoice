@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float _moveSpeed = 1.0f;
     private readonly float _minMoveSpeed = 1.0f;
     private readonly float _maxMoveSpeed = 10.0f;
+    public static event Action<int> OnSpeedChanged;
 
     [Header("점프 설정")]
     private float _jumpForce = 5;
@@ -60,19 +62,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (amount < 0.0f) return;
         _moveSpeed = Mathf.Min(_moveSpeed + amount, _maxMoveSpeed);
-        UpdateSpeedUI();
+        OnSpeedChanged?.Invoke((int)_moveSpeed);
     }
 
     public void MoveSpeedDown(float amount)
     {
         if (amount < 0.0f) return;
         _moveSpeed = Mathf.Max(_moveSpeed - amount, _minMoveSpeed);
-        UpdateSpeedUI();
-    }
-
-    private void UpdateSpeedUI()
-    {
-        _inGameUIController.OnUpdateSpeedUI((int)_moveSpeed);
+        OnSpeedChanged?.Invoke((int)_moveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
