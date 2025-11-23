@@ -12,13 +12,12 @@ public class CameraController : SingletonBehaviour<CameraController>
     protected override void Init()
     {
         _camera = Camera.main;
-
-        SyncUserSettings();
     }
 
     private void Start()
     {
         Init();
+        SyncUserSettings();
     }
 
     public void SetShakerOn(bool isOn)

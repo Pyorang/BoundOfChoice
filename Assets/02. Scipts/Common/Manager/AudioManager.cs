@@ -29,7 +29,10 @@ public class AudioManager : SingletonBehaviour<AudioManager>
 
         AudioSource bgm = _audioSources[(int)AudioType.BGM];
         bgm.loop = true;
+    }
 
+    private void Start()
+    {
         SyncUserSettings();
     }
 
