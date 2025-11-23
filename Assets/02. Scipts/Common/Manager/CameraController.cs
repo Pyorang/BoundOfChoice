@@ -84,7 +84,7 @@ public class CameraController : SingletonBehaviour<CameraController>
 
     public void SyncUserSettings()
     {
-        var userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
-        _isShakerOn = userSettingsData.IsVibrationOn;
+        var _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
+        _isShakerOn = _userSettingsData.IsVibrationOn;
     }
 }
