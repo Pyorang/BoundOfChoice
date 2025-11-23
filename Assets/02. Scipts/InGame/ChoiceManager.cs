@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 {
-    [Header("¼±ÅÃÀ» Ç¥½ÃÇÒ Text")]
+    [Header("ì„ íƒì„ í‘œì‹œí•  Text")]
     [Space]
     [SerializeField] private TextMeshProUGUI _text1;
     [SerializeField] private TextMeshProUGUI _text2;
@@ -22,6 +22,7 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 
     private void Start()
     {
+        IsDestroyOnLoad = true;
         InitChoices();
         GetNewChoice();
     }
@@ -58,17 +59,17 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError($"Choice Å¬·¡½º ÀÎ½ºÅÏ½º »ı¼º ½ÇÆĞ ({className}): {e.Message}");
+                        Debug.LogError($"Choice í´ë˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ ìƒì„± ì‹¤íŒ¨ ({className}): {e.Message}");
                     }
                 }
                 else
                 {
-                    Debug.LogWarning($"{className} Å¸ÀÔÀº Á¸ÀçÇÏÁö¸¸, IChoice¸¦ ±¸ÇöÇÏÁö ¾Ê¾Ò°Å³ª Ãß»ó Å¬·¡½ºÀÔ´Ï´Ù.");
+                    Debug.LogWarning($"{className} íƒ€ì…ì€ ì¡´ì¬í•˜ì§€ë§Œ, IChoiceë¥¼ êµ¬í˜„í•˜ì§€ ì•Šì•˜ê±°ë‚˜ ì¶”ìƒ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.");
                 }
             }
             else
             {
-                Debug.LogWarning($"Å¬·¡½º {className}À»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù. ÀÎµ¦½º {i}¿¡ ÇØ´çÇÏ´Â Choice Å¬·¡½º°¡ ¾ø½À´Ï´Ù.");
+                Debug.LogWarning($"í´ë˜ìŠ¤ {className}ì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ì¸ë±ìŠ¤ {i}ì— í•´ë‹¹í•˜ëŠ” Choice í´ë˜ìŠ¤ê°€ ì—†ìŠµë‹ˆë‹¤.");
             }
         }
     }

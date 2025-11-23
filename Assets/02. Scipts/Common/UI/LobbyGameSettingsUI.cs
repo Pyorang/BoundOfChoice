@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameSettingsUI : BaseUI
+public class LobbyGameSettingsUI : BaseUI
 {
     private UserSettingsData _userSettingsData;
 
