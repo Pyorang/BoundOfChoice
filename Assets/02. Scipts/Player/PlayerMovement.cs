@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
+    private InGameUIController _inGameUIController;
 
     [Header("이동 설정")]
     private float _xMovement = 0.0f;
@@ -17,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        _inGameUIController = FindAnyObjectByType<InGameUIController>();
     }
 
     private void Update()
@@ -54,12 +60,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (amount < 0.0f) return;
         _moveSpeed = Mathf.Min(_moveSpeed + amount, _maxMoveSpeed);
+        UpdateSpeedUI();
     }
 
     public void MoveSpeedDown(float amount)
     {
         if (amount < 0.0f) return;
         _moveSpeed = Mathf.Max(_moveSpeed - amount, _minMoveSpeed);
+        UpdateSpeedUI();
+    }
+
+    private void UpdateSpeedUI()
+    {
+        _inGameUIController.OnUpdateSpeedUI((int)_moveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

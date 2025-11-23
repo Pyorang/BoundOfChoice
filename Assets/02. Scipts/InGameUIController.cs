@@ -6,10 +6,13 @@ public class InGameUIController : MonoBehaviour
 {
     [SerializeField] private Button _inGameSettingsButton;
 
+    [Header("Player 스탯")]
     [SerializeField] private Image _healthBarImage;
     [SerializeField] private TextMeshProUGUI _healthText;
     [SerializeField] private Image _manaBarImage;
     [SerializeField] private TextMeshProUGUI _manaText;
+    [SerializeField] private TextMeshProUGUI _speedText;
+    [SerializeField] private TextMeshProUGUI _DamageText;
 
     public void OnClickInGameSettingsButton()
     {
@@ -28,5 +31,15 @@ public class InGameUIController : MonoBehaviour
     {
         _manaBarImage.fillAmount = (float)mana / maxMana;
         _manaText.text = $"{mana} \n/ {maxMana}";
+    }
+
+    public void OnUpdateSpeedUI(int speed)
+    {
+        _speedText.text = $"{speed}";
+    }
+
+    public void OnUpdateDamageUI(int damage)
+    {
+        _DamageText.text = $"{damage}";
     }
 }
