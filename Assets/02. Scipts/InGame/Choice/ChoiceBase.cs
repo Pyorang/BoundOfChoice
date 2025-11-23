@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class IChoice
+public abstract class ChoiceBase
 {
     public virtual void Execute1()
     {

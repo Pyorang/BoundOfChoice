@@ -33,16 +33,18 @@ public class DataTableManager : SingletonBehaviour<DataTableManager>
     public ChoiceModel GetRandomChoice(params int[] exclusives)
     {
         var exclusiveIds = new HashSet<string>(
-            exclusives.Select(id => id.ToString())
+            exclusives.Select(id => $"C_{id}")
         );
 
         var availableChoices = _choiceTable.Where(x => !exclusiveIds.Contains(x.ID));
 
-        ChoiceModel randomChoice = availableChoices
-            .OrderBy(x => UnityEngine.Random.value)
-            .FirstOrDefault();
+        var availableChoicesArray = availableChoices.ToArray();
+        if (availableChoicesArray.Length == 0)
+        {
+            return default;
+        }
 
-        return randomChoice;
+        return availableChoicesArray[UnityEngine.Random.Range(0, availableChoicesArray.Length)];
     }
 
     private const string DATA_PATH = "DataTable";

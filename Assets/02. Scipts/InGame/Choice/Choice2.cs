@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Choice2 : IChoice
+public class Choice2 : ChoiceBase
 {
     public override void Execute1()
     {

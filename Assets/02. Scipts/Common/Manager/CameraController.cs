@@ -6,8 +6,6 @@ public class CameraController : SingletonBehaviour<CameraController>
     private bool _isShakerOn = true;
     private Camera _camera;
 
-    private UserSettingsData _userSettingsData;
-
     private Vector3 _startPosition;
     private Coroutine _shakeCoroutine;
 
@@ -86,7 +84,7 @@ public class CameraController : SingletonBehaviour<CameraController>
 
     public void SyncUserSettings()
     {
-        _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
+        var _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         _isShakerOn = _userSettingsData.IsVibrationOn;
     }
 }

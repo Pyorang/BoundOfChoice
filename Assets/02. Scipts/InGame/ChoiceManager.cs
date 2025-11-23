@@ -1,23 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using TMPro;
-using UnityEditor.Compilation;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 {
     [Header("선택을 표시할 Text")]
     [Space]
-    [SerializeField] private TextMeshProUGUI Text1;
-    [SerializeField] private TextMeshProUGUI Text2;
+    [SerializeField] private TextMeshProUGUI _text1;
+    [SerializeField] private TextMeshProUGUI _text2;
 
     private ChoiceModel _currentChoiceModel;
     
-    private IChoice _currentChoice;
-    private List<IChoice> _choices = new List<IChoice>();
+    private ChoiceBase _currentChoice;
+    private List<ChoiceBase> _choices = new List<ChoiceBase>();
 
     protected override void Init()
     {
@@ -50,11 +46,11 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 
             if (type != null)
             {
-                if (typeof(IChoice).IsAssignableFrom(type) && !type.IsAbstract)
+                if (typeof(ChoiceBase).IsAssignableFrom(type) && !type.IsAbstract)
                 {
                     try
                     {
-                        IChoice choiceInstance = Activator.CreateInstance(type) as IChoice;
+                        ChoiceBase choiceInstance = Activator.CreateInstance(type) as ChoiceBase;
                         if (choiceInstance != null)
                         {
                             _choices.Add(choiceInstance);
@@ -79,14 +75,27 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 
     public void UpdateChoiceText(string text1, string text2)
     {
-        Text1.text = text1;
-        Text2.text = text2;
+        _text1.text = text1;
+        _text2.text = text2;
     }
 
     public int GetCurrentChoiceID()
     {
-        string numberString = _currentChoiceModel.ID.Replace("C_", "");
+        string numberString = _currentChoiceModel.ID.Substring(2);
         int number = int.Parse(numberString);
         return number;
+    }
+
+
+    private void Update()
+    {
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _currentChoice.Execute1();
+        }
+        else if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _currentChoice.Execute2();
+        }
     }
 }
