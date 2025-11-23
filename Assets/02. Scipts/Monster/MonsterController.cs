@@ -11,6 +11,9 @@ public abstract class MonsterController : MonoBehaviour
     protected MonsterAnimator _animator;
     protected SpriteRenderer _spriteRenderer;
     [SerializeField] protected GameObject _player;
+    
+    private Vector2 _direction;
+    protected float _distance;
 
     private void Awake()
     {
@@ -29,28 +32,54 @@ public abstract class MonsterController : MonoBehaviour
     private void Update()
     {
         if (_player == null) return;
+        DetermineState();
+        HandleMove();
+    }
 
-        float distance = _player.transform.position.x - transform.position.x;
-        float absDistance = Mathf.Abs(distance);
+    private void DetermineState()
+    {
+        _distance = _player.transform.position.x - transform.position.x;
 
-        Vector2 direction;
-        if (absDistance < _stopDistance)
+        if (IsPlayerInAttackRange())
         {
-            direction = Vector2.zero;
-            // NOTE : 스킬 시전 로직을 추가한다.
-            _animator.PlayAttackAnimation();
-            _spriteRenderer.flipX = distance > 0;
+            HandleAttack();
         }
         else
         {
-            direction = GetMoveDirection();
-            _spriteRenderer.flipX = direction.x > 0;
+            HandleMoveDirection();
         }
+    }
 
-        bool isMoving = direction != Vector2.zero;
+    private bool IsPlayerInAttackRange()
+    {
+        return Mathf.Abs(_distance) < _stopDistance;
+    } 
+
+    private void SetSpriteFlip(bool flip)
+    {
+        _spriteRenderer.flipX = flip;
+    }
+
+    private void HandleAttack()
+    {
+        _direction = Vector2.zero;
+        // NOTE : 스킬 시전 로직을 추가한다.
+        _animator.PlayAttackAnimation();
+        SetSpriteFlip(_distance > 0);
+    }
+
+    private void HandleMoveDirection()
+    {
+        _direction = GetMoveDirection();
+        SetSpriteFlip(_direction.x > 0);
+    }
+
+    private void HandleMove()
+    {
+        bool isMoving = _direction != Vector2.zero;
 
         _animator.PlayMoveAnimation(isMoving);
-        _movement.SetMoveDirection(direction);
+        _movement.SetMoveDirection(_direction);
     }
 
     protected abstract Vector2 GetMoveDirection();

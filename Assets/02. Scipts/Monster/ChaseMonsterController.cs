@@ -4,9 +4,7 @@ public class ChaseMonsterController : MonsterController
 {
     protected override Vector2 GetMoveDirection()
     {
-        float distance = _player.transform.position.x - transform.position.x;
-
-        float sign = Mathf.Sign(distance);
+        float sign = Mathf.Sign(_distance);
         return Vector2.right * sign;
     }
 }
