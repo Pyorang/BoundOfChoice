@@ -21,6 +21,13 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
     }
 
+    private void OnDestroy()
+    {
+        PlayerHealth.OnHealthChanged -= OnUpdateHealthUI;
+        PlayerMana.OnManaChanged -= OnUpdateManaUI;
+        PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
+    }
+
     public void OnClickInGameSettingsButton()
     {
         var uiData = new BaseUIData();
