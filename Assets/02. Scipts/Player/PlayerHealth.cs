@@ -7,24 +7,32 @@ public class PlayerHealth : MonoBehaviour
     private int _maxHealth = 100;
     public static event Action<int, int> OnHealthChanged;
 
+    public int Health
+    {
+        get => _health;
+        private set
+        {
+            _health = value;
+            OnHealthChanged?.Invoke(_health, _maxHealth);
+        }
+    }
+
     public void TakeDamage(int amount)
     {
         if (amount < 0) return;
-        _health = Mathf.Max(_health - amount, 0);
+        Health = Mathf.Max(Health - amount, 0);
         CheckDeath();
-        OnHealthChanged?.Invoke(_health, _maxHealth);
     }
 
     public void Heal(int amount)
     {
         if (amount < 0) return;
-        _health = Mathf.Min(_health + amount, _maxHealth);
-        OnHealthChanged?.Invoke(_health, _maxHealth);
+        Health = Mathf.Min(Health + amount, _maxHealth);
     }
 
     private void CheckDeath()
     {
-        if (_health <= 0)
+        if (Health <= 0)
         {
             Die();
         }

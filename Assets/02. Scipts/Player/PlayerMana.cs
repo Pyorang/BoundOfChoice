@@ -7,19 +7,27 @@ public class PlayerMana : MonoBehaviour
     private int _maxMana = 100;
     public static event Action<int, int> OnManaChanged;
 
+    public int Mana
+    {
+        get => _mana;
+        private set
+        {
+            _mana = value;
+            OnManaChanged?.Invoke(_mana, _maxMana);
+        }
+    }
+
     public bool TryUseMana(int amount)
     {
         if (amount < 0) return false;
-        if (_mana < amount) return false;
-        _mana = Mathf.Max(_mana - amount, 0);
-        OnManaChanged?.Invoke(_mana, _maxMana);
+        if (Mana < amount) return false;
+        Mana = Mathf.Max(Mana - amount, 0);
         return true;
     }
 
     public void RegenerateMana(int amount)
     {
         if (amount < 0) return;
-        _mana = Mathf.Min(_mana + amount, _maxMana);
-        OnManaChanged?.Invoke(_mana, _maxMana);
+        Mana = Mathf.Min(Mana + amount, _maxMana);
     }
 }

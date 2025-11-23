@@ -12,6 +12,15 @@ public class PlayerMovement : MonoBehaviour
     private readonly float _minMoveSpeed = 1.0f;
     private readonly float _maxMoveSpeed = 10.0f;
     public static event Action<int> OnSpeedChanged;
+    public float MoveSpeed
+    {
+        get => _moveSpeed;
+        private set
+        {
+            _moveSpeed = Mathf.Clamp(value, _minMoveSpeed, _maxMoveSpeed);
+            OnSpeedChanged?.Invoke((int)_moveSpeed);
+        }
+    }
 
     [Header("점프 설정")]
     private float _jumpForce = 5;
@@ -55,21 +64,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveHorizontal()
     {
-        _rigidBody.linearVelocityX = _xMovement * _moveSpeed;
+        _rigidBody.linearVelocityX = _xMovement * MoveSpeed;
     }
 
     public void MoveSpeedUp(float amount)
     {
         if (amount < 0.0f) return;
-        _moveSpeed = Mathf.Min(_moveSpeed + amount, _maxMoveSpeed);
-        OnSpeedChanged?.Invoke((int)_moveSpeed);
+        MoveSpeed = Mathf.Min(MoveSpeed + amount, _maxMoveSpeed);
     }
 
     public void MoveSpeedDown(float amount)
     {
         if (amount < 0.0f) return;
-        _moveSpeed = Mathf.Max(_moveSpeed - amount, _minMoveSpeed);
-        OnSpeedChanged?.Invoke((int)_moveSpeed);
+        MoveSpeed = Mathf.Max(MoveSpeed - amount, _minMoveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
