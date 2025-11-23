@@ -17,6 +17,11 @@ public class PlayerMana : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        OnManaChanged?.Invoke(Mana, _maxMana);
+    }
+
     public bool TryUseMana(int amount)
     {
         if (amount < 0) return false;

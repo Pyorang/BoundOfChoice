@@ -20,7 +20,7 @@ public class MonsterMovement : MonoBehaviour
 
     private void Move()
     {
-        _rigidbody.linearVelocity = _direction * _stats.MoveSpeed;
+        _rigidbody.linearVelocityX = _direction.x * _stats.MoveSpeed;
     }
 
     public void SetMoveDirection(Vector2 direction)

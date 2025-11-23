@@ -1,11 +1,16 @@
 using System;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 {
     private int _health = 100;
     private int _maxHealth = 100;
     public static event Action<int, int> OnHealthChanged;
+
+    private void Start()
+    {
+        OnHealthChanged?.Invoke(Health, _maxHealth);
+    }
 
     public int Health
     {
@@ -21,7 +26,11 @@ public class PlayerHealth : MonoBehaviour
     {
         if (amount < 0) return;
         Health = Mathf.Max(Health - amount, 0);
-        CheckDeath();
+
+        if (Health <= 0)
+        {
+            Die();
+        }
     }
 
     public void Heal(int amount)
@@ -30,16 +39,8 @@ public class PlayerHealth : MonoBehaviour
         Health = Mathf.Min(Health + amount, _maxHealth);
     }
 
-    private void CheckDeath()
+    public void Die()
     {
-        if (Health <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-
+        Debug.Log("Player has died.");
     }
 }

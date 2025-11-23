@@ -4,13 +4,21 @@ public class Choice1 : ChoiceBase
 {
     public override void Execute1()
     {
-        Debug.Log("Choice1 - Execute1 executed.");
+        int RandomValue = Random.Range(1, 101);
+        if(RandomValue <= 90)
+        {
+            PlayerHealth.Instance.TakeDamage(30);
+        }
         base.Execute1();
     }
 
     public override void Execute2()
     {
-        Debug.Log("Choice1 - Execute2 executed.");
+        int RandomValue = Random.Range(1, 101);
+        if (RandomValue <= 10)
+        {
+            PlayerHealth.Instance.Die();
+        }
         base.Execute2();
     }
 }

@@ -30,7 +30,6 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
                 Debug.LogWarning($"중복된 몬스터 ID({info.ID})가 존재합니다.");
             }
         }
-        _monsterPrefabInfos.Clear();
     }
 
     private void Start()

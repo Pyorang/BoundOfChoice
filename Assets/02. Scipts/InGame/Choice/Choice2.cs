@@ -4,13 +4,13 @@ public class Choice2 : ChoiceBase
 {
     public override void Execute1()
     {
-        Debug.Log("Choice2 - Execute1 executed.");
+        MonsterSpawner.Instance.CreateMonster(0, MonsterSpawner.Instance.transform.position);
         base.Execute1();
     }
 
     public override void Execute2()
     {
-        Debug.Log("Choice2 - Execute2 executed.");
+        PlayerHealth.Instance.TakeDamage(40);
         base.Execute2();
     }
 }

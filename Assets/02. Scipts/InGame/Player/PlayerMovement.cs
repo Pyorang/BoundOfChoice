@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D _rigidBody;
+    public static event Action<int> OnSpeedChanged;
+
+    private bool _isOnGround = false;
 
     [Header("이동 설정")]
-    private float _xMovement = 0.0f;
-    private float _moveSpeed = 1.0f;
+    [Space]
+    [SerializeField] private float _moveSpeed = 1.0f;
+    [SerializeField] private float _jumpForce = 5;
+    [SerializeField] private float _maxMoveSpeed = 10.0f;
     private readonly float _minMoveSpeed = 1.0f;
-    private readonly float _maxMoveSpeed = 10.0f;
-    public static event Action<int> OnSpeedChanged;
+    private float _xMovement = 0.0f;
+
     public float MoveSpeed
     {
         get => _moveSpeed;
@@ -21,13 +25,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    [Header("점프 설정")]
-    private float _jumpForce = 5;
-    private bool _isOnGround = false;
+    private Rigidbody2D _rigidBody;
 
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        OnSpeedChanged?.Invoke((int)MoveSpeed);
     }
 
     private void Update()

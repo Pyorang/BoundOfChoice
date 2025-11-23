@@ -6,15 +6,21 @@ public class InGameUIController : MonoBehaviour
 {
     [SerializeField] private Button _inGameSettingsButton;
 
-    [Header("Player 스탯")]
+    [Header("체력 관련")]
+    [Space]
     [SerializeField] private Image _healthBarImage;
     [SerializeField] private TextMeshProUGUI _healthText;
+
+    [Header("마나 관련")]
+    [Space]
     [SerializeField] private Image _manaBarImage;
     [SerializeField] private TextMeshProUGUI _manaText;
-    [SerializeField] private TextMeshProUGUI _speedText;
-    [SerializeField] private TextMeshProUGUI _damageText;
 
-    private void Start()
+    [Header("공격력 및 속도 관련")]
+    [SerializeField] private TextMeshProUGUI _damageText;
+    [SerializeField] private TextMeshProUGUI _speedText;
+
+    private void Awake()
     {
         PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
