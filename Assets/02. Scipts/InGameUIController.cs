@@ -1,0 +1,59 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class InGameUIController : MonoBehaviour
+{
+    [SerializeField] private Button _inGameSettingsButton;
+
+    [Header("Player 스탯")]
+    [SerializeField] private Image _healthBarImage;
+    [SerializeField] private TextMeshProUGUI _healthText;
+    [SerializeField] private Image _manaBarImage;
+    [SerializeField] private TextMeshProUGUI _manaText;
+    [SerializeField] private TextMeshProUGUI _speedText;
+    [SerializeField] private TextMeshProUGUI _damageText;
+
+    private void Start()
+    {
+        PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
+        PlayerMana.OnManaChanged += OnUpdateManaUI;
+        PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerHealth.OnHealthChanged -= OnUpdateHealthUI;
+        PlayerMana.OnManaChanged -= OnUpdateManaUI;
+        PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
+    }
+
+    public void OnClickInGameSettingsButton()
+    {
+        var uiData = new BaseUIData();
+        UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
+        AudioManager.Instance.Play(AudioType.SFX, "ui_openUI_button_click");
+    }
+
+    public void OnUpdateHealthUI(int health, int maxHealth)
+    {
+        _healthBarImage.fillAmount = (float)health / maxHealth;
+        _healthText.text = $"{health} \n/ {maxHealth}";
+    }
+
+    public void OnUpdateManaUI(int mana, int maxMana)
+    {
+        _manaBarImage.fillAmount = (float)mana / maxMana;
+        _manaText.text = $"{mana} \n/ {maxMana}";
+    }
+
+    public void OnUpdateSpeedUI(int speed)
+    {
+        _speedText.text = $"{speed}";
+    }
+
+    public void OnUpdateDamageUI(int damage)
+    {
+        _damageText.text = $"{damage}";
+    }
+}

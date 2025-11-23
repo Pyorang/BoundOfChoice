@@ -1,42 +1,48 @@
 using System.Collections;
 using UnityEngine;
 
-public class CameraShaker : MonoBehaviour
+public class CameraController : SingletonBehaviour<CameraController>
 {
+    private bool _isShakerOn = true;
     private Camera _camera;
 
     private Vector3 _startPosition;
     private Coroutine _shakeCoroutine;
 
-    protected virtual void Init()
+    protected override void Init()
     {
         _camera = Camera.main;
-        if (_camera != null)
-        {
-            _startPosition = _camera.transform.localPosition;
-        }
     }
 
     private void Start()
     {
         Init();
+        SyncUserSettings();
+    }
+
+    public void SetShakerOn(bool isOn)
+    {
+        _isShakerOn = isOn;
     }
 
     public void StartShake(float duration, float power)
     {
-        if (_shakeCoroutine != null)
+        if(_isShakerOn)
         {
-            StopCoroutine(_shakeCoroutine);
-            if (_camera != null)
+            if (_shakeCoroutine != null)
             {
-                _camera.transform.localPosition = _startPosition;
+                StopCoroutine(_shakeCoroutine);
+                if (_camera != null)
+                {
+                    _camera.transform.localPosition = _startPosition;
+                }
             }
+
+            if (_camera == null) return;
+
+            _startPosition = _camera.transform.localPosition;
+            _shakeCoroutine = StartCoroutine(ShakeCoroutine(duration, power));
         }
-
-        if (_camera == null) return;
-
-        _startPosition = _camera.transform.localPosition;
-        _shakeCoroutine = StartCoroutine(ShakeCoroutine(duration, power));
     }
 
     public void StopShake()
@@ -74,5 +80,11 @@ public class CameraShaker : MonoBehaviour
         }
 
         StopShake();
+    }
+
+    public void SyncUserSettings()
+    {
+        var _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
+        _isShakerOn = _userSettingsData.IsVibrationOn;
     }
 }
