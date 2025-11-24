@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4894144253344244565}
   - component: {fileID: 5749125183171213185}
   - component: {fileID: 4624470721804548101}
+  - component: {fileID: -2594655757305269106}
   m_Layer: 0
   m_Name: ManaPotion
   m_TagString: Untagged
@@ -139,3 +140,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amount: 60
+--- !u!95 &-2594655757305269106
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4365059584085031791}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7019d036c02148846a6a1ef1f8761114, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
