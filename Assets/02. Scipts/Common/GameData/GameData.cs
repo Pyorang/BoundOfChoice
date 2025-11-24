@@ -8,13 +8,3 @@ using System;
     public string Text2;
 }
 #endregion
-
-#region Item
-[Serializable] public struct ItemModel
-{
-    public string ID;
-    public int Price;
-    public string Name;
-    public string Description;
-}
-#endregion
