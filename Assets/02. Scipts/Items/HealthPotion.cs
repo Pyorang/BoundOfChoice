@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class HealthPotion : InteractObjectBase
+public class HealthPotion : ItemBase
 {
     [Header("체력 회복량")]
     [SerializeField] private int _amount;
 
-    public override void Execute()
+    public override void ApplyEffect()
     {
         PlayerHealth.Instance.Heal(_amount);
-        gameObject.SetActive(false);
     }
 }
