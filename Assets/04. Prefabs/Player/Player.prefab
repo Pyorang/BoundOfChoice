@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8064035831890495040}
   - component: {fileID: 4696680221305993533}
   - component: {fileID: 4802543602573509518}
+  - component: {fileID: 1271196531910990680}
   - component: {fileID: 4510558363928938250}
   - component: {fileID: 7966202360319994107}
   - component: {fileID: 8999589725191860525}
@@ -130,6 +131,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a28b26f694c374bae92d47bbcfda6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 1
+  _jumpForce: 5
+  _maxMoveSpeed: 10
+--- !u!114 &1271196531910990680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4659175342300605240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4384ed92addf54580ff051e99d2877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPower: 1
 --- !u!61 &4510558363928938250
 BoxCollider2D:
   m_ObjectHideFlags: 0

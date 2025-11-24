@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxMoveSpeed = 10.0f;
     private readonly float _minMoveSpeed = 1.0f;
     private float _xMovement = 0.0f;
+    private int _playerDirection = 1;
+    public int PlayerDirection => _playerDirection;
 
     public float MoveSpeed
     {
@@ -50,6 +52,10 @@ public class PlayerMovement : MonoBehaviour
     private void GetKeyInput()
     {
         _xMovement = Input.GetAxisRaw("Horizontal");
+        if (_xMovement != 0)
+        {
+            _playerDirection = Mathf.RoundToInt(_xMovement);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
