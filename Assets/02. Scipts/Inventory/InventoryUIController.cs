@@ -6,7 +6,6 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
 
     [SerializeField] GameObject _slotContent;
     private SlotController[] _slots;
-    private int _slotIndex;
 
     protected override void Init()
     {
@@ -14,7 +13,6 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
         base.Init();
 
         _slots = _slotContent.GetComponentsInChildren<SlotController>(true);
-        _slotIndex = 0;
         gameObject.SetActive(false);
     }
 
@@ -34,6 +32,24 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
                 return;
             }
         }
-        _slots[_slotIndex++].AddSlot(item, count);
+        foreach (SlotController slot in _slots)
+        {
+            if (slot.IsEmpty)
+            {
+                slot.SetSlot(item, count);
+                return;
+            }
+        }
+    }
+
+    public void SortInventory()
+    {
+        foreach (SlotController slot in _slots)
+        {
+            if (slot.IsEmpty)
+            {
+                slot.transform.SetAsLastSibling();
+            }
+        }
     }
 }
