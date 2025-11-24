@@ -44,8 +44,8 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
             return null;
         }
 
-        GameObject monster = Instantiate(prefab, position, Quaternion.identity, transform);
+        GameObject item = Instantiate(prefab, position, Quaternion.identity, transform);
 
-        return monster;
+        return item;
     }
 }
