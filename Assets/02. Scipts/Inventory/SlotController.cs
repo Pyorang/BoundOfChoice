@@ -23,6 +23,12 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
     public void SetSlot(ItemBase item, int count = 1)
     {
+        if (item == null || count <= 0)
+        {
+            ClearSlot();
+            return;
+        }
+
         SetColor(1);
         _item = item;
         _itemCount = count;
@@ -63,9 +69,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
     }
 
     public void SwapSlot(SlotController slot)
-    {
-        if (IsEmpty || slot.IsEmpty) return;
-        
+    {        
         ItemBase item = _item;
         int count = _itemCount;
         
@@ -92,19 +96,18 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
     {
         _beginDragPosition = eventData.position;
         _originPosition = transform.position;
-        _itemImageUI.raycastTarget = false;
+        DragSlot.Instance.BeginDrag(_itemImageUI.sprite);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 moveOffset = eventData.position - _beginDragPosition;
-        transform.position = _originPosition + moveOffset;
+        DragSlot.Instance.Drag(_originPosition + moveOffset);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.position = _originPosition;
-        _itemImageUI.raycastTarget = true;
+        DragSlot.Instance.EndDrag();
     }
 
     public void OnDrop(PointerEventData eventData)
