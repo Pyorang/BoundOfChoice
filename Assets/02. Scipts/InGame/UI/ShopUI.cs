@@ -14,7 +14,7 @@ public class ShopUI : BaseUI
     [Space]
     [SerializeField] private GameObject _itemQuantitySelectionWindow;
     [SerializeField] private TextMeshProUGUI _itemNameText;
-    [SerializeField] private Image itemImage;
+    [SerializeField] private Image _itemImage;
     [SerializeField] private TextMeshProUGUI _itemDescriptionText;
     [SerializeField] private Button _removeButton;
     [SerializeField] private TextMeshProUGUI _itemQuantityText;
@@ -29,19 +29,8 @@ public class ShopUI : BaseUI
         get { return _currentCount; }
         private set
         {
-            if(value <= 1)
-            {
-                value = 1;
-                _currentCount = value;
-                _removeButton.interactable = false;
-            }
-
-            // NOTE : 골드 시스템 만들어지면 추가되어야 함.
-            else
-            {
-                _currentCount = value;
-                _removeButton.interactable = true;
-            }
+            _currentCount = Mathf.Max(1, value);
+            _removeButton.interactable = _currentCount > 1;
 
             _itemQuantityText.text = $"{value}";
             _totalPriceText.text = $"{ _selectedItem.Price * value}G";
@@ -74,8 +63,8 @@ public class ShopUI : BaseUI
         CurrentCount = 1;
 
         _itemNameText.text = _selectedItem.Name;
-        itemImage.sprite = _itemImages[index].sprite;
-        itemImage.preserveAspect = true;
+        _itemImage.sprite = _itemImages[index].sprite;
+        _itemImage.preserveAspect = true;
         _itemDescriptionText.text = _selectedItem.Description;
     }
 

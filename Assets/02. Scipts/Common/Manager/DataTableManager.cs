@@ -22,11 +22,11 @@ public class DataTableManager : SingletonBehaviour<DataTableManager>
         _itemTable = LoadDataFromJson<ItemModel>("Item");
     }
 
-    private const string DATA_PATH = "DataTable";
+    private const string DataPath = "DataTable";
 
     private T[] LoadDataFromJson<T>(string filename)
     {
-        var path = Path.Combine(DATA_PATH, filename);
+        var path = Path.Combine(DataPath, filename);
         var json = Resources.Load<TextAsset>(path);
         var wrapper = JsonUtility.FromJson<Wrapper<T>>(json.text);
         return wrapper.data;
