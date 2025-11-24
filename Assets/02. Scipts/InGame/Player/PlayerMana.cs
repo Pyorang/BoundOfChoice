@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerMana : MonoBehaviour
+public class PlayerMana : SingletonBehaviour<PlayerMana>
 {
     private int _mana = 100;
     private int _maxMana = 100;
