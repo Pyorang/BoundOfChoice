@@ -36,9 +36,9 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
         _itemCountTextUI.text = _itemCount.ToString();
     }
 
-    public void AddItem()
+    public void AddItem(int count)
     {
-        ++_itemCount;
+        _itemCount += count;
         _itemCountTextUI.text = _itemCount.ToString();
     }
 
@@ -64,17 +64,23 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
     public bool CompareItem(EItemType itemType)
     {
-        if(_item== null) return false;
+        if (_item == null) return false;
         return _item.ItemType.Equals(itemType);
     }
 
-    public void SwapSlot(SlotController slot)
+    private void SwapSlot(SlotController slot)
     {        
         ItemBase item = _item;
         int count = _itemCount;
         
         SetSlot(slot._item, slot._itemCount);
         slot.SetSlot(item, count);
+    }
+
+    private void MergeSlot(SlotController slot)
+    {
+        AddItem(slot._itemCount);
+        slot.ClearSlot();
     }
 
     private void SetColor(float alpha)
@@ -86,7 +92,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             UseItem();
         }
@@ -114,6 +120,14 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
     {
         SlotController draggedSlot = eventData.pointerDrag.GetComponent<SlotController>();
         if (draggedSlot == null || draggedSlot == this) return;
-        SwapSlot(draggedSlot);
+
+        if (!IsEmpty && draggedSlot.CompareItem(_item.ItemType))
+        {
+            MergeSlot(draggedSlot);
+        }
+        else
+        {
+            SwapSlot(draggedSlot);
+        }
     }
 }

@@ -28,7 +28,7 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
         {
             if (slot.CompareItem(item.ItemType))
             {
-                slot.AddItem();
+                slot.AddItem(count);
                 return;
             }
         }
