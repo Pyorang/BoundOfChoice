@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameSettingsUI : SettingsUI
+public class LobbyGameSettingsUI : SettingsUI
 {
     
 }

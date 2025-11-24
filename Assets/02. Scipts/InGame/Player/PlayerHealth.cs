@@ -9,6 +9,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
     private void Start()
     {
+        IsDestroyOnLoad = true;
         OnHealthChanged?.Invoke(Health, _maxHealth);
     }
 

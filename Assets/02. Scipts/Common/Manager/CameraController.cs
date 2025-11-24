@@ -17,6 +17,7 @@ public class CameraController : SingletonBehaviour<CameraController>
     private void Start()
     {
         Init();
+
         SyncUserSettings();
     }
 
