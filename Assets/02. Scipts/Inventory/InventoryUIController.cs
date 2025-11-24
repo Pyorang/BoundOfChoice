@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class InventoryUIController : SingletonBehaviour<InventoryUIController>
 {
-    private bool _inventoryActived = false;
-
     [SerializeField] GameObject _slotContent;
     private SlotController[] _slots;
 
@@ -18,8 +16,7 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
 
     public void ToggleInventory()
     {
-        _inventoryActived = !_inventoryActived;
-        gameObject.SetActive(_inventoryActived);
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 
     public void GetItem(ItemBase item, int count)
@@ -38,17 +35,6 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
             {
                 slot.SetSlot(item, count);
                 return;
-            }
-        }
-    }
-
-    public void SortInventory()
-    {
-        foreach (SlotController slot in _slots)
-        {
-            if (slot.IsEmpty)
-            {
-                slot.transform.SetAsLastSibling();
             }
         }
     }

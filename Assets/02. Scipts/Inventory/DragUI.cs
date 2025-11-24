@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DrogUI : MonoBehaviour, IDragHandler, IBeginDragHandler
+public class DragUI : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     private Vector2 _beginDragPosition;
     private Vector2 _startPosition;

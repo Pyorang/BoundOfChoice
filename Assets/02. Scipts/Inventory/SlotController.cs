@@ -44,13 +44,14 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
     public void UseItem()
     {
+        if (IsEmpty) return;
+
         _item.ApplyEffect();
         --_itemCount;
         _itemCountTextUI.text = _itemCount.ToString();
 
         if (_itemCount > 0) return;
         ClearSlot();
-        InventoryUIController.Instance.SortInventory();
     }
 
     private void ClearSlot()
@@ -100,6 +101,8 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (IsEmpty) return;
+
         _beginDragPosition = eventData.position;
         _originPosition = transform.position;
         DragSlot.Instance.BeginDrag(_itemImageUI.sprite);
@@ -119,7 +122,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
     public void OnDrop(PointerEventData eventData)
     {
         SlotController draggedSlot = eventData.pointerDrag.GetComponent<SlotController>();
-        if (draggedSlot == null || draggedSlot == this) return;
+        if (draggedSlot == null || draggedSlot == this || draggedSlot.IsEmpty) return;
 
         if (!IsEmpty && draggedSlot.CompareItem(_item.ItemType))
         {
