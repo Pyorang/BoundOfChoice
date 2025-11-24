@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
+  _maxAttackCount: 4
   _arrowSpeed: 10
+  _destroyTime: 5
 --- !u!61 &5005450280607701142
 BoxCollider2D:
   m_ObjectHideFlags: 0
