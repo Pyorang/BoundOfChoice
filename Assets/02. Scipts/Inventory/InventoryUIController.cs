@@ -21,6 +21,7 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
 
     public void GetItem(ItemBase item, int count)
     {
+        SlotController emptySlot = null;
         foreach (SlotController slot in _slots)
         {
             if (slot.CompareItem(item.ItemType))
@@ -28,14 +29,17 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
                 slot.AddItem(count);
                 return;
             }
-        }
-        foreach (SlotController slot in _slots)
-        {
-            if (slot.IsEmpty)
+            if (emptySlot == null && slot.IsEmpty)
             {
-                slot.SetSlot(item, count);
-                return;
+                emptySlot = slot;
             }
         }
+
+        if (emptySlot != null)
+        {
+            emptySlot.SetSlot(item, count);
+            return;
+        }
+
     }
 }
