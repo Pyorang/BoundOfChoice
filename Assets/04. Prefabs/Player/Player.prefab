@@ -101,8 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackDamage: 20
-  _attackCoolTime: 0.5
-  _maxBoltCount: 4
+  _attackCoolTime: 0.3
 --- !u!1 &2014739114944699033
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackDamage: 20
-  _attackCoolTime: 1
+  _attackCoolTime: 0.3
 --- !u!1 &4659175342300605240
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackDamage: 45
-  _attackCoolTime: 1
+  _attackCoolTime: 0.5
   _attackRange: {x: 2, y: 0.5}
   _boxOffset: {x: 1.5, y: 0}
   _enemyLayer:

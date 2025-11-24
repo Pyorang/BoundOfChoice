@@ -15,10 +15,4 @@ public class MagicBolt : ProjectileBase
     {
         transform.Translate(Vector2.right * (_direction * _speed * Time.deltaTime));
     }
-
-    public void OnDestroy()
-    {
-        // Note : Pooling 방식 적용시 Bolt Counting 방식 수정
-        Mage.BoltCount--;
-    }
 }

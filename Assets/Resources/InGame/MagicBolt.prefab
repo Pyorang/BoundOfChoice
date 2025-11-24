@@ -104,6 +104,8 @@ MonoBehaviour:
   _damage: 0
   _speed: 10
   _destroyTime: 5
+  _splashRange: 2
+  _damageReductionRate: 0.3
 --- !u!61 &2853968652812171075
 BoxCollider2D:
   m_ObjectHideFlags: 0

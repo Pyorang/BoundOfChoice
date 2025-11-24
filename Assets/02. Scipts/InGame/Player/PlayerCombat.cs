@@ -47,7 +47,6 @@ public class PlayerCombat : MonoBehaviour
         GetAttackKeyInput();
     }
 
-    private float _effectOffset = 0.5f;
     private void GetCharacterChangeInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
