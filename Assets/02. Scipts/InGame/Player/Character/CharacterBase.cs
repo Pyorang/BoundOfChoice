@@ -7,6 +7,16 @@ public abstract class CharacterBase : MonoBehaviour
     [SerializeField] protected float _attackCoolTime = 1.0f;
     private float _lastAttackTime;
 
+    public void DeactiveCharacter()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public void ActiveCharacter()
+    {
+        this.gameObject.SetActive(true);
+    }
+
     public abstract void Attack(Vector2 position, float power, int direction);
     public virtual void DrawRange(Vector2 position, int direction) { }
 

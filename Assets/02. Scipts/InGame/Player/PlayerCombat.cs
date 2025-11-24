@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum ECharacterType
 {
@@ -31,12 +32,13 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
-
         CharacterBase[] characters = GetComponentsInChildren<CharacterBase>();
         foreach (CharacterBase character in characters)
         {
             _characters.Add(character.CharacterType, character);
+            character.DeactiveCharacter();
         }
+        _characters[_currentCharacter].ActiveCharacter();
     }
 
     private void Update()
@@ -45,6 +47,7 @@ public class PlayerCombat : MonoBehaviour
         GetAttackKeyInput();
     }
 
+    private float _effectOffset = 0.5f;
     private void GetCharacterChangeInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -77,7 +80,9 @@ public class PlayerCombat : MonoBehaviour
     private void ChangeCharacter(ECharacterType playerType)
     {
         if (_currentCharacter == playerType) return;
+        _characters[_currentCharacter].DeactiveCharacter();
         _currentCharacter = playerType;
+        _characters[_currentCharacter].ActiveCharacter();
     }
 
     private void OnDrawGizmos()
