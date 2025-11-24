@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EPlayerType
+public enum ECharacterType
 {
     Warrior,
     Archer,
@@ -15,8 +15,8 @@ public class PlayerCombat : MonoBehaviour
     public static event Action<int> OnPowerChanged;
 
     private PlayerMovement _movement;
-    private Dictionary<EPlayerType, CharacterBase> _characters = new Dictionary<EPlayerType, CharacterBase>();
-    private EPlayerType _currentCharacter = EPlayerType.Warrior;
+    private Dictionary<ECharacterType, CharacterBase> _characters = new Dictionary<ECharacterType, CharacterBase>();
+    private ECharacterType _currentCharacter = ECharacterType.Warrior;
 
     public float AttackPower
     {
@@ -35,11 +35,7 @@ public class PlayerCombat : MonoBehaviour
         CharacterBase[] characters = GetComponentsInChildren<CharacterBase>();
         foreach (CharacterBase character in characters)
         {
-            string className = character.GetType().Name;
-            if (Enum.TryParse<EPlayerType>(className, out var playerType))
-            {
-                _characters.Add(playerType, character);
-            }
+            _characters.Add(character.CharacterType, character);
         }
     }
 
@@ -53,11 +49,11 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ChangeCharacter(EPlayerType.Warrior);
+            ChangeCharacter(ECharacterType.Warrior);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ChangeCharacter(EPlayerType.Archer);
+            ChangeCharacter(ECharacterType.Archer);
         }
     }
 
@@ -65,15 +61,16 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (_characters[_currentCharacter].CanAttack())
+            CharacterBase currentCharacter = _characters[_currentCharacter];
+            if (currentCharacter.CanAttack())
             {
-                _characters[_currentCharacter].
-                    Attack(this.transform.position, AttackPower, _movement.PlayerDirection);
+                currentCharacter.Attack(this.transform.position, AttackPower, _movement.PlayerDirection);
+                currentCharacter.ResetAttackCooldown();
             }
         }
     }
 
-    private void ChangeCharacter(EPlayerType playerType)
+    private void ChangeCharacter(ECharacterType playerType)
     {
         if (_currentCharacter == playerType) return;
         _currentCharacter = playerType;
@@ -81,6 +78,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!Application.isPlaying || _movement == null) return;
         if (_characters == null || _characters.Count == 0) return;
         _characters[_currentCharacter].DrawRange(this.transform.position, _movement.PlayerDirection);
     }

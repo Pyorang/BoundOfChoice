@@ -49,6 +49,9 @@ MonoBehaviour:
   _attackCoolTime: 1
   _attackRange: {x: 2, y: 0.5}
   _boxOffset: {x: 1.5, y: 0}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &5078299729473682151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +66,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackDamage: 10
   _attackCoolTime: 1
-  _arrow: {fileID: 0}
 --- !u!1 &4659175342300605240
 GameObject:
   m_ObjectHideFlags: 0

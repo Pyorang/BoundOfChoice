@@ -206,8 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopDistance: 3
   _player: {fileID: 0}
-  _minInterval: 0
-  _maxInterval: 0
+  _minInterval: 1
+  _maxInterval: 3
 --- !u!114 &-1096434593606969997
 MonoBehaviour:
   m_ObjectHideFlags: 0

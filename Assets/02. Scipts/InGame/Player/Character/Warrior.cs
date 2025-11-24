@@ -1,11 +1,12 @@
-using System.Drawing;
 using UnityEngine;
 
 public class Warrior : CharacterBase
 {
+    public override ECharacterType CharacterType => ECharacterType.Warrior;
     [Header("공격 범위")]
     [SerializeField] private Vector2 _attackRange = new Vector2(1f, 0.5f);
     [SerializeField] private Vector2 _boxOffset = new Vector2(1f, 0f);
+    [SerializeField] private LayerMask _enemyLayer;
 
     public override void Attack(Vector2 position, float power, int direction)
     {
@@ -13,13 +14,14 @@ public class Warrior : CharacterBase
         boxPosition.x += _boxOffset.x * direction;
 
         Collider2D[] hitMonsters =
-            Physics2D.OverlapBoxAll(boxPosition, _attackRange, 0.0f, LayerMask.GetMask("Enemy"));
+            Physics2D.OverlapBoxAll(boxPosition, _attackRange, 0.0f, _enemyLayer);
         
         foreach (Collider2D hit in hitMonsters)
         {
-            MonsterStats monster = hit.GetComponent<MonsterStats>();
-            if (monster == null) continue;
-            monster.TakeDamage(power * _attackDamage);
+            if (hit.TryGetComponent<MonsterStats>(out var monster))
+            {
+                monster.TakeDamage(power * _attackDamage);
+            }
         }
     }
 

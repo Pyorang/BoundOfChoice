@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class Archer : CharacterBase
 {
-    private GameObject _arrowObject;
+    public override ECharacterType CharacterType => ECharacterType.Archer;
+    private GameObject _arrowPrefab;
 
     private void Awake()
     {
-        _arrowObject = Resources.Load<GameObject>("InGame/Arrow");
+        _arrowPrefab = Resources.Load<GameObject>("InGame/Arrow");
     }
 
     public override void Attack(Vector2 position, float power, int direction)
     {
-        GameObject arrow = Instantiate(_arrowObject, position, Quaternion.identity);
-        arrow.GetComponent<Arrow>().SetArrowInfo(direction, power * _attackDamage);
+        // NOTE : 이후 Pooling 방식을 사용해 오브젝트 관리
+        GameObject arrowObject = Instantiate(_arrowPrefab, position, Quaternion.identity);
+        arrowObject.GetComponent<Arrow>().SetArrowInfo(direction, power * _attackDamage);
     }
 }
