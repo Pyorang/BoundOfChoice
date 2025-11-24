@@ -12,12 +12,24 @@ public class DataTableManager : SingletonBehaviour<DataTableManager>
     }
 
     private ChoiceModel[] _choiceTable;
+    private ItemModel[] _itemTable;
 
     protected override void Init()
     {
         base.Init();
 
         _choiceTable = LoadDataFromJson<ChoiceModel>("Choice");
+        _itemTable = LoadDataFromJson<ItemModel>("Item");
+    }
+
+    private const string DataPath = "DataTable";
+
+    private T[] LoadDataFromJson<T>(string filename)
+    {
+        var path = Path.Combine(DataPath, filename);
+        var json = Resources.Load<TextAsset>(path);
+        var wrapper = JsonUtility.FromJson<Wrapper<T>>(json.text);
+        return wrapper.data;
     }
 
     public int GetChoiceCount()
@@ -47,13 +59,20 @@ public class DataTableManager : SingletonBehaviour<DataTableManager>
         return availableChoicesArray[UnityEngine.Random.Range(0, availableChoicesArray.Length)];
     }
 
-    private const string DATA_PATH = "DataTable";
-
-    private T[] LoadDataFromJson<T>(string filename)
+    public ItemModel GetItemModel(int index)
     {
-        var path = Path.Combine(DATA_PATH, filename);
-        var json = Resources.Load<TextAsset>(path);
-        var wrapper = JsonUtility.FromJson<Wrapper<T>>(json.text);
-        return wrapper.data;
+        return _itemTable[index];
+    }
+
+    public string GetItemName(string itemId)
+    {
+        ItemModel item = _itemTable.FirstOrDefault(x => x.ID == itemId);
+        return item.Name;
+    }
+
+    public string GetItemDescription(string itemId)
+    {
+        ItemModel item = _itemTable.FirstOrDefault(x => x.ID == itemId);
+        return item.Description;
     }
 }

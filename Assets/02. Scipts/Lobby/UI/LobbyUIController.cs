@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class LobbyUIController : MonoBehaviour
 {
+    public const string UiOpenButtonClick = "ui_openUI_button_click";
+
     [Header("로비 버튼")]
     [Space]
     [SerializeField] private Button _playButton;
@@ -18,7 +20,7 @@ public class LobbyUIController : MonoBehaviour
     {
         var uiData = new BaseUIData();
         UIManager.Instance.OpenUI<LobbyGameSettingsUI>(uiData);
-        AudioManager.Instance.Play(AudioType.SFX, "ui_openUI_button_click");
+        AudioManager.Instance.Play(AudioType.SFX, UiOpenButtonClick);
     }
 
     public void OnClickExitButton()
