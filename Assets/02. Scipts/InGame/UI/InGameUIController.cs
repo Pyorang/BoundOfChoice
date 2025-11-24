@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class InGameUIController : MonoBehaviour
 {
+    public const string UI_OPEN_BUTTON_CLICK = "ui_openUI_button_click";
+
     [SerializeField] private Button _inGameSettingsButton;
 
     [Header("체력 관련")]
@@ -38,7 +40,7 @@ public class InGameUIController : MonoBehaviour
     {
         var uiData = new BaseUIData();
         UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
-        AudioManager.Instance.Play(AudioType.SFX, "ui_openUI_button_click");
+        AudioManager.Instance.Play(AudioType.SFX, UI_OPEN_BUTTON_CLICK);
     }
 
     public void OnUpdateHealthUI(int health, int maxHealth)
