@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7926052781596981077}
   - component: {fileID: 2154430565191627379}
   - component: {fileID: 5078299729473682151}
+  - component: {fileID: 2343985377203724803}
   m_Layer: 0
   m_Name: ChangeCharacter
   m_TagString: Untagged
@@ -64,8 +65,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237a1b8b2375c4f4cafb5bf4ddbcc064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDamage: 10
+  _attackDamage: 20
   _attackCoolTime: 1
+--- !u!114 &2343985377203724803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474431074036769259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497b37a844130e442af2ff83c4459086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackDamage: 20
+  _attackCoolTime: 1
+  _maxBoltCount: 4
 --- !u!1 &4659175342300605240
 GameObject:
   m_ObjectHideFlags: 0

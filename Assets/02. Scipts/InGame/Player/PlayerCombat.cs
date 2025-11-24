@@ -55,6 +55,10 @@ public class PlayerCombat : MonoBehaviour
         {
             ChangeCharacter(ECharacterType.Archer);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ChangeCharacter(ECharacterType.Mage);
+        }
     }
 
     private void GetAttackKeyInput()

@@ -14,6 +14,6 @@ public class Archer : CharacterBase
     {
         // NOTE : 이후 Pooling 방식을 사용해 오브젝트 관리
         GameObject arrowObject = Instantiate(_arrowPrefab, position, Quaternion.identity);
-        arrowObject.GetComponent<Arrow>().SetArrowInfo(direction, power * _attackDamage);
+        arrowObject.GetComponent<ProjectileBase>().SetProjectileInfo(direction, power * _attackDamage);
     }
 }
