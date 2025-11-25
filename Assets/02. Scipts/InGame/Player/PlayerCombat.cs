@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public enum ECharacterType
 {
@@ -36,9 +35,9 @@ public class PlayerCombat : MonoBehaviour
         foreach (CharacterBase character in characters)
         {
             _characters.Add(character.CharacterType, character);
-            character.DeactiveCharacter();
+            character.DeactivateCharacter();
         }
-        _characters[_currentCharacter].ActiveCharacter();
+        _characters[_currentCharacter].ActivateCharacter();
     }
 
     private void Update()
@@ -79,9 +78,9 @@ public class PlayerCombat : MonoBehaviour
     private void ChangeCharacter(ECharacterType playerType)
     {
         if (_currentCharacter == playerType) return;
-        _characters[_currentCharacter].DeactiveCharacter();
+        _characters[_currentCharacter].DeactivateCharacter();
         _currentCharacter = playerType;
-        _characters[_currentCharacter].ActiveCharacter();
+        _characters[_currentCharacter].ActivateCharacter();
     }
 
     private void OnDrawGizmos()

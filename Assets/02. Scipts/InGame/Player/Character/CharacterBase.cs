@@ -7,12 +7,12 @@ public abstract class CharacterBase : MonoBehaviour
     [SerializeField] protected float _attackCoolTime = 1.0f;
     private float _lastAttackTime;
 
-    public void DeactiveCharacter()
+    public void DeactivateCharacter()
     {
         this.gameObject.SetActive(false);
     }
 
-    public void ActiveCharacter()
+    public void ActivateCharacter()
     {
         this.gameObject.SetActive(true);
     }

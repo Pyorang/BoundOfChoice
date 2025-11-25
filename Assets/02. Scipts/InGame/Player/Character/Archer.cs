@@ -3,12 +3,7 @@ using UnityEngine;
 public class Archer : CharacterBase
 {
     public override ECharacterType CharacterType => ECharacterType.Archer;
-    private GameObject _arrowPrefab;
-
-    private void Awake()
-    {
-        _arrowPrefab = Resources.Load<GameObject>("InGame/Arrow");
-    }
+    [SerializeField] private GameObject _arrowPrefab;
 
     public override void Attack(Vector2 position, float power, int direction)
     {
