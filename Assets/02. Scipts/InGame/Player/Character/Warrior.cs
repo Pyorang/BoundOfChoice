@@ -8,7 +8,10 @@ public class Warrior : CharacterBase
     [SerializeField] private Vector2 _boxOffset = new Vector2(1f, 0f);
     [SerializeField] private LayerMask _enemyLayer;
 
-    public override void Attack(Vector2 position, float power, int direction)
+    [Header("데미지")]
+    [SerializeField] private int _attackDamage = 25;
+
+    public override void Attack(Vector2 position, int additionalDamage, int direction)
     {
         Vector2 boxPosition = position;
         boxPosition.x += _boxOffset.x * direction;
@@ -16,15 +19,16 @@ public class Warrior : CharacterBase
         Collider2D[] hitMonsters =
             Physics2D.OverlapBoxAll(boxPosition, _attackRange, 0.0f, _enemyLayer);
         
-        foreach (Collider2D hit in hitMonsters)
+        foreach (Collider2D hitMonster in hitMonsters)
         {
-            if (hit.TryGetComponent<MonsterStats>(out var monster))
+            if (hitMonster.TryGetComponent<MonsterStats>(out var monster))
             {
-                monster.TakeDamage(power * _attackDamage);
+                monster.TakeDamage(additionalDamage + _attackDamage);
             }
         }
     }
 
+#if UNITY_EDITOR
     public override void DrawRange(Vector2 position, int direction)
     {
         Vector2 boxPosition = position;
@@ -33,4 +37,5 @@ public class Warrior : CharacterBase
         Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawCube(boxPosition, _attackRange);
     }
+#endif
 }

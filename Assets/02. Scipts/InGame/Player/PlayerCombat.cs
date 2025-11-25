@@ -11,14 +11,15 @@ public enum ECharacterType
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private float _attackPower;
+    [SerializeField] private int _attackPower;
+    [SerializeField] private int _increaseDamagePerPower;
     public static event Action<int> OnPowerChanged;
 
     private PlayerMovement _movement;
     private Dictionary<ECharacterType, CharacterBase> _characters = new Dictionary<ECharacterType, CharacterBase>();
     private ECharacterType _currentCharacter = ECharacterType.Warrior;
 
-    public float AttackPower
+    public int AttackPower
     {
         get => _attackPower;
         private set
@@ -60,6 +61,22 @@ public class PlayerCombat : MonoBehaviour
         {
             ChangeCharacter(ECharacterType.Mage);
         }
+
+        // Note : Test 코드 이후 서적 사용에 따라 발사
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (_currentCharacter != ECharacterType.Mage) return;
+            UseFireBall();
+        }
+    }
+
+    private void UseFireBall()
+    {
+        GameObject fireBallObject = PoolManager.Instance.GetObject(EPoolType.FireBall);
+        ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
+        if (projectile == null) return;
+        if (!projectile.TryConsumeCost()) return;
+        projectile.Init(this.transform.position, _movement.PlayerDirection, AttackPower);
     }
 
     private void GetAttackKeyInput()
@@ -83,10 +100,12 @@ public class PlayerCombat : MonoBehaviour
         _characters[_currentCharacter].ActivateCharacter();
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying || _movement == null) return;
         if (_characters == null || _characters.Count == 0) return;
         _characters[_currentCharacter].DrawRange(this.transform.position, _movement.PlayerDirection);
     }
+#endif
 }

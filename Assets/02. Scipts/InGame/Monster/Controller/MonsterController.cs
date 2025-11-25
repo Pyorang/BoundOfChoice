@@ -74,7 +74,7 @@ public abstract class MonsterController : MonoBehaviour
     {
         if (IsPlayerInAttackRange())
         {
-            PlayerHealth.Instance.TakeDamage((int)_stats.AttackPower);
+            PlayerHealth.Instance.TakeDamage(_stats.AttackPower);
         }
     }
 
