@@ -10,7 +10,7 @@ public class Choice2 : ChoiceBase
 
     public override void Execute2()
     {
-        PlayerHealth.Instance.TakeDamage(40);
+        ItemSpawner.Instance.CreateItem(EItemType.HealthPotion, ItemSpawner.Instance.transform.position);
         base.Execute2();
     }
 }

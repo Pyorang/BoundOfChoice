@@ -4940,7 +4940,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimOnOpen: {fileID: 0}
-  _closeButton: {fileID: 8638394792454205578}
   _itemImages:
   - {fileID: 6419783941530399826}
   - {fileID: 4464270109688134572}
@@ -4952,7 +4951,7 @@ MonoBehaviour:
   - {fileID: 8504327656223678284}
   _itemQuantitySelectionWindow: {fileID: 3846452550898960682}
   _itemNameText: {fileID: 6950820861684806118}
-  itemImage: {fileID: 2616973366979318173}
+  _itemImage: {fileID: 2616973366979318173}
   _itemDescriptionText: {fileID: 2464440870724752171}
   _removeButton: {fileID: 8807062907091303456}
   _itemQuantityText: {fileID: 6814718976055599347}

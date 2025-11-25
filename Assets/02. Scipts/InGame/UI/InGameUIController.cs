@@ -36,6 +36,12 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
     }
 
+    public void OnClickInventoryButton()
+    {
+        InventoryUI.Instance.ToggleInventory();
+        AudioManager.Instance.Play(AudioType.SFX, UI_OPEN_BUTTON_CLICK);
+    }
+
     public void OnClickInGameSettingsButton()
     {
         var uiData = new BaseUIData();
