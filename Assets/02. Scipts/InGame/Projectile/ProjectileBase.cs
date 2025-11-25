@@ -3,12 +3,14 @@ using UnityEngine;
 public abstract class ProjectileBase : MonoBehaviour
 {
     [Header("공격")]
+    [Space]
     [SerializeField] private int _cost;
     [SerializeField] protected float _damage;
 
     [Header("이동")]
-    protected int _direction = -1;
+    [Space]
     [SerializeField] protected float _speed = 10.0f;
+    protected int _direction = -1;
 
     private SpriteRenderer _renderer;
 

@@ -60,6 +60,22 @@ public class PlayerCombat : MonoBehaviour
         {
             ChangeCharacter(ECharacterType.Mage);
         }
+
+        // Note : Test 코드 이후 서적 사용에 따라 발사
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (_currentCharacter != ECharacterType.Mage) return;
+            UseFireBall();
+        }
+    }
+
+    private void UseFireBall()
+    {
+        GameObject fireBallObject = PoolManager.Instance.GetObject(EPoolType.FireBall);
+        ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
+        if (projectile == null) return;
+        if (projectile.TryConsumeCost() == false) return;
+        projectile.Init(this.transform.position, _movement.PlayerDirection, 40.0f);
     }
 
     private void GetAttackKeyInput()

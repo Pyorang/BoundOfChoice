@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MonsterStats : MonoBehaviour
@@ -14,6 +15,8 @@ public class MonsterStats : MonoBehaviour
     public float MaxHealth => _currentMaxHealth;
     public float AttackPower => _currentAttackPower;
     public float MoveSpeed => _currentMoveSpeed;
+
+    private Coroutine _dotDamageCoroutine;
 
     private void OnEnable()
     {
@@ -37,7 +40,6 @@ public class MonsterStats : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (_currentHealth <= 0) return;
-
         _currentHealth -= damage;
 
         if (_currentHealth <= 0)
@@ -45,9 +47,34 @@ public class MonsterStats : MonoBehaviour
             Death();
         }
     }
+    public void TakeDotDamage(float damage, float duration, float interval)
+    {
+        if (_currentHealth <= 0) return;
+        if (_dotDamageCoroutine != null)
+        {
+            StopCoroutine(_dotDamageCoroutine);
+        }
+        _dotDamageCoroutine = StartCoroutine(ApplyDotDamage(damage, duration, interval));
+    }
+
+    private IEnumerator ApplyDotDamage(float damage, float duration, float interval)
+    {
+        float elapsedTime = 0.0f;
+        while (elapsedTime < duration)
+        {
+            yield return new WaitForSeconds(interval);
+            TakeDamage(damage);
+            elapsedTime += interval;
+        }
+        _dotDamageCoroutine = null;
+    }
 
     private void Death()
     {
+        if (_dotDamageCoroutine != null)
+        {
+            StopCoroutine(_dotDamageCoroutine);
+        }
         gameObject.SetActive(false);
     }
 }

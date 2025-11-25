@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class FireBall : ProjectileBase
+{
+    [Header("Dot 데미지")]
+    [Space]
+    [SerializeField] private float _dotDamagePerTick = 10.0f;  // 도트당 데미지
+    [SerializeField] private float _dotDuration = 3.0f;
+    [SerializeField] private float _dotTickInterval = 1.0f;
+
+    public override void ApplyDamage(Collider2D other)
+    {
+        if (other.CompareTag("Enemy") == false) return;
+        MonsterStats stat = other.GetComponent<MonsterStats>();
+        if (stat == null) return;
+        stat.TakeDotDamage(_dotDamagePerTick, _dotDuration, _dotTickInterval);
+        stat.TakeDamage(_damage);
+        ReleaseObject();
+    }
+
+    public override void Move()
+    {
+        transform.Translate(Vector2.right * (_direction * _speed * Time.deltaTime));
+    }
+
+    public override void ReleaseObject()
+    {
+        PoolManager.Instance.ReleaseObject(EPoolType.FireBall, this.gameObject);
+    }
+}

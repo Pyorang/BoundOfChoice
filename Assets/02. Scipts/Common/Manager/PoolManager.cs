@@ -4,7 +4,8 @@ using UnityEngine;
 public enum EPoolType
 {
     Arrow,
-    MagicBolt
+    MagicBolt,
+    FireBall,
 }
 
 [System.Serializable] public struct PoolInfo
