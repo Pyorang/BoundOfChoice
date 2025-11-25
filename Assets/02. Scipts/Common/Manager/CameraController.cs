@@ -91,7 +91,7 @@ public class CameraController : SingletonBehaviour<CameraController>
         float elapsedTime = 0f;
         float startSize = _camera.orthographicSize;
 
-        Vector3 startPosition = _camera.transform.position;
+        Vector3 startPosition = _startPosition;
 
         while (elapsedTime < duration)
         {
