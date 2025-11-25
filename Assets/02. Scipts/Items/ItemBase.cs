@@ -21,3 +21,4 @@ public abstract class ItemBase : InteractObjectBase
     }
     public abstract void ApplyEffect();
 }
+
