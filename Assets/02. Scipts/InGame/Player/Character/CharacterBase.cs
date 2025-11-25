@@ -16,7 +16,7 @@ public abstract class CharacterBase : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    public abstract void Attack(Vector2 position, float power, int direction);
+    public abstract void Attack(Vector2 position, int additionalDamage, int direction);
 
 
 #if UNITY_EDITOR

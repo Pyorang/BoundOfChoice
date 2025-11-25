@@ -9,9 +9,9 @@ public class Warrior : CharacterBase
     [SerializeField] private LayerMask _enemyLayer;
 
     [Header("데미지")]
-    [SerializeField] private float _attackDamage = 25.0f;
+    [SerializeField] private int _attackDamage = 25;
 
-    public override void Attack(Vector2 position, float power, int direction)
+    public override void Attack(Vector2 position, int additionalDamage, int direction)
     {
         Vector2 boxPosition = position;
         boxPosition.x += _boxOffset.x * direction;
@@ -23,7 +23,7 @@ public class Warrior : CharacterBase
         {
             if (hitMonster.TryGetComponent<MonsterStats>(out var monster))
             {
-                monster.TakeDamage(power * _attackDamage);
+                monster.TakeDamage(additionalDamage + _attackDamage);
             }
         }
     }

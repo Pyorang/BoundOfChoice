@@ -4,12 +4,12 @@ public class Mage : CharacterBase
 {
     public override ECharacterType CharacterType => ECharacterType.Mage;
 
-    public override void Attack(Vector2 position, float power, int direction)
+    public override void Attack(Vector2 position, int additionalDamage, int direction)
     {
         GameObject magicBoltObject = PoolManager.Instance.GetObject(EPoolType.MagicBolt);
         ProjectileBase projectile = magicBoltObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
         if (projectile.TryConsumeCost() == false) return;
-        projectile.Init(position, direction, power);
+        projectile.Init(position, direction, additionalDamage);
     }
 }

@@ -5,7 +5,7 @@ public abstract class ProjectileBase : MonoBehaviour
     [Header("공격")]
     [Space]
     [SerializeField] private int _cost;
-    [SerializeField] protected float _damage;
+    [SerializeField] protected int _damage;
 
     [Header("이동")]
     [Space]
@@ -35,12 +35,12 @@ public abstract class ProjectileBase : MonoBehaviour
         return false;
     }
 
-    public void Init(Vector2 position, int direction, float damageMultiply = 1.0f)
+    public void Init(Vector2 position, int direction, int additionalDamage = 0)
     {
         this.transform.position = position;
         _direction = direction;
         _renderer.flipX = (direction < 0);
-        _damage *= damageMultiply;
+        _damage += additionalDamage;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

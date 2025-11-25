@@ -17,7 +17,7 @@ public class MagicBolt : ProjectileBase
         foreach (var nearEnemy in nearEnemies)
         {
             if (nearEnemy == other) continue;
-            nearEnemy.GetComponent<MonsterStats>()?.TakeDamage(_damage * _splashDamageReduction);
+            nearEnemy.GetComponent<MonsterStats>()?.TakeDamage(Mathf.RoundToInt(_damage * _splashDamageReduction));
         }
 
         ReleaseObject();

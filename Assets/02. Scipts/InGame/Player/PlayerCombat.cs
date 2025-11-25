@@ -11,14 +11,15 @@ public enum ECharacterType
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private float _attackPower;
+    [SerializeField] private int _attackPower;
+    [SerializeField] private int _increaseDamagePerPower;
     public static event Action<int> OnPowerChanged;
 
     private PlayerMovement _movement;
     private Dictionary<ECharacterType, CharacterBase> _characters = new Dictionary<ECharacterType, CharacterBase>();
     private ECharacterType _currentCharacter = ECharacterType.Warrior;
 
-    public float AttackPower
+    public int AttackPower
     {
         get => _attackPower;
         private set
@@ -27,8 +28,6 @@ public class PlayerCombat : MonoBehaviour
             OnPowerChanged?.Invoke((int)_attackPower);
         }
     }
-
-    public float AttackPowerRatio => _attackPower * 0.1f + 1.0f;
 
     private void Awake()
     {
@@ -77,7 +76,7 @@ public class PlayerCombat : MonoBehaviour
         ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
         if (projectile.TryConsumeCost() == false) return;
-        projectile.Init(this.transform.position, _movement.PlayerDirection, AttackPowerRatio);
+        projectile.Init(this.transform.position, _movement.PlayerDirection, AttackPower);
     }
 
     private void GetAttackKeyInput()
@@ -87,7 +86,7 @@ public class PlayerCombat : MonoBehaviour
             CharacterBase currentCharacter = _characters[_currentCharacter];
             if (currentCharacter.CanAttack())
             {
-                currentCharacter.Attack(this.transform.position, AttackPowerRatio, _movement.PlayerDirection);
+                currentCharacter.Attack(this.transform.position, AttackPower, _movement.PlayerDirection);
                 currentCharacter.ResetAttackCooldown();
             }
         }
