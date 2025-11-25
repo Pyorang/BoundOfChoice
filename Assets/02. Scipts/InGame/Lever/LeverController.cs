@@ -9,6 +9,8 @@ public class LeverController : InteractObjectBase
     [SerializeField] private float _shakeDuration;
     [SerializeField] private float _shakePower;
 
+    private bool canInteract = true;
+
     private Animator _animator;
 
     private readonly int _pull = Animator.StringToHash("Pull");
@@ -20,8 +22,23 @@ public class LeverController : InteractObjectBase
 
     public override void GetItem()
     {
-        _animator.SetTrigger(_pull);
-        CameraController.Instance.StartShake(_shakeDuration, _shakePower);
-        ChoiceManager.Instance.ExecuteChoice(_isLeft);
+        if(canInteract)
+        {
+            _animator.SetTrigger(_pull);
+            AudioManager.Instance.Play(AudioType.SFX, "Lever");
+            CameraController.Instance.StartShake(_shakeDuration, _shakePower);
+            ChoiceManager.Instance.IsLeftChoice = _isLeft;
+            Angel.Instance.StartAnimation();
+        }
+    }
+
+    public void EnableInteract()
+    {
+        canInteract = true;
+    }
+
+    public void DisableInteract()
+    {
+        canInteract = false;
     }
 }

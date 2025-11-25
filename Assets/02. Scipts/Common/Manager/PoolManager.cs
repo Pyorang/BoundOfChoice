@@ -21,6 +21,7 @@ public class PoolManager : SingletonBehaviour<PoolManager>
 
     protected override void Init()
     {
+        IsDestroyOnLoad = true;
         base.Init();
         foreach (var info in _poolInfos)
         {

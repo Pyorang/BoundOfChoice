@@ -39,7 +39,7 @@ public class DataTableManager : SingletonBehaviour<DataTableManager>
 
     public ChoiceModel GetChoice(int id)
     {
-        return _choiceTable.FirstOrDefault(x => x.ID == id.ToString());
+        return _choiceTable.FirstOrDefault(x => x.ID.Substring(2) == id.ToString());
     }
 
     public ChoiceModel GetRandomChoice(params int[] exclusives)

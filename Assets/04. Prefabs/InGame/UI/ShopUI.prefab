@@ -197,7 +197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uACE0\uAE09\n"
+  m_text: Advanced
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
   m_sharedMaterial: {fileID: 6281517052949390355, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 52.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAE30\uD0C0"
+  m_text: Etc
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
   m_sharedMaterial: {fileID: 6281517052949390355, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
@@ -1375,7 +1375,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD68C\uBCF5"
+  m_text: Recovery
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
   m_sharedMaterial: {fileID: 6281517052949390355, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 54.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1727,7 +1727,7 @@ GameObject:
   - component: {fileID: 5997799376754932620}
   - component: {fileID: 4679529378106742338}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Shop Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1780,7 +1780,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0C1\uC810"
+  m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
   m_sharedMaterial: {fileID: 6281517052949390355, guid: b68b3bfac78c14546add046c28e725a7, type: 2}
@@ -1817,7 +1817,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 70
+  m_characterSpacing: 45
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
