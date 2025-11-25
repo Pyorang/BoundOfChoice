@@ -5,7 +5,7 @@ public abstract class ItemBase : InteractObjectBase
     [Header("아이템 타입")]
     [SerializeField] private EItemType _itemType;
     private Sprite _itemImage;
-
+    
     public EItemType ItemType => _itemType;
     public Sprite ItemImage => _itemImage;
 
@@ -21,3 +21,4 @@ public abstract class ItemBase : InteractObjectBase
     }
     public abstract void ApplyEffect();
 }
+
