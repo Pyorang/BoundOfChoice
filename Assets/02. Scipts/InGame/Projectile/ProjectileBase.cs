@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class ProjectileBase : MonoBehaviour
 {
     [Header("공격")]
+    [SerializeField] private int _cost;
     [SerializeField] protected float _damage;
 
     [Header("이동")]
@@ -23,16 +24,22 @@ public abstract class ProjectileBase : MonoBehaviour
 
     public abstract void ApplyDamage(Collider2D other);
     public abstract void Move();
+    public abstract void ReleaseObject();
 
-    public void SetProjectileInfo(Vector2 position, int direction, float damage)
+    public bool TryConsumeCost()
+    {
+        if (PlayerMana.Instance.TryUseMana(_cost)) return true;
+        ReleaseObject();
+        return false;
+    }
+
+    public void Init(Vector2 position, int direction, float damage)
     {
         this.transform.position = position;
         _direction = direction;
         _renderer.flipX = (direction < 0);
         _damage = damage;
     }
-
-    public abstract void ReleaseObject();
 
     private void OnTriggerEnter2D(Collider2D other)
     {

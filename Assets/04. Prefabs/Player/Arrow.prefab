@@ -46,10 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7117e7c3d0cef4db92f057b3ae4f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
-  _maxAttackCount: 4
-  _arrowSpeed: 10
-  _destroyTime: 5
+  _damage: 50
+  _speed: 10
 --- !u!61 &5005450280607701142
 BoxCollider2D:
   m_ObjectHideFlags: 0
