@@ -14,9 +14,9 @@ public abstract class ItemBase : InteractObjectBase
         _itemImage = GetComponent<SpriteRenderer>().sprite;
     }
 
-    public override void Execute()
+    public override void GetItem()
     {
-        InventoryUIController.Instance.GetItem(this, 1);
+        InventoryUI.Instance.GetItem(this, 1);
         gameObject.SetActive(false);
     }
     public abstract void ApplyEffect();

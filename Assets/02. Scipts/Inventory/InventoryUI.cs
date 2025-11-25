@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InventoryUIController : SingletonBehaviour<InventoryUIController>
+public class InventoryUI : SingletonBehaviour<InventoryUI>
 {
     [SerializeField] GameObject _slotContent;
     private SlotController[] _slots;
@@ -9,9 +9,20 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
     {
         IsDestroyOnLoad = true;
         base.Init();
+    }
 
+    private void Start()
+    {
         _slots = _slotContent.GetComponentsInChildren<SlotController>(true);
         gameObject.SetActive(false);
+    }
+
+    public void ClearInventory()
+    {
+        foreach (SlotController slot in _slots)
+        {
+            slot.ClearSlot();
+        }
     }
 
     public void ToggleInventory()
@@ -32,6 +43,7 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
             if (emptySlot == null && slot.IsEmpty)
             {
                 emptySlot = slot;
+                break;
             }
         }
 
@@ -40,6 +52,5 @@ public class InventoryUIController : SingletonBehaviour<InventoryUIController>
             emptySlot.SetSlot(item, count);
             return;
         }
-
     }
 }

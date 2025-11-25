@@ -16,7 +16,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             InteractObjectBase targetObject = UpdateNearestTarget();
             if (targetObject == null) return;
-            targetObject.Execute();
+            targetObject.GetItem();
         }
     }
 

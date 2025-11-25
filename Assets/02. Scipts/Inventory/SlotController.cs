@@ -54,7 +54,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
         ClearSlot();
     }
 
-    private void ClearSlot()
+    public void ClearSlot()
     {
         SetColor(0);
         _item = null;
