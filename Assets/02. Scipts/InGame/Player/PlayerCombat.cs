@@ -83,10 +83,12 @@ public class PlayerCombat : MonoBehaviour
         _characters[_currentCharacter].ActivateCharacter();
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying || _movement == null) return;
         if (_characters == null || _characters.Count == 0) return;
         _characters[_currentCharacter].DrawRange(this.transform.position, _movement.PlayerDirection);
     }
+#endif
 }

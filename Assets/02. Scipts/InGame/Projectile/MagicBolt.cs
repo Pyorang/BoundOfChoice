@@ -2,10 +2,24 @@ using UnityEngine;
 
 public class MagicBolt : ProjectileBase
 {
+    [SerializeField] private float _splashDistance = 2.0f;
+    [SerializeField] private float _splashDamageReduction = 0.5f;
+    [SerializeField] private LayerMask _enemyLayer;
+
     public override void ApplyDamage(Collider2D other)
     {
         if (other.CompareTag("Enemy") == false) return;
         other.GetComponent<MonsterStats>()?.TakeDamage(_damage);
+
+        Collider2D[] nearEnemies =
+            Physics2D.OverlapCircleAll(this.transform.position, _splashDistance, _enemyLayer);
+
+        foreach (var nearEnemy in nearEnemies)
+        {
+            if (nearEnemy == other) continue;
+            nearEnemy.GetComponent<MonsterStats>().TakeDamage(_damage * _splashDamageReduction);
+        }
+
         ReleaseObject();
     }
 
@@ -18,4 +32,12 @@ public class MagicBolt : ProjectileBase
     {
         PoolManager.Instance.ReleaseObject(EPoolType.MagicBolt, this.gameObject);
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _splashDistance);
+    }
+#endif
 }

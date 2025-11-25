@@ -16,15 +16,16 @@ public class Warrior : CharacterBase
         Collider2D[] hitMonsters =
             Physics2D.OverlapBoxAll(boxPosition, _attackRange, 0.0f, _enemyLayer);
         
-        foreach (Collider2D hit in hitMonsters)
+        foreach (Collider2D hitMonster in hitMonsters)
         {
-            if (hit.TryGetComponent<MonsterStats>(out var monster))
+            if (hitMonster.TryGetComponent<MonsterStats>(out var monster))
             {
                 monster.TakeDamage(power * _attackDamage);
             }
         }
     }
 
+#if UNITY_EDITOR
     public override void DrawRange(Vector2 position, int direction)
     {
         Vector2 boxPosition = position;
@@ -33,4 +34,5 @@ public class Warrior : CharacterBase
         Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawCube(boxPosition, _attackRange);
     }
+#endif
 }

@@ -18,7 +18,11 @@ public abstract class CharacterBase : MonoBehaviour
     }
 
     public abstract void Attack(Vector2 position, float power, int direction);
+
+
+#if UNITY_EDITOR
     public virtual void DrawRange(Vector2 position, int direction) { }
+#endif
 
     public bool CanAttack() => Time.time - _lastAttackTime >= _attackCoolTime;
     public void ResetAttackCooldown() => _lastAttackTime = Time.time;
