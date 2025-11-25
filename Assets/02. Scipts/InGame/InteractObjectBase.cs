@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class InteractObjectBase : MonoBehaviour
 {
-    public abstract void Execute();
+    public abstract void GetItem();
     private PlayerInteraction _player = null;
 
     private void OnTriggerEnter2D(Collider2D other)
