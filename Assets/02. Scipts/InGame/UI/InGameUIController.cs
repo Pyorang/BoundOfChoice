@@ -22,9 +22,6 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _damageText;
     [SerializeField] private TextMeshProUGUI _speedText;
 
-    [Header("임시")]
-    [SerializeField] private GameObject _shopUI;
-
     private void Awake()
     {
         PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
@@ -47,7 +44,7 @@ public class InGameUIController : MonoBehaviour
 
     public void OnClickShopButton()
     {
-        _shopUI.SetActive(!_shopUI.activeSelf);
+        ShopUI.Instance.gameObject.SetActive(true);
     }
 
     public void OnClickInGameSettingsButton()
