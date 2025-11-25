@@ -7,7 +7,7 @@ public abstract class InteractObjectBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") == false) return;
+        if (!other.CompareTag("Player")) return;
         if (_player != null) return;
 
         _player = other.GetComponent<PlayerInteraction>();
@@ -16,7 +16,7 @@ public abstract class InteractObjectBase : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") == false) return;
+        if (!other.CompareTag("Player")) return;
         if (_player == null) return;
 
         _player.RemoveInteractableObject(this);

@@ -9,7 +9,7 @@ public class Mage : CharacterBase
         GameObject magicBoltObject = PoolManager.Instance.GetObject(EPoolType.MagicBolt);
         ProjectileBase projectile = magicBoltObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
-        if (projectile.TryConsumeCost() == false) return;
+        if (!projectile.TryConsumeCost()) return;
         projectile.Init(position, direction, additionalDamage);
     }
 }

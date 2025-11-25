@@ -75,7 +75,7 @@ public class PlayerCombat : MonoBehaviour
         GameObject fireBallObject = PoolManager.Instance.GetObject(EPoolType.FireBall);
         ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
-        if (projectile.TryConsumeCost() == false) return;
+        if (!projectile.TryConsumeCost()) return;
         projectile.Init(this.transform.position, _movement.PlayerDirection, AttackPower);
     }
 

@@ -46,7 +46,7 @@ public class PoolManager : SingletonBehaviour<PoolManager>
 
     public void ReleaseObject(EPoolType type, GameObject poolObject)
     {
-        if (_pools.ContainsKey(type) == false) return;
+        if (!_pools.ContainsKey(type)) return;
         poolObject.SetActive(false);
         _pools[type].ReleaseObject(poolObject);
     }

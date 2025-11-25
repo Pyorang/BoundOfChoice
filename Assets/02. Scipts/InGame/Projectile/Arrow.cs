@@ -4,7 +4,7 @@ public class Arrow : ProjectileBase
 {
     public override void ApplyDamage(Collider2D other)
     {
-        if (other.CompareTag("Enemy") == false) return;
+        if (!other.CompareTag("Enemy")) return;
         MonsterStats stat = other.GetComponent<MonsterStats>();
         if (stat == null) return;
         stat.TakeDamage(_damage);
