@@ -79,6 +79,6 @@ public class InGameUIController : MonoBehaviour
 
     public void OnUpdateGoldUI(int gold)
     {
-        _goldText.text = $"{gold}";
+        _goldText.text = gold.ToString("N0");
     }
 }
