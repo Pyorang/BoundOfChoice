@@ -36,7 +36,7 @@ public class ObjectPool
     {
         if (_pool.Count == 0)
         {
-            int newPoolCount = (int)(_poolCount * IncreasePoolRate);
+            int newPoolCount = Mathf.Max(_poolCount + 1, (int)(_poolCount * IncreasePoolRate));
             CreateObject(newPoolCount - _poolCount);
             _poolCount = newPoolCount;
         }

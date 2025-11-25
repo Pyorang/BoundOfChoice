@@ -3,7 +3,6 @@ using UnityEngine;
 public class Mage : CharacterBase
 {
     public override ECharacterType CharacterType => ECharacterType.Mage;
-    [SerializeField] private GameObject _magicBoltPrefab;
 
     public override void Attack(Vector2 position, float power, int direction)
     {

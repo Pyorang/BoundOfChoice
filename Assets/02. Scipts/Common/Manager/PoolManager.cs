@@ -34,9 +34,13 @@ public class PoolManager : SingletonBehaviour<PoolManager>
 
     public GameObject GetObject(EPoolType type, bool active = true)
     {
-        GameObject poolObject = _pools[type].GetObject();
-        poolObject.SetActive(active);
-        return poolObject;
+        if (_pools.TryGetValue(type, out ObjectPool pool))
+        {
+            GameObject poolObject = pool.GetObject();
+            poolObject.SetActive(active);
+            return poolObject;
+        }
+        return null;
     }
 
     public void ReleaseObject(EPoolType type, GameObject poolObject)
