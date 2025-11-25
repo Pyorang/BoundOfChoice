@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObjectPool
 {
     private Queue<GameObject> _pool;
-    private HashSet<GameObject> _activeObjects;
+    private HashSet<GameObject> _activeObjects = new HashSet<GameObject>();
 
     private GameObject _prefab = null;
     private Transform _parent = null;
@@ -41,6 +41,7 @@ public class ObjectPool
             _poolCount = newPoolCount;
         }
         GameObject pooledObject = _pool.Dequeue();
+        _activeObjects.Add(pooledObject);
         return pooledObject;
     }
 
