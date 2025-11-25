@@ -4,17 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class CameraController : SingletonBehaviour<CameraController>
 {
-    private bool _isShakerOn = true;
+    private bool _isCameraEffectOn = true;
     private Camera _camera;
 
     private Vector3 _startPosition;
     private Coroutine _shakeCoroutine;
+    private Coroutine _zoomCoroutine;
 
     protected override void Init()
     {
         base.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
         _camera = Camera.main;
+        _startPosition = _camera.transform.localPosition;
     }
 
     private void Start()
@@ -25,52 +27,40 @@ public class CameraController : SingletonBehaviour<CameraController>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _camera = Camera.main;
+        _startPosition = _camera.transform.localPosition;
     }
 
-    public void SetShakerOn(bool isOn)
+    public void SetCameraEffectOn(bool isOn)
     {
-        _isShakerOn = isOn;
+        _isCameraEffectOn = isOn;
     }
 
     public void StartShake(float duration, float power)
     {
-        if(_isShakerOn)
-        {
-            if (_shakeCoroutine != null)
-            {
-                StopCoroutine(_shakeCoroutine);
-                if (_camera != null)
-                {
-                    _camera.transform.localPosition = _startPosition;
-                }
-            }
+        if (!_isCameraEffectOn || _camera == null) return;
 
-            if (_camera == null) return;
+        StopShake();
 
-            _startPosition = _camera.transform.localPosition;
-            _shakeCoroutine = StartCoroutine(ShakeCoroutine(duration, power));
-        }
+        _shakeCoroutine = StartCoroutine(ShakeCoroutine(duration, power));
     }
 
     public void StopShake()
     {
-        if (_shakeCoroutine != null)
-        {
-            StopCoroutine(_shakeCoroutine);
-            _shakeCoroutine = null;
-        }
+        if (_shakeCoroutine == null) return;
+   
+        StopCoroutine(_shakeCoroutine);
+        _shakeCoroutine = null;
 
-        if (_camera != null)
-        {
-            _camera.transform.localPosition = _startPosition;
-        }
+        if (_camera == null) return;
+        
+        _camera.transform.localPosition = _startPosition;
     }
 
     private IEnumerator ShakeCoroutine(float duration, float power)
     {
         float elapsedTime = 0f;
 
-        Vector3 originalPosition = _startPosition;
+        Vector3 startPosition = _startPosition;
 
         while (elapsedTime < duration)
         {
@@ -78,16 +68,52 @@ public class CameraController : SingletonBehaviour<CameraController>
 
             Vector3 randomOffset = Random.insideUnitCircle.normalized * power;
 
-            _camera.transform.localPosition = originalPosition + randomOffset;
+            _camera.transform.localPosition = startPosition + randomOffset;
             yield return null;
         }
 
         StopShake();
     }
+    public void StartZoom(float duration, float size, Vector2 target)
+    {
+        if (!_isCameraEffectOn || _camera == null) return;
+
+        if (_zoomCoroutine != null)
+        {
+            StopCoroutine(_zoomCoroutine);
+        }
+
+        _zoomCoroutine = StartCoroutine(ZoomCoroutine(duration, size, target));
+    }
+
+    private IEnumerator ZoomCoroutine(float duration, float size, Vector2 target)
+    {
+        float elapsedTime = 0f;
+        float startSize = _camera.orthographicSize;
+
+        Vector3 startPosition = _camera.transform.position;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
+
+            _camera.orthographicSize = Mathf.Lerp(startSize, size, t);
+
+            _camera.transform.position = Vector3.Lerp(startPosition, target, t);
+
+            yield return null;
+        }
+
+        _camera.orthographicSize = startSize;
+        _camera.transform.position = startPosition;
+
+        _zoomCoroutine = null;
+    }
 
     public void SyncUserSettings()
     {
         var _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
-        _isShakerOn = _userSettingsData.IsVibrationOn;
+        _isCameraEffectOn = _userSettingsData.IsVibrationOn;
     }
 }

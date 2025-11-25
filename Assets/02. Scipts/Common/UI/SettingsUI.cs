@@ -48,7 +48,7 @@ public class SettingsUI : BaseUI
 
     public void OnVibrationToggleChanged()
     {
-        CameraController.Instance.SetShakerOn(_vibrationToggle.isOn);
+        CameraController.Instance.SetCameraEffectOn(_vibrationToggle.isOn);
         UserDataManager.Instance.GetUserData<UserSettingsData>().IsVibrationOn = _vibrationToggle.isOn;
     }
 

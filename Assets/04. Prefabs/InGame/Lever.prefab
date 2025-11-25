@@ -127,6 +127,8 @@ MonoBehaviour:
   _isLeft: 1
   _shakeDuration: 0.5
   _shakePower: 0.2
+  _zoomDuration: 1
+  _zoomSize: 3
 --- !u!61 &2386266296168855750
 BoxCollider2D:
   m_ObjectHideFlags: 0

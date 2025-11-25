@@ -22,7 +22,6 @@ public class LeverController : InteractObjectBase
     {
         _animator.SetTrigger(_pull);
         CameraController.Instance.StartShake(_shakeDuration, _shakePower);
-        // NOTE : 카메라 줌인을 구현한다.
         ChoiceManager.Instance.ExecuteChoice(_isLeft);
     }
 }
