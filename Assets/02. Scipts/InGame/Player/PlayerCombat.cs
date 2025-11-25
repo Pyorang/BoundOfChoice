@@ -31,12 +31,13 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
-
         CharacterBase[] characters = GetComponentsInChildren<CharacterBase>();
         foreach (CharacterBase character in characters)
         {
             _characters.Add(character.CharacterType, character);
+            character.DeactivateCharacter();
         }
+        _characters[_currentCharacter].ActivateCharacter();
     }
 
     private void Update()
@@ -54,6 +55,10 @@ public class PlayerCombat : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ChangeCharacter(ECharacterType.Archer);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ChangeCharacter(ECharacterType.Mage);
         }
     }
 
@@ -73,7 +78,9 @@ public class PlayerCombat : MonoBehaviour
     private void ChangeCharacter(ECharacterType playerType)
     {
         if (_currentCharacter == playerType) return;
+        _characters[_currentCharacter].DeactivateCharacter();
         _currentCharacter = playerType;
+        _characters[_currentCharacter].ActivateCharacter();
     }
 
     private void OnDrawGizmos()
