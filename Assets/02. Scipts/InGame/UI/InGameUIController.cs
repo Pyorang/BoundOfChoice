@@ -42,6 +42,11 @@ public class InGameUIController : MonoBehaviour
         AudioManager.Instance.Play(AudioType.SFX, UI_OPEN_BUTTON_CLICK);
     }
 
+    public void OnClickShopButton()
+    {
+        ShopUI.Instance.gameObject.SetActive(true);
+    }
+
     public void OnClickInGameSettingsButton()
     {
         var uiData = new BaseUIData();

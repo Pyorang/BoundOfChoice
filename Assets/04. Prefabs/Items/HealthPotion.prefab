@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 2
-  _itemImage: {fileID: 21300000, guid: ddf8838d0a06d8d4c9dec9e3bed69260, type: 3}
+  _itemImage: {fileID: 384535668486497040}
   _amount: 60
 --- !u!95 &-7805000788228699122
 Animator:
