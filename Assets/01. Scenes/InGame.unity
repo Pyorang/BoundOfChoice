@@ -340,8 +340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isLeft: 1
-  _shakeDuration: 1
-  _shakePower: 0.5
+  _shakeDuration: 0.5
+  _shakePower: 0.2
 --- !u!61 &430251810
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1117,8 +1117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isLeft: 0
-  _shakeDuration: 1
-  _shakePower: 0.5
+  _shakeDuration: 0.5
+  _shakePower: 0.2
 --- !u!95 &971867790
 Animator:
   serializedVersion: 7

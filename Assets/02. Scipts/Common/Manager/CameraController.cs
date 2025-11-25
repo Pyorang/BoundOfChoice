@@ -76,11 +76,7 @@ public class CameraController : SingletonBehaviour<CameraController>
         {
             elapsedTime += Time.deltaTime;
 
-            Vector3 randomOffset = new Vector3(
-                Random.Range(-1f, 1f) * power,
-                Random.Range(-1f, 1f) * power,
-                0f
-            );
+            Vector3 randomOffset = Random.insideUnitCircle.normalized * power;
 
             _camera.transform.localPosition = originalPosition + randomOffset;
             yield return null;
