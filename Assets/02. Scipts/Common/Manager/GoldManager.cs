@@ -12,7 +12,7 @@ public class GoldManager : SingletonBehaviour<GoldManager>
         IsDestroyOnLoad = true;
         base.Init();
 
-        _gold = 0;
+        Gold = 0;
     }
     public int Gold
     {
