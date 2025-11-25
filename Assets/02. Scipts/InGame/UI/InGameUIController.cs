@@ -22,6 +22,9 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _damageText;
     [SerializeField] private TextMeshProUGUI _speedText;
 
+    [Header("임시")]
+    [SerializeField] private GameObject _shopUI;
+
     private void Awake()
     {
         PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
@@ -40,6 +43,11 @@ public class InGameUIController : MonoBehaviour
     {
         InventoryUI.Instance.ToggleInventory();
         AudioManager.Instance.Play(AudioType.SFX, UI_OPEN_BUTTON_CLICK);
+    }
+
+    public void OnClickShopButton()
+    {
+        _shopUI.SetActive(!_shopUI.activeSelf);
     }
 
     public void OnClickInGameSettingsButton()
