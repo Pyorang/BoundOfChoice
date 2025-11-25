@@ -7,6 +7,8 @@ public enum EItemType
     Apple,
     HealthPotion,
     ManaPotion,
+    RerollTicket,
+    EliminationTicket,
 }
 
 [System.Serializable]
