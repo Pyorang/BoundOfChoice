@@ -30,9 +30,6 @@ public abstract class ProjectileBase : MonoBehaviour
         _direction = direction;
         _renderer.flipX = (direction < 0);
         _damage = damage;
-
-        // Note : Test 코드 수정 필요
-        Invoke("ReleaseObject", 3.0f);
     }
 
     public abstract void ReleaseObject();

@@ -2,21 +2,13 @@ using UnityEngine;
 
 public class Arrow : ProjectileBase
 {
-    [Header("관통 개수")]
-    private int _attackCount = 0;
-    [SerializeField] private int _maxAttackCount = 4;
-
     public override void ApplyDamage(Collider2D other)
     {
         if (other.CompareTag("Enemy") == false) return;
         MonsterStats stat = other.GetComponent<MonsterStats>();
         if (stat == null) return;
         stat.TakeDamage(_damage);
-        _attackCount++;
-        if (_attackCount >= _maxAttackCount)
-        {
-            ReleaseObject();
-        }
+        ReleaseObject();
     }
 
     public override void Move()
