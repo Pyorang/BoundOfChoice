@@ -4,7 +4,7 @@ public class FireBall : ProjectileBase
 {
     [Header("Dot 데미지")]
     [Space]
-    [SerializeField] private float _dotDamagePerTick = 10.0f;  // 도트당 데미지
+    [SerializeField] private float _dotDamagePerTick = 10.0f;
     [SerializeField] private float _dotDuration = 3.0f;
     [SerializeField] private float _dotTickInterval = 1.0f;
 

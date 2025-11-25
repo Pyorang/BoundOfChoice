@@ -35,12 +35,12 @@ public abstract class ProjectileBase : MonoBehaviour
         return false;
     }
 
-    public void Init(Vector2 position, int direction, float damage)
+    public void Init(Vector2 position, int direction, float damageMultiply = 1.0f)
     {
         this.transform.position = position;
         _direction = direction;
         _renderer.flipX = (direction < 0);
-        _damage = damage;
+        _damage *= damageMultiply;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

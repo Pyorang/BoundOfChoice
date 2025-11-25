@@ -10,6 +10,6 @@ public class Mage : CharacterBase
         ProjectileBase projectile = magicBoltObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
         if (projectile.TryConsumeCost() == false) return;
-        projectile.Init(position, direction, power * _attackDamage);
+        projectile.Init(position, direction, power);
     }
 }

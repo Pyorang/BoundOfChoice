@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class CharacterBase : MonoBehaviour
 {
     public abstract ECharacterType CharacterType { get; }
-    [SerializeField] protected float _attackDamage = 10.0f;
     [SerializeField] protected float _attackCoolTime = 1.0f;
     private float _lastAttackTime;
 

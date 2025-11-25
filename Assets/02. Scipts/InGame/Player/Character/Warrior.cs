@@ -8,6 +8,9 @@ public class Warrior : CharacterBase
     [SerializeField] private Vector2 _boxOffset = new Vector2(1f, 0f);
     [SerializeField] private LayerMask _enemyLayer;
 
+    [Header("데미지")]
+    [SerializeField] private float _attackDamage = 25.0f;
+
     public override void Attack(Vector2 position, float power, int direction)
     {
         Vector2 boxPosition = position;

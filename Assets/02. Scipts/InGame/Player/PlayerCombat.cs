@@ -28,6 +28,8 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public float AttackPowerRatio => _attackPower * 0.1f + 1.0f;
+
     private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
@@ -75,7 +77,7 @@ public class PlayerCombat : MonoBehaviour
         ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
         if (projectile.TryConsumeCost() == false) return;
-        projectile.Init(this.transform.position, _movement.PlayerDirection, 40.0f);
+        projectile.Init(this.transform.position, _movement.PlayerDirection, AttackPowerRatio);
     }
 
     private void GetAttackKeyInput()
@@ -85,7 +87,7 @@ public class PlayerCombat : MonoBehaviour
             CharacterBase currentCharacter = _characters[_currentCharacter];
             if (currentCharacter.CanAttack())
             {
-                currentCharacter.Attack(this.transform.position, AttackPower, _movement.PlayerDirection);
+                currentCharacter.Attack(this.transform.position, AttackPowerRatio, _movement.PlayerDirection);
                 currentCharacter.ResetAttackCooldown();
             }
         }

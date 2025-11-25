@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497b37a844130e442af2ff83c4459086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDamage: 20
   _attackCoolTime: 0.3
 --- !u!1 &2014739114944699033
 GameObject:
@@ -202,7 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237a1b8b2375c4f4cafb5bf4ddbcc064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDamage: 20
   _attackCoolTime: 0.3
 --- !u!1 &4659175342300605240
 GameObject:
@@ -490,13 +488,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9de6c6f15c20e346b5cea92d97c436f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDamage: 45
   _attackCoolTime: 0.5
   _attackRange: {x: 2, y: 0.5}
   _boxOffset: {x: 1.5, y: 0}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  _attackDamage: 25
 --- !u!1 &6145296015874021320
 GameObject:
   m_ObjectHideFlags: 0

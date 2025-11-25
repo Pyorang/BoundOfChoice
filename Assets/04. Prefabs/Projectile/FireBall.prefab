@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cost: 40
-  _damage: 40
+  _damage: 60
   _speed: 10
   _dotDamagePerTick: 10
   _dotDuration: 3
