@@ -27,13 +27,13 @@
     {
       "ID": "I_5",
       "Price": 200,
-      "Name": "Magic: Fire Crash",
+      "Name": "Magic: Fire Ball",
       "Description": "If this book is carried, you can cast Fire Crash."
     },
     {
       "ID": "I_6",
       "Price": 200,
-      "Name": "Magic: Ice Spear",
+      "Name": "Magic: Ice Age",
       "Description": "If this book is carried, you can cast Ice Spear."
     },
     {
