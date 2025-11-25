@@ -22,11 +22,16 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _damageText;
     [SerializeField] private TextMeshProUGUI _speedText;
 
+    [Header("골드 관련")]
+    [SerializeField] private Image _goldIconImage;
+    [SerializeField] private TextMeshProUGUI _goldText;
+
     private void Awake()
     {
         PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
+        GoldManager.OnGoldChanged += OnUpdateGoldUI;
     }
 
     private void OnDestroy()
@@ -34,6 +39,7 @@ public class InGameUIController : MonoBehaviour
         PlayerHealth.OnHealthChanged -= OnUpdateHealthUI;
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
+        GoldManager.OnGoldChanged -= OnUpdateGoldUI;
     }
 
     public void OnClickInventoryButton()
@@ -69,5 +75,10 @@ public class InGameUIController : MonoBehaviour
     public void OnUpdateDamageUI(int damage)
     {
         _damageText.text = $"{damage}";
+    }
+
+    public void OnUpdateGoldUI(int gold)
+    {
+        _goldText.text = $"{gold}";
     }
 }
