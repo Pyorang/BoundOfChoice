@@ -6,13 +6,16 @@ public class MagicBolt : ProjectileBase
     {
         if (other.CompareTag("Enemy") == false) return;
         other.GetComponent<MonsterStats>()?.TakeDamage(_damage);
-
-        // NOTE : 이후 Pooling 방식을 사용해 오브젝트 관리
-        Destroy(this.gameObject);
+        ReleaseObject();
     }
 
     public override void Move()
     {
         transform.Translate(Vector2.right * (_direction * _speed * Time.deltaTime));
+    }
+
+    public override void ReleaseObject()
+    {
+        PoolManager.Instance.ReleaseObject(EPoolType.MagicBolt, this.gameObject);
     }
 }

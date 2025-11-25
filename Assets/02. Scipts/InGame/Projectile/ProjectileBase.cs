@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class ProjectileBase : MonoBehaviour
@@ -8,7 +9,6 @@ public abstract class ProjectileBase : MonoBehaviour
     [Header("이동")]
     protected int _direction = -1;
     [SerializeField] protected float _speed = 10.0f;
-    [SerializeField] private float _destroyTime = 5.0f;
 
     private SpriteRenderer _renderer;
 
@@ -25,15 +25,18 @@ public abstract class ProjectileBase : MonoBehaviour
     public abstract void ApplyDamage(Collider2D other);
     public abstract void Move();
 
-    public void SetProjectileInfo(int direction, float damage)
+    public void SetProjectileInfo(Vector2 position, int direction, float damage)
     {
+        this.transform.position = position;
         _direction = direction;
         _renderer.flipX = (direction < 0);
         _damage = damage;
 
-        // NOTE : 이후 Pooling 방식을 사용해 오브젝트 관리
-        Destroy(gameObject, _destroyTime);
+        // Note : Test 코드 수정 필요
+        Invoke("ReleaseObject", 3.0f);
     }
+
+    public abstract void ReleaseObject();
 
     private void OnTriggerEnter2D(Collider2D other)
     {
