@@ -87,14 +87,13 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         return number;
     }
 
-
-    private void Update()
+    public void ExecuteChoice(bool left)
     {
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
+        if (left)
         {
             _currentChoice.Execute1();
         }
-        else if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
             _currentChoice.Execute2();
         }

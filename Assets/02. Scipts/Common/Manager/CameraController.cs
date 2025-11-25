@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : SingletonBehaviour<CameraController>
 {
@@ -11,14 +12,19 @@ public class CameraController : SingletonBehaviour<CameraController>
 
     protected override void Init()
     {
+        base.Init();
+        SceneManager.sceneLoaded += OnSceneLoaded;
         _camera = Camera.main;
     }
 
     private void Start()
     {
-        Init();
-
         SyncUserSettings();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _camera = Camera.main;
     }
 
     public void SetShakerOn(bool isOn)
