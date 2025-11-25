@@ -15,13 +15,17 @@ public class Arrow : ProjectileBase
         _attackCount++;
         if (_attackCount >= _maxAttackCount)
         {
-            // NOTE : 이후 Pooling 방식을 사용해 오브젝트 관리
-            Destroy(this.gameObject);
+            ReleaseObject();
         }
     }
 
     public override void Move()
     {
         transform.Translate(Vector2.right * (_direction * _speed * Time.deltaTime));
+    }
+
+    public override void ReleaseObject()
+    {
+        PoolManager.Instance.ReleaseObject(EPoolType.Arrow, this.gameObject);
     }
 }
