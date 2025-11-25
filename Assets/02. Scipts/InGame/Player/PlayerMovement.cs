@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
             _playerDirection = Mathf.RoundToInt(_xMovement);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
