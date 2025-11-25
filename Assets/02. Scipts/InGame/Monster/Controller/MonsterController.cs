@@ -14,12 +14,14 @@ public abstract class MonsterController : MonoBehaviour
     
     private Vector2 _direction;
     protected float _distance;
+    private MonsterStats _stats;
 
     private void Awake()
     {
         _movement = GetComponent<MonsterMovement>();
         _animator = GetComponent<MonsterAnimator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _stats = GetComponent<MonsterStats>();
     }
 
     private void OnEnable()
@@ -66,6 +68,14 @@ public abstract class MonsterController : MonoBehaviour
         // NOTE : 스킬 시전 로직을 추가한다.
         _animator.PlayAttackAnimation();
         SetSpriteFlip(_distance > 0);
+    }
+
+    public void ApplyDamage()
+    {
+        if (IsPlayerInAttackRange())
+        {
+            PlayerHealth.Instance.TakeDamage((int)_stats.AttackPower);
+        }
     }
 
     private void HandleMoveDirection()

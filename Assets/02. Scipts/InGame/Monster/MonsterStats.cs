@@ -36,11 +36,11 @@ public class MonsterStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (_currentHealth < 0) return;
+        if (_currentHealth <= 0) return;
 
         _currentHealth -= damage;
 
-        if (_currentHealth < 0)
+        if (_currentHealth <= 0)
         {
             Death();
         }
