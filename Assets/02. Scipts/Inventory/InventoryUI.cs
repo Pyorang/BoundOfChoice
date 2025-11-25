@@ -43,7 +43,6 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
             if (emptySlot == null && slot.IsEmpty)
             {
                 emptySlot = slot;
-                break;
             }
         }
 
