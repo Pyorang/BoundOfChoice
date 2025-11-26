@@ -47,6 +47,27 @@ public class InGameUIController : MonoBehaviour
         SpiritManager.OnSpiritPieceChanged -= OnUpdateSpiritUI;
     }
 
+    private void Update()
+    {
+        if(!PlayerHealth.Instance.IsDeath)
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                OnClickInventoryButton();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OnClickInGameSettingsButton();
+            }
+
+            if (Input.GetKeyDown(KeyCode.BackQuote))
+            {
+                OnClickShopButton();
+            }
+        }
+    }
+
     public void OnClickInventoryButton()
     {
         InventoryUI.Instance.ToggleInventory();
