@@ -33,13 +33,13 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
         _item = item;
         _itemCount = count;
         _itemImageUI.sprite = item.ItemImage;
-        _itemCountTextUI.text = _itemCount.ToString();
+        UpdateCountTextUI();
     }
 
     public void AddItem(int count)
     {
         _itemCount += count;
-        _itemCountTextUI.text = _itemCount.ToString();
+        UpdateCountTextUI();
     }
 
     public void UseItem()
@@ -48,7 +48,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
         if (!_item.ApplyEffect()) return;
         --_itemCount;
-        _itemCountTextUI.text = _itemCount.ToString();
+        UpdateCountTextUI();
 
         if (_itemCount > 0) return;
         ClearSlot();
@@ -59,7 +59,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
         if (amount < 0 || _itemCount < amount) return;
 
         _itemCount -= amount;
-        _itemCountTextUI.text = _itemCount.ToString();
+        UpdateCountTextUI();
 
         if (_itemCount > 0) return;
         ClearSlot();
@@ -71,13 +71,25 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
         _item = null;
         _itemCount = 0;
         _itemImageUI.sprite = null;
-        _itemCountTextUI.text = null;
+        _itemCountTextUI.text = string.Empty;
     }
 
     public bool CompareItem(EItemType itemType)
     {
         if (_item == null) return false;
         return _item.ItemType.Equals(itemType);
+    }
+
+    private void UpdateCountTextUI()
+    {
+        if (_item.ShowItemCount)
+        {
+            _itemCountTextUI.text = _itemCount.ToString();
+        }
+        else
+        {
+            _itemCountTextUI.text = string.Empty;
+        }
     }
 
     private void SwapSlot(SlotController slot)
