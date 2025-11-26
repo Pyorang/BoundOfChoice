@@ -52,4 +52,18 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
             return;
         }
     }
+
+    public bool TryConsumeItem(EItemType itemType, int amount)
+    {
+        if (amount > 1) return false;
+
+        foreach (SlotController slot in _slots)
+        {
+            if (slot.IsEmpty || !slot.CompareItem(itemType)) continue;
+
+            slot.ConsumeItem(amount);
+            return true;
+        }
+        return false;
+    }
 }

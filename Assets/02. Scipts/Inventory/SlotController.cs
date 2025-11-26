@@ -46,8 +46,19 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
     {
         if (IsEmpty) return;
 
-        _item.ApplyEffect();
+        if (!_item.ApplyEffect()) return;
         --_itemCount;
+        _itemCountTextUI.text = _itemCount.ToString();
+
+        if (_itemCount > 0) return;
+        ClearSlot();
+    }
+
+    public void ConsumeItem(int amount)
+    {
+        if (amount < 0 || _itemCount < amount) return;
+
+        _itemCount -= amount;
         _itemCountTextUI.text = _itemCount.ToString();
 
         if (_itemCount > 0) return;

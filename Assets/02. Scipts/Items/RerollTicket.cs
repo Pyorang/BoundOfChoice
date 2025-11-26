@@ -1,7 +1,8 @@
 public class RerollTicket : ItemBase
 {
-    public override void ApplyEffect()
+    public override bool ApplyEffect()
     {
         ChoiceManager.Instance.GetNewChoice();
+        return true;
     }
 }

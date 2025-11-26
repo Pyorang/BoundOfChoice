@@ -32,6 +32,5 @@ public abstract class ItemBase : InteractObjectBase
         InventoryUI.Instance.GetItem(this, 1);
         gameObject.SetActive(false);
     }
-    public abstract void ApplyEffect();
+    public abstract bool ApplyEffect();
 }
-
