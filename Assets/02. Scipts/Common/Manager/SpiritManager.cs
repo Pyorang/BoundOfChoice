@@ -13,23 +13,19 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
         IsDestroyOnLoad = true;
         base.Init();
 
-        SpiritPiece = 0;
-    }
-    public int SpiritPiece
-    {
-        get => _spiritPiece;
-        private set
-        {
-            _spiritPiece = value;
-            OnSpiritPieceChanged?.Invoke(_spiritPiece, MaxSpiritPiece);
-        }
+        _spiritPiece = 0;
     }
 
     public void GetSpiritPiece(int amount)
     {
         if (amount <= 0) return;
-        SpiritPiece = Mathf.Min(SpiritPiece + amount, MaxSpiritPiece);
+        _spiritPiece = Mathf.Min(_spiritPiece + amount, MaxSpiritPiece);
 
         OnSpiritGained?.Invoke();
+    }
+
+    public void SpiritChangedEvent()
+    {
+        OnSpiritPieceChanged?.Invoke(_spiritPiece, MaxSpiritPiece);
     }
 }

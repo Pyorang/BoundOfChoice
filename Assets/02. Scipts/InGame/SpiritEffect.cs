@@ -4,7 +4,8 @@ using UnityEngine;
 public class SpiritEffect : MonoBehaviour
 {
     [Header("파티클 프리팹")]
-    [SerializeField] private GameObject _effectPrefab;
+    [SerializeField] private GameObject _trailEffectPrefab;
+    [SerializeField] private GameObject _gainEffectPrefab;
     [SerializeField] public float _effectDuration = 1.0f;
     [SerializeField] private AnimationCurve _speedCurve;
 
@@ -13,10 +14,13 @@ public class SpiritEffect : MonoBehaviour
     [SerializeField] private Transform _endTransform;
     [SerializeField] private Vector3 _controlPoint1;
     [SerializeField] private Vector3 _controlPoint2;
+    private Vector3 _worldEndPosition;
+    private const float DestroyTime = 3f;
 
     private void Awake()
     {
         SpiritManager.OnSpiritGained += StartEffect;
+        _worldEndPosition = Camera.main.ScreenToWorldPoint(_endTransform.position);
     }
 
     private void OnDestroy()
@@ -26,10 +30,15 @@ public class SpiritEffect : MonoBehaviour
 
     public void StartEffect()
     {
-        Vector3 worldEndPosition = Camera.main.ScreenToWorldPoint(_endTransform.position);
+        GameObject effectInstance = Instantiate(_trailEffectPrefab, _startTransform.position, Quaternion.identity);
+        StartCoroutine(MoveBezierCurveEffect(effectInstance, _startTransform.position, _worldEndPosition));
+    }
 
-        GameObject effectInstance = Instantiate(_effectPrefab, _startTransform.position, Quaternion.identity);
-        StartCoroutine(MoveBezierCurveEffect(effectInstance, _startTransform.position, worldEndPosition));
+    public void GainEffect()
+    {
+        SpiritManager.Instance.SpiritChangedEvent();
+        GameObject effectInstance = Instantiate(_gainEffectPrefab, _worldEndPosition, Quaternion.identity);
+        Destroy(effectInstance, DestroyTime);
     }
 
     private IEnumerator MoveBezierCurveEffect(GameObject effect, Vector3 startPosition, Vector3 endPosition)
@@ -50,6 +59,7 @@ public class SpiritEffect : MonoBehaviour
         }
 
         Destroy(effect);
+        GainEffect();
     }
 
     public static Vector3 GetBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
