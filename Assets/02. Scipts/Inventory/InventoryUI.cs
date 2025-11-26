@@ -43,7 +43,6 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
             if (emptySlot == null && slot.IsEmpty)
             {
                 emptySlot = slot;
-                break;
             }
         }
 
@@ -52,5 +51,17 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
             emptySlot.SetSlot(item, count);
             return;
         }
+    }
+
+    public bool TryConsumeItem(EItemType itemType)
+    {
+        foreach (SlotController slot in _slots)
+        {
+            if (slot.IsEmpty || !slot.CompareItem(itemType)) continue;
+
+            slot.ConsumeItem();
+            return true;
+        }
+        return false;
     }
 }

@@ -1,0 +1,44 @@
+using UnityEngine;
+
+public class LeverController : InteractObjectBase
+{
+    [Header("왼쪽 레버")]
+    [SerializeField] private bool _isLeft;
+
+    [Header("레버 연출 설정")]
+    [SerializeField] private float _shakeDuration;
+    [SerializeField] private float _shakePower;
+
+    private bool canInteract = true;
+
+    private Animator _animator;
+
+    private readonly int _pull = Animator.StringToHash("Pull");
+    
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    public override void GetItem()
+    {
+        if(canInteract)
+        {
+            _animator.SetTrigger(_pull);
+            AudioManager.Instance.Play(AudioType.SFX, "Lever");
+            CameraController.Instance.StartShake(_shakeDuration, _shakePower);
+            ChoiceManager.Instance.IsLeftChoice = _isLeft;
+            Angel.Instance.StartAnimation();
+        }
+    }
+
+    public void EnableInteract()
+    {
+        canInteract = true;
+    }
+
+    public void DisableInteract()
+    {
+        canInteract = false;
+    }
+}

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,12 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     [Space]
     [SerializeField] private TextMeshProUGUI _text1;
     [SerializeField] private TextMeshProUGUI _text2;
+    [SerializeField] private float _typingDelay = 0.1f;
+
+    public bool IsLeftChoice;
+
+    private IEnumerator _typingCoroutine1;
+    private IEnumerator _typingCoroutine2;
 
     private ChoiceModel _currentChoiceModel;
     
@@ -24,12 +31,20 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     {
         IsDestroyOnLoad = true;
         InitChoices();
-        GetNewChoice();
+        SetChoice(1);
+    }
+
+    public void SetChoice(int choiceID)
+    {
+        _currentChoiceModel = DataTableManager.Instance.GetChoice(choiceID);
+        UpdateChoiceText(_currentChoiceModel.Text1, _currentChoiceModel.Text2);
+
+        _currentChoice = _choices[GetCurrentChoiceID() - 1];
     }
 
     public void GetNewChoice()
     {
-        _currentChoiceModel = DataTableManager.Instance.GetRandomChoice();
+        _currentChoiceModel = DataTableManager.Instance.GetRandomChoice(1, 2);
         UpdateChoiceText(_currentChoiceModel.Text1, _currentChoiceModel.Text2);
 
         _currentChoice = _choices[GetCurrentChoiceID() - 1];
@@ -76,8 +91,34 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 
     public void UpdateChoiceText(string text1, string text2)
     {
-        _text1.text = text1;
-        _text2.text = text2;
+        if(_typingCoroutine1 != null)
+        {
+            StopCoroutine(_typingCoroutine1);
+        }
+        if(_typingCoroutine2 != null)
+        {
+            StopCoroutine(_typingCoroutine2);
+        }
+
+        _typingCoroutine1 = TypingEffect(_text1, text1, _typingDelay);
+        _typingCoroutine2 = TypingEffect(_text2, text2, _typingDelay);
+
+        StartCoroutine(_typingCoroutine1);
+        StartCoroutine(_typingCoroutine2);
+    }
+
+    private IEnumerator TypingEffect(TextMeshProUGUI textObject, string fullText, float delay)
+    {
+        textObject.text = "";
+        var sb = new System.Text.StringBuilder();
+
+        foreach (char c in fullText)
+        {
+            sb.Append(c);
+            textObject.text = sb.ToString();
+            AudioManager.Instance.Play(AudioType.SFX, "Typing");
+            yield return new WaitForSeconds(delay);
+        }
     }
 
     public int GetCurrentChoiceID()
@@ -87,14 +128,13 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         return number;
     }
 
-
-    private void Update()
+    public void ExecuteChoice()
     {
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
+        if (IsLeftChoice)
         {
             _currentChoice.Execute1();
         }
-        else if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
             _currentChoice.Execute2();
         }
