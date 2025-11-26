@@ -56,14 +56,15 @@ public abstract class MonsterController : MonoBehaviour
     private void DetermineState()
     {
         _distance = _player.transform.position.x - transform.position.x;
-        if (_state == EMonsterState.Move)
+        switch (_state)
         {
-            HandleMoveDirection();
-            HandleMove();
-        }
-        else if (_state == EMonsterState.Attack)
-        {
-            HandleAttack();
+            case EMonsterState.Move:
+                HandleMoveDirection();
+                HandleMove();
+                break;
+            case EMonsterState.Attack:
+                HandleAttack();
+                break;
         }
     }
 
@@ -120,6 +121,8 @@ public abstract class MonsterController : MonoBehaviour
         _stats.TakeDamage(damage);
         _direction = Vector2.zero;
         _movement.SetMoveDirection(_direction);
+        Vector2 knockBackDirection = -(Vector2.right * _distance);
+        _movement.ApplyKnockback(knockBackDirection);
         if (_stats.CurrentHealth <= 0)
         {
             Death();
@@ -147,7 +150,6 @@ public abstract class MonsterController : MonoBehaviour
     private IEnumerator ProcessBind(float duration)
     {
         _state = EMonsterState.Freeze;
-        float prevSpeed = _stats.MoveSpeed;
         _stats.SetMoveSpeed(0);
         _animator.StopAnimation();
 

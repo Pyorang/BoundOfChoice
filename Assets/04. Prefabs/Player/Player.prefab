@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1931509443795668876}
   - component: {fileID: 1231203226812644738}
   - component: {fileID: 8284565954351412865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,6 +138,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _bindDuration: 2
+  _drawColor: {r: 0, g: 0, b: 1, a: 1}
+  _drawOffset: {x: 0, y: -0.5}
 --- !u!114 &8284565954351412865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +165,7 @@ GameObject:
   - component: {fileID: 1742885861038542122}
   - component: {fileID: 7085530987313531877}
   - component: {fileID: 8589633340993306565}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +271,7 @@ GameObject:
   - component: {fileID: 4510558363928938250}
   - component: {fileID: 7966202360319994107}
   - component: {fileID: 8999589725191860525}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -406,7 +408,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RotationalOffset: 0
   m_UseOneWay: 0
   m_UseOneWayGrouping: 0
@@ -440,7 +442,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &4724862087516092064
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7807083090896012290}
   - component: {fileID: 5601247362112385453}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +538,7 @@ GameObject:
   - component: {fileID: 4830026916516058247}
   - component: {fileID: 4863464199009404999}
   - component: {fileID: 1657108375121986337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,6 +634,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _attackDamage: 25
+  _drawColor: {r: 1, g: 0, b: 0, a: 1}
+  _drawOffset: {x: 0, y: -0.5}
 --- !u!1 &6145296015874021320
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +647,7 @@ GameObject:
   - component: {fileID: 778427064041985703}
   - component: {fileID: 5605414591450584505}
   - component: {fileID: 2316325627799582639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InteractRange
   m_TagString: Player
   m_Icon: {fileID: 0}
