@@ -52,12 +52,8 @@ public class PlayerMovement : MonoBehaviour
     private void GetKeyInput()
     {
         _xMovement = Input.GetAxisRaw("Horizontal");
-        if (_xMovement != 0)
-        {
-            _playerDirection = Mathf.RoundToInt(_xMovement);
-        }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             Jump();
         }
@@ -74,13 +70,13 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody.linearVelocityX = _xMovement * MoveSpeed;
     }
 
-    public void MoveSpeedUp(float amount)
+    public void IncreaseSpeed(float amount)
     {
         if (amount < 0.0f) return;
         MoveSpeed = Mathf.Min(MoveSpeed + amount, _maxMoveSpeed);
     }
 
-    public void MoveSpeedDown(float amount)
+    public void DecreaseSpeed(float amount)
     {
         if (amount < 0.0f) return;
         MoveSpeed = Mathf.Max(MoveSpeed - amount, _minMoveSpeed);

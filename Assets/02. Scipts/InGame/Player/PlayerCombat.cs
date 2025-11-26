@@ -91,7 +91,7 @@ public class PlayerCombat : MonoBehaviour
             if (currentCharacter.CanAttack())
             {
                 currentCharacter.Attack(_movement.PlayerDirection, AttackPower);
-                currentCharacter.ResetAttackCooldown();
+                currentCharacter.SaveLastAttackTime();
             }
         }
     }
