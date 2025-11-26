@@ -92,9 +92,9 @@ public class InGameUIController : MonoBehaviour
         _goldText.text = gold.ToString("N0");
     }
 
-    public void OnUpdateSpiritUI(int piece, int MaxPiece)
+    public void OnUpdateSpiritUI(int piece, int maxPiece)
     {
-        _spiritImage.fillAmount = (float)piece / MaxPiece;
+        _spiritImage.fillAmount = (float)piece / maxPiece;
 
     }
 }

@@ -22,9 +22,14 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
         _spiritPiece = Mathf.Min(_spiritPiece + amount, MaxSpiritPiece);
 
         OnSpiritGained?.Invoke();
+
+        if(_spiritPiece == MaxSpiritPiece)
+        {
+            // NOTE : 게임 클리어 로직을 작성한다.
+        }
     }
 
-    public void SpiritChangedEvent()
+    public void RefreshSpiritUI()
     {
         OnSpiritPieceChanged?.Invoke(_spiritPiece, MaxSpiritPiece);
     }

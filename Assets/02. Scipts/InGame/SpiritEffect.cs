@@ -6,7 +6,7 @@ public class SpiritEffect : MonoBehaviour
     [Header("파티클 프리팹")]
     [SerializeField] private GameObject _trailEffectPrefab;
     [SerializeField] private GameObject _gainEffectPrefab;
-    [SerializeField] public float _effectDuration = 1.0f;
+    [SerializeField] private float _effectDuration = 1.0f;
     [SerializeField] private AnimationCurve _speedCurve;
 
     [Header("위치 설정")]
@@ -36,7 +36,7 @@ public class SpiritEffect : MonoBehaviour
 
     public void GainEffect()
     {
-        SpiritManager.Instance.SpiritChangedEvent();
+        SpiritManager.Instance.RefreshSpiritUI();
         GameObject effectInstance = Instantiate(_gainEffectPrefab, _worldEndPosition, Quaternion.identity);
         Destroy(effectInstance, DestroyTime);
     }

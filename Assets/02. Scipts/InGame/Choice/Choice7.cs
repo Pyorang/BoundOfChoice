@@ -10,8 +10,13 @@ public class Choice7 : ChoiceBase
 
     public override void Execute2()
     {
-        if (Random.value < 0.55f) return;
-        SpiritManager.Instance.GetSpiritPiece(2);
+        const float GainSpiritChance = 0.45f;
+        const int SpiritPieceAmount = 2;
+
+        if (Random.value < GainSpiritChance)
+        {
+            SpiritManager.Instance.GetSpiritPiece(SpiritPieceAmount);
+        }
         base.Execute2();
     }
 }
