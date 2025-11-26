@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class IceAge : MonoBehaviour
+public class IceAgeSkill : SkillBase
 {
+    public override ESkillType SkillType => ESkillType.IceAge;
+
     [Header("공격 범위")]
     [Space]
     [SerializeField] private Vector2 _attackRange = new Vector2(1f, 0.5f);
@@ -10,14 +11,14 @@ public class IceAge : MonoBehaviour
     [SerializeField] private LayerMask _enemyLayer;
 
 
-    [Header("스킬 밸런스")]
+    [Header("스킬 효과")]
     [Space]
-    [SerializeField] private float _cost;
     [SerializeField] private float _bindDuration;
 
-    public void UseSkill(Vector2 position, int direction, int additionalDamage = 0)
+
+    protected override void ExecuteSkill(int direction, int additionalDamage = 0)
     {
-        Vector2 boxPosition = position;
+        Vector2 boxPosition = this.transform.position;
         boxPosition.x += _boxOffset.x * direction;
 
         Collider2D[] hitMonsters =

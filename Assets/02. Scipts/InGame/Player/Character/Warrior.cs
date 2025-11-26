@@ -11,9 +11,9 @@ public class Warrior : CharacterBase
     [Header("데미지")]
     [SerializeField] private int _attackDamage = 25;
 
-    public override void Attack(Vector2 position, int additionalDamage, int direction)
+    public override void Attack(int direction, int additionalDamage)
     {
-        Vector2 boxPosition = position;
+        Vector2 boxPosition = this.transform.position;
         boxPosition.x += _boxOffset.x * direction;
 
         Collider2D[] hitMonsters =
