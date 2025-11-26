@@ -7,9 +7,14 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     private int _maxHealth = 100;
     public static event Action<int, int> OnHealthChanged;
 
-    private void Start()
+    protected override void Init()
     {
         IsDestroyOnLoad = true;
+        base.Init();
+    }
+
+    private void Start()
+    {
         OnHealthChanged?.Invoke(Health, _maxHealth);
     }
 

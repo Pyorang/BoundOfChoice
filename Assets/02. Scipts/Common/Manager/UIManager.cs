@@ -13,11 +13,6 @@ public class UIManager : SingletonBehaviour<UIManager>
 
     public GameObject CurrencyUI { get; private set; }
 
-    protected override void Init()
-    {
-        base.Init();
-    }
-
     private BaseUI GetUI<T>(out bool isAlreadyOpen) where T : BaseUI
     {
         Type uiType = typeof(T);

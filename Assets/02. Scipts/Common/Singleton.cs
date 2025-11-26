@@ -3,6 +3,7 @@ using UnityEngine;
 public class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
 {
     protected bool IsDestroyOnLoad { get; set; } = false;
+
     private static T s_instance;
 
     public static T Instance => s_instance;
@@ -30,11 +31,13 @@ public class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<
     private void OnDestroy()
     {
         Dispose();
-
     }
 
     protected virtual void Dispose()
     {
-        s_instance = null;
+        if(s_instance == this)
+        {
+            s_instance = null;
+        }
     }
 }

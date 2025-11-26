@@ -24,12 +24,12 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 
     protected override void Init()
     {
+        IsDestroyOnLoad = true;
         base.Init();
     }
 
     private void Start()
     {
-        IsDestroyOnLoad = true;
         InitChoices();
         SetChoice(1);
     }

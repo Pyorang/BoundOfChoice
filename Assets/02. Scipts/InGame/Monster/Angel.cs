@@ -12,6 +12,12 @@ public class Angel : SingletonBehaviour<Angel>
     [SerializeField] private Animator _animator;
     private static readonly int AttackTrigger = Animator.StringToHash("Attack");
 
+    protected override void Init()
+    {
+        IsDestroyOnLoad = true;
+        base.Init();
+    }
+
     public void StartAnimation()
     {
         _animator.SetTrigger(AttackTrigger);
