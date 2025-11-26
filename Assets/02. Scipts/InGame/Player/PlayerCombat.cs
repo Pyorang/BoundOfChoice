@@ -9,15 +9,24 @@ public enum ECharacterType
     Mage
 }
 
+public enum ESkillType
+{
+    MagicBolt,
+    FireBall,
+    IceAge
+}
+
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private int _attackPower;
-    [SerializeField] private int _increaseDamagePerPower;
-    public static event Action<int> OnPowerChanged;
-
     private PlayerMovement _movement;
     private Dictionary<ECharacterType, CharacterBase> _characters = new Dictionary<ECharacterType, CharacterBase>();
     private ECharacterType _currentCharacter = ECharacterType.Warrior;
+    public static event Action<int> OnPowerChanged;
+
+    [Header("공격력")]
+    [Space]
+    [SerializeField] private int _attackPower;
+    [SerializeField] private int _increaseDamagePerPower;
 
     public int AttackPower
     {
@@ -62,21 +71,16 @@ public class PlayerCombat : MonoBehaviour
             ChangeCharacter(ECharacterType.Mage);
         }
 
-        // Note : Test 코드 이후 서적 사용에 따라 발사
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (_currentCharacter != ECharacterType.Mage) return;
-            UseFireBall();
+            _characters[_currentCharacter].
+                UseSkill(ESkillType.FireBall, _movement.PlayerDirection, AttackPower);
         }
-    }
-
-    private void UseFireBall()
-    {
-        GameObject fireBallObject = PoolManager.Instance.GetObject(EPoolType.FireBall);
-        ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
-        if (projectile == null) return;
-        if (!projectile.TryConsumeCost()) return;
-        projectile.Init(this.transform.position, _movement.PlayerDirection, AttackPower);
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            _characters[_currentCharacter].
+                UseSkill(ESkillType.IceAge, _movement.PlayerDirection, AttackPower);
+        }
     }
 
     private void GetAttackKeyInput()
@@ -86,7 +90,7 @@ public class PlayerCombat : MonoBehaviour
             CharacterBase currentCharacter = _characters[_currentCharacter];
             if (currentCharacter.CanAttack())
             {
-                currentCharacter.Attack(this.transform.position, AttackPower, _movement.PlayerDirection);
+                currentCharacter.Attack(_movement.PlayerDirection, AttackPower);
                 currentCharacter.ResetAttackCooldown();
             }
         }
