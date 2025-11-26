@@ -6,6 +6,7 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
     private int _spiritPiece;
     private const int MaxSpiritPiece = 4;
     public static event Action<int, int> OnSpiritPieceChanged;
+    public static event Action OnSpiritGained;
 
     protected override void Init()
     {
@@ -26,7 +27,9 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
 
     public void GetSpiritPiece(int amount)
     {
-        if (amount < 0) return;
+        if (amount <= 0) return;
         SpiritPiece = Mathf.Min(SpiritPiece + amount, MaxSpiritPiece);
+
+        OnSpiritGained?.Invoke();
     }
 }

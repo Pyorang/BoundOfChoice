@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4335429009033889954}
   - component: {fileID: 6792361448046357225}
+  - component: {fileID: 980440352119541775}
   m_Layer: 0
   m_Name: SpiritManager
   m_TagString: Untagged
@@ -44,3 +45,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb01ceebbac8c8d4297b8ae0d2616e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &980440352119541775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913616500777115790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c50651dcb6c3549aef2cb9d7d92c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectPrefab: {fileID: 862244143080017990, guid: 742910277ac9833499ce728c2c3f5f76, type: 3}
+  _effectDuration: 2.5
+  _speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _startTransform: {fileID: 0}
+  _endTransform: {fileID: 0}
+  _controlPoint1: {x: 6, y: 0, z: 0}
+  _controlPoint2: {x: 0, y: 0, z: 0}
