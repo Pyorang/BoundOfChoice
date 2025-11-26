@@ -109,10 +109,12 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     private IEnumerator TypingEffect(TextMeshProUGUI textObject, string fullText, float delay)
     {
         textObject.text = "";
+        var sb = new System.Text.StringBuilder();
 
-        for (int i = 0; i < fullText.Length; i++)
+        foreach (char c in fullText)
         {
-            textObject.text = fullText.Substring(0, i + 1);
+            sb.Append(c);
+            textObject.text = sb.ToString();
             AudioManager.Instance.Play(AudioType.SFX, "Typing");
             yield return new WaitForSeconds(delay);
         }
