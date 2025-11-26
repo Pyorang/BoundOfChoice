@@ -54,11 +54,11 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
         ClearSlot();
     }
 
-    public void ConsumeItem(int amount)
+    public void ConsumeItem()
     {
-        if (amount < 0 || _itemCount < amount) return;
+        if (_itemCount <= 0) return;
 
-        _itemCount -= amount;
+        --_itemCount;
         UpdateCountTextUI();
 
         if (_itemCount > 0) return;

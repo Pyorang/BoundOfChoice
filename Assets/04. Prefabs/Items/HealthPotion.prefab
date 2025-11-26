@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 2
   _itemImage: {fileID: 384535668486497040}
+  _showItemCount: 1
   _amount: 60
 --- !u!95 &-7805000788228699122
 Animator:

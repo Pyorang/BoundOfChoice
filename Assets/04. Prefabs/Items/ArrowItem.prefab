@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 4
   _itemImage: {fileID: 3524293974926634137}
+  _showItemCount: 1
 --- !u!61 &239280438211315037
 BoxCollider2D:
   m_ObjectHideFlags: 0

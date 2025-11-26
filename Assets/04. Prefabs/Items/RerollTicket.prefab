@@ -149,3 +149,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 7
   _itemImage: {fileID: 4564136665613233540}
+  _showItemCount: 1

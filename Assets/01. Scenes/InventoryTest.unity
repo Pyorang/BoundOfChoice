@@ -3355,6 +3355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowItem
       objectReference: {fileID: 0}
+    - target: {fileID: 8078428302822987009, guid: 782fc604b9104ce40ba18d862f106bab, type: 3}
+      propertyPath: _showItemCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
