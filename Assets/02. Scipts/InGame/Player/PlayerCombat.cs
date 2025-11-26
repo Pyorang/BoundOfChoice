@@ -11,13 +11,19 @@ public enum ECharacterType
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private int _attackPower;
-    [SerializeField] private int _increaseDamagePerPower;
-    public static event Action<int> OnPowerChanged;
-
     private PlayerMovement _movement;
     private Dictionary<ECharacterType, CharacterBase> _characters = new Dictionary<ECharacterType, CharacterBase>();
     private ECharacterType _currentCharacter = ECharacterType.Warrior;
+    public static event Action<int> OnPowerChanged;
+
+    [Header("공격력")]
+    [Space]
+    [SerializeField] private int _attackPower;
+    [SerializeField] private int _increaseDamagePerPower;
+
+    [Header("스킬")]
+    [Space]
+    [SerializeField] private IceAge _iceAgeSkill;
 
     public int AttackPower
     {
@@ -68,6 +74,12 @@ public class PlayerCombat : MonoBehaviour
             if (_currentCharacter != ECharacterType.Mage) return;
             UseFireBall();
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (_currentCharacter != ECharacterType.Mage) return;
+            _iceAgeSkill.UseSkill(this.transform.position, _movement.PlayerDirection, AttackPower);
+        }
     }
 
     private void UseFireBall()
@@ -105,7 +117,14 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!Application.isPlaying || _movement == null) return;
         if (_characters == null || _characters.Count == 0) return;
-        _characters[_currentCharacter].DrawRange(this.transform.position, _movement.PlayerDirection);
+        if (_currentCharacter == ECharacterType.Warrior)
+        {
+            _characters[_currentCharacter].DrawRange(this.transform.position, _movement.PlayerDirection);
+        }
+        else if (_currentCharacter == ECharacterType.Mage)
+        {
+            _iceAgeSkill?.DrawRange(this.transform.position, _movement.PlayerDirection);
+        }
     }
 #endif
 }

@@ -17,6 +17,7 @@ public class MonsterStats : MonoBehaviour
     public float MoveSpeed => _currentMoveSpeed;
 
     private Coroutine _dotDamageCoroutine;
+    private Coroutine _bindCoroutine;
 
     private void OnEnable()
     {
@@ -47,6 +48,7 @@ public class MonsterStats : MonoBehaviour
             Death();
         }
     }
+    
     public void TakeDotDamage(int damage, float duration, float interval)
     {
         if (_currentHealth <= 0) return;
@@ -54,10 +56,26 @@ public class MonsterStats : MonoBehaviour
         {
             StopCoroutine(_dotDamageCoroutine);
         }
-        _dotDamageCoroutine = StartCoroutine(ApplyDotDamage(damage, duration, interval));
+        _dotDamageCoroutine = StartCoroutine(ProcessDotDamage(damage, duration, interval));
     }
 
-    private IEnumerator ApplyDotDamage(int damage, float duration, float interval)
+    public void TakeBind(float duration)
+    {
+        if (_bindCoroutine != null)
+        {
+            StopCoroutine(_bindCoroutine);
+        }
+        _bindCoroutine = StartCoroutine(ProcessBind(duration));
+    }
+
+    private IEnumerator ProcessBind(float duration)
+    {
+        _currentMoveSpeed = 0;
+        yield return new WaitForSeconds(duration);
+        _currentMoveSpeed = _baseData.MoveSpeed;
+    }
+
+    private IEnumerator ProcessDotDamage(int damage, float duration, float interval)
     {
         float elapsedTime = 0.0f;
         while (elapsedTime < duration)
@@ -71,10 +89,7 @@ public class MonsterStats : MonoBehaviour
 
     private void Death()
     {
-        if (_dotDamageCoroutine != null)
-        {
-            StopCoroutine(_dotDamageCoroutine);
-        }
+        StopAllCoroutines();
         gameObject.SetActive(false);
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1826297148310462336}
   - component: {fileID: 890053707214154297}
   - component: {fileID: 4699530460100683936}
+  - component: {fileID: 6192298458858099266}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -101,6 +102,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCoolTime: 0.3
+--- !u!114 &6192298458858099266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653535248616942392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac8f548797af6445961366a502255d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackRange: {x: 8, y: 0.5}
+  _boxOffset: {x: 4, y: 0}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _bindDuration: 2
 --- !u!1 &2014739114944699033
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPower: 1
+  _increaseDamagePerPower: 0
+  _iceAgeSkill: {fileID: 6192298458858099266}
 --- !u!61 &4510558363928938250
 BoxCollider2D:
   m_ObjectHideFlags: 0
