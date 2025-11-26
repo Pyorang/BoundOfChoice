@@ -25,7 +25,11 @@ public class ShopUI : SingletonBehaviour<ShopUI>
         private set
         {
             _currentCount = Mathf.Max(1, value);
+
             _removeButton.interactable = _currentCount > 1;
+            _addButton.interactable = GoldManager.Instance.Gold >= _itemInfo.Price * (_currentCount + 1);
+
+            _confirmButton.interactable = GoldManager.Instance.Gold >= _itemInfo.Price * _currentCount;
 
             _itemQuantityText.text = $"{value}";
             _totalPriceText.text = $"{_itemInfo.Price * value}G";
@@ -39,6 +43,11 @@ public class ShopUI : SingletonBehaviour<ShopUI>
     {
         IsDestroyOnLoad = true;
         base.Init();
+    }
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -79,21 +88,17 @@ public class ShopUI : SingletonBehaviour<ShopUI>
     public void OnClickAddButton()
     {
         CurrentCount++;
-        // NOTE ; 사는 버튼 비활성화 확인
     }
 
     public void OnClickRemoveButton()
     {
         CurrentCount--;
-        // NOTE ; 사는 버튼 활성화 확인
     }
 
     public void OnClickConfirmButton()
     {
-        // NOTE : 로직
-        // 1. 골드 확인
         InventoryUI.Instance.GetItem(_selectedItem, CurrentCount);
-        // 3. 골드 차감
+        GoldManager.Instance.UseGold(_itemInfo.Price * CurrentCount);
         _itemQuantitySelectionWindow.SetActive(false);
     }
 

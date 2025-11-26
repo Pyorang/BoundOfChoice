@@ -13,6 +13,15 @@ public class UserDataManager : SingletonBehaviour<UserDataManager>
 
         ExistsSavedData = PlayerPrefs.GetInt(nameof(ExistsSavedData)) == 1;
         UserDataList.Add(new UserSettingsData());
+
+        if (ExistsSavedData)
+        {
+            LoadUserData();
+        }
+        else
+        {
+            SetDefaultData();
+        }
     }
 
     public void SetDefaultData()

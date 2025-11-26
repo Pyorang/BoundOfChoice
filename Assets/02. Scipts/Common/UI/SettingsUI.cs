@@ -25,10 +25,8 @@ public class SettingsUI : BaseUI
     [Space]
     [SerializeField] private Toggle _vibrationToggle;
 
-    public override void SetData(BaseUIData data)
+    private void Start()
     {
-        base.SetData(data);
-
         _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         SetSoundSetting(_userSettingsData);
         _vibrationToggle.isOn = _userSettingsData.IsVibrationOn;

@@ -19,6 +19,7 @@ public class PlayerMana : SingletonBehaviour<PlayerMana>
 
     private void Start()
     {
+        IsDestroyOnLoad = true;
         OnManaChanged?.Invoke(Mana, _maxMana);
     }
 

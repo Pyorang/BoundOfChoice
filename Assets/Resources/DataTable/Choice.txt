@@ -2,23 +2,33 @@
   "data": [
     {
       "ID": "C_1",
-      "Text1": "90% 확률로 30의 피해를 입습니다",
-      "Text2": "10% 확률로 즉사합니다"
+      "Text1": "Pull the Lever",
+      "Text2": "Pull the Lever"
     },
     {
       "ID": "C_2",
-      "Text1": "슬라임 1마리 소환.",
-      "Text2": "회복 포션 1개 소환."
+      "Text1": "Light 7 torches",
+      "Text2": "Light 7 torches"
     },
     {
       "ID": "C_3",
-      "Text1": "25의 피해를 입거나 35의 체력을 회복합니다",
-      "Text2": "아무 일도 일어나지 않습니다"
+      "Text1": "Take 30 damage with a 90% chance",
+      "Text2": "Instant death with a 10% chance"
     },
     {
       "ID": "C_4",
-      "Text1": "27% 확률로 죽습니다",
-      "Text2": "85% 확률로 60의 피해를 입습니다"
+      "Text1": "Summon 1 Slime",
+      "Text2": "Gain 20 Gold and summon 2 Slimes"
+    },
+    {
+      "ID": "C_5",
+      "Text1": "Take 25 damage or recover 35 HP",
+      "Text2": "Nothing happens"
+    },
+    {
+      "ID": "C_6",
+      "Text1": "Gain 20 Gold",
+      "Text2": "Recover 5 HP"
     }
   ]
 }
