@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArrowItem : ItemBase
+public class UnuseableItem : ItemBase
 {
     public override bool ApplyEffect()
     {

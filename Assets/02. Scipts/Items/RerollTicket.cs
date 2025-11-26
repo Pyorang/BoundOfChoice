@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RerollTicket : ItemBase
 {
     public override bool ApplyEffect()
