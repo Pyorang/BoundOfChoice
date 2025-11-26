@@ -34,13 +34,17 @@ public class IceAgeSkill : SkillBase
     }
 
 #if UNITY_EDITOR
+    [Header("Gizmos 그리기 도구")]
+    [Space]
+    [SerializeField] private Color _drawColor = Color.blue;
+    [SerializeField] private Vector2 _drawOffset = new Vector2(0f, -0.5f);
     public void DrawRange(Vector2 position, int direction)
     {
         Vector2 boxPosition = position;
         boxPosition.x += _boxOffset.x * direction;
-        boxPosition.y -= 0.5f;
+        boxPosition += _drawOffset;
 
-        Gizmos.color = UnityEngine.Color.blue;
+        Gizmos.color = _drawColor;
         Gizmos.DrawCube(boxPosition, _attackRange);
     }
 #endif

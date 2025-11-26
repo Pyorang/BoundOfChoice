@@ -73,6 +73,7 @@ public class MonsterStats : MonoBehaviour
         _currentMoveSpeed = 0;
         yield return new WaitForSeconds(duration);
         _currentMoveSpeed = _baseData.MoveSpeed;
+        _bindCoroutine = null;
     }
 
     private IEnumerator ProcessDotDamage(int damage, float duration, float interval)

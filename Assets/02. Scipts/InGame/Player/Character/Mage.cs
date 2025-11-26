@@ -10,8 +10,8 @@ public class Mage : CharacterBase
 
     protected override void Init()
     {
-        SkillBase[] skiils = GetComponents<SkillBase>();
-        foreach (SkillBase skill in skiils)
+        SkillBase[] skills = GetComponents<SkillBase>();
+        foreach (SkillBase skill in skills)
         {
             _skills.Add(skill.SkillType, skill);
         }
@@ -24,7 +24,10 @@ public class Mage : CharacterBase
 
     public override void UseSkill(ESkillType type, int direction, int additionalDamage)
     {
-        _skills[type].UseSkill(direction, additionalDamage);
+        if (_skills.TryGetValue(type, out SkillBase skill))
+        {
+            skill.UseSkill(direction, additionalDamage);
+        }
     }
 
 #if UNITY_EDITOR
