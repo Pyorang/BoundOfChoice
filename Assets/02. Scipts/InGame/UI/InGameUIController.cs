@@ -26,12 +26,16 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private Image _goldIconImage;
     [SerializeField] private TextMeshProUGUI _goldText;
 
+    [Header("영혼 관련")]
+    [SerializeField] private Image _spiritImage;
+
     private void Awake()
     {
         PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
+        SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
     }
 
     private void OnDestroy()
@@ -40,6 +44,7 @@ public class InGameUIController : MonoBehaviour
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
+        SpiritManager.OnSpiritPieceChanged -= OnUpdateSpiritUI;
     }
 
     public void OnClickInventoryButton()
@@ -85,5 +90,11 @@ public class InGameUIController : MonoBehaviour
     public void OnUpdateGoldUI(int gold)
     {
         _goldText.text = gold.ToString("N0");
+    }
+
+    public void OnUpdateSpiritUI(int piece, int MaxPiece)
+    {
+        _spiritImage.fillAmount = (float)piece / MaxPiece;
+
     }
 }

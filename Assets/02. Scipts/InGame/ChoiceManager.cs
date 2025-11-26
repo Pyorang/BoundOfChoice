@@ -112,12 +112,14 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         textObject.text = "";
         var sb = new System.Text.StringBuilder();
 
+        WaitForSeconds waitDelay = new WaitForSeconds(delay);
+
         foreach (char c in fullText)
         {
             sb.Append(c);
             textObject.text = sb.ToString();
             AudioManager.Instance.Play(AudioType.SFX, "Typing");
-            yield return new WaitForSeconds(delay);
+            yield return waitDelay;
         }
     }
 
