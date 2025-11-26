@@ -50,58 +50,37 @@ public class PlayerCombat : MonoBehaviour
         _characters[_currentCharacter].ActivateCharacter();
     }
 
-    private void Update()
+    public void OnAttack()
     {
-        GetCharacterChangeInput();
-        GetAttackKeyInput();
-    }
-
-    private void GetCharacterChangeInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        CharacterBase currentCharacter = _characters[_currentCharacter];
+        if (currentCharacter.CanAttack())
         {
-            ChangeCharacter(ECharacterType.Warrior);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangeCharacter(ECharacterType.Archer);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangeCharacter(ECharacterType.Mage);
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _characters[_currentCharacter].
-                UseSkill(ESkillType.FireBall, _movement.PlayerDirection, AttackPower);
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            _characters[_currentCharacter].
-                UseSkill(ESkillType.IceAge, _movement.PlayerDirection, AttackPower);
+            currentCharacter.Attack(_movement.PlayerDirection, AttackPower);
+            currentCharacter.ResetAttackCooldown();
         }
     }
 
-    private void GetAttackKeyInput()
+    public void ChangeCharacter()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            CharacterBase currentCharacter = _characters[_currentCharacter];
-            if (currentCharacter.CanAttack())
-            {
-                currentCharacter.Attack(_movement.PlayerDirection, AttackPower);
-                currentCharacter.ResetAttackCooldown();
-            }
-        }
-    }
+        int characterCount = _characters.Count;
+        int nextCharacter = ((int)_currentCharacter + 1) % characterCount;
+        ECharacterType nextType = (ECharacterType)nextCharacter;
 
-    private void ChangeCharacter(ECharacterType playerType)
-    {
-        if (_currentCharacter == playerType) return;
         _characters[_currentCharacter].DeactivateCharacter();
-        _currentCharacter = playerType;
+        _currentCharacter = nextType;
         _characters[_currentCharacter].ActivateCharacter();
+    }
+
+    public void UseFireBall()
+    {
+        _characters[_currentCharacter].
+            UseSkill(ESkillType.FireBall, _movement.PlayerDirection, AttackPower);
+    }
+
+    public void UseIceAge()
+    {
+        _characters[_currentCharacter].
+            UseSkill(ESkillType.IceAge, _movement.PlayerDirection, AttackPower);
     }
 
 #if UNITY_EDITOR

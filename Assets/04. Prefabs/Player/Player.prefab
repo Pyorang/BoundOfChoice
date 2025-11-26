@@ -138,6 +138,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _bindDuration: 2
+  _drawColor: {r: 0, g: 0, b: 1, a: 1}
+  _drawOffset: {x: 0, y: -0.5}
 --- !u!114 &8284565954351412865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8572364200155463690}
   - component: {fileID: 8064035831890495040}
+  - component: {fileID: 3561185205046502800}
   - component: {fileID: 4696680221305993533}
   - component: {fileID: 4802543602573509518}
   - component: {fileID: 1271196531910990680}
@@ -306,6 +309,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80af37283612d2f4badd6ff4de46f5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3561185205046502800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4659175342300605240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015a22a0d10b3d54886d5534ffb0c6cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4696680221305993533
@@ -632,6 +647,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _attackDamage: 25
+  _drawColor: {r: 1, g: 0, b: 0, a: 1}
+  _drawOffset: {x: 0, y: -0.5}
 --- !u!1 &6145296015874021320
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     private int _health = 100;
     private int _maxHealth = 100;
     public static event Action<int, int> OnHealthChanged;
+    public static event Action OnDamaged;
+    public static event Action OnDied;
 
     protected override void Init()
     {
@@ -32,7 +34,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     {
         if (amount < 0) return;
         Health = Mathf.Max(Health - amount, 0);
-
+        OnDamaged?.Invoke();
         if (Health <= 0)
         {
             Die();
@@ -47,6 +49,6 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
     public void Die()
     {
-        Debug.Log("Player has died.");
+        OnDied?.Invoke();
     }
 }

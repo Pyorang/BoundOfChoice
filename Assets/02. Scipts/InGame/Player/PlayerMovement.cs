@@ -39,31 +39,12 @@ public class PlayerMovement : MonoBehaviour
         OnSpeedChanged?.Invoke((int)MoveSpeed);
     }
 
-    private void Update()
-    {
-        GetKeyInput();
-    }
-
     private void FixedUpdate()
     {
         MoveHorizontal();
     }
 
-    private void GetKeyInput()
-    {
-        _xMovement = Input.GetAxisRaw("Horizontal");
-        if (_xMovement != 0)
-        {
-            _playerDirection = Mathf.RoundToInt(_xMovement);
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Jump();
-        }
-    }
-
-    private void Jump()
+    public void Jump()
     {
         if (!_isOnGround) return;
         _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
@@ -84,6 +65,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (amount < 0.0f) return;
         MoveSpeed = Mathf.Max(MoveSpeed - amount, _minMoveSpeed);
+    }
+
+    public void SetDirection(int direction)
+    {
+        _playerDirection = direction;
+    }
+
+    public void SetMovement(float movement)
+    {
+        _xMovement = movement;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

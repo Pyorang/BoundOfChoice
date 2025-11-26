@@ -5,19 +5,11 @@ public class PlayerInteraction : MonoBehaviour
 {
     private List<InteractObjectBase> _interactableObjects = new List<InteractObjectBase>();
 
-    private void Update()
+    public void DoInteraction()
     {
-        GetKeyInput();
-    }
-
-    private void GetKeyInput()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            InteractObjectBase targetObject = UpdateNearestTarget();
-            if (targetObject == null) return;
-            targetObject.GetItem();
-        }
+        InteractObjectBase targetObject = UpdateNearestTarget();
+        if (targetObject == null) return;
+        targetObject.GetItem();
     }
 
     public void AddInteractableObject(InteractObjectBase interactableObject)
