@@ -1,4 +1,14 @@
+using System.Collections;
 using UnityEngine;
+
+public enum EMonsterState
+{
+    Move,
+    Attack,
+    Freeze,
+    Hurt,
+    Death,
+}
 
 [RequireComponent(typeof(MonsterMovement))]
 public abstract class MonsterController : MonoBehaviour
@@ -15,6 +25,12 @@ public abstract class MonsterController : MonoBehaviour
     private Vector2 _direction;
     protected float _distance;
     private MonsterStats _stats;
+
+    private EMonsterState _state;
+
+    private Coroutine _bindCoroutine;
+    private Coroutine _dotDamageCoroutine;
+
 
     private void Awake()
     {
@@ -35,20 +51,19 @@ public abstract class MonsterController : MonoBehaviour
     {
         if (_player == null) return;
         DetermineState();
-        HandleMove();
     }
 
     private void DetermineState()
     {
         _distance = _player.transform.position.x - transform.position.x;
-
-        if (IsPlayerInAttackRange())
-        {
-            HandleAttack();
-        }
-        else
+        if (_state == EMonsterState.Move)
         {
             HandleMoveDirection();
+            HandleMove();
+        }
+        else if (_state == EMonsterState.Attack)
+        {
+            HandleAttack();
         }
     }
 
@@ -64,13 +79,10 @@ public abstract class MonsterController : MonoBehaviour
 
     private void HandleAttack()
     {
-        _direction = Vector2.zero;
-        // NOTE : 스킬 시전 로직을 추가한다.
-        _animator.PlayAttackAnimation();
         SetSpriteFlip(_distance > 0);
     }
-
-    public void ApplyDamage()
+    
+    public void DealDamage()
     {
         if (IsPlayerInAttackRange())
         {
@@ -86,9 +98,13 @@ public abstract class MonsterController : MonoBehaviour
 
     private void HandleMove()
     {
-        bool isMoving = _direction != Vector2.zero;
-
-        _animator.PlayMoveAnimation(isMoving);
+        if (IsPlayerInAttackRange())
+        {
+            _state = EMonsterState.Attack;
+            _direction = Vector2.zero;
+            _animator.PlayMoveAnimation(false);
+            _animator.PlayAttackAnimation();
+        }
         _movement.SetMoveDirection(_direction);
     }
 
@@ -97,5 +113,83 @@ public abstract class MonsterController : MonoBehaviour
     public void SetPlayer(GameObject player)
     {
         _player = player;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _stats.TakeDamage(damage);
+        _direction = Vector2.zero;
+        _movement.SetMoveDirection(_direction);
+        if (_stats.CurrentHealth <= 0)
+        {
+            Death();
+            return;
+        }
+        _state = EMonsterState.Hurt;
+        _animator.PlayHurtAnimation();
+    }
+
+    public void Death()
+    {
+        _state = EMonsterState.Death;
+        _animator.PlayDieAnimation();
+    }
+
+    public void TakeBind(float duration)
+    {
+        if (_bindCoroutine != null)
+        {
+            StopCoroutine(_bindCoroutine);
+        }
+        _bindCoroutine = StartCoroutine(ProcessBind(duration));
+    }
+
+    private IEnumerator ProcessBind(float duration)
+    {
+        _state = EMonsterState.Freeze;
+        float prevSpeed = _stats.MoveSpeed;
+        _stats.SetMoveSpeed(0);
+        _animator.StopAnimation();
+
+        yield return new WaitForSeconds(duration);
+
+        _animator.ResumeAnimation();
+        _stats.ResetSpeed();
+        _state = EMonsterState.Move;
+        _bindCoroutine = null;
+    }
+
+    public void TakeDotDamage(int damage, float duration, float interval)
+    {
+        if (_stats.CurrentHealth <= 0) return;
+        if (_dotDamageCoroutine != null)
+        {
+            StopCoroutine(_dotDamageCoroutine);
+        }
+        _dotDamageCoroutine = StartCoroutine(ProcessDotDamage(damage, duration, interval));
+    }
+
+    private IEnumerator ProcessDotDamage(int damage, float duration, float interval)
+    {
+        float elapsedTime = 0.0f;
+        while (elapsedTime < duration)
+        {
+            yield return new WaitForSeconds(interval);
+            TakeDamage(damage);
+            elapsedTime += interval;
+        }
+        _dotDamageCoroutine = null;
+    }
+
+    public void OnAnimationEnd()
+    {
+        _state = EMonsterState.Move;
+        _animator.PlayMoveAnimation(true);
+    }
+
+    public void OnDeathAnimationEnd()
+    {
+        StopAllCoroutines();
+        Destroy(this.gameObject);
     }
 }
