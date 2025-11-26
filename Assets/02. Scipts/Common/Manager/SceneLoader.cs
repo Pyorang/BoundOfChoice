@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public enum ESceneType
 {
-    Title,
     Lobby,
     InGame
 }
