@@ -10,6 +10,7 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     [Space]
     [SerializeField] private TextMeshProUGUI _text1;
     [SerializeField] private TextMeshProUGUI _text2;
+    [SerializeField] private float _typingDelay = 0.1f;
 
     public bool IsLeftChoice;
 
@@ -99,8 +100,8 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
             StopCoroutine(_typingCoroutine2);
         }
 
-        _typingCoroutine1 = TypingEffect(_text1, text1, 0.1f);
-        _typingCoroutine2 = TypingEffect(_text2, text2, 0.1f);
+        _typingCoroutine1 = TypingEffect(_text1, text1, _typingDelay);
+        _typingCoroutine2 = TypingEffect(_text2, text2, _typingDelay);
 
         StartCoroutine(_typingCoroutine1);
         StartCoroutine(_typingCoroutine2);
