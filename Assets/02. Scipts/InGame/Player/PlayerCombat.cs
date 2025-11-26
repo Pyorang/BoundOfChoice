@@ -9,16 +9,26 @@ public enum ECharacterType
     Mage
 }
 
+public enum ESkillType
+{
+    MagicBolt,
+    FireBall,
+    IceAge
+}
+
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private float _attackPower;
-    public static event Action<int> OnPowerChanged;
-
     private PlayerMovement _movement;
     private Dictionary<ECharacterType, CharacterBase> _characters = new Dictionary<ECharacterType, CharacterBase>();
     private ECharacterType _currentCharacter = ECharacterType.Warrior;
+    public static event Action<int> OnPowerChanged;
 
-    public float AttackPower
+    [Header("공격력")]
+    [Space]
+    [SerializeField] private int _attackPower;
+    [SerializeField] private int _increaseDamagePerPower;
+
+    public int AttackPower
     {
         get => _attackPower;
         private set
@@ -60,6 +70,17 @@ public class PlayerCombat : MonoBehaviour
         {
             ChangeCharacter(ECharacterType.Mage);
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            _characters[_currentCharacter].
+                UseSkill(ESkillType.FireBall, _movement.PlayerDirection, AttackPower);
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            _characters[_currentCharacter].
+                UseSkill(ESkillType.IceAge, _movement.PlayerDirection, AttackPower);
+        }
     }
 
     private void GetAttackKeyInput()
@@ -69,7 +90,7 @@ public class PlayerCombat : MonoBehaviour
             CharacterBase currentCharacter = _characters[_currentCharacter];
             if (currentCharacter.CanAttack())
             {
-                currentCharacter.Attack(this.transform.position, AttackPower, _movement.PlayerDirection);
+                currentCharacter.Attack(_movement.PlayerDirection, AttackPower);
                 currentCharacter.ResetAttackCooldown();
             }
         }
@@ -83,10 +104,12 @@ public class PlayerCombat : MonoBehaviour
         _characters[_currentCharacter].ActivateCharacter();
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying || _movement == null) return;
         if (_characters == null || _characters.Count == 0) return;
         _characters[_currentCharacter].DrawRange(this.transform.position, _movement.PlayerDirection);
     }
+#endif
 }

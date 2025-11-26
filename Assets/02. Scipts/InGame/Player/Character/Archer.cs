@@ -4,11 +4,11 @@ public class Archer : CharacterBase
 {
     public override ECharacterType CharacterType => ECharacterType.Archer;
 
-    public override void Attack(Vector2 position, float power, int direction)
+    public override void Attack(int direction, int additionalDamage)
     {
         if (!InventoryUI.Instance.TryConsumeItem(EItemType.ArrowItem)) return;
 
         GameObject arrowObject = PoolManager.Instance.GetObject(EPoolType.Arrow);
-        arrowObject.GetComponent<ProjectileBase>().SetProjectileInfo(position, direction, power * _attackDamage);
+        arrowObject.GetComponent<ProjectileBase>().Init(this.transform.position, direction, additionalDamage);
     }
 }

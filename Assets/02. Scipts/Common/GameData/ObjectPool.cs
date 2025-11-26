@@ -47,7 +47,7 @@ public class ObjectPool
 
     public void ReleaseObject(GameObject releaseObject)
     {
-        if (_activeObjects.Contains(releaseObject) == false) return;
+        if (!_activeObjects.Contains(releaseObject)) return;
         _activeObjects.Remove(releaseObject);
         _pool.Enqueue(releaseObject);
     }

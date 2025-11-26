@@ -3,11 +3,13 @@ using UnityEngine;
 public abstract class ProjectileBase : MonoBehaviour
 {
     [Header("공격")]
-    [SerializeField] protected float _damage;
+    [Space]
+    [SerializeField] protected int _damage;
 
     [Header("이동")]
-    protected int _direction = -1;
+    [Space]
     [SerializeField] protected float _speed = 10.0f;
+    protected int _direction = -1;
 
     private SpriteRenderer _renderer;
 
@@ -23,19 +25,15 @@ public abstract class ProjectileBase : MonoBehaviour
 
     public abstract void ApplyDamage(Collider2D other);
     public abstract void Move();
+    public abstract void ReleaseObject();
 
-    public void SetProjectileInfo(Vector2 position, int direction, float damage)
+    public void Init(Vector2 position, int direction, int additionalDamage = 0)
     {
         this.transform.position = position;
         _direction = direction;
         _renderer.flipX = (direction < 0);
-        _damage = damage;
-
-        // Note : Test 코드 수정 필요
-        Invoke("ReleaseObject", 3.0f);
+        _damage += additionalDamage;
     }
-
-    public abstract void ReleaseObject();
 
     private void OnTriggerEnter2D(Collider2D other)
     {
