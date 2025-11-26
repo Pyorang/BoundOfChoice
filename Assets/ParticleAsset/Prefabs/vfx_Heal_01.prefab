@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7662913529153330500}
   - component: {fileID: 2865955014250320189}
   - component: {fileID: 2413333106277601229}
-  - component: {fileID: -1645616559347866149}
   m_Layer: 0
   m_Name: vfx_Heal_01
   m_TagString: Untagged
@@ -4839,18 +4838,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!210 &-1645616559347866149
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 339158821923109191}
-  m_Enabled: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 100
-  m_SortAtRoot: 0
 --- !u!1 &1103811999212747579
 GameObject:
   m_ObjectHideFlags: 0
