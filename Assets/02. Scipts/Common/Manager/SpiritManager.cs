@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpiritManager : SingletonBehaviour<SpiritManager>
 {
     private int _spiritPiece;
-    [SerializeField] private int _maxSpiritPiece = 4;
+    private const int MaxSpiritPiece = 4;
     public static event Action<int, int> OnSpiritPieceChanged;
     public static event Action OnSpiritGained;
 
@@ -19,11 +19,11 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
     public void GetSpiritPiece(int amount)
     {
         if (amount <= 0) return;
-        _spiritPiece = Mathf.Min(_spiritPiece + amount, _maxSpiritPiece);
+        _spiritPiece = Mathf.Min(_spiritPiece + amount, MaxSpiritPiece);
 
         OnSpiritGained?.Invoke();
 
-        if(_spiritPiece == _maxSpiritPiece)
+        if(_spiritPiece == MaxSpiritPiece)
         {
             // NOTE : 게임 클리어 로직을 작성한다.
         }
@@ -31,6 +31,6 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
 
     public void RefreshSpiritUI()
     {
-        OnSpiritPieceChanged?.Invoke(_spiritPiece, _maxSpiritPiece);
+        OnSpiritPieceChanged?.Invoke(_spiritPiece, MaxSpiritPiece);
     }
 }
