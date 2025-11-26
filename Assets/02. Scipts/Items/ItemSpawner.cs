@@ -7,7 +7,7 @@ public enum EItemType
     Apple,
     HealthPotion,
     ManaPotion,
-    Arrow,
+    ArrowItem,
     FireMagicScroll,
     IceMagicScroll,
     RerollTicket,

@@ -6,6 +6,8 @@ public class Archer : CharacterBase
 
     public override void Attack(Vector2 position, float power, int direction)
     {
+        if (!InventoryUI.Instance.TryConsumeItem(EItemType.ArrowItem)) return;
+
         GameObject arrowObject = PoolManager.Instance.GetObject(EPoolType.Arrow);
         arrowObject.GetComponent<ProjectileBase>().SetProjectileInfo(position, direction, power * _attackDamage);
     }
