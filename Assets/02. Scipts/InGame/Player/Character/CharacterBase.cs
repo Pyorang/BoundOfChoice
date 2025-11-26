@@ -32,5 +32,5 @@ public abstract class CharacterBase : MonoBehaviour
 #endif
 
     public bool CanAttack() => Time.time - _lastAttackTime >= _attackCoolTime;
-    public void ResetAttackCooldown() => _lastAttackTime = Time.time;
+    public void SaveLastAttackTime() => _lastAttackTime = Time.time;
 }

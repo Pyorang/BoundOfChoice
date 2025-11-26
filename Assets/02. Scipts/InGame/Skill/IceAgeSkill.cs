@@ -26,7 +26,7 @@ public class IceAgeSkill : SkillBase
 
         foreach (Collider2D hitMonster in hitMonsters)
         {
-            if (hitMonster.TryGetComponent<MonsterStats>(out var monster))
+            if (hitMonster.TryGetComponent<MonsterController>(out var monster))
             {
                 monster.TakeBind(_bindDuration);
             }
