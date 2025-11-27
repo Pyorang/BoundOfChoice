@@ -9,45 +9,48 @@ public enum ECharacterType
     Mage
 }
 
-public enum ESkillType
+[RequireComponent(typeof(PlayerMovement))]
+public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 {
-    MagicBolt,
-    FireBall,
-    IceAge
-}
-
-public class PlayerCombat : MonoBehaviour
-{
-    private PlayerMovement _movement;
-    private Dictionary<ECharacterType, CharacterBase> _characters = new Dictionary<ECharacterType, CharacterBase>();
-    private ECharacterType _currentCharacter = ECharacterType.Warrior;
-    public static event Action<int> OnPowerChanged;
-
     [Header("공격력")]
     [Space]
-    [SerializeField] private int _attackPower;
-    [SerializeField] private int _increaseDamagePerPower;
+    [SerializeField] private int _additionalDamage;
 
-    public int AttackPower
+    public int AdditionalPower
     {
-        get => _attackPower;
+        get => _additionalDamage;
         private set
         {
-            _attackPower = value;
-            OnPowerChanged?.Invoke((int)_attackPower);
+            _additionalDamage = value;
+            OnPowerChanged?.Invoke(_additionalDamage);
         }
     }
 
-    private void Awake()
+    public static event Action<int> OnPowerChanged;
+
+    [Header("동료들")]
+    [Tooltip("첫 번쨰 동료를 제외한 나머지 동료들의 오브젝트들은 OFF 해주세요")]
+    [Space]
+    private ECharacterType _currentCharacter = ECharacterType.Warrior;
+    public ECharacterType CurrentCharacter => _currentCharacter;
+
+    [SerializeField] private CharacterBase[] _partners;
+
+    protected override void Init()
     {
-        _movement = GetComponent<PlayerMovement>();
-        CharacterBase[] characters = GetComponentsInChildren<CharacterBase>();
-        foreach (CharacterBase character in characters)
+        IsDestroyOnLoad = true;
+        base.Init();
+    }
+
+    private void Start()
+    {
+        foreach (CharacterBase partner in _partners)
         {
-            _characters.Add(character.CharacterType, character);
-            character.DeactivateCharacter();
+            if(partner.GoingWith == false)
+            {
+                partner.DeactivateCharacter();
+            }
         }
-        _characters[_currentCharacter].ActivateCharacter();
     }
 
     private void Update()
@@ -58,58 +61,55 @@ public class PlayerCombat : MonoBehaviour
 
     private void GetCharacterChangeInput()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Space) && !PlayerHealth.Instance.IsDeath)
         {
-            ChangeCharacter(ECharacterType.Warrior);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangeCharacter(ECharacterType.Archer);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangeCharacter(ECharacterType.Mage);
-        }
+            _partners[(int)_currentCharacter].DeactivateCharacter();
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _characters[_currentCharacter].
-                UseSkill(ESkillType.FireBall, _movement.PlayerDirection, AttackPower);
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            _characters[_currentCharacter].
-                UseSkill(ESkillType.IceAge, _movement.PlayerDirection, AttackPower);
+            GetNextCharacter();
+
+            _partners[(int)_currentCharacter].ActivateCharacter();
         }
     }
 
     private void GetAttackKeyInput()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && !PlayerHealth.Instance.IsDeath)
         {
-            CharacterBase currentCharacter = _characters[_currentCharacter];
+            CharacterBase currentCharacter = _partners[(int)_currentCharacter];
+
             if (currentCharacter.CanAttack())
             {
-                currentCharacter.Attack(_movement.PlayerDirection, AttackPower);
+                currentCharacter.Attack(PlayerMovement.Instance.PlayerDirection, AdditionalPower);
                 currentCharacter.SaveLastAttackTime();
             }
         }
     }
 
-    private void ChangeCharacter(ECharacterType playerType)
+    private void GetNextCharacter()
     {
-        if (_currentCharacter == playerType) return;
-        _characters[_currentCharacter].DeactivateCharacter();
-        _currentCharacter = playerType;
-        _characters[_currentCharacter].ActivateCharacter();
+        ECharacterType nextCharacter = (ECharacterType)(((int)_currentCharacter + 1) % _partners.Length);
+        
+        while(true)
+        {
+            if (_partners[(int)nextCharacter].GoingWith == false)
+            {
+                nextCharacter = (ECharacterType)(((int)nextCharacter + 1) % _partners.Length);
+            }
+
+            else
+            {
+                _currentCharacter = nextCharacter;
+                break;
+            }
+        }
     }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if (!Application.isPlaying || _movement == null) return;
-        if (_characters == null || _characters.Count == 0) return;
-        _characters[_currentCharacter].DrawRange(this.transform.position, _movement.PlayerDirection);
+        if (!Application.isPlaying || PlayerMovement.Instance == null) return;
+        if (_partners == null || _partners.Length == 0) return;
+        _partners[(int)_currentCharacter].DrawRange(this.transform.position, PlayerMovement.Instance.PlayerDirection);
     }
 #endif
 }

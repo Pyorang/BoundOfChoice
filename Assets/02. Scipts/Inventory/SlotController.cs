@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
+    [SerializeField] private RectTransform _canvasRectTransform;
+    private Camera _renderCamera;
+
     private ItemBase _item;
     private int _itemCount;
 
@@ -18,6 +21,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
     private void Awake()
     {
+        _renderCamera = Camera.main;
         ClearSlot();
     }
 
@@ -133,8 +137,19 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 moveOffset = eventData.position - _beginDragPosition;
-        DragSlot.Instance.Drag(_originPosition + moveOffset);
+        Vector3 worldPosition;
+
+        bool success = RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            _canvasRectTransform,
+            eventData.position,
+            _renderCamera,
+            out worldPosition
+        );
+
+        if (success)
+        {
+            DragSlot.Instance.Drag(worldPosition);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)

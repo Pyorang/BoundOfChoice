@@ -7,8 +7,8 @@
     },
     {
       "ID": "C_2",
-      "Text1": "Light 7 torches",
-      "Text2": "Light 7 torches"
+      "Text1": "Collect 7 spirits",
+      "Text2": "Collect 7 spirits"
     },
     {
       "ID": "C_3",

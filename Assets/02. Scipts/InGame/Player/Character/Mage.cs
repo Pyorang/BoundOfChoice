@@ -1,40 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ESkillType
+{
+    FireBall,
+    IceAge
+}
+
 public class Mage : CharacterBase
 {
-    public override ECharacterType CharacterType => ECharacterType.Mage;
-    
-    private ESkillType _defaultSkill = ESkillType.MagicBolt;
-    private Dictionary<ESkillType, SkillBase> _skills = new Dictionary<ESkillType, SkillBase>();
+    [Header("공격 마나 비용")]
+    [Space]
+    [SerializeField] private int _magicBoltCost = 20;
 
-    protected override void Init()
-    {
-        SkillBase[] skills = GetComponents<SkillBase>();
-        foreach (SkillBase skill in skills)
-        {
-            _skills.Add(skill.SkillType, skill);
-        }
-    }
+    [Header("스킬 위치 보정")]
+    [Space]
+    [SerializeField] private Vector2 _spawnOffset = new Vector2(1f, 0f);
+    public Vector2 SpawnOffset => _spawnOffset;
 
     public override void Attack(int direction, int additionalDamage)
     {
-        _skills[_defaultSkill].UseSkill(direction, additionalDamage);
-    }
-
-    public override void UseSkill(ESkillType type, int direction, int additionalDamage)
-    {
-        if (_skills.TryGetValue(type, out SkillBase skill))
+        if (PlayerMana.Instance.TryUseMana(_magicBoltCost))
         {
-            skill.UseSkill(direction, additionalDamage);
+            GameObject magicBolt = PoolManager.Instance.GetObject(EPoolType.MagicBolt);
+            magicBolt.GetComponent<ProjectileBase>().Init((Vector2)transform.position + _spawnOffset * direction, direction, additionalDamage);
         }
     }
-
-#if UNITY_EDITOR
-    public override void DrawRange(Vector2 position, int direction)
-    {
-        IceAgeSkill iceAgeSkill = _skills[ESkillType.IceAge] as IceAgeSkill;
-        iceAgeSkill?.DrawRange(position, direction);
-    }
-#endif
 }

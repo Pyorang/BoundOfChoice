@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 {
     public static event Action<int> OnSpeedChanged;
 
@@ -29,9 +29,16 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidBody;
 
+    protected override void Init()
+    {
+        IsDestroyOnLoad = true;
+        base.Init();
+    }
+
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        Init();
     }
 
     private void Start()
@@ -51,9 +58,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetKeyInput()
     {
-        _xMovement = Input.GetAxisRaw("Horizontal");
+        if(!PlayerHealth.Instance.IsDeath)
+        {
+            _xMovement = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.C))
+            if (_xMovement != 0)
+            {
+                _playerDirection = (int)_xMovement;
+            }
+        }
+
+        if (!PlayerHealth.Instance.IsDeath && Input.GetKeyDown(KeyCode.C))
         {
             Jump();
         }

@@ -14,13 +14,13 @@ public class SpiritEffect : MonoBehaviour
     [SerializeField] private Transform _endTransform;
     [SerializeField] private Vector3 _controlPoint1;
     [SerializeField] private Vector3 _controlPoint2;
-    private Vector3 _worldEndPosition;
+    //private Vector3 _worldEndPosition;
     private const float DestroyTime = 3f;
 
     private void Awake()
     {
         SpiritManager.OnSpiritGained += StartEffect;
-        _worldEndPosition = Camera.main.ScreenToWorldPoint(_endTransform.position);
+        //_worldEndPosition = Camera.main.ScreenToWorldPoint(_endTransform.position);
     }
 
     private void OnDestroy()
@@ -31,13 +31,13 @@ public class SpiritEffect : MonoBehaviour
     public void StartEffect()
     {
         GameObject effectInstance = Instantiate(_trailEffectPrefab, _startTransform.position, Quaternion.identity);
-        StartCoroutine(MoveBezierCurveEffect(effectInstance, _startTransform.position, _worldEndPosition));
+        StartCoroutine(MoveBezierCurveEffect(effectInstance, _startTransform.position, _endTransform.position));
     }
 
     public void GainEffect()
     {
         SpiritManager.Instance.RefreshSpiritUI();
-        GameObject effectInstance = Instantiate(_gainEffectPrefab, _worldEndPosition, Quaternion.identity);
+        GameObject effectInstance = Instantiate(_gainEffectPrefab, _endTransform.position, Quaternion.identity);
         Destroy(effectInstance, DestroyTime);
     }
 
@@ -70,10 +70,10 @@ public class SpiritEffect : MonoBehaviour
         float uuu = uu * u;
         float ttt = tt * t;
 
-        Vector3 p = uuu * p0; // (1-t)^3 * P0
-        p += 3 * uu * t * p1; // 3 * (1-t)^2 * t * P1
-        p += 3 * u * tt * p2; // 3 * (1-t) * t^2 * P2
-        p += ttt * p3;        // t^3 * P3
+        Vector3 p = uuu * p0;
+        p += 3 * uu * t * p1;
+        p += 3 * u * tt * p2;
+        p += ttt * p3;
 
         return p;
     }
