@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class DestroyProjectile : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        ProjectileBase projectile = other.GetComponent<ProjectileBase>();
+        ProjectileBase projectile = collision.gameObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
         projectile.ReleaseObject();
     }

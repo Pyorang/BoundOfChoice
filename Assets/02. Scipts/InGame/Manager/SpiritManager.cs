@@ -20,8 +20,8 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
     public void GetSpiritPiece(int amount)
     {
         if (amount <= 0) return;
+        AudioManager.Instance.Play(AudioType.SFX, "Spirit");
         _spiritPiece = Mathf.Min(_spiritPiece + amount, _maxSpiritPiece);
-
         OnSpiritGained?.Invoke();
     }
 

@@ -6,6 +6,8 @@ public class FireBallSkill : SkillBase
 
     protected override void ExecuteSkill(int direction, int additionalDamage = 0)
     {
+        AudioManager.Instance.Play(AudioType.SFX, "FireBall");
+
         GameObject fireBallObject = PoolManager.Instance.GetObject(EPoolType.FireBall);
         ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;

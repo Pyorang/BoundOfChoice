@@ -27,6 +27,7 @@ public class GoldManager : SingletonBehaviour<GoldManager>
     public void GetGold(int amount)
     {
         if (amount < 0) return;
+        AudioManager.Instance.Play(AudioType.SFX, "Gold");
         Gold = Mathf.Min(Gold + amount, MaxGold);
     }
 

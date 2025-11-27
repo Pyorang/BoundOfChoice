@@ -7,6 +7,7 @@ public class HealthPotion : ItemBase
 
     public override bool ApplyEffect()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Potion");
         PlayerHealth.Instance.Heal(_amount);
         return true;
     }

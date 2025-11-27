@@ -16,6 +16,8 @@ public class IceAgeSkill : SkillBase
 
     protected override void ExecuteSkill(int direction, int additionalDamage = 0)
     {
+        AudioManager.Instance.Play(AudioType.SFX, "IceAge");
+
         Vector2 boxPosition = PlayerHealth.Instance.gameObject.transform.position;
         boxPosition.x += _boxOffset.x * direction;
 

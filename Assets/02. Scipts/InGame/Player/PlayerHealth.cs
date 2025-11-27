@@ -48,12 +48,14 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
         {
             UIManager.Instance.OpenUI<GameOverUI>(new BaseUIData());
             _isDeath = true;
+            AudioManager.Instance.Play(AudioType.SFX, "PlayerDie");
             _playerAnimator.PlayDeathAnimation();
         }
 
         else
         {
             OnHealthChange?.Invoke();
+            AudioManager.Instance.Play(AudioType.SFX, "PlayerHurt");
             _playerAnimator.PlayHitAnimation();
         }
     }

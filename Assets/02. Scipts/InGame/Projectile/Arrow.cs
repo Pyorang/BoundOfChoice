@@ -5,6 +5,7 @@ public class Arrow : ProjectileBase
     public override void ApplyDamage(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
+        AudioManager.Instance.Play(AudioType.SFX, "ArrowHit");
         MonsterController stat = other.GetComponent<MonsterController>();
         if (stat == null) return;
         stat.TakeDamage(_damage);

@@ -7,6 +7,7 @@ public class ManaPotion : ItemBase
 
     public override bool ApplyEffect()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Potion");
         PlayerMana.Instance.RegenerateMana(_amount);
         return true;
     }

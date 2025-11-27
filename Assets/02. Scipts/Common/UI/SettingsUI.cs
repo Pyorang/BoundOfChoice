@@ -52,6 +52,7 @@ public class SettingsUI : BaseUI
 
     public void OnClickSettingsButton()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         _settingsButton.interactable = false;
         _settingsBoard.SetActive(true);
         _keyManualButton.interactable = true;
@@ -60,6 +61,7 @@ public class SettingsUI : BaseUI
 
     public void OnClickKeyManualButton()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         _keyManualButton.interactable = false;
         _keyManualBoard.SetActive(true);
         _settingsButton.interactable = true;
@@ -73,6 +75,7 @@ public class SettingsUI : BaseUI
 
     public void OnClickReturnButton()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         Save();
         UIManager.Instance.CloseUI(this);
     }

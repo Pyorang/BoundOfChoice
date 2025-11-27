@@ -12,6 +12,8 @@ public class Warrior : CharacterBase
 
     public override void Attack(int direction, int additionalDamage)
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Sword");
+
         Vector2 boxPosition = this.transform.position;
         boxPosition.x += _boxOffset.x * direction;
 

@@ -8,6 +8,7 @@ public class Archer : CharacterBase
 
     public override void Attack(int direction, int additionalDamage)
     {
+        AudioManager.Instance.Play(AudioType.SFX, "ShootArrow");
         if (!InventoryUI.Instance.TryConsumeItem(EItemType.ArrowItem)) return;
 
         GameObject arrowObject = PoolManager.Instance.GetObject(EPoolType.Arrow);

@@ -22,6 +22,7 @@ public class Mage : CharacterBase
     {
         if (PlayerMana.Instance.TryUseMana(_magicBoltCost))
         {
+            AudioManager.Instance.Play(AudioType.SFX, "MagicBolt");
             GameObject magicBolt = PoolManager.Instance.GetObject(EPoolType.MagicBolt);
             magicBolt.GetComponent<ProjectileBase>().Init((Vector2)transform.position + _spawnOffset * direction, direction, additionalDamage);
         }

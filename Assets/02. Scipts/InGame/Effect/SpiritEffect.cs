@@ -36,6 +36,7 @@ public class SpiritEffect : MonoBehaviour
 
     public void GainEffect()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "GainSpirit");
         SpiritManager.Instance.RefreshSpiritUI();
         GameObject effectInstance = Instantiate(_gainEffectPrefab, _endTransform.position, Quaternion.identity);
         Destroy(effectInstance, DestroyTime);

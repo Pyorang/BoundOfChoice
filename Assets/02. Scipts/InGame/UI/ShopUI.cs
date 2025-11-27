@@ -61,13 +61,14 @@ public class ShopUI : SingletonBehaviour<ShopUI>
         Time.timeScale = 1f;
     }
 
-    public void OnClickCloseUI()
+    public void ToggleShop()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 
     public void OnClickBuyItem(ShopSlot shopslot)
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         _itemQuantitySelectionWindow.SetActive(true);
         ShowSelectedItem(shopslot);
     }
@@ -87,16 +88,19 @@ public class ShopUI : SingletonBehaviour<ShopUI>
 
     public void OnClickAddButton()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         CurrentCount++;
     }
 
     public void OnClickRemoveButton()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         CurrentCount--;
     }
 
     public void OnClickConfirmButton()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Buy");
         InventoryUI.Instance.GetItem(_selectedItem, CurrentCount);
         GoldManager.Instance.UseGold(_itemInfo.Price * CurrentCount);
         _itemQuantitySelectionWindow.SetActive(false);
@@ -104,6 +108,7 @@ public class ShopUI : SingletonBehaviour<ShopUI>
 
     public void OnClickReturnButton()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         _itemQuantitySelectionWindow.SetActive(false);
     }
 }

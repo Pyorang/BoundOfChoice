@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class InGameUIController : MonoBehaviour
 {
-    public const string UI_OPEN_BUTTON_CLICK = "ui_openUI_button_click";
+    public const string Button = "Button";
 
     [Header("체력 관련")]
     [Space]
@@ -72,19 +72,20 @@ public class InGameUIController : MonoBehaviour
     public void OnClickInventoryButton()
     {
         InventoryUI.Instance.ToggleInventory();
-        AudioManager.Instance.Play(AudioType.SFX, UI_OPEN_BUTTON_CLICK);
+        AudioManager.Instance.Play(AudioType.SFX, Button);
     }
 
     public void OnClickShopButton()
     {
-        ShopUI.Instance.gameObject.SetActive(true);
+        ShopUI.Instance.ToggleShop();
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
     }
 
     public void OnClickInGameSettingsButton()
     {
         var uiData = new BaseUIData();
         UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
-        AudioManager.Instance.Play(AudioType.SFX, UI_OPEN_BUTTON_CLICK);
+        AudioManager.Instance.Play(AudioType.SFX, Button);
     }
 
     public void OnUpdateHealthUI(int health, int maxHealth)
