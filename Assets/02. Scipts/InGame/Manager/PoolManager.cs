@@ -6,6 +6,9 @@ public enum EPoolType
     Arrow,
     MagicBolt,
     FireBall,
+    Blood1,
+    Blood2,
+    Blood3
 }
 
 [System.Serializable] public struct PoolInfo
