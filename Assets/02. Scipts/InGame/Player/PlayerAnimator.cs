@@ -31,6 +31,9 @@ public class PlayerAnimator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X)) PlayHitAnimation();
         if (Input.GetKeyDown(KeyCode.C)) PlayDeathAnimation();
         if (Input.GetKeyDown(KeyCode.UpArrow)) PlayJumpAnimation();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) ChangeAnimatorController(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) ChangeAnimatorController(1);
         
     }
     private void OnCollisionEnter2D(Collision2D other)
@@ -75,5 +78,10 @@ public class PlayerAnimator : MonoBehaviour
     public void StopRunAnimation()
     {
         _animator.SetBool(_isRun, false);
+    }
+
+    public void ChangeAnimatorController(int index)
+    {
+        _animator.runtimeAnimatorController = _animatorContoller[index];
     }
 }
