@@ -26,7 +26,7 @@ public class DragSlot : SingletonBehaviour<DragSlot>
         _dragImageUI.sprite = null;
     }
 
-    public void Drag(Vector2 position)
+    public void Drag(Vector3 position)
     {
         transform.position = position;
     }

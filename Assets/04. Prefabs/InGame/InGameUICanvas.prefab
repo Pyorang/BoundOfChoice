@@ -326,7 +326,7 @@ Canvas:
   m_GameObject: {fileID: 6557761527619350399}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -616,6 +616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1154796265243407265, guid: 854f1afda75eb1e4fb610b3a5669b846, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
     - target: {fileID: 2280647132336422913, guid: 854f1afda75eb1e4fb610b3a5669b846, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -632,6 +636,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4518106677770463430, guid: 854f1afda75eb1e4fb610b3a5669b846, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
+    - target: {fileID: 6283668852128668952, guid: 854f1afda75eb1e4fb610b3a5669b846, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
     - target: {fileID: 6424726455496078279, guid: 854f1afda75eb1e4fb610b3a5669b846, type: 3}
       propertyPath: m_fontSize
       value: 36
@@ -664,6 +676,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8723760927312973956, guid: 854f1afda75eb1e4fb610b3a5669b846, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -947,6 +963,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3817628957682383086, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
+    - target: {fileID: 4088114212901709385, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
     - target: {fileID: 4300784224298203102, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -971,6 +995,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4350379288783534585, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
+    - target: {fileID: 4524388167288919628, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
+    - target: {fileID: 4905377942472501358, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
     - target: {fileID: 5180590304553707365, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1019,6 +1055,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6003189495562443662, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
+    - target: {fileID: 7061382407350478310, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
     - target: {fileID: 7110383565412390154, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1075,6 +1119,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8609029500794659061, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: _canvasRectTransform
+      value: 
+      objectReference: {fileID: 4296851649650034381}
     - target: {fileID: 8638193606449639964, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

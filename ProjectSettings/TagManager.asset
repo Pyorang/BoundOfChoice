@@ -49,5 +49,8 @@ TagManager:
   - name: UI
     uniqueID: 367934157
     locked: 0
+  - name: Spirit
+    uniqueID: 3270047393
+    locked: 0
   m_RenderingLayers:
   - Default
