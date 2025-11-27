@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4335429009033889954}
   - component: {fileID: 6792361448046357225}
   - component: {fileID: 980440352119541775}
+  - component: {fileID: 2431455250251989478}
   m_Layer: 0
   m_Name: SpiritManager
   m_TagString: Untagged
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb01ceebbac8c8d4297b8ae0d2616e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxSpiritPiece: 4
 --- !u!114 &980440352119541775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,3 +90,21 @@ MonoBehaviour:
   _endTransform: {fileID: 0}
   _controlPoint1: {x: 6, y: 0, z: 0}
   _controlPoint2: {x: 0, y: 0, z: 0}
+--- !u!114 &2431455250251989478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913616500777115790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35f9eb351290b7d4c9338fb7fb54f4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 3
+  _targetGobalIntensity: 50
+  _targetPlayerIntensity: 50
+  _targetOuterRadius: 50
+  _globalLight: {fileID: 0}
+  _playerLight: {fileID: 0}
