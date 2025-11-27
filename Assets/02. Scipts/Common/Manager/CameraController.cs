@@ -11,6 +11,10 @@ public class CameraController : SingletonBehaviour<CameraController>
     private Coroutine _shakeCoroutine;
     private Coroutine _zoomCoroutine;
 
+    [Header("연출 설정")]
+    [SerializeField] private float _shakeDuration = 0.5f;
+    [SerializeField] private float _shakePower = 0.2f;
+
     protected override void Init()
     {
         base.Init();
@@ -33,6 +37,15 @@ public class CameraController : SingletonBehaviour<CameraController>
     public void SetCameraEffectOn(bool isOn)
     {
         _isCameraEffectOn = isOn;
+    }
+
+    public void StartShake()
+    {
+        if (!_isCameraEffectOn || _camera == null) return;
+
+        StopShake();
+
+        _shakeCoroutine = StartCoroutine(ShakeCoroutine(_shakeDuration, _shakePower));
     }
 
     public void StartShake(float duration, float power)

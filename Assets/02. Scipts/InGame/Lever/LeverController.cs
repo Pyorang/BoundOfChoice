@@ -5,10 +5,6 @@ public class LeverController : InteractObjectBase
     [Header("왼쪽 레버")]
     [SerializeField] private bool _isLeft;
 
-    [Header("레버 연출 설정")]
-    [SerializeField] private float _shakeDuration;
-    [SerializeField] private float _shakePower;
-
     private bool canInteract = true;
 
     private Animator _animator;
@@ -26,7 +22,7 @@ public class LeverController : InteractObjectBase
         {
             _animator.SetTrigger(_pull);
             AudioManager.Instance.Play(AudioType.SFX, "Lever");
-            CameraController.Instance.StartShake(_shakeDuration, _shakePower);
+            CameraController.Instance.StartShake();
             ChoiceManager.Instance.IsLeftChoice = _isLeft;
             Angel.Instance.StartAnimation();
         }
