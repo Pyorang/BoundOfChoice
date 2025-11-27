@@ -486,6 +486,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volume
       objectReference: {fileID: 0}
+    - target: {fileID: 757049804998699860, guid: 95b1ef58cf182614ca17712a7236a8f2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8262770980951317331, guid: 95b1ef58cf182614ca17712a7236a8f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
