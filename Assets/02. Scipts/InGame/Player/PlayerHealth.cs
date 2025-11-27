@@ -8,8 +8,20 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     private int _health = 100;
     private int _maxHealth = 100;
 
+    public int Health
+    {
+        get => _health;
+        private set
+        {
+            _health = value;
+            OnHealthValueUpdate?.Invoke(_health, _maxHealth);
+        }
+    }
+
     private bool _isDeath = false;
     public bool IsDeath { get { return _isDeath; } }
+
+    private static readonly int _maxBloodNumber = 3;
 
     public static event Action OnHealthChange;
     public static event Action<int, int> OnHealthValueUpdate;
@@ -26,22 +38,14 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
         OnHealthValueUpdate?.Invoke(Health, _maxHealth);
     }
 
-    public int Health
-    {
-        get => _health;
-        private set
-        {
-            _health = value;
-            OnHealthValueUpdate?.Invoke(_health, _maxHealth);
-        }
-    }
-
     public void TakeDamage(int amount)
     {
         if (amount < 0) return;
         if(Health <= 0) return;
+     
         Health = Mathf.Max(Health - amount, 0);
 
+        SpawnRandomBlood();
         CameraController.Instance.StartShake(0.7f);
 
         if (Health <= 0)
@@ -58,6 +62,16 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
             AudioManager.Instance.Play(AudioType.SFX, "PlayerHurt");
             _playerAnimator.PlayHitAnimation();
         }
+    }
+
+    private void SpawnRandomBlood()
+    {
+        int randomNumber = UnityEngine.Random.Range(1, _maxBloodNumber + 1);
+        string PoolingObjectName = $"Blood{randomNumber}";
+        EPoolType poolingObject = (EPoolType)Enum.Parse(typeof(EPoolType), PoolingObjectName, true);
+
+        GameObject blood = PoolManager.Instance.GetObject(poolingObject, true);
+        blood.transform.position = transform.position;
     }
 
     public void Heal(int amount)
