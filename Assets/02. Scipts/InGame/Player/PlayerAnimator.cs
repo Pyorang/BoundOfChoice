@@ -61,6 +61,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayJumpAnimation()
     {
+        if (!_animator.GetBool(_isOnGround)) return;
         _animator.SetTrigger(_jump);
         _animator.SetBool(_isOnGround, false);
     }
