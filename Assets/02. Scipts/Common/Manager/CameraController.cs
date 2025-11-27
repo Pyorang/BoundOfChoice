@@ -48,7 +48,7 @@ public class CameraController : SingletonBehaviour<CameraController>
         _shakeCoroutine = StartCoroutine(ShakeCoroutine(_shakeDuration, _shakePower));
     }
 
-    public void StartShake(float duration, float power)
+    public void StartShake(float duration = 0.5f, float power = 0.2f)
     {
         if (!_isCameraEffectOn || _camera == null) return;
 

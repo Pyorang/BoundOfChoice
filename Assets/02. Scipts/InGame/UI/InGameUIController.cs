@@ -6,12 +6,11 @@ public class InGameUIController : MonoBehaviour
 {
     public const string UI_OPEN_BUTTON_CLICK = "ui_openUI_button_click";
 
-    [SerializeField] private Button _inGameSettingsButton;
-
     [Header("체력 관련")]
     [Space]
     [SerializeField] private Image _healthBarImage;
     [SerializeField] private TextMeshProUGUI _healthText;
+    [SerializeField] private GameObject _hurtEffect;
 
     [Header("마나 관련")]
     [Space]
@@ -32,6 +31,7 @@ public class InGameUIController : MonoBehaviour
     private void Awake()
     {
         PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
+        PlayerHealth.OnHealthChange += OnHurt;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
@@ -41,6 +41,7 @@ public class InGameUIController : MonoBehaviour
     private void OnDestroy()
     {
         PlayerHealth.OnHealthChanged -= OnUpdateHealthUI;
+        PlayerHealth.OnHealthChange -= OnHurt;
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
@@ -117,5 +118,10 @@ public class InGameUIController : MonoBehaviour
     {
         _spiritImage.fillAmount = (float)piece / maxPiece;
 
+    }
+
+    public void OnHurt()
+    {
+        _hurtEffect.gameObject.SetActive(true);
     }
 }

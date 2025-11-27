@@ -58,17 +58,20 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 
     private void GetKeyInput()
     {
-        if(!PlayerHealth.Instance.IsDeath)
+        if(PlayerHealth.Instance.IsDeath)
         {
-            _xMovement = Input.GetAxisRaw("Horizontal");
-
-            if (_xMovement != 0)
-            {
-                _playerDirection = (int)_xMovement;
-            }
+            _xMovement = 0.0f;
+            return;
         }
 
-        if (!PlayerHealth.Instance.IsDeath && Input.GetKeyDown(KeyCode.C))
+        _xMovement = Input.GetAxisRaw("Horizontal");
+
+        if (_xMovement != 0)
+        {
+            _playerDirection = (int)_xMovement;
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
         {
             Jump();
         }

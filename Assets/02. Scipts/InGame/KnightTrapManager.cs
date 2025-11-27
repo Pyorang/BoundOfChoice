@@ -18,11 +18,11 @@ public class KnightTrapManager : SingletonBehaviour<KnightTrapManager>
     {
         if (Input.GetKeyUp(KeyCode.H))
         {
-            ActivateKnight();
+            Activate();
         }
         if(Input.GetKeyUp(KeyCode.J))
         {
-            DeactivateKnight();
+            Deactivate();
         }
 
         if(Input.GetKeyUp(KeyCode.K))
@@ -36,7 +36,7 @@ public class KnightTrapManager : SingletonBehaviour<KnightTrapManager>
         }
     }
 
-    public void ActivateKnight()
+    public void Activate()
     {
         if (_activatedKnightsCount >= _knights.Length) return;
 
@@ -44,7 +44,7 @@ public class KnightTrapManager : SingletonBehaviour<KnightTrapManager>
         _knights[_activatedKnightsCount - 1].ActivateTrap();
     }
 
-    public void DeactivateKnight()
+    public void Deactivate()
     {
         if (_activatedKnightsCount <= 0) return;
 

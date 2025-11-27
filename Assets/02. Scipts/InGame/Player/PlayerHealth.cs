@@ -9,6 +9,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     private bool _isDeath = false;
     public bool IsDeath { get { return _isDeath; } }
 
+    public static event Action OnHealthChange;
     public static event Action<int, int> OnHealthChanged;
 
     protected override void Init()
@@ -36,6 +37,9 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     {
         if (amount < 0) return;
         Health = Mathf.Max(Health - amount, 0);
+
+        OnHealthChange?.Invoke();
+        CameraController.Instance.StartShake(0.7f);
 
         if (Health <= 0)
         {

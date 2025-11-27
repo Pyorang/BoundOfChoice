@@ -4,6 +4,10 @@ public class Trap_Knight : MonoBehaviour
 {
     public bool _activated = false;
 
+    [Header("방향 반대 여부")]
+    [Space]
+    [SerializeField] private bool _isLeft = false;
+
     [Header("데미지")]
     [Space]
     [SerializeField] private int _damage = 20;
@@ -40,10 +44,19 @@ public class Trap_Knight : MonoBehaviour
     {
         CameraController.Instance.StartShake();
 
-        Vector2 attackCenter = (Vector2)transform.position + (Vector2)transform.right * _boxOffset.x + (Vector2)transform.up * _boxOffset.y;
+        // 2. 공격 중심 위치 및 방향 계산 (Attack과 Gizmo에서 동일하게 사용)
+        // moveDirection은 transform.right를 기준으로 _isLeft에 따라 방향이 결정됩니다.
+        Vector2 direction = _isLeft ? -(Vector2)transform.right : (Vector2)transform.right;
 
+        // 공격 박스의 중심 위치 계산 (오브젝트 회전 + 방향 + 오프셋 고려)
+        Vector2 attackCenter = (Vector2)transform.position
+                             + direction * _boxOffset.x
+                             + (Vector2)transform.up * _boxOffset.y;
+
+        // 3. 최종 회전 각도 계산
         float finalAngle = transform.eulerAngles.z + _boxAngle;
 
+        // 4. OverlapBoxAll 실행
         Collider2D[] hits = Physics2D.OverlapBoxAll(
             attackCenter,
             _boxSize,
@@ -51,6 +64,7 @@ public class Trap_Knight : MonoBehaviour
             _targetLayer
         );
 
+        // 5. 감지된 물체 처리
         foreach (Collider2D hit in hits)
         {
             if (hit.CompareTag("Player"))
@@ -61,7 +75,7 @@ public class Trap_Knight : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
@@ -75,10 +89,14 @@ public class Trap_Knight : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 attackCenter = transform.position + transform.right * _boxOffset.x + transform.up * _boxOffset.y;
+        // 1. 공격 중심 위치 계산 (Attack 함수와 동일)
+        Vector3 direction = _isLeft ? -(Vector3)transform.right : (Vector3)transform.right;
+        Vector3 attackCenter = transform.position + direction * _boxOffset.x + transform.up * _boxOffset.y;
 
+        // 2. Gizmo 시각화 설정
         Gizmos.color = Color.red;
 
+        // 3. 회전 행렬을 사용하여 위치, 회전, 크기 변환 적용
         Quaternion finalRotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + _boxAngle);
 
         Matrix4x4 rotationMatrix = Matrix4x4.TRS(
@@ -88,8 +106,11 @@ public class Trap_Knight : MonoBehaviour
         );
 
         Gizmos.matrix = rotationMatrix;
+
+        // 4. 박스 그리기
         Gizmos.DrawWireCube(Vector3.zero, new Vector3(_boxSize.x, _boxSize.y, 0.01f));
 
+        // 5. Gizmos.matrix 초기화 (필수)
         Gizmos.matrix = Matrix4x4.identity;
     }
 }
