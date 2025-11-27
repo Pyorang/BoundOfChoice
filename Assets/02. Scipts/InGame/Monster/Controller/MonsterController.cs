@@ -126,9 +126,14 @@ public abstract class MonsterController : MonoBehaviour
         if (_stats.CurrentHealth <= 0)
         {
             Death();
+            CameraController.Instance.StartShake(0.25f, 0.75f);
             return;
         }
-        _state = EMonsterState.Hurt;
+        else
+        {
+            CameraController.Instance.StartShake(0.25f, 0.1f);
+        }
+         _state = EMonsterState.Hurt;
         _animator.PlayHurtAnimation();
     }
 
