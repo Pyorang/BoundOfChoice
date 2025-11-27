@@ -34,6 +34,7 @@ public class PlayerAnimator : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) ChangeAnimatorController(0);
         if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) ChangeAnimatorController(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) ChangeAnimatorController(2);
         
     }
     private void OnCollisionEnter2D(Collision2D other)
