@@ -10,13 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1826297148310462336}
   - component: {fileID: 4699530460100683936}
+  - component: {fileID: 1231203226812644738}
+  - component: {fileID: 8284565954351412865}
   m_Layer: 7
   m_Name: Mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1826297148310462336
 Transform:
   m_ObjectHideFlags: 0
@@ -46,21 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoingWith: 0
   _characterType: 2
-  _attackCoolTime: 0.3
---- !u!114 &1931509443795668876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653535248616942392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef2b35818d1271d49aba46396c650282, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cost: 10
-  _damage: 10
+  _magicBoltCost: 20
+  _spawnOffset: {x: 1, y: 0}
 --- !u!114 &1231203226812644738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,8 +70,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _bindDuration: 2
-  _drawColor: {r: 0, g: 0, b: 1, a: 1}
-  _drawOffset: {x: 0, y: -0.5}
 --- !u!114 &8284565954351412865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1742885861038542122
 Transform:
   m_ObjectHideFlags: 0
@@ -143,7 +130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoingWith: 0
   _characterType: 1
-  _attackCoolTime: 0.3
   _spawnOffset: {x: 1, y: 0}
 --- !u!1 &4659175342300605240
 GameObject:
@@ -562,7 +548,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoingWith: 1
   _characterType: 0
-  _attackCoolTime: 0.5
   _attackRange: {x: 2, y: 0.5}
   _boxOffset: {x: 1.5, y: 0}
   _enemyLayer:

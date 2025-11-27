@@ -12,6 +12,7 @@ public enum ECharacterType
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 {
+
     [Header("공격력")]
     [Space]
     [SerializeField] private int _additionalDamage;
@@ -36,9 +37,12 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     [SerializeField] private CharacterBase[] _partners;
 
+    private PlayerAnimator _playerAnimator;
+
     protected override void Init()
     {
         IsDestroyOnLoad = true;
+        _playerAnimator = GetComponent<PlayerAnimator>();
         base.Init();
     }
 
@@ -55,34 +59,38 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     private void Update()
     {
-        GetCharacterChangeInput();
-        GetAttackKeyInput();
+        if(!PlayerHealth.Instance.IsDeath)
+        {
+            GetCharacterChangeInput();
+            GetAttackKeyInput();
+        }
     }
 
     private void GetCharacterChangeInput()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && !PlayerHealth.Instance.IsDeath)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             _partners[(int)_currentCharacter].DeactivateCharacter();
 
             GetNextCharacter();
 
             _partners[(int)_currentCharacter].ActivateCharacter();
+            _playerAnimator.ChangeAnimatorController((int)_currentCharacter);
         }
     }
 
     private void GetAttackKeyInput()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && !PlayerHealth.Instance.IsDeath)
+        if (Input.GetKeyDown(KeyCode.Z) && !PlayerMovement.Instance.Moving)
         {
-            CharacterBase currentCharacter = _partners[(int)_currentCharacter];
-
-            if (currentCharacter.CanAttack())
-            {
-                currentCharacter.Attack(PlayerMovement.Instance.PlayerDirection, AdditionalPower);
-                currentCharacter.SaveLastAttackTime();
-            }
+            _playerAnimator.PlayAttackAnimation();
         }
+    }
+
+    public void Attack()
+    {
+        CharacterBase currentCharacter = _partners[(int)_currentCharacter];
+        currentCharacter.Attack(PlayerMovement.Instance.PlayerDirection, AdditionalPower);
     }
 
     private void GetNextCharacter()

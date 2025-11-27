@@ -20,32 +20,6 @@ public class PlayerAnimator : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        // NOTE : 애니메이션 테스트용입니다.
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        int direction = (int)Mathf.Sign(horizontal);
-        if (horizontal != 0) PlayRunAnimation(direction != 1);
-        else StopRunAnimation();
-        if (Input.GetKeyDown(KeyCode.Z)) PlayAttackAnimation();
-        if (Input.GetKeyDown(KeyCode.X)) PlayHitAnimation();
-        if (Input.GetKeyDown(KeyCode.C)) PlayDeathAnimation();
-        if (Input.GetKeyDown(KeyCode.UpArrow)) PlayJumpAnimation();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) ChangeAnimatorController(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) ChangeAnimatorController(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) ChangeAnimatorController(2);
-        
-    }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // NOTE : 애니메이션 테스트용입니다.
-        if (!other.gameObject.CompareTag("Ground")) return;
-        StopJumpAnimation();
-    }
-#endif
-
     public void PlayAttackAnimation()
     {
         _animator.SetTrigger(s_attack);

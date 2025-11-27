@@ -30,7 +30,7 @@ public class InGameUIController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
+        PlayerHealth.OnHealthValueUpdate += OnUpdateHealthUI;
         PlayerHealth.OnHealthChange += OnHurt;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
@@ -40,7 +40,7 @@ public class InGameUIController : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerHealth.OnHealthChanged -= OnUpdateHealthUI;
+        PlayerHealth.OnHealthValueUpdate -= OnUpdateHealthUI;
         PlayerHealth.OnHealthChange -= OnHurt;
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
