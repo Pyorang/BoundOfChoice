@@ -9,6 +9,6 @@ public class FireBallSkill : SkillBase
         GameObject fireBallObject = PoolManager.Instance.GetObject(EPoolType.FireBall);
         ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
-        projectile.Init(this.transform.position, direction, additionalDamage);
+        projectile.Init(PlayerHealth.Instance.gameObject.transform.position, direction, additionalDamage);
     }
 }

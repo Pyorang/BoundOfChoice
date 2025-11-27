@@ -3125,6 +3125,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1349007187574076385, guid: 2fdd30db6189dad4995243f1d37a100c, type: 3}
+      propertyPath: _itemPrefab
+      value: 
+      objectReference: {fileID: 5427847787184718103, guid: 9202ec21a74090f4da9ea582c50782fe, type: 3}
     - target: {fileID: 3779435585659011187, guid: 2fdd30db6189dad4995243f1d37a100c, type: 3}
       propertyPath: m_Name
       value: ShopSlot (1)
@@ -3227,6 +3231,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1349007187574076385, guid: 2fdd30db6189dad4995243f1d37a100c, type: 3}
+      propertyPath: _itemPrefab
+      value: 
+      objectReference: {fileID: 4411452716167821065, guid: af53e744fc0d40e4d98bd6d88808fa11, type: 3}
     - target: {fileID: 3779435585659011187, guid: 2fdd30db6189dad4995243f1d37a100c, type: 3}
       propertyPath: m_Name
       value: ShopSlot (2)
@@ -3439,6 +3447,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1349007187574076385, guid: 2fdd30db6189dad4995243f1d37a100c, type: 3}
+      propertyPath: _itemPrefab
+      value: 
+      objectReference: {fileID: 6451897020152732300, guid: 782fc604b9104ce40ba18d862f106bab, type: 3}
     - target: {fileID: 3779435585659011187, guid: 2fdd30db6189dad4995243f1d37a100c, type: 3}
       propertyPath: m_Name
       value: ShopSlot

@@ -12,7 +12,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void GetKeyInput()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             InteractObjectBase targetObject = UpdateNearestTarget();
             if (targetObject == null) return;

@@ -7,6 +7,13 @@ public class MonsterMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector2 _direction;
 
+    [Header("넉백 수치")]
+    [Space]
+    [SerializeField] private float _knockBackDuration;
+    [SerializeField] private float _knockBackForce;
+    private float _knockBackTimer;
+    private float _knockBackVelocity;
+
     private void Awake()
     {
         _stats = GetComponent<MonsterStats>();
@@ -20,11 +27,25 @@ public class MonsterMovement : MonoBehaviour
 
     private void Move()
     {
-        _rigidbody.linearVelocityX = _direction.x * _stats.MoveSpeed;
+        if (_knockBackTimer > 0)
+        {
+            _knockBackTimer -= Time.fixedDeltaTime;
+            _rigidbody.linearVelocityX = _knockBackVelocity;
+        }
+        else
+        {
+            _rigidbody.linearVelocityX = _direction.x * _stats.MoveSpeed;
+        }
     }
 
     public void SetMoveDirection(Vector2 direction)
     {
         _direction = direction.normalized;
+    }
+
+    public void ApplyKnockback(Vector2 direction)
+    {
+        _knockBackVelocity = direction.normalized.x * _knockBackForce;
+        _knockBackTimer = _knockBackDuration;
     }
 }

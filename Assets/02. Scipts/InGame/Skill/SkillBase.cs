@@ -8,10 +8,13 @@ public abstract class SkillBase : MonoBehaviour
     [SerializeField] private int _cost;
     [SerializeField] protected int _damage;
 
-    public void UseSkill(int direction, int additionalDamage = 0)
+    public void UseSkill()
     {
-        if (!PlayerMana.Instance.TryUseMana(_cost)) return;
-        ExecuteSkill(direction, additionalDamage);
+        if(PlayerCombat.Instance.CurrentCharacter == ECharacterType.Mage)
+        {
+            if (!PlayerMana.Instance.TryUseMana(_cost)) return;
+            ExecuteSkill(PlayerMovement.Instance.PlayerDirection, PlayerCombat.Instance.AdditionalPower);
+        }   
     }
 
     protected abstract void ExecuteSkill(int direction, int additionalDamage = 0);

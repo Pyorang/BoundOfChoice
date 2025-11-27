@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8329196450079901554
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -192,6 +192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025022b3e82af5746800a8c3dbae27fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _knockBackTimer: 0
+  _knockBackDuration: 0.2
+  _knockBackForce: 1
+  _knockBackVelocity: 0
 --- !u!114 &3025591734785516976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10a5931355e1a44b8e21eb0385c7162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopDistance: 3
+  _stopDistance: 1.5
   _player: {fileID: 0}
   _minInterval: 1
   _maxInterval: 3

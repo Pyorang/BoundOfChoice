@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4750149188922073232}
   - component: {fileID: 5511694400809781755}
   - component: {fileID: 7525413158840997144}
+  - component: {fileID: -4303214590827219679}
   - component: {fileID: 3447672034653440611}
   m_Layer: 0
   m_Name: FireMagicScroll
@@ -104,6 +105,21 @@ MonoBehaviour:
   _itemType: 5
   _itemImage: {fileID: 5511694400809781755}
   _showItemCount: 0
+  _skill: {fileID: -4303214590827219679}
+--- !u!114 &-4303214590827219679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5427847787184718103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13baef1324c6f74eb83a597d64b8060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: 50
+  _damage: 90
 --- !u!61 &3447672034653440611
 BoxCollider2D:
   m_ObjectHideFlags: 0
