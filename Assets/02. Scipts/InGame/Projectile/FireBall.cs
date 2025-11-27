@@ -11,10 +11,10 @@ public class FireBall : ProjectileBase
     public override void ApplyDamage(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
-        MonsterStats stat = other.GetComponent<MonsterStats>();
-        if (stat == null) return;
-        stat.TakeDotDamage(_dotDamagePerTick, _dotDuration, _dotTickInterval);
-        stat.TakeDamage(_damage);
+        MonsterController monster = other.GetComponent<MonsterController>();
+        if (monster == null) return;
+        monster.TakeDotDamage(_dotDamagePerTick, _dotDuration, _dotTickInterval);
+        monster.TakeDamage(_damage);
         ReleaseObject();
     }
 

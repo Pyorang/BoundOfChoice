@@ -6,12 +6,11 @@ public class InGameUIController : MonoBehaviour
 {
     public const string UI_OPEN_BUTTON_CLICK = "ui_openUI_button_click";
 
-    [SerializeField] private Button _inGameSettingsButton;
-
     [Header("체력 관련")]
     [Space]
     [SerializeField] private Image _healthBarImage;
     [SerializeField] private TextMeshProUGUI _healthText;
+    [SerializeField] private GameObject _hurtEffect;
 
     [Header("마나 관련")]
     [Space]
@@ -26,20 +25,48 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private Image _goldIconImage;
     [SerializeField] private TextMeshProUGUI _goldText;
 
+    [Header("영혼 관련")]
+    [SerializeField] private Image _spiritImage;
+
     private void Awake()
     {
         PlayerHealth.OnHealthChanged += OnUpdateHealthUI;
+        PlayerHealth.OnHealthChange += OnHurt;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
+        SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
     }
 
     private void OnDestroy()
     {
         PlayerHealth.OnHealthChanged -= OnUpdateHealthUI;
+        PlayerHealth.OnHealthChange -= OnHurt;
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
+        SpiritManager.OnSpiritPieceChanged -= OnUpdateSpiritUI;
+    }
+
+    private void Update()
+    {
+        if(!PlayerHealth.Instance.IsDeath)
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                OnClickInventoryButton();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OnClickInGameSettingsButton();
+            }
+
+            if (Input.GetKeyDown(KeyCode.BackQuote))
+            {
+                OnClickShopButton();
+            }
+        }
     }
 
     public void OnClickInventoryButton()
@@ -85,5 +112,16 @@ public class InGameUIController : MonoBehaviour
     public void OnUpdateGoldUI(int gold)
     {
         _goldText.text = gold.ToString("N0");
+    }
+
+    public void OnUpdateSpiritUI(int piece, int maxPiece)
+    {
+        _spiritImage.fillAmount = (float)piece / maxPiece;
+
+    }
+
+    public void OnHurt()
+    {
+        _hurtEffect.gameObject.SetActive(true);
     }
 }

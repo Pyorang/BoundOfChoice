@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2833713275932259997}
   - component: {fileID: 1118668361926071604}
-  - component: {fileID: 253643264186852615}
   - component: {fileID: 5209262459442709331}
+  - component: {fileID: 6354701131354539584}
+  - component: {fileID: 7680731890812578295}
   m_Layer: 0
   m_Name: IceMagicScroll
   m_TagString: Untagged
@@ -89,21 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &253643264186852615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4411452716167821065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acc8beb1a6aa7ac4b959327c2a6711c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemType: 6
-  _itemImage: {fileID: 1118668361926071604}
-  _showItemCount: 0
 --- !u!61 &5209262459442709331
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,3 +136,39 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.0625, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6354701131354539584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411452716167821065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac8f548797af6445961366a502255d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: 30
+  _damage: 0
+  _attackRange: {x: 6, y: 0.5}
+  _boxOffset: {x: 1, y: 0}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _bindDuration: 3
+--- !u!114 &7680731890812578295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411452716167821065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc8beb1a6aa7ac4b959327c2a6711c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemType: 6
+  _itemImage: {fileID: 1118668361926071604}
+  _showItemCount: 0
+  _skill: {fileID: 6354701131354539584}

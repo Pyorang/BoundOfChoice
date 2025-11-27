@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 {
     public static event Action<int> OnSpeedChanged;
 
@@ -29,9 +29,16 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidBody;
 
+    protected override void Init()
+    {
+        IsDestroyOnLoad = true;
+        base.Init();
+    }
+
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        Init();
     }
 
     private void Start()
@@ -51,13 +58,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetKeyInput()
     {
-        _xMovement = Input.GetAxisRaw("Horizontal");
-        if (_xMovement != 0)
+        if(PlayerHealth.Instance.IsDeath)
         {
-            _playerDirection = Mathf.RoundToInt(_xMovement);
+            _xMovement = 0.0f;
+            return;
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        _xMovement = Input.GetAxisRaw("Horizontal");
+
+        if (_xMovement != 0)
+        {
+            _playerDirection = (int)_xMovement;
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
         {
             Jump();
         }
@@ -74,13 +88,13 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody.linearVelocityX = _xMovement * MoveSpeed;
     }
 
-    public void MoveSpeedUp(float amount)
+    public void IncreaseSpeed(float amount)
     {
         if (amount < 0.0f) return;
         MoveSpeed = Mathf.Min(MoveSpeed + amount, _maxMoveSpeed);
     }
 
-    public void MoveSpeedDown(float amount)
+    public void DecreaseSpeed(float amount)
     {
         if (amount < 0.0f) return;
         MoveSpeed = Mathf.Max(MoveSpeed - amount, _minMoveSpeed);

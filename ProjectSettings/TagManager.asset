@@ -10,7 +10,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Enemy
@@ -45,6 +45,12 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 367934157
+    locked: 0
+  - name: Spirit
+    uniqueID: 3270047393
     locked: 0
   m_RenderingLayers:
   - Default

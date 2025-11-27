@@ -5,6 +5,11 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 {
     private int _health = 100;
     private int _maxHealth = 100;
+
+    private bool _isDeath = false;
+    public bool IsDeath { get { return _isDeath; } }
+
+    public static event Action OnHealthChange;
     public static event Action<int, int> OnHealthChanged;
 
     protected override void Init()
@@ -33,9 +38,13 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
         if (amount < 0) return;
         Health = Mathf.Max(Health - amount, 0);
 
+        OnHealthChange?.Invoke();
+        CameraController.Instance.StartShake(0.7f);
+
         if (Health <= 0)
         {
-            Die();
+            UIManager.Instance.OpenUI<GameOverUI>(new BaseUIData());
+            _isDeath = true;
         }
     }
 
@@ -47,6 +56,6 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
     public void Die()
     {
-        Debug.Log("Player has died.");
+        TakeDamage(Health);
     }
 }

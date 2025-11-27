@@ -7,8 +7,8 @@
     },
     {
       "ID": "C_2",
-      "Text1": "Light 7 torches",
-      "Text2": "Light 7 torches"
+      "Text1": "Collect 7 spirits",
+      "Text2": "Collect 7 spirits"
     },
     {
       "ID": "C_3",
@@ -29,6 +29,21 @@
       "ID": "C_6",
       "Text1": "Gain 20 Gold",
       "Text2": "Recover 5 HP"
+    },
+    {
+      "ID": "C_7",
+      "Text1": "Gain 1 Spirit Piece",
+      "Text2": "Gain 2 Spirit Pieces with a 45 % chance"
+    },
+    {
+      "ID": "C_8",
+      "Text1": "Activate 1 Trap",
+      "Text2": "Activate all Traps with a 25% chance"
+    },
+    {
+      "ID": "C_9",
+      "Text1": "Deactivate 1 Trap",
+      "Text2": "Deactivate all Traps with a 25% chance"
     }
   ]
 }

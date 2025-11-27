@@ -9,7 +9,7 @@ public class MagicBolt : ProjectileBase
     public override void ApplyDamage(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
-        other.GetComponent<MonsterStats>()?.TakeDamage(_damage);
+        other.GetComponent<MonsterController>()?.TakeDamage(_damage);
 
         Collider2D[] nearEnemies =
             Physics2D.OverlapCircleAll(this.transform.position, _splashDistance, _enemyLayer);
@@ -17,7 +17,7 @@ public class MagicBolt : ProjectileBase
         foreach (var nearEnemy in nearEnemies)
         {
             if (nearEnemy == other) continue;
-            nearEnemy.GetComponent<MonsterStats>()?.TakeDamage(Mathf.RoundToInt(_damage * _splashDamageReduction));
+            nearEnemy.GetComponent<MonsterController>()?.TakeDamage(Mathf.RoundToInt(_damage * _splashDamageReduction));
         }
 
         ReleaseObject();
