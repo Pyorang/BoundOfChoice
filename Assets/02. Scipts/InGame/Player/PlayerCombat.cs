@@ -83,8 +83,6 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
     {
         if (Input.GetKeyDown(KeyCode.Z) && !PlayerMovement.Instance.Moving)
         {
-            CharacterBase currentCharacter = _partners[(int)_currentCharacter];
-
             _playerAnimator.PlayAttackAnimation();
         }
     }

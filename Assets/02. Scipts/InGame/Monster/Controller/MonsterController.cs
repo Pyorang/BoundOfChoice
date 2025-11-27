@@ -123,17 +123,16 @@ public abstract class MonsterController : MonoBehaviour
         _movement.SetMoveDirection(_direction);
         Vector2 knockBackDirection = -(Vector2.right * _distance);
         _movement.ApplyKnockback(knockBackDirection);
+        
         if (_stats.CurrentHealth <= 0)
         {
             Death();
             CameraController.Instance.StartShake(0.25f, 0.75f);
             return;
         }
-        else
-        {
-            CameraController.Instance.StartShake(0.25f, 0.1f);
-        }
-         _state = EMonsterState.Hurt;
+
+        CameraController.Instance.StartShake(0.25f, 0.1f);
+        _state = EMonsterState.Hurt;
         _animator.PlayHurtAnimation();
     }
 
