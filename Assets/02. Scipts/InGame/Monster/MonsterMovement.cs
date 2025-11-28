@@ -43,6 +43,11 @@ public class MonsterMovement : MonoBehaviour
         _direction = direction.normalized;
     }
 
+    public void StopMove()
+    {
+        _direction = Vector2.zero;
+    }
+
     public void ApplyKnockback(Transform attacker)
     {
         float directionX = Mathf.Sign(transform.position.x - attacker.position.x);

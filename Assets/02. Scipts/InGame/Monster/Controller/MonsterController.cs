@@ -1,29 +1,35 @@
-using System.Collections;
 using UnityEngine;
 
 public enum EMonsterState
 {
-    Move,
+    Patrol,
+    Chase,
     Attack,
     Freeze,
     Hurt,
     Death,
-    Spawning,
-    Patrol,
-    Chase,
 }
 
-[RequireComponent(typeof(MonsterMovement))]
-public abstract class MonsterController : MonoBehaviour
+[RequireComponent(typeof(MonsterMovement), typeof(MonsterAnimator), typeof(MonsterStats))]
+[RequireComponent(typeof(MonsterStatusEffect))]
+public class MonsterController : MonoBehaviour
 {
     [Header("플레이어 추격 거리 설정")]
+    [Space]
+    [Tooltip("플레이어를 발견하고 추격을 시작하는 최소 거리입니다.")]
+    [SerializeField] private float _chaseDistance;
     [Tooltip("플레이어에게 접근을 멈추고 공격을 시작하는 최소 거리입니다.")]
-    [SerializeField] protected float _stopDistance;
+    [SerializeField] private float _attackDistance;
+
+    [Header("순찰 설정")]
+    [Space]
+    [SerializeField] private float _minInterval;
+    [SerializeField] private float _maxInterval;
 
     [Header("시작 상태")]
     [Space]
     [SerializeField] private EMonsterState _state;
-    [SerializeField] private bool _isLeft;
+    [SerializeField] private bool _isSpriteLeft;
 
     [Header("타격감 설정")]
     [Space]
@@ -32,19 +38,20 @@ public abstract class MonsterController : MonoBehaviour
     [SerializeField] private float _deathShakeDuration = 0.25f;
     [SerializeField] private float _deathShakeIntensity = 0.75f;
 
-    protected MonsterMovement _movement;
-    protected MonsterAnimator _animator;
+    private MonsterMovement _movement;
+    private MonsterAnimator _animator;
     private MonsterStats _stats;
     private MonsterStatusEffect _statusEffect;
-    protected SpriteRenderer _spriteRenderer;
-    protected Transform _player;
+    private SpriteRenderer _spriteRenderer;
+    private Transform _player;
     
-    private Vector2 _direction;
-    protected float _distance;
+    private Vector2 _moveDirection;
+    private float _distanceToPlayer;
 
-    private Coroutine _bindCoroutine;
-    private Coroutine _dotDamageCoroutine;
-
+    private const int LeftVector = -1;
+    private const int RightVector = 2;
+    private Vector2 _patrolDirection;
+    private Camera _mainCamera;
 
     private void Awake()
     {
@@ -53,12 +60,21 @@ public abstract class MonsterController : MonoBehaviour
         _stats = GetComponent<MonsterStats>();
         _statusEffect = GetComponent<MonsterStatusEffect>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         _player = PlayerMovement.Instance.transform;
+        _mainCamera = Camera.main;
     }
 
     private void OnEnable()
     {
-        Init();
+        CancelInvoke(nameof(NextDirection));
+        NextDirection(); 
+        
+        _stats.OnDeath += HandleDeath;
+        _stats.OnDamageTaken += HandleTakeDamage;
         _statusEffect.OnDotDamageTick += HandleDotDamage;
         _statusEffect.OnBindStart += HandleBindStart;
         _statusEffect.OnBindEnd += HandleBindEnd;
@@ -66,12 +82,12 @@ public abstract class MonsterController : MonoBehaviour
 
     private void OnDisable()
     {
+        _stats.OnDeath -= HandleDeath;
+        _stats.OnDamageTaken -= HandleTakeDamage;
         _statusEffect.OnDotDamageTick -= HandleDotDamage;
         _statusEffect.OnBindStart -= HandleBindStart;
         _statusEffect.OnBindEnd -= HandleBindEnd;
     }
-
-    protected virtual void Init() { }
 
     private void Update()
     {
@@ -81,34 +97,34 @@ public abstract class MonsterController : MonoBehaviour
 
     private void DetermineState()
     {
-        _distance = _player.position.x - transform.position.x;
+        _distanceToPlayer = _player.position.x - transform.position.x;
         switch (_state)
         {
-            case EMonsterState.Move:
+            case EMonsterState.Chase:
                 HandleMoveDirection();
                 HandleMove();
+                break;
+            case EMonsterState.Patrol:
                 break;
             case EMonsterState.Attack:
                 HandleAttack();
                 break;
-            case EMonsterState.Spawning:
-                return;
         }
     }
 
     private bool IsPlayerInAttackRange()
     {
-        return Mathf.Abs(_distance) < _stopDistance;
+        return Mathf.Abs(_distanceToPlayer) < _attackDistance;
     } 
 
     private void SetSpriteFlip(bool flip)
     {
-        _spriteRenderer.flipX = flip == _isLeft;
+        _spriteRenderer.flipX = flip == _isSpriteLeft;
     }
 
     private void HandleAttack()
     {
-        SetSpriteFlip(_distance > 0);
+        SetSpriteFlip(_distanceToPlayer > 0);
     }
     
     public void DealDamage()
@@ -121,8 +137,8 @@ public abstract class MonsterController : MonoBehaviour
 
     private void HandleMoveDirection()
     {
-        _direction = GetMoveDirection();
-        SetSpriteFlip(_direction.x > 0);
+        _moveDirection = GetChaseDirection();
+        SetSpriteFlip(_moveDirection.x > 0);
     }
 
     private void HandleMove()
@@ -130,38 +146,59 @@ public abstract class MonsterController : MonoBehaviour
         if (IsPlayerInAttackRange())
         {
             _state = EMonsterState.Attack;
-            _direction = Vector2.zero;
+            _moveDirection = Vector2.zero;
             _animator.PlayMoveAnimation(false);
             _animator.PlayAttackAnimation();
         }
-        _movement.SetMoveDirection(_direction);
+        _movement.SetMoveDirection(_moveDirection);
     }
 
-    protected abstract Vector2 GetMoveDirection();
+    private Vector2 GetChaseDirection()
+    {
+        float sign = Mathf.Sign(_distanceToPlayer);
+        return Vector2.right * sign;
+    }
+
+    private Vector2 GetPatrolDirection()
+    {
+        Vector2 viewPos = _mainCamera.WorldToViewportPoint(transform.position);
+
+        if (viewPos.x < 0 || viewPos.x > 1)
+        {
+            _patrolDirection = -_patrolDirection;
+        }
+
+        return _patrolDirection;
+    }
+
+    private void NextDirection()
+    {
+        _patrolDirection = Vector2.right * Random.Range(LeftVector, RightVector);
+
+        float interval = Random.Range(_minInterval, _maxInterval);
+        Invoke(nameof(NextDirection), interval);
+    }
 
     public void TakeDamage(int damage)
     {
         _stats.TakeDamage(damage);
-        _direction = Vector2.zero;
-        _movement.SetMoveDirection(_direction);
+    }
+
+    private void HandleTakeDamage()
+    {
+        _movement.StopMove();
         _movement.ApplyKnockback(_player);
-        
-        if (_stats.CurrentHealth <= 0)
-        {
-            Death();
-            CameraController.Instance.StartShake(_deathShakeDuration, _deathShakeIntensity);
-            return;
-        }
 
         CameraController.Instance.StartShake(_hitShakeDuration, _hitShakeIntensity);
         _state = EMonsterState.Hurt;
         _animator.PlayHitAnimation();
     }
 
-    public void Death()
+    public void HandleDeath()
     {
         _state = EMonsterState.Death;
         _animator.PlayDeathAnimation();
+        CameraController.Instance.StartShake(_deathShakeDuration, _deathShakeIntensity);
     }
 
     public void TakeDotDamage(int damage, float duration, float interval)
@@ -177,8 +214,10 @@ public abstract class MonsterController : MonoBehaviour
 
     private void HandleDotDamage(int damage)
     {
-        // NOTE : 추후 Take Damage 로직을 stats로 분리하며 이 곳을 추가한다.
-        // NOTE : 카메라 쉐이크가 적용되지 않는 TakeDamage 로직이다.
+        _movement.StopMove();
+
+        _state = EMonsterState.Hurt;
+        _animator.PlayHitAnimation();
     }
 
     private void HandleBindStart()
@@ -192,12 +231,12 @@ public abstract class MonsterController : MonoBehaviour
     {
         _animator.ResumeAnimation();
         _stats.ResetSpeed();
-        _state = EMonsterState.Move;
+        _state = EMonsterState.Chase;
     }
 
     public void OnAnimationEnd()
     {
-        _state = EMonsterState.Move;
+        _state = EMonsterState.Chase;
         _animator.PlayMoveAnimation(true);
     }
 
