@@ -133,13 +133,13 @@ public abstract class MonsterController : MonoBehaviour
 
         CameraController.Instance.StartShake(0.25f, 0.1f);
         _state = EMonsterState.Hurt;
-        _animator.PlayHurtAnimation();
+        _animator.PlayHitAnimation();
     }
 
     public void Death()
     {
         _state = EMonsterState.Death;
-        _animator.PlayDieAnimation();
+        _animator.PlayDeathAnimation();
     }
 
     public void TakeBind(float duration)
