@@ -49,5 +49,4 @@ public class MonsterStats : MonoBehaviour
     {
         _currentMoveSpeed = _baseData.MoveSpeed;
     }
-
 }
