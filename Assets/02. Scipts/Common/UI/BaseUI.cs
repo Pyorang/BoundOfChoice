@@ -69,10 +69,10 @@ public class BaseUI : MonoBehaviour
         {
             action.Invoke();
         }
-        catch (Exception ex)
+        catch (MissingReferenceException)
         {
 #if UNITY_EDITOR
-            Debug.LogError($"Unexpected error in UI callback: {ex}");
+            Debug.LogWarning("UI callback target was destroyed - this is usually safe to ignore");
 #endif
         }
     }

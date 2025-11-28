@@ -34,7 +34,7 @@ public class Warrior : CharacterBase
     public override void DrawRange(Vector2 position, int direction)
     {
         Vector2 attackStart = position;
-        Vector2 attackEnd = attackStart + new Vector2(direction * _attackRange, 0);
+        Vector2 attackEnd = attackStart + new Vector2(direction * _attackRange, _attackHeight);
 
         Vector2 center = (attackStart + attackEnd) / 2f;
         Vector2 size = new Vector2(_attackRange, _attackHeight);
