@@ -4,7 +4,7 @@ public class Warrior : CharacterBase
 {
     [Header("공격 범위")]
     [SerializeField] private Vector2 _attackRange = new Vector2(1f, 0.5f);
-    [SerializeField] private Vector2 _boxOffset = new Vector2(1f, 0f);
+    [SerializeField] private Vector2 _hitBoxOffset = new Vector2(1f, 0f);
     [SerializeField] private LayerMask _enemyLayer;
 
     [Header("데미지")]
@@ -14,11 +14,11 @@ public class Warrior : CharacterBase
     {
         AudioManager.Instance.Play(AudioType.SFX, "Sword");
 
-        Vector2 boxPosition = this.transform.position;
-        boxPosition.x += _boxOffset.x * direction;
+        Vector2 hitBoxPosition = this.transform.position;
+        hitBoxPosition.x += _hitBoxOffset.x * direction;
 
         Collider2D[] hitMonsters =
-            Physics2D.OverlapBoxAll(transform.position, _attackRange, 0.0f, _enemyLayer);
+            Physics2D.OverlapBoxAll(hitBoxPosition, _attackRange, 0.0f, _enemyLayer);
         
         foreach (Collider2D hitMonster in hitMonsters)
         {
@@ -34,12 +34,10 @@ public class Warrior : CharacterBase
     [Header("Gizmos 그리기 도구")]
     [Space]
     [SerializeField] private Color _drawColor = Color.red;
-    [SerializeField] private Vector2 _drawOffset = new Vector2(0f, -0.5f);
     public override void DrawRange(Vector2 position, int direction)
     {
         Vector2 boxPosition = position;
-        boxPosition.x += _boxOffset.x * direction;
-        boxPosition += _drawOffset;
+        boxPosition.x += _hitBoxOffset.x * direction;
 
         Gizmos.color = _drawColor;
         Gizmos.DrawCube(boxPosition, _attackRange);
