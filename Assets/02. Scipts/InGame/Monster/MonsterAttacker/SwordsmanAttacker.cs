@@ -20,10 +20,11 @@ public class SwordsmanAttacker : MonsterAttacker
 
         Collider2D hit = Physics2D.OverlapBox(attackPoint, _attackBoxSize, 0f, _targetLayer);
 
-        if (hit == null || !hit.CompareTag("Player")) return;
+        if (hit == null || !hit.CompareTag(PlayerTag)) return;
         PlayerHealth.Instance.TakeDamage(_stats.AttackPower);        
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (_spriteRenderer == null)
@@ -42,4 +43,5 @@ public class SwordsmanAttacker : MonsterAttacker
 
         Gizmos.DrawWireCube(attackPoint, _attackBoxSize);
     }
+#endif
 }

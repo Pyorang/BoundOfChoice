@@ -162,6 +162,8 @@ public class MonsterController : MonoBehaviour
 
     public void HandleDeath()
     {
+        _movement.StopMove();
+
         _state = EMonsterState.Death;
         _animator.PlayDeathAnimation();
         CameraController.Instance.StartShake(_deathShakeDuration, _deathShakeIntensity);
