@@ -20,7 +20,7 @@ public class IceAgeSkill : SkillBase
 
         Vector2 attackStart = PlayerHealth.Instance.gameObject.transform.position;
         Vector2 attackEnd = attackStart + new Vector2(direction * _attackRange, _attackHeight);
-        Collider2D[] hitMonsters = Physics2D.OverlapAreaAll(attackStart, attackEnd);
+        Collider2D[] hitMonsters = Physics2D.OverlapAreaAll(attackStart, attackEnd, _enemyLayer);
 
         foreach (Collider2D hitMonster in hitMonsters)
         {
