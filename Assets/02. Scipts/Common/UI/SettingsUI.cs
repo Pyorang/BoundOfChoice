@@ -32,6 +32,14 @@ public class SettingsUI : BaseUI
         _vibrationToggle.isOn = _userSettingsData.IsVibrationOn;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Close();
+        }
+    }
+
     public void OnBGMValueChanged()
     {
         AudioManager.Instance.SetVolume(AudioType.BGM, _bgmSlider.value);
@@ -76,8 +84,13 @@ public class SettingsUI : BaseUI
     public void OnClickReturnButton()
     {
         AudioManager.Instance.Play(AudioType.SFX, "Button");
+        Close();
+    }
+
+    public override void Close(bool isCloseAll = false)
+    {
         Save();
-        UIManager.Instance.CloseUI(this);
+        base.Close(isCloseAll);
     }
 
     private void SetSoundSetting(UserSettingsData data)

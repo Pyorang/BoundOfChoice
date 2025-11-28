@@ -86,6 +86,7 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
     private void Jump()
     {
         if (!_isOnGround) return;
+        _isOnGround = false;
         _playerAnimator.PlayJumpAnimation();
         _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
@@ -121,12 +122,5 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
         if (!other.gameObject.CompareTag("Ground")) return;
         _playerAnimator.StopJumpAnimation();
         _isOnGround = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (!other.gameObject.CompareTag("Ground")) return;
-        _playerAnimator.PlayJumpAnimation();
-        _isOnGround = false;
     }
 }
