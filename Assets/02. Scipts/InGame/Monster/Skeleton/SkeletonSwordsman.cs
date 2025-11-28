@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwordsmanAttacker : MonsterAttacker
+public class SkeletonSwordsman : BaseMonster
 {
     [Header("공격 범위")]
     [SerializeField] private Vector2 _attackOffset;
@@ -30,8 +30,8 @@ public class SwordsmanAttacker : MonsterAttacker
         if (_spriteRenderer == null)
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-
         }
+
         int attackDirection = _spriteRenderer.flipX ? -1 : 1;
 
         Vector2 attackOffset = _attackOffset;
