@@ -3,6 +3,7 @@ using UnityEngine;
 public class MonsterAnimator : MonoBehaviour
 {
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     private static readonly int s_isMoving = Animator.StringToHash("IsMoving");
     private static readonly int s_attack = Animator.StringToHash("Attack");
@@ -12,6 +13,7 @@ public class MonsterAnimator : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void PlayMoveAnimation(bool isMoving)
@@ -26,6 +28,7 @@ public class MonsterAnimator : MonoBehaviour
 
     public void PlayAttackAnimation()
     {
+        StopMoveAnimation();
         _animator.SetTrigger(s_attack);
     }
 
@@ -47,5 +50,9 @@ public class MonsterAnimator : MonoBehaviour
     public void ResumeAnimation()
     {
         _animator.speed = 1.0f;
+    }
+    public void SetSpriteFlip(bool flip)
+    {
+        _spriteRenderer.flipX = flip;
     }
 }

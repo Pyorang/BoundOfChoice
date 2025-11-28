@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum EMonsterState
 {
+    None,
     Patrol,
     Chase,
     Attack,
@@ -21,11 +22,6 @@ public class MonsterController : MonoBehaviour
     [Tooltip("플레이어에게 접근을 멈추고 공격을 시작하는 최소 거리입니다.")]
     [SerializeField] private float _attackDistance;
 
-    [Header("순찰 설정")]
-    [Space]
-    [SerializeField] private float _minInterval;
-    [SerializeField] private float _maxInterval;
-
     [Header("시작 상태")]
     [Space]
     [SerializeField] private EMonsterState _state;
@@ -38,41 +34,32 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private float _deathShakeDuration = 0.25f;
     [SerializeField] private float _deathShakeIntensity = 0.75f;
 
-    private MonsterMovement _movement;
-    private MonsterAnimator _animator;
     private MonsterStats _stats;
+    private MonsterMovement _movement;
+    private MonsterNavigator _navigator;
+    private MonsterAnimator _animator;
     private MonsterStatusEffect _statusEffect;
-    private SpriteRenderer _spriteRenderer;
     private Transform _player;
     
     private Vector2 _moveDirection;
     private float _distanceToPlayer;
 
-    private const int LeftVector = -1;
-    private const int RightVector = 2;
-    private Vector2 _patrolDirection;
-    private Camera _mainCamera;
-
     private void Awake()
     {
-        _movement = GetComponent<MonsterMovement>();
-        _animator = GetComponent<MonsterAnimator>();
         _stats = GetComponent<MonsterStats>();
+        _movement = GetComponent<MonsterMovement>();
+        _navigator = GetComponent<MonsterNavigator>();
+        _animator = GetComponent<MonsterAnimator>();
         _statusEffect = GetComponent<MonsterStatusEffect>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
         _player = PlayerMovement.Instance.transform;
-        _mainCamera = Camera.main;
     }
 
     private void OnEnable()
     {
-        CancelInvoke(nameof(NextDirection));
-        NextDirection(); 
-        
         _stats.OnDeath += HandleDeath;
         _stats.OnDamageTaken += HandleTakeDamage;
         _statusEffect.OnDotDamageTick += HandleDotDamage;
@@ -92,19 +79,40 @@ public class MonsterController : MonoBehaviour
     private void Update()
     {
         if (_player == null) return;
+        _distanceToPlayer = _player.position.x - transform.position.x;
+
+        if (_state != EMonsterState.Patrol && _state != EMonsterState.Chase) return;
         DetermineState();
     }
 
     private void DetermineState()
     {
-        _distanceToPlayer = _player.position.x - transform.position.x;
+        if (IsPlayerInAttackRange())
+        {
+            _state = EMonsterState.Attack;
+        }
+        else if (IsPlayerInSight())
+        {
+            _state = EMonsterState.Chase;
+        }
+        else
+        {
+            _state = EMonsterState.Patrol;
+        }
+        ActionByState();
+    }
+
+    private void ActionByState()
+    {
         switch (_state)
         {
             case EMonsterState.Chase:
-                HandleMoveDirection();
+                FindChaseDirection();
                 HandleMove();
                 break;
             case EMonsterState.Patrol:
+                FindPatrolDirection();
+                HandleMove();
                 break;
             case EMonsterState.Attack:
                 HandleAttack();
@@ -112,22 +120,24 @@ public class MonsterController : MonoBehaviour
         }
     }
 
+    private bool IsPlayerInSight()
+    {
+        return Mathf.Abs(_distanceToPlayer) < _chaseDistance;
+    }
+    
     private bool IsPlayerInAttackRange()
     {
         return Mathf.Abs(_distanceToPlayer) < _attackDistance;
-    } 
-
-    private void SetSpriteFlip(bool flip)
-    {
-        _spriteRenderer.flipX = flip == _isSpriteLeft;
     }
 
     private void HandleAttack()
     {
-        SetSpriteFlip(_distanceToPlayer > 0);
+        _movement.StopMove();
+        _animator.PlayAttackAnimation();
+        _animator.SetSpriteFlip((_distanceToPlayer > 0) == _isSpriteLeft);
     }
     
-    public void DealDamage()
+    public void OnAttackHit()
     {
         if (IsPlayerInAttackRange())
         {
@@ -135,52 +145,25 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    private void HandleMoveDirection()
+    private void FindChaseDirection()
     {
-        _moveDirection = GetChaseDirection();
-        SetSpriteFlip(_moveDirection.x > 0);
+        _moveDirection = _navigator.GetChaseDirection(_distanceToPlayer);
+    }
+    private void FindPatrolDirection()
+    {
+        _moveDirection = _navigator.GetPatrolDirection();
     }
 
     private void HandleMove()
     {
-        if (IsPlayerInAttackRange())
-        {
-            _state = EMonsterState.Attack;
-            _moveDirection = Vector2.zero;
-            _animator.PlayMoveAnimation(false);
-            _animator.PlayAttackAnimation();
-        }
+        _animator.PlayMoveAnimation(_moveDirection.x != 0);
+        _animator.SetSpriteFlip((_moveDirection.x > 0) == _isSpriteLeft);
         _movement.SetMoveDirection(_moveDirection);
-    }
-
-    private Vector2 GetChaseDirection()
-    {
-        float sign = Mathf.Sign(_distanceToPlayer);
-        return Vector2.right * sign;
-    }
-
-    private Vector2 GetPatrolDirection()
-    {
-        Vector2 viewPos = _mainCamera.WorldToViewportPoint(transform.position);
-
-        if (viewPos.x < 0 || viewPos.x > 1)
-        {
-            _patrolDirection = -_patrolDirection;
-        }
-
-        return _patrolDirection;
-    }
-
-    private void NextDirection()
-    {
-        _patrolDirection = Vector2.right * Random.Range(LeftVector, RightVector);
-
-        float interval = Random.Range(_minInterval, _maxInterval);
-        Invoke(nameof(NextDirection), interval);
     }
 
     public void TakeDamage(int damage)
     {
+        if (_state == EMonsterState.None) return;
         _stats.TakeDamage(damage);
     }
 
@@ -231,17 +214,16 @@ public class MonsterController : MonoBehaviour
     {
         _animator.ResumeAnimation();
         _stats.ResetSpeed();
-        _state = EMonsterState.Chase;
+        DetermineState();
     }
 
     public void OnAnimationEnd()
     {
-        _state = EMonsterState.Chase;
-        _animator.PlayMoveAnimation(true);
+        DetermineState();
     }
 
     public void OnDeathAnimationEnd()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
