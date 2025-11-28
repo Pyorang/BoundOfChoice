@@ -5,7 +5,7 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
 {
     [SerializeField] private GameObject _slotContent;
     [SerializeField] private SlotController[] _quickSlots;
-    private List<SlotController> _slots = new List<SlotController>();
+    private List<SlotController> _slots;
 
     protected override void Init()
     {
@@ -16,17 +16,9 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
     private void Start()
     {
         SlotController[] slots = _slotContent.GetComponentsInChildren<SlotController>(true);
-        _slots.Capacity = slots.Length + _quickSlots.Length;
-        foreach (SlotController slot in slots)
-        {
-            _slots.Add(slot);
-        }
-
-        foreach (SlotController slot in _quickSlots)
-        {
-            _slots.Add(slot);
-        }
-
+        _slots = new List<SlotController>(slots.Length + _quickSlots.Length);
+        _slots.AddRange(slots);
+        _slots.AddRange(_quickSlots);
         gameObject.SetActive(false);
     }
 

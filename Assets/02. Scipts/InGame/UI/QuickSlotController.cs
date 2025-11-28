@@ -11,7 +11,7 @@ public class QuickSlotController : MonoBehaviour
 
     private void UseItemInQuickSlot()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < _slotControllers.Length; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
