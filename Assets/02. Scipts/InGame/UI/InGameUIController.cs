@@ -49,7 +49,7 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
         SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
-        SettingsUI.CloseSetting += CloseSettingUI;
+        SettingsUI.OnClosed += CloseSettingUI;
         InitializeWindowUiToggles();
     }
 
@@ -71,6 +71,7 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
         SpiritManager.OnSpiritPieceChanged -= OnUpdateSpiritUI;
+        SettingsUI.OnClosed -= CloseSettingUI;
     }
 
     private void Update()
@@ -97,19 +98,14 @@ public class InGameUIController : MonoBehaviour
     private void TryToggleUI(EWindowUIType type)
     {
         if (_currentWindowUI == EWindowUIType.Setting) return;
-        if (_currentWindowUI == EWindowUIType.None)
+        if (_currentWindowUI == EWindowUIType.None || _currentWindowUI == type)
         {
             _windowUiToggleActions[type]();
-            _currentWindowUI = type;
-        }
-        else if (_currentWindowUI == type)
-        {
-            _windowUiToggleActions[type]();
-            _currentWindowUI = EWindowUIType.None;
+            _currentWindowUI = (_currentWindowUI == type) ? EWindowUIType.None : type;
         }
     }
 
-    public void CloseSettingUI()
+    private void CloseSettingUI()
     {
         _currentWindowUI = EWindowUIType.None;
     }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SettingsUI : BaseUI
 {
     private UserSettingsData _userSettingsData;
-    public static event Action CloseSetting;
+    public static event Action OnClosed;
 
     [Header("환경설정 버튼")]
     [Space]
@@ -79,7 +79,7 @@ public class SettingsUI : BaseUI
     {
         AudioManager.Instance.Play(AudioType.SFX, "Button");
         Save();
-        CloseSetting?.Invoke();
+        OnClosed?.Invoke();
         UIManager.Instance.CloseUI(this);
     }
 
