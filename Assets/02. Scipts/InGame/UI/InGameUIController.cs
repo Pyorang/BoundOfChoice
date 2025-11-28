@@ -1,11 +1,24 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum EWindowUIType
+{
+    None,
+    Inventory,
+    Shop,
+    Setting
+}
 
 public class InGameUIController : MonoBehaviour
 {
     public const string Button = "Button";
 
+    private EWindowUIType _currentWindowUI = EWindowUIType.None;
+    private Dictionary<EWindowUIType, Action> _windowUiToggleActions;
+    
     [Header("체력 관련")]
     [Space]
     [SerializeField] private Image _healthBarImage;
@@ -36,6 +49,18 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
         SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
+        SettingsUI.CloseSetting += CloseSettingUI;
+        InitializeWindowUiToggles();
+    }
+
+    private void InitializeWindowUiToggles()
+    {
+        _windowUiToggleActions = new Dictionary<EWindowUIType, Action>
+        {
+            { EWindowUIType.Inventory, OnClickInventoryButton },
+            { EWindowUIType.Shop,  OnClickShopButton  },
+            { EWindowUIType.Setting, OnClickInGameSettingsButton }
+        };
     }
 
     private void OnDestroy()
@@ -54,19 +79,39 @@ public class InGameUIController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                OnClickInventoryButton();
+                TryToggleUI(EWindowUIType.Inventory);
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                OnClickInGameSettingsButton();
+                TryToggleUI(EWindowUIType.Setting);
             }
 
             if (Input.GetKeyDown(KeyCode.BackQuote))
             {
-                OnClickShopButton();
+                TryToggleUI(EWindowUIType.Shop);
             }
         }
+    }
+
+    private void TryToggleUI(EWindowUIType type)
+    {
+        if (_currentWindowUI == EWindowUIType.Setting) return;
+        if (_currentWindowUI == EWindowUIType.None)
+        {
+            _windowUiToggleActions[type]();
+            _currentWindowUI = type;
+        }
+        else if (_currentWindowUI == type)
+        {
+            _windowUiToggleActions[type]();
+            _currentWindowUI = EWindowUIType.None;
+        }
+    }
+
+    public void CloseSettingUI()
+    {
+        _currentWindowUI = EWindowUIType.None;
     }
 
     public void OnClickInventoryButton()
@@ -78,7 +123,7 @@ public class InGameUIController : MonoBehaviour
     public void OnClickShopButton()
     {
         ShopUI.Instance.ToggleShop();
-        AudioManager.Instance.Play(AudioType.SFX, "Button");
+        AudioManager.Instance.Play(AudioType.SFX, Button);
     }
 
     public void OnClickInGameSettingsButton()
