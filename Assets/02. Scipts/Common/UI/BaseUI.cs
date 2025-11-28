@@ -49,7 +49,7 @@ public class BaseUI : MonoBehaviour
     {
         if (isCloseAll == false)
         {
-            _actionOnClose?.Invoke();
+            SafeInvoke(_actionOnClose);
         }
         _actionOnClose = null;
 
@@ -60,5 +60,20 @@ public class BaseUI : MonoBehaviour
     {
         AudioManager.Instance.Play(AudioType.SFX, "Button");
         Close();
+    }
+
+    private void SafeInvoke(Action action)
+    {
+        if (action == null) return;
+        try
+        {
+            action.Invoke();
+        }
+        catch (Exception ex)
+        {
+#if UNITY_EDITOR
+            Debug.LogError($"Unexpected error in UI callback: {ex}");
+#endif
+        }
     }
 }
