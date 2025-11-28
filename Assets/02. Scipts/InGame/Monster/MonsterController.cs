@@ -107,11 +107,11 @@ public class MonsterController : MonoBehaviour
         switch (_state)
         {
             case EMonsterState.Chase:
-                FindChaseDirection();
+                _moveDirection = _navigator.GetChaseDirection(_distanceToPlayer);
                 HandleMove();
                 break;
             case EMonsterState.Patrol:
-                FindPatrolDirection();
+                _moveDirection = _navigator.GetPatrolDirection();
                 HandleMove();
                 break;
             case EMonsterState.Attack:
@@ -137,23 +137,6 @@ public class MonsterController : MonoBehaviour
         _animator.SetSpriteFlip((_distanceToPlayer > 0) == _isSpriteLeft);
     }
     
-    public void OnAttackHit()
-    {
-        if (IsPlayerInAttackRange())
-        {
-            PlayerHealth.Instance.TakeDamage(_stats.AttackPower);
-        }
-    }
-
-    private void FindChaseDirection()
-    {
-        _moveDirection = _navigator.GetChaseDirection(_distanceToPlayer);
-    }
-    private void FindPatrolDirection()
-    {
-        _moveDirection = _navigator.GetPatrolDirection();
-    }
-
     private void HandleMove()
     {
         _animator.PlayMoveAnimation(_moveDirection.x != 0);

@@ -21,14 +21,8 @@ public class MonsterAnimator : MonoBehaviour
         _animator.SetBool(s_isMoving, isMoving);
     }
 
-    public void StopMoveAnimation()
-    {
-        _animator.SetBool(s_isMoving, false);
-    }
-
     public void PlayAttackAnimation()
     {
-        StopMoveAnimation();
         _animator.SetTrigger(s_attack);
     }
 
