@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1459541515187164eb26f4b11fac5b37, type: 3}
-  m_Name: SkeletonSwordsman
+  m_Name: SkeletonArbalist
   m_EditorClassIdentifier: 
   _maxHealth: 300
-  _attackPower: 10
+  _attackPower: 7
   _moveSpeed: 2
