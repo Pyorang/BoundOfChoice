@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 1
   _itemImage: {fileID: 7372512845220210203}
+  _showItemCount: 1
   _amount: 30
 --- !u!58 &1194858047901580071
 CircleCollider2D:
