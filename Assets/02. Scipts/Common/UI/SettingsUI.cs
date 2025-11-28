@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsUI : BaseUI
 {
     private UserSettingsData _userSettingsData;
-    public static event Action OnClosed;
 
     [Header("환경설정 버튼")]
     [Space]
@@ -32,6 +30,14 @@ public class SettingsUI : BaseUI
         _userSettingsData = UserDataManager.Instance.GetUserData<UserSettingsData>();
         SetSoundSetting(_userSettingsData);
         _vibrationToggle.isOn = _userSettingsData.IsVibrationOn;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Close();
+        }
     }
 
     public void OnBGMValueChanged()
@@ -78,9 +84,13 @@ public class SettingsUI : BaseUI
     public void OnClickReturnButton()
     {
         AudioManager.Instance.Play(AudioType.SFX, "Button");
+        Close();
+    }
+
+    public override void Close(bool isCloseAll = false)
+    {
         Save();
-        OnClosed?.Invoke();
-        UIManager.Instance.CloseUI(this);
+        base.Close(isCloseAll);
     }
 
     private void SetSoundSetting(UserSettingsData data)

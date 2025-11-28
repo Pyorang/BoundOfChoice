@@ -49,7 +49,6 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
         SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
-        SettingsUI.OnClosed += CloseSettingUI;
         InitializeWindowUiToggles();
     }
 
@@ -71,7 +70,6 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
         SpiritManager.OnSpiritPieceChanged -= OnUpdateSpiritUI;
-        SettingsUI.OnClosed -= CloseSettingUI;
     }
 
     private void Update()
@@ -125,6 +123,7 @@ public class InGameUIController : MonoBehaviour
     public void OnClickInGameSettingsButton()
     {
         var uiData = new BaseUIData();
+        uiData.ActionOnClose = CloseSettingUI;
         UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
         AudioManager.Instance.Play(AudioType.SFX, Button);
     }
