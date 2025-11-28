@@ -6,8 +6,8 @@ public class IceAgeSkill : SkillBase
 
     [Header("공격 범위")]
     [Space]
-    [SerializeField] private Vector2 _attackRange = new Vector2(1f, 0.5f);
-    [SerializeField] private Vector2 _boxOffset = new Vector2(1f, 0f);
+    [SerializeField] private float _attackRange = 8.0f;
+    private float _attackHeight = 0.1f;
     [SerializeField] private LayerMask _enemyLayer;
 
     [Header("스킬 효과")]
@@ -18,11 +18,9 @@ public class IceAgeSkill : SkillBase
     {
         AudioManager.Instance.Play(AudioType.SFX, "IceAge");
 
-        Vector2 boxPosition = PlayerHealth.Instance.gameObject.transform.position;
-        boxPosition.x += _boxOffset.x * direction;
-
-        Collider2D[] hitMonsters =
-            Physics2D.OverlapBoxAll(boxPosition, _attackRange, 0.0f, _enemyLayer);
+        Vector2 attackStart = PlayerHealth.Instance.gameObject.transform.position;
+        Vector2 attackEnd = attackStart + new Vector2(direction * _attackRange, _attackHeight);
+        Collider2D[] hitMonsters = Physics2D.OverlapAreaAll(attackStart, attackEnd);
 
         foreach (Collider2D hitMonster in hitMonsters)
         {
