@@ -16,6 +16,6 @@ public class SkeletonArbalist : BaseMonster
         Vector2 attackPoint = (Vector2)transform.position + attackOffset;
 
         GameObject arrow = PoolManager.Instance.GetObject(EPoolType.SkeletonArrow);
-        arrow.GetComponent<ProjectileBase>().Init(attackPoint, attackDirection, 0);
+        arrow.GetComponent<ProjectileBase>().Init(attackPoint, attackDirection, _stats.AttackPower);
     }
 }

@@ -14,7 +14,7 @@ public class FireBall : ProjectileBase
         MonsterController monster = other.GetComponent<MonsterController>();
         if (monster == null) return;
         monster.TakeDotDamage(_dotDamagePerTick, _dotDuration, _dotTickInterval);
-        monster.TakeDamage(_damage);
+        monster.TakeDamage(_finalDamage);
         ReleaseObject();
     }
 
