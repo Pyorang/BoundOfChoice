@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab464865059fa5d42b5a3a67c2404116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetInetensity: 300
+  _targetIntensity: 300
   _effectDuration: 0.1
   _light: {fileID: 323142368}
 --- !u!114 &323142368

@@ -33,10 +33,10 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
     [Tooltip("첫 번쨰 동료를 제외한 나머지 동료들의 오브젝트들은 OFF 해주세요")]
     [Space]
     [SerializeField] private CharacterBase[] _partners;
+    [SerializeField] private SwitchEffect _switchEffect;
+
     private ECharacterType _currentCharacter = ECharacterType.Warrior;
     public ECharacterType CurrentCharacter => _currentCharacter;
-
-    [SerializeField] private SwitchEffect _switchEffect;
 
     private PlayerAnimator _playerAnimator;
 

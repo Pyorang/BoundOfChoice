@@ -8,7 +8,7 @@ public class SwitchEffect : MonoBehaviour
 {
     [Header("교체 이펙트 설정")]
     [Space]
-    [SerializeField] private float _targetInetensity;
+    [SerializeField] private float _targetIntensity;
     [SerializeField] private float _effectDuration;
 
     [Header("Light2D 컴포넌트")]
@@ -27,7 +27,7 @@ public class SwitchEffect : MonoBehaviour
 
     public void ProcessSwitchEffect()
     {
-        if( _effectCoroutine != null )
+        if(_effectCoroutine != null )
         {
             StopCoroutine(_effectCoroutine);
             _light.intensity = 0;
@@ -41,26 +41,14 @@ public class SwitchEffect : MonoBehaviour
     {
         float timeElapsed = 0;
         float halfDuration = _effectDuration / 2;
-        float elapsedRatio;
 
-        while (timeElapsed < halfDuration)
+        while (timeElapsed < _effectDuration)
         {
-            elapsedRatio = timeElapsed / halfDuration;
-            _light.intensity = _targetInetensity * elapsedRatio;
+            float pingPongValue = Mathf.PingPong(timeElapsed, halfDuration);
+            _light.intensity = Mathf.Lerp(0, _targetIntensity, pingPongValue / halfDuration);
             timeElapsed += Time.deltaTime;
             yield return null;
-        }
-
-        _light.intensity = _targetInetensity;
-        timeElapsed = 0;
-
-        while (timeElapsed < halfDuration)
-        {
-            elapsedRatio = timeElapsed / halfDuration;
-            _light.intensity = _targetInetensity * (1 - elapsedRatio);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
+        }   
 
         _light.intensity = 0;
         _effectCoroutine = null;
