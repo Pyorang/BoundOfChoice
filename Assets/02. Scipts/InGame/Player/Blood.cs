@@ -7,8 +7,6 @@ public class Blood : MonoBehaviour
     [Space]
     [SerializeField] private int _bloodType;
 
-    private static readonly int _maxBloodNumber = 3;
-
     private void DisableObject()
     {
         string PoolingObjectName = $"Blood{_bloodType}";
