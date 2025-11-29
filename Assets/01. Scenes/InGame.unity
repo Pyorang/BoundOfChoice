@@ -5071,6 +5071,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2060470106876482000, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2565698403930949206, guid: b805ba6612068eb4981887c1b956594d, type: 3}
       propertyPath: _renderCamera
       value: 
@@ -5215,6 +5219,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4566247700672750636, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566247700672750636, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566247700672750636, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566247700672750636, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4748994464789963357, guid: b805ba6612068eb4981887c1b956594d, type: 3}
       propertyPath: _renderCamera
       value: 
@@ -5266,6 +5286,22 @@ PrefabInstance:
     - target: {fileID: 5748025816807260730, guid: b805ba6612068eb4981887c1b956594d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339520821637286456, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: _healColor.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339520821637286456, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: _healColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339520821637286456, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: _hurtColor.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339520821637286456, guid: b805ba6612068eb4981887c1b956594d, type: 3}
+      propertyPath: _hurtColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6509378827504304678, guid: b805ba6612068eb4981887c1b956594d, type: 3}
       propertyPath: m_AnchorMax.y
