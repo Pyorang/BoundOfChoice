@@ -115,15 +115,15 @@ public class InGameUIController : MonoBehaviour
     public void OnClickInventoryButton()
     {
         InventoryUI.Instance.ToggleInventory();
-        string InventorySound = InventoryUI.Instance.gameObject.activeSelf ? InventoryOpen : InventoryClose;
-        AudioManager.Instance.Play(AudioType.SFX, InventorySound);
+        string inventorySound = InventoryUI.Instance.gameObject.activeSelf ? InventoryOpen : InventoryClose;
+        AudioManager.Instance.Play(AudioType.SFX, inventorySound);
     }
 
     public void OnClickShopButton()
     {
         ShopUI.Instance.ToggleShop();
-        string ShopSound = ShopUI.Instance.gameObject.activeSelf ? ShopOpen : ShopClose;
-        AudioManager.Instance.Play(AudioType.SFX, ShopSound);
+        string shopSound = ShopUI.Instance.gameObject.activeSelf ? ShopOpen : ShopClose;
+        AudioManager.Instance.Play(AudioType.SFX, shopSound);
     }
 
     public void OnClickInGameSettingsButton()
