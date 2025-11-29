@@ -29,6 +29,10 @@ public class IceAgeSkill : SkillBase
                 monster.TakeBind(_bindDuration);
             }
         }
+
+        IceAgeEffect skillEffect = PoolManager.Instance.GetObject(EPoolType.IceAgeEffect).GetComponent<IceAgeEffect>();
+        Vector2 effectPosition = (attackStart + attackEnd) / 2.0f;
+        skillEffect.SetEffeect(effectPosition, direction);
     }
 
 /*#if UNITY_EDITOR

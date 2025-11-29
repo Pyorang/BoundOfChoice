@@ -8,7 +8,8 @@ public enum EPoolType
     FireBall,
     Blood1,
     Blood2,
-    Blood3
+    Blood3,
+    IceAgeEffect
 }
 
 [System.Serializable] public struct PoolInfo
