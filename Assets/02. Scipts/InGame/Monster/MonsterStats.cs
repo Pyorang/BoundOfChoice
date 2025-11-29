@@ -1,10 +1,13 @@
-using System.Collections;
+using System;
 using UnityEngine;
 
 public class MonsterStats : MonoBehaviour
 {
     [Header("몬스터 데이터")]
     [SerializeField] private MonsterData _baseData;
+
+    public event Action OnDeath;
+    public event Action OnDamageTaken;
 
     private int _currentHealth;
     private int _currentMaxHealth;
@@ -37,7 +40,17 @@ public class MonsterStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (_currentHealth <= 0) return;
+
         _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            OnDeath?.Invoke();
+            return;
+        }
+
+        OnDamageTaken?.Invoke();
     }
 
     public void SetMoveSpeed(float speed)
@@ -49,5 +62,4 @@ public class MonsterStats : MonoBehaviour
     {
         _currentMoveSpeed = _baseData.MoveSpeed;
     }
-
 }

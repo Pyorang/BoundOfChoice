@@ -13,9 +13,6 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
     [SerializeField] private List<MonsterPrefabInfo> _monsterPrefabInfos;
     private Dictionary<int, GameObject> _monsterPrefabDict;
 
-    [SerializeField] private GameObject _player;
-    private const string PlayerTag = "player";
-
     protected override void Init()
     {
         IsDestroyOnLoad = true;
@@ -32,23 +29,6 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         }
     }
 
-    private void Start()
-    {
-        // NOTE : player가 인스펙터에서 할당되지 않으면 태그로 탐색하여 캐싱한다.
-        if (_player == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag(PlayerTag);
-            if (player != null)
-            {
-                _player = player;
-            }
-            else
-            {
-                Debug.LogError($"'{PlayerTag}' 태그를 가진 플레이어를 찾을 수 없습니다. Player 오브젝트에 태그가 올바르게 설정되었는지 확인해주세요. ");
-            }
-        }
-    }
-
     public GameObject CreateMonster(int id, Vector2 position)
     {
         if (!_monsterPrefabDict.TryGetValue(id, out GameObject prefab) || prefab == null)
@@ -58,17 +38,6 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         }
 
         GameObject monster  = Instantiate(prefab, position, Quaternion.identity, transform);
-        
-        if (monster.TryGetComponent<MonsterController>(out var controller))
-        {
-            controller.SetPlayer(_player);
-        }
-        else
-        {
-            Debug.LogError($"몬스터 프리팹(ID : {id})에 MonsterController 컴포넌트가 없습니다.");
-            Destroy(monster);
-            return null;
-        }
 
         return monster;
     }
