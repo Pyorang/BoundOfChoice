@@ -143,6 +143,13 @@ public class MonsterController : MonoBehaviour
         _animator.SetSpriteFlip((_moveDirection.x > 0) == _isSpriteLeft);
         _movement.SetMoveDirection(_moveDirection);
     }
+    
+    public void HandleDash()
+    {
+        _moveDirection = _navigator.GetChaseDirection(_distanceToPlayer);
+        _animator.SetSpriteFlip((_moveDirection.x > 0) == _isSpriteLeft);
+        _movement.SetMoveDirection(_moveDirection);
+    }
 
     public void TakeDamage(int damage)
     {
