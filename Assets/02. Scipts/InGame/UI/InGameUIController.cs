@@ -14,6 +14,10 @@ public enum EWindowUIType
 
 public class InGameUIController : MonoBehaviour
 {
+    public const string InventoryOpen = "InventoryOpen";
+    public const string InventoryClose = "InventoryClose";
+    public const string ShopOpen = "ShopOpen";
+    public const string ShopClose = "ShopClose";
     public const string Button = "Button";
 
     private EWindowUIType _currentWindowUI = EWindowUIType.None;
@@ -49,10 +53,10 @@ public class InGameUIController : MonoBehaviour
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
         SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
-        InitializeWindowUiToggles();
+        InitializeWindowUIToggles();
     }
 
-    private void InitializeWindowUiToggles()
+    private void InitializeWindowUIToggles()
     {
         _windowUiToggleActions = new Dictionary<EWindowUIType, Action>
         {
@@ -111,13 +115,15 @@ public class InGameUIController : MonoBehaviour
     public void OnClickInventoryButton()
     {
         InventoryUI.Instance.ToggleInventory();
-        AudioManager.Instance.Play(AudioType.SFX, Button);
+        string inventorySound = InventoryUI.Instance.gameObject.activeSelf ? InventoryOpen : InventoryClose;
+        AudioManager.Instance.Play(AudioType.SFX, inventorySound);
     }
 
     public void OnClickShopButton()
     {
         ShopUI.Instance.ToggleShop();
-        AudioManager.Instance.Play(AudioType.SFX, Button);
+        string shopSound = ShopUI.Instance.gameObject.activeSelf ? ShopOpen : ShopClose;
+        AudioManager.Instance.Play(AudioType.SFX, shopSound);
     }
 
     public void OnClickInGameSettingsButton()
