@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryUI : SingletonBehaviour<InventoryUI>
 {
-    [SerializeField] GameObject _slotContent;
-    private SlotController[] _slots;
+    [SerializeField] private GameObject _slotContent;
+    [SerializeField] private SlotController[] _quickSlots;
+    private List<SlotController> _slots;
 
     protected override void Init()
     {
@@ -13,7 +15,10 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
 
     private void Start()
     {
-        _slots = _slotContent.GetComponentsInChildren<SlotController>(true);
+        SlotController[] slots = _slotContent.GetComponentsInChildren<SlotController>(true);
+        _slots = new List<SlotController>(slots.Length + _quickSlots.Length);
+        _slots.AddRange(slots);
+        _slots.AddRange(_quickSlots);
         gameObject.SetActive(false);
     }
 
