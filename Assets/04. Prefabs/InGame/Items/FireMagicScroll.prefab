@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cost: 50
   _damage: 90
+  _spawnOffset: {x: 1.5, y: 0.5}
 --- !u!61 &3447672034653440611
 BoxCollider2D:
   m_ObjectHideFlags: 0

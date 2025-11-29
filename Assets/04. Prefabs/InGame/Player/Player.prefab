@@ -49,7 +49,7 @@ MonoBehaviour:
   GoingWith: 0
   _characterType: 2
   _magicBoltCost: 20
-  _spawnOffset: {x: 1, y: 0}
+  _spawnOffset: {x: 1, y: 1}
 --- !u!114 &1231203226812644738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,8 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cost: 20
   _damage: 0
-  _attackRange: {x: 8, y: 0.5}
-  _boxOffset: {x: 4, y: 0}
+  _attackRange: 8
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -84,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cost: 40
   _damage: 40
+  _spawnOffset: {x: 0, y: 0}
 --- !u!1 &2014739114944699033
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,14 +548,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoingWith: 1
   _characterType: 0
-  _attackRange: {x: 2, y: 0.5}
-  _boxOffset: {x: 1.5, y: 0}
+  _attackRange: 2.5
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
   _attackDamage: 50
   _drawColor: {r: 1, g: 0, b: 0, a: 1}
-  _drawOffset: {x: 0, y: -0.5}
 --- !u!1 &6145296015874021320
 GameObject:
   m_ObjectHideFlags: 0
