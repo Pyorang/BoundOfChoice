@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwordsmanAttacker : MonsterAttacker
+public class SwordSkeleton : MonsterAttacker
 {
     [Header("공격 범위")]
     [SerializeField] private Vector2 _attackOffset;
