@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class Choice16 : MonoBehaviour
+public class Choice16 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static readonly int _AActivateTrapAmount = 2;
+
+    protected override void StepA()
     {
-        
+        for(int i = 0; i < _AActivateTrapAmount; i++)
+        {
+            KnightTrapManager.Instance.Activate();
+        }
+
+        Debug.Log("검사 스켈레톤 한 마리 소환");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        Debug.Log("엘리트 스켈레톤 한 마리 소환");
     }
 }

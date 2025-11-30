@@ -10,6 +10,27 @@ public struct MonsterPrefabInfo
 
 public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 {
+    private int _currentMonsterCount = 0;
+    public int CurrentMonsterCount
+    {
+        get { return _currentMonsterCount; }
+        set
+        {
+            _currentMonsterCount = value;
+
+            if(_currentMonsterCount == 0)
+            {
+                ChoiceManager.Instance.GetNewChoice();
+                Angel.Instance.DisableLevers();
+            }
+
+            else
+            {
+                Angel.Instance.DisableLevers();
+            }
+        }
+    }
+
     [SerializeField] private List<MonsterPrefabInfo> _monsterPrefabInfos;
     private Dictionary<int, GameObject> _monsterPrefabDict;
 
@@ -31,6 +52,8 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
     public GameObject CreateMonster(int id, Vector2 position)
     {
+        _currentMonsterCount++;
+
         if (!_monsterPrefabDict.TryGetValue(id, out GameObject prefab) || prefab == null)
         {
             Debug.LogError($"몬스터 ID({id})가 없거나 프리팹이 null 입니다.");

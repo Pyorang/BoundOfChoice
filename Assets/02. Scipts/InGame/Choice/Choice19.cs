@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Choice19 : MonoBehaviour
+public class Choice19 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static readonly int _BDamageAmount = 25;
+
+    protected override void StepA()
     {
-        
+        Debug.Log("검사 스켈레톤 한 마리와 궁수 스켈레톤 두 마리를 소환");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        PlayerHealth.Instance.TakeDamage(_BDamageAmount);
     }
 }

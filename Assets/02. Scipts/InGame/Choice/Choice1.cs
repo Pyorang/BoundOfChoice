@@ -2,13 +2,25 @@ using UnityEngine;
 
 public class Choice1 : ChoiceBase
 {
-    public override void Execute1()
+    private static readonly int _nextChoiceID = 2;
+
+    protected override void StepA()
     {
-        ChoiceManager.Instance.SetChoice(2);
+
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        ChoiceManager.Instance.SetChoice(2);
+
+    }
+
+    public override void ExecuteA()
+    {
+        ChoiceManager.Instance.SetChoice(_nextChoiceID);
+    }
+
+    public override void ExecuteB()
+    {
+        ChoiceManager.Instance.SetChoice(_nextChoiceID);
     }
 }

@@ -22,6 +22,11 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     private ChoiceBase _currentChoice;
     private List<ChoiceBase> _choices = new List<ChoiceBase>();
 
+    private List<int> _nonAppearableChoicesID = new List<int>();
+
+    public static event Action OnLeftLeverInteracted;
+    public static event Action OnRightLeverInteracted;
+
     protected override void Init()
     {
         IsDestroyOnLoad = true;
@@ -31,23 +36,12 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     private void Start()
     {
         InitChoices();
+
+        // NOTE : 1번과 2번 선택지는 게임 시작 시에만 나옴.
+        // 2번 선택지는 추후에 추가됨.
+        _nonAppearableChoicesID.Add(1);
+
         SetChoice(1);
-    }
-
-    public void SetChoice(int choiceID)
-    {
-        _currentChoiceModel = DataTableManager.Instance.GetChoice(choiceID);
-        UpdateChoiceText(_currentChoiceModel.Text1, _currentChoiceModel.Text2);
-
-        _currentChoice = _choices[GetCurrentChoiceID() - 1];
-    }
-
-    public void GetNewChoice()
-    {
-        _currentChoiceModel = DataTableManager.Instance.GetRandomChoice(1, 2);
-        UpdateChoiceText(_currentChoiceModel.Text1, _currentChoiceModel.Text2);
-
-        _currentChoice = _choices[GetCurrentChoiceID() - 1];
     }
 
     private void InitChoices()
@@ -87,6 +81,24 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
                 Debug.LogWarning($"클래스 {className}을(를) 찾을 수 없습니다. 인덱스 {i}에 해당하는 Choice 클래스가 없습니다.");
             }
         }
+    }
+
+    public void SetChoice(int choiceID)
+    {
+        _currentChoiceModel = DataTableManager.Instance.GetChoice(choiceID);
+        UpdateChoiceText(_currentChoiceModel.Text1, _currentChoiceModel.Text2);
+
+        _currentChoice = _choices[GetCurrentChoiceID() - 1];
+    }
+
+    public void GetNewChoice()
+    {
+        ProcessLeftTurns();
+
+        _currentChoiceModel = DataTableManager.Instance.GetRandomChoice(_nonAppearableChoicesID.ToArray());
+        UpdateChoiceText(_currentChoiceModel.Text1, _currentChoiceModel.Text2);
+
+        _currentChoice = _choices[GetCurrentChoiceID() - 1];
     }
 
     public void UpdateChoiceText(string text1, string text2)
@@ -134,11 +146,38 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     {
         if (IsLeftChoice)
         {
-            _currentChoice.Execute1();
+            OnLeftLeverInteracted?.Invoke();
+            _currentChoice.ExecuteA();
         }
         else
         {
-            _currentChoice.Execute2();
+            OnRightLeverInteracted?.Invoke();
+            _currentChoice.ExecuteB();
+        }
+    }
+
+    public void ProcessLeftTurns()
+    {
+        //NOTE : 초반 선택지 2개는 게임 시작 안내 멘트
+
+        for(int i = 2; i < _choices.Count; i++)
+        {
+            _choices[i].ProcessLeftTurn();
+            ManageAppearList(i, _choices[i].CanAppear);
+        }
+
+        _nonAppearableChoicesID.Add(GetCurrentChoiceID());
+    }
+
+    private void ManageAppearList(int choiceID, bool canAppear)
+    {
+        if(!canAppear)
+        {
+            _nonAppearableChoicesID.Add(choiceID + 1);
+        }
+        else
+        {
+            _nonAppearableChoicesID.Remove(choiceID + 1);
         }
     }
 }

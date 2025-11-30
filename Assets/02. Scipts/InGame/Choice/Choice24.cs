@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class Choice24 : MonoBehaviour
+public class Choice24 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static readonly int _archerAlreadyGainedGoldAmount = 50;
+
+    protected override void StepA()
     {
-        
+        PlayerCombat.Instance.OpenCharacter(ECharacterType.Archer, _archerAlreadyGainedGoldAmount);
+        Debug.Log("궁수 스켈레톤 4마리 소환");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        Debug.Log("궁수 스켈레톤 1마리 소환");
     }
 }

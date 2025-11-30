@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class Choice22 : MonoBehaviour
+public class Choice22 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static readonly float _BDeActivateAllTrapChance = 0.25f;
+
+    protected override void StepA()
     {
-        
+        KnightTrapManager.Instance.Deactivate();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        if (Random.value <= _BDeActivateAllTrapChance)
+        {
+            KnightTrapManager.Instance.DeActivateAll();
+        }
     }
 }

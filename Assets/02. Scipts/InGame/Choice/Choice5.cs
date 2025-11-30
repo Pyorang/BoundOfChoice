@@ -2,22 +2,21 @@ using UnityEngine;
 
 public class Choice5 : ChoiceBase
 {
-    public override void Execute1()
+    private static readonly int _AHealAmount = 15;
+    private static readonly int _AManaRegenerateAmount = 20;
+
+    private static readonly int _BHealAmount = 10;
+    private static readonly int _BManaRegenerateAmount = 40;
+
+    protected override void StepA()
     {
-        int RandomValue = Random.Range(1, 101);
-        if (RandomValue <= 50)
-        {
-            PlayerHealth.Instance.TakeDamage(30);
-        }
-        else
-        {
-            PlayerHealth.Instance.Heal(25);
-        }
-        base.Execute1();
+        PlayerHealth.Instance.Heal(_AHealAmount);
+        PlayerMana.Instance.RegenerateMana(_AManaRegenerateAmount);
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        base.Execute2();
+        PlayerHealth.Instance.Heal(_BHealAmount);
+        PlayerMana.Instance.RegenerateMana(_BManaRegenerateAmount);
     }
 }

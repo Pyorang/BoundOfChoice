@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class SpiritManager : SingletonBehaviour<SpiritManager>
 {
-    private int _spiritPiece;
-    [SerializeField] private int _maxSpiritPiece;
-    public static event Action<int, int> OnSpiritPieceChanged;
+    private int _currentSpiritCount;
+    [SerializeField] private int _maxSpiritCount;
+    public static event Action<int, int> OnSpiritCountValueChanged;
     public static event Action OnSpiritGained;
     public static event Action OnSpiritCompleted;
 
@@ -14,22 +14,27 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
         IsDestroyOnLoad = true;
         base.Init();
 
-        _spiritPiece = 0;
+        _currentSpiritCount = 0;
     }
 
-    public void GetSpiritPiece(int amount)
+    public void GetSpirit(int amount)
     {
         if (amount <= 0) return;
         AudioManager.Instance.Play(AudioType.SFX, "Spirit");
-        _spiritPiece = Mathf.Min(_spiritPiece + amount, _maxSpiritPiece);
+        _currentSpiritCount = Mathf.Min(_currentSpiritCount + amount, _maxSpiritCount);
         OnSpiritGained?.Invoke();
+    }
+
+    public void FillRemainingSpirit()
+    {
+        GetSpirit(_maxSpiritCount - _currentSpiritCount);
     }
 
     public void RefreshSpiritUI()
     {
-        OnSpiritPieceChanged?.Invoke(_spiritPiece, _maxSpiritPiece);
+        OnSpiritCountValueChanged?.Invoke(_currentSpiritCount, _maxSpiritCount);
 
-        if (_spiritPiece == _maxSpiritPiece)
+        if (_currentSpiritCount == _maxSpiritCount)
         {
             OnSpiritCompleted?.Invoke();
         }

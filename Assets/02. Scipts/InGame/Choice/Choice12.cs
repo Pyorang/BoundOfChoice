@@ -1,16 +1,25 @@
 using UnityEngine;
 
-public class Choice12 : MonoBehaviour
+public class Choice12 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static readonly float _AEscapeChance = 0.005f;
+
+    private static readonly float _BSpiritGainChance = 0.05f;
+    private static readonly int _BSpiritGainAmount = 1;
+
+    protected override void StepA()
     {
-        
+        if(Random.value <= _AEscapeChance)
+        {
+            SpiritManager.Instance.FillRemainingSpirit();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        if(Random.value <= _BSpiritGainChance)
+        {
+            SpiritManager.Instance.GetSpirit(_BSpiritGainAmount);
+        }
     }
 }

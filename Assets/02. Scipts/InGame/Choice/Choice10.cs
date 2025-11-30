@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class Choice10 : MonoBehaviour
+public class Choice10 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static readonly int _AGoldAmount = 10;
+
+    private static readonly int _BHealAmount = 5;
+
+    protected override void StepA()
     {
-        
+        GoldManager.Instance.GetGold(_AGoldAmount);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        PlayerHealth.Instance.Heal(_BHealAmount);
     }
 }

@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class Choice15 : MonoBehaviour
+public class Choice15 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private static readonly int _AGoldAmount = 20;
+
+    protected override void StepA()
     {
-        
+        GoldManager.Instance.GetGold(_AGoldAmount);
+        Debug.Log("랜덤 스켈레톤 두 마리 소환");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        Debug.Log("검사 스켈레톤 두 마리 소환");
     }
 }

@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Choice20 : MonoBehaviour
+public class Choice20 : ChoiceBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void StepA()
     {
-        
+        Debug.Log("명예를 아는 자를 소환");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void StepB()
     {
-        
+        Debug.Log("비열한 패거리를 소환");
     }
 }

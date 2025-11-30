@@ -25,7 +25,7 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
     public float MoveSpeed
     {
         get => _moveSpeed;
-        private set
+        set
         {
             _moveSpeed = Mathf.Clamp(value, _minMoveSpeed, _maxMoveSpeed);
             OnSpeedChanged?.Invoke((int)_moveSpeed);
@@ -115,6 +115,11 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
     {
         if (amount < 0.0f) return;
         MoveSpeed = Mathf.Max(MoveSpeed - amount, _minMoveSpeed);
+    }
+
+    public void ResetSpeed()
+    {
+        MoveSpeed = _minMoveSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

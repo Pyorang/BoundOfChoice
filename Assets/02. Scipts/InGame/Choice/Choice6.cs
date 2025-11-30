@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class Choice6 : ChoiceBase
 {
-    public override void Execute1()
+    private static readonly float _ADamageChance = 0.2f;
+    private static readonly float _ADamageRatio = 0.4f;
+
+    private static readonly float _BDamageChance = 0.8f;
+    private static readonly float _BDamageRatio = 0.1f;
+
+    protected override void StepA()
     {
-        GoldManager.Instance.GetGold(20);
-        base.Execute1();
+        if (Random.value <= _ADamageChance)
+        {
+            PlayerHealth.Instance.TakeDamage((int)(PlayerHealth.Instance.Health * (_ADamageRatio)));
+        }
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        PlayerHealth.Instance.Heal(5);
-        base.Execute2();
+        if (Random.value <= _BDamageChance)
+        {
+            PlayerHealth.Instance.TakeDamage((int)(PlayerHealth.Instance.Health * (_BDamageRatio)));
+        }
     }
 }

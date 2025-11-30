@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class Choice4 : ChoiceBase
 {
-    public override void Execute1()
+    private static readonly float _damageChance = 0.5f;
+    private static readonly int _damageAmount = 25;
+    private static readonly int _healAmount = 35;
+
+    protected override void StepA()
     {
-        MonsterSpawner.Instance.CreateMonster(0, MonsterSpawner.Instance.transform.position);
-        base.Execute1();
+        if(Random.value <= _damageChance)
+        {
+            PlayerHealth.Instance.TakeDamage(_damageAmount);
+        }
+        else
+        {
+            PlayerHealth.Instance.Heal(_healAmount);
+        }
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        MonsterSpawner.Instance.CreateMonster(0, MonsterSpawner.Instance.transform.position);
-        MonsterSpawner.Instance.CreateMonster(0, MonsterSpawner.Instance.transform.position);
-        GoldManager.Instance.GetGold(20);
-        base.Execute2();
+
     }
 }
