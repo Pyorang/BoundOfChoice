@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class SkeletonElite : SkeletonSwordsman
 {
-    private bool isDash = false;
+    private bool _isDash = false;
 
     public void StartDash()
     {
-        isDash = true;
+        _isDash = true;
     }
 
     public void EndDash()
     {
-        isDash = false;
+        _isDash = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isDash || !other.gameObject.CompareTag(PlayerTag)) return;
+        if (!_isDash || !other.gameObject.CompareTag(PlayerTag)) return;
         PlayerHealth.Instance.TakeDamage(_stats.AttackPower);
     }
 }
