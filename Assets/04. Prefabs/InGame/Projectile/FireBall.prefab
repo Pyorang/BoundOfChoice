@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 60
   _speed: 10
+  _animator: {fileID: 778406585595187754}
   _dotDamagePerTick: 10
   _dotDuration: 3
   _dotTickInterval: 1
