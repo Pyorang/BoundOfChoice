@@ -83,11 +83,11 @@ AnimationClip:
     functionName: SetMoveSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 7
+    floatParameter: 17
     intParameter: 0
     messageOptions: 0
-  - time: 0.33333334
-    functionName: ResetSpeed
+  - time: 0
+    functionName: HandleDash
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
