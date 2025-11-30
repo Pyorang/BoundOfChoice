@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MonsterAttacker : MonoBehaviour
+public abstract class BaseMonster : MonoBehaviour
 {
     protected MonsterStats _stats;
     protected SpriteRenderer _spriteRenderer;

@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 100
   _speed: 10
+  _targetTag: Enemy
+  _poolType: 0
 --- !u!61 &5005450280607701142
 BoxCollider2D:
   m_ObjectHideFlags: 0

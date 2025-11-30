@@ -54,3 +54,6 @@ MonoBehaviour:
   - Type: 2
     PoolObjectPrefab: {fileID: 6611910325252506188, guid: 12d907e3b9ea1cb4397f03c277179e92, type: 3}
     InitialCount: 2
+  - Type: 6
+    PoolObjectPrefab: {fileID: 5378074776663993024, guid: 01a2144d1cc4cee49b12594b891c4cd8, type: 3}
+    InitialCount: 5
