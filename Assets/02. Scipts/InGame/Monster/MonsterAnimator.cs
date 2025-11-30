@@ -10,6 +10,9 @@ public class MonsterAnimator : MonoBehaviour
     private static readonly int s_hit = Animator.StringToHash("Hit");
     private static readonly int s_death = Animator.StringToHash("Death");
 
+    private const float FlipRotation = 180f;
+    private const float NormalRotation = 0f;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -48,6 +51,7 @@ public class MonsterAnimator : MonoBehaviour
     }
     public void SetSpriteFlip(bool flip)
     {
-        _spriteRenderer.flipX = flip;
+        float rotation = flip ? FlipRotation : NormalRotation;
+        transform.rotation = Quaternion.Euler(0, rotation, 0);
     }
 }
