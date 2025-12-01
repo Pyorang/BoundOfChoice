@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class SkeletonArbalist : BaseMonster
+public class ProjectileAttacker : MonoBehaviour
 {
-    [Header("화살 발사 위치")]
+    [Header("투사체 발사 위치")]
     [SerializeField] private Transform _attackOffset;
 
-    public void ShotArrow()
+    [Header("투사체 종류")]
+    [SerializeField] private EPoolType _type;
+
+    private void Shot()
     {
         int attackDirection = transform.right == Vector3.right ? 1 : -1;
 
-        GameObject arrow = PoolManager.Instance.GetObject(EPoolType.SkeletonArrow);
-        arrow.GetComponent<ProjectileBase>().Init(_attackOffset.position, attackDirection, _stats.AttackPower);
+        GameObject projectile = PoolManager.Instance.GetObject(_type);
+        projectile.GetComponent<ProjectileBase>().Init(_attackOffset.position, attackDirection, 0);
     }
 
 #if UNITY_EDITOR

@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class SkeletonNecro : SkeletonSwordsman
+public class SpellCaster : MonoBehaviour
 {
-    [Header("소환 공격 설정")]
+    [Header("주문 공격 설정")]
     [Space]
     [SerializeField] private float _castInterval;
 
@@ -11,9 +11,8 @@ public class SkeletonNecro : SkeletonSwordsman
     private WaitForSeconds _waitInterval;
     private Coroutine _castCoroutine;
 
-    protected override void Init()
+    private void Awake()
     {
-        base.Init();
         _animator = GetComponent<MonsterAnimator>();
         _waitInterval = new WaitForSeconds(_castInterval);
     }
@@ -34,16 +33,6 @@ public class SkeletonNecro : SkeletonSwordsman
     private void Cast()
     {
         _animator.PlaySpecialAttackAnimation();
-    }
-
-    public void SpawnTombstone()
-    {
-        GameObject tombstone = PoolManager.Instance.GetObject(EPoolType.Tombstone);
-
-        Vector2 spawnPoint = PlayerMovement.Instance.transform.position;
-        spawnPoint.y = tombstone.transform.position.y;
-
-        tombstone.GetComponent<ProjectileBase>().Init(spawnPoint, 1, _stats.AttackPower);
     }
 
     private IEnumerator CastCoroutine()

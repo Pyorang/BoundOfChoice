@@ -94,19 +94,19 @@ public class MonsterController : MonoBehaviour
         _movement.SetMoveDirection(_moveDirection);
     }
     
-    public void HandleDash()
+    private void HandleDash()
     {
         _moveDirection = transform.right;
         _movement.SetMoveDirection(_moveDirection);
     }
 
-    public void HandleSmash()
+    private void HandleSmash()
     {
         _moveDirection = _navigator.GetChaseDirection(_state.GetDistanceToPlayer());
         _animator.SetSpriteFlip((_moveDirection.x > 0) == _isSpriteLeft);
     }
 
-    public void HandleCast()
+    private void HandleCast()
     {
         _movement.StopMove();
         _state.SetState(EMonsterState.Attack);
@@ -170,13 +170,13 @@ public class MonsterController : MonoBehaviour
         _state.DetermineState();
     }
 
-    public void OnAnimationEnd()
+    private void OnAnimationEnd()
     {
         _state.DetermineState();
         ActionByState();
     }
 
-    public void OnDeathAnimationEnd()
+    private void OnDeathAnimationEnd()
     {
         MonsterSpawner.Instance.CurrentMonsterCount--;
         PoolManager.Instance.ReleaseObject(_type, gameObject);

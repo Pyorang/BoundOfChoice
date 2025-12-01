@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SkeletonElite : SkeletonSwordsman
+public class DashAttacker : MeleeAttacker
 {
     private bool _isDash = false;
 

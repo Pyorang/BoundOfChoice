@@ -18,10 +18,10 @@ GameObject:
   - component: {fileID: 1885530129576601317}
   - component: {fileID: 6040852994571168953}
   - component: {fileID: 4529727181005379951}
-  - component: {fileID: 6463349046093669149}
   - component: {fileID: 6293659603719861044}
   - component: {fileID: 4358631164131459471}
   - component: {fileID: 2024366942414526228}
+  - component: {fileID: 5350653618491920352}
   m_Layer: 6
   m_Name: SkeletonArbalist
   m_TagString: Enemy
@@ -260,19 +260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfb0968932fd3c45bc984a2c453141b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6463349046093669149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008387672266635162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d74083783939c9a4b945fec574724294, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackOffset: {fileID: 4728416969208271786}
 --- !u!114 &6293659603719861044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +310,20 @@ MonoBehaviour:
   _state: 0
   _chaseDistance: 12
   _attackDistance: 10
+--- !u!114 &5350653618491920352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008387672266635162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cd159e42dda114fa6a30f4265efeef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackOffset: {fileID: 4728416969208271786}
+  _type: 7
 --- !u!1 &8721415942770215541
 GameObject:
   m_ObjectHideFlags: 0
