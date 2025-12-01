@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 323142368}
   - component: {fileID: 323142367}
   m_Layer: 3
-  m_Name: Sprite Light 2D
+  m_Name: SwitchEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4504,12 +4504,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1271196531910990680, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
+      propertyPath: playerVision
+      value: 
+      objectReference: {fileID: 2014928734}
+    - target: {fileID: 1271196531910990680, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
       propertyPath: _switchEffect
       value: 
       objectReference: {fileID: 323142367}
     - target: {fileID: 4659175342300605240, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4724862087516092064, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
+      propertyPath: m_Name
+      value: PlayerVision
       objectReference: {fileID: 0}
     - target: {fileID: 8572364200155463690, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
       propertyPath: m_LocalPosition.x

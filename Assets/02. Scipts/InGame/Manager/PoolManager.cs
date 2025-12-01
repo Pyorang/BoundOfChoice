@@ -9,7 +9,7 @@ public enum EPoolType
     Blood1,
     Blood2,
     Blood3,
-    IceAgeEffect
+    IceAgeEffect,
     SkeletonArrow,
 }
 
