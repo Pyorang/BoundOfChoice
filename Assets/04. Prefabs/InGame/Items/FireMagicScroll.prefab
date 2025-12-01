@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4303214590827219679}
   - component: {fileID: 3447672034653440611}
   m_Layer: 0
-  m_Name: Fire Scroll
+  m_Name: FireMagicScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
