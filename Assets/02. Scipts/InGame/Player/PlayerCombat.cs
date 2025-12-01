@@ -38,6 +38,7 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     private ECharacterType _currentCharacter = ECharacterType.Warrior;
     public ECharacterType CurrentCharacter => _currentCharacter;
+    public static event Action<int> OnCharacterChanged;
 
     private PlayerAnimator _playerAnimator;
 
@@ -83,6 +84,7 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
             GetNextCharacter();
 
             _partners[(int)_currentCharacter].ActivateCharacter();
+            OnCharacterChanged?.Invoke((int)_currentCharacter);
             _playerAnimator.ChangeAnimatorController((int)_currentCharacter);
 
             _switchEffect.ProcessSwitchEffect();
