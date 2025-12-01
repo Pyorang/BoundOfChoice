@@ -29,7 +29,7 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private Image _portrait;
     [SerializeField] private TextMeshProUGUI _characterName;
     [SerializeField] private Sprite[] _portraits;
-    [SerializeField] private String[] _characterNames;
+    [SerializeField] private string[] _characterNames;
 
     [Header("체력 관련")]
     [Space]
@@ -180,7 +180,7 @@ public class InGameUIController : MonoBehaviour
         if(_goldEffect != null)
         {
             StopCoroutine( _goldEffect );
-            _goldImage.transform.localScale = new Vector3(1, 1, 1);
+            _goldImage.transform.localScale = Vector3.one;
         }
 
         _goldEffect = GoldGainEffect();
@@ -201,7 +201,7 @@ public class InGameUIController : MonoBehaviour
             yield return null;
         }
 
-        _goldImage.transform.localScale = new Vector3(1, 1, 1);
+        _goldImage.transform.localScale = Vector3.one;
         _goldEffect = null;
     }
 

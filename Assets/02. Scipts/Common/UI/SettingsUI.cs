@@ -19,7 +19,7 @@ public class SettingsUI : BaseUI
     [Space]
     [SerializeField] private Image _bgmSlider;
     [SerializeField] private Image _sfxSlider;
-    private static readonly float AudioChangeAmount = 0.20f;
+    private readonly float AudioChangeAmount = 0.20f;
 
     [Header("진동 설정")]
     [Space]
@@ -50,7 +50,7 @@ public class SettingsUI : BaseUI
         UserDataManager.Instance.GetUserData<UserSettingsData>().BGMvalue = _bgmSlider.fillAmount;
     }
 
-    public void OnClickSFXChangeButton( bool changeUp)
+    public void OnClickSFXChangeButton(bool changeUp)
     {
         float changeAmount = changeUp ? AudioChangeAmount : -AudioChangeAmount;
 

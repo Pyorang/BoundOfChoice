@@ -32,7 +32,7 @@ public class LobbyUIController : MonoBehaviour
         float timeElapsed = 0;
         Color startColor = _loadingText.color;
 
-        while(timeElapsed < _duration)
+        while (timeElapsed < _duration)
         {
             float ratio = timeElapsed / _duration;
 
@@ -44,20 +44,12 @@ public class LobbyUIController : MonoBehaviour
             yield return null;
         }
 
-        while (true)
+        while (loadingOperation.progress < 0.9f)
         {
-            if (loadingOperation.isDone)
-            {
-                break;
-            }
-
-            if (loadingOperation.progress >= 0.9f)
-            {
-                loadingOperation.allowSceneActivation = true;
-            }
-
             yield return null;
         }
+
+        loadingOperation.allowSceneActivation = true;
     }
 
     public void OnClickPlayButton()
