@@ -224,7 +224,6 @@ public class MonsterController : MonoBehaviour
     public void OnDeathAnimationEnd()
     {
         MonsterSpawner.Instance.CurrentMonsterCount--;
-        StopAllCoroutines();
         Destroy(gameObject);
     }
 }
