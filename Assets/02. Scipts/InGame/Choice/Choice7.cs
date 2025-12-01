@@ -2,21 +2,39 @@ using UnityEngine;
 
 public class Choice7 : ChoiceBase
 {
-    public override void Execute1()
+    private static readonly int ExecuteCount = 5;
+    private static readonly int DamageAmount = 10;
+
+    protected override void StepA()
     {
-        SpiritManager.Instance.GetSpiritPiece(1);
-        base.Execute1();
+        _executeACount = ExecuteCount;
+        ChoiceManager.OnRightLeverInteracted += GiveDamage;
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        const float GainSpiritChance = 0.45f;
-        const int SpiritPieceAmount = 2;
+        _executeBCount = ExecuteCount;
+        ChoiceManager.OnLeftLeverInteracted += GiveDamage;
+    }
 
-        if (Random.value < GainSpiritChance)
+    protected override void ExecuteRemainingA()
+    {
+        if(_executeACount == 0)
         {
-            SpiritManager.Instance.GetSpiritPiece(SpiritPieceAmount);
+            ChoiceManager.OnRightLeverInteracted -= GiveDamage;
         }
-        base.Execute2();
+    }
+
+    protected override void ExecuteRemainingB()
+    {
+        if (_executeBCount == 0)
+        {
+            ChoiceManager.OnLeftLeverInteracted -= GiveDamage;
+        }
+    }
+
+    public void GiveDamage()
+    {
+        PlayerHealth.Instance.TakeDamage(DamageAmount);
     }
 }

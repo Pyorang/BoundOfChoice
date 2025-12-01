@@ -48,9 +48,10 @@ public class InGameUIController : MonoBehaviour
     {
         PlayerHealth.OnHealthValueUpdate += OnUpdateHealthUI;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
+        PlayerCombat.OnPowerChanged += OnUpdateDamageUI;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
-        SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
+        SpiritManager.OnSpiritCountValueChanged += OnUpdateSpiritUI;
         InitializeWindowUIToggles();
     }
 
@@ -68,9 +69,10 @@ public class InGameUIController : MonoBehaviour
     {
         PlayerHealth.OnHealthValueUpdate -= OnUpdateHealthUI;
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
+        PlayerCombat.OnPowerChanged -= OnUpdateDamageUI;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
-        SpiritManager.OnSpiritPieceChanged -= OnUpdateSpiritUI;
+        SpiritManager.OnSpiritCountValueChanged -= OnUpdateSpiritUI;
     }
 
     private void Update()

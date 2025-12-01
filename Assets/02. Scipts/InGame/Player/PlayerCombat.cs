@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public enum ECharacterType
 {
@@ -20,7 +21,7 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
     public int AdditionalPower
     {
         get => _additionalDamage;
-        private set
+        set
         {
             _additionalDamage = value;
             OnPowerChanged?.Invoke(_additionalDamage);
@@ -40,6 +41,10 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     private PlayerAnimator _playerAnimator;
 
+    [Header("플레이어 시야")]
+    [Space]
+    [SerializeField] private Light2D playerVision;
+
     protected override void Init()
     {
         IsDestroyOnLoad = true;
@@ -49,6 +54,8 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     private void Start()
     {
+        AdditionalPower = 0;
+
         foreach (CharacterBase partner in _partners)
         {
             if(partner.GoingWith == false)
@@ -113,6 +120,39 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
                 break;
             }
         }
+    }
+
+    public void ChangePlayerVision(float effectDuartion, float targetRadius)
+    {
+        StartCoroutine(ChangePlayerVisionEffect(effectDuartion, targetRadius));
+    }
+
+    private IEnumerator ChangePlayerVisionEffect(float effectDuartion, float targetRadius)
+    {
+        float timeElapsed = 0f;
+        float elapsedRatio = 0f;
+        float startRadius = playerVision.pointLightOuterRadius;
+
+        while (timeElapsed < effectDuartion)
+        {
+            elapsedRatio = timeElapsed / effectDuartion;
+            playerVision.pointLightOuterRadius = startRadius + (targetRadius - startRadius) * elapsedRatio;
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        playerVision.pointLightOuterRadius = targetRadius;
+    }
+
+    public void OpenCharacter(ECharacterType character, int goldAmount)
+    {
+        if(_partners[(int)character].GoingWith)
+        {
+            GoldManager.Instance.GetGold(goldAmount);
+            return;
+        }
+
+        _partners[(int)character].GoingWith = true;
     }
 
 #if UNITY_EDITOR

@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class Choice2 : ChoiceBase
 {
-    public override void Execute1()
+    protected override void StepA()
     {
-        base.Execute1();
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        base.Execute2();
     }
 }
