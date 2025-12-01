@@ -23,6 +23,7 @@ public class MonsterAnimator : MonoBehaviour
 
     public void PlayAttackAnimation()
     {
+        PlayMoveAnimation(false);
         _animator.SetTrigger(s_attack);
     }
 
