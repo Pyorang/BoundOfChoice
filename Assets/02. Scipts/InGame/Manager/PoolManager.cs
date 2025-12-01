@@ -11,6 +11,7 @@ public enum EPoolType
     Blood3,
     IceAgeEffect,
     SkeletonArrow,
+    Tombstone
 }
 
 [System.Serializable] public struct PoolInfo
