@@ -275,6 +275,7 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 8
+  _castInterval: 5
 --- !u!114 &7098165926238558178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chaseDistance: 0
-  _attackDistance: 7
+  _attackDistance: 2
   _state: 1
   _isSpriteLeft: 0
   _hitShakeDuration: 0.25
