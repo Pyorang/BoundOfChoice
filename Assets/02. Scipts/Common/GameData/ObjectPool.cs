@@ -51,4 +51,14 @@ public class ObjectPool
         _activeObjects.Remove(releaseObject);
         _pool.Enqueue(releaseObject);
     }
+
+    public void ReleaseAllActiveObjects()
+    {
+        foreach (var obj in _activeObjects)
+        {
+            obj.SetActive(false);
+            _pool.Enqueue(obj);
+        }
+        _activeObjects.Clear();
+    }
 }

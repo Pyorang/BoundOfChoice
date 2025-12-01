@@ -13,6 +13,11 @@ public enum EPoolType
     SkeletonArrow,
     Tombstone,
     Spell,
+    SkeletonSwrodsman,
+    SkeletonArbalist,
+    SkeletonElite,
+    SkeletonNecro,
+    BringerOfDeath,
 }
 
 [System.Serializable] public struct PoolInfo
@@ -57,5 +62,13 @@ public class PoolManager : SingletonBehaviour<PoolManager>
         if (!_pools.ContainsKey(type)) return;
         poolObject.SetActive(false);
         _pools[type].ReleaseObject(poolObject);
+    }
+
+    public void ReleaseAllObjects(EPoolType type)
+    {
+        if (_pools.TryGetValue(type, out ObjectPool pool))
+        {
+            pool.ReleaseAllActiveObjects();
+        }
     }
 }
