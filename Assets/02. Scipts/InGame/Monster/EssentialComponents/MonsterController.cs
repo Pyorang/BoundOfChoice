@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterMovement), typeof(MonsterAnimator), typeof(MonsterStats))]
-[RequireComponent(typeof(MonsterStatusEffect), typeof(MonsterState))]
+[RequireComponent(typeof(MonsterStatusEffect), typeof(MonsterState), typeof(MonsterNavigator))]
 public class MonsterController : MonoBehaviour
 {
     [Header("몬스터 설정")]
@@ -139,17 +139,19 @@ public class MonsterController : MonoBehaviour
 
     public void TakeDotDamage(int damage, float duration, float interval)
     {
-        if (_stats.CurrentHealth <= 0) return;
+        if (_state.State == EMonsterState.Death) return;
         _statusEffect.ApplyDotDamage(damage, duration, interval);
     }
 
     public void TakeBind(float duration)
     {
+        if (_state.State == EMonsterState.Death) return;
         _statusEffect.ApplyBind(duration);
     }
 
     private void HandleDotDamage(int damage)
     {
+        if (_state.State == EMonsterState.Death) return;
         _movement.StopMove();
 
         _state.SetState(EMonsterState.Hurt);

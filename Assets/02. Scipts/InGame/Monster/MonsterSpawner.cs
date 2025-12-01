@@ -31,7 +31,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
     public GameObject SpawnMonster(EPoolType monsterType)
     {
-        ++_currentMonsterCount;
+        CurrentMonsterCount++;
 
         GameObject monster = PoolManager.Instance.GetObject(monsterType);
         
