@@ -4,7 +4,7 @@ public class IceAgeEffect : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _renderer;
 
-    public void SetEffeect(Vector2 position, int direction)
+    public void SetEffect(Vector2 position, int direction)
     {
         this.transform.position = position;
         _renderer.flipX = (direction < 0);

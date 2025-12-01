@@ -12,7 +12,7 @@ public class FireBallSkill : SkillBase
         ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
         Vector2 directionalSpawnOffset = new Vector2(_spawnOffset.x * direction, _spawnOffset.y);
-        Vector2 spawnPosition = (Vector2)PlayerHealth.Instance.gameObject.transform.position + directionalSpawnOffset; 
+        Vector2 spawnPosition = (Vector2)PlayerHealth.Instance.transform.position + directionalSpawnOffset; 
         projectile.Init(spawnPosition, direction, additionalDamage);
     }
 }
