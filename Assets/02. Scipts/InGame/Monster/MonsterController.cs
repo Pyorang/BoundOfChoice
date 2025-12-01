@@ -40,6 +40,7 @@ public class MonsterController : MonoBehaviour
     private MonsterNavigator _navigator;
     private MonsterAnimator _animator;
     private MonsterStatusEffect _statusEffect;
+    private ItemDropper _itemDropper;
     private Transform _player;
     
     private Vector2 _moveDirection;
@@ -52,6 +53,7 @@ public class MonsterController : MonoBehaviour
         _navigator = GetComponent<MonsterNavigator>();
         _animator = GetComponent<MonsterAnimator>();
         _statusEffect = GetComponent<MonsterStatusEffect>();
+        _itemDropper = GetComponent<ItemDropper>();
     }
 
     private void Start()
@@ -230,5 +232,7 @@ public class MonsterController : MonoBehaviour
     {
         MonsterSpawner.Instance.CurrentMonsterCount--;
         PoolManager.Instance.ReleaseObject(_type, gameObject);
+        if (_itemDropper == null) return;
+        _itemDropper.TryDropItem();
     }
 }
