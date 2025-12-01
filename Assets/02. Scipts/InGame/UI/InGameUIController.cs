@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -46,6 +47,10 @@ public class InGameUIController : MonoBehaviour
 
     [Header("골드 관련")]
     [SerializeField] private TextMeshProUGUI _goldText;
+    [SerializeField] private GameObject _goldImage;
+    [SerializeField] private float _targetScale = 1.3f;
+    [SerializeField] private float _effectDuration = 0.15f;
+    private IEnumerator _goldEffect;
 
     [Header("영혼 관련")]
     [SerializeField] private Image _spiritImage;
@@ -168,15 +173,40 @@ public class InGameUIController : MonoBehaviour
     {
         _damageText.text = $"{damage}";
     }
-
     public void OnUpdateGoldUI(int gold)
     {
         _goldText.text = gold.ToString("N0");
+        
+        if(_goldEffect != null)
+        {
+            StopCoroutine( _goldEffect );
+            _goldImage.transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        _goldEffect = GoldGainEffect();
+        StartCoroutine(_goldEffect);
+    }
+
+    private IEnumerator GoldGainEffect()
+    {
+        float timeElapsed = 0;
+        float halfDuration = _effectDuration / 2;
+
+        while (timeElapsed < _effectDuration)
+        {
+            float pingPongValue = Mathf.PingPong(timeElapsed, halfDuration);
+            float scale = Mathf.Lerp(1, _targetScale, pingPongValue / halfDuration);
+            _goldImage.transform.localScale = new Vector3(scale, scale, scale);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _goldImage.transform.localScale = new Vector3(1, 1, 1);
+        _goldEffect = null;
     }
 
     public void OnUpdateSpiritUI(int piece, int maxPiece)
     {
         _spiritImage.fillAmount = (float)piece / maxPiece;
-
     }
 }
