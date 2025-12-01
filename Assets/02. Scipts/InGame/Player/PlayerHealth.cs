@@ -15,6 +15,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
             bool isHealed = _health < value ? true : false;
             _health = value;
+            OnHealthChange?.Invoke(isHealed);
             OnHealthValueUpdate?.Invoke(_health, MaxHealth);
         }
     }

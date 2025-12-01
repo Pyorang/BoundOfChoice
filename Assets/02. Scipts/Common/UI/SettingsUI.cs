@@ -17,8 +17,9 @@ public class SettingsUI : BaseUI
 
     [Header("소리 설정")]
     [Space]
-    [SerializeField] private Slider _bgmSlider;
-    [SerializeField] private Slider _sfxSlider;
+    [SerializeField] private Image _bgmSlider;
+    [SerializeField] private Image _sfxSlider;
+    private static readonly float AudioChangeAmount = 0.20f;
 
     [Header("진동 설정")]
     [Space]
@@ -39,16 +40,24 @@ public class SettingsUI : BaseUI
         }
     }
 
-    public void OnBGMValueChanged()
+    public void OnClickBGMChangeButton(bool changeUp)
     {
-        AudioManager.Instance.SetVolume(AudioType.BGM, _bgmSlider.value);
-        UserDataManager.Instance.GetUserData<UserSettingsData>().BGMvalue = _bgmSlider.value;
+        float changeAmount = changeUp ? AudioChangeAmount : -AudioChangeAmount;
+
+        _bgmSlider.fillAmount = Mathf.Clamp01(_bgmSlider.fillAmount + changeAmount);
+
+        AudioManager.Instance.SetVolume(AudioType.BGM, _bgmSlider.fillAmount);
+        UserDataManager.Instance.GetUserData<UserSettingsData>().BGMvalue = _bgmSlider.fillAmount;
     }
 
-    public void OnSFXValueChanged()
+    public void OnClickSFXChangeButton( bool changeUp)
     {
-        AudioManager.Instance.SetVolume(AudioType.SFX, _sfxSlider.value);
-        UserDataManager.Instance.GetUserData<UserSettingsData>().SFXvalue = _sfxSlider.value;
+        float changeAmount = changeUp ? AudioChangeAmount : -AudioChangeAmount;
+
+        _sfxSlider.fillAmount = Mathf.Clamp01(_sfxSlider.fillAmount + changeAmount);
+
+        AudioManager.Instance.SetVolume(AudioType.SFX, _sfxSlider.fillAmount);
+        UserDataManager.Instance.GetUserData<UserSettingsData>().SFXvalue = _sfxSlider.fillAmount;
     }
 
     public void OnVibrationToggleChanged()
@@ -101,7 +110,7 @@ public class SettingsUI : BaseUI
 
     private void SetSoundSetting(UserSettingsData data)
     {
-        _bgmSlider.value = data.BGMvalue;
-        _sfxSlider.value = data.SFXvalue;
+        _bgmSlider.fillAmount = data.BGMvalue;
+        _sfxSlider.fillAmount = data.SFXvalue;
     }
 }
