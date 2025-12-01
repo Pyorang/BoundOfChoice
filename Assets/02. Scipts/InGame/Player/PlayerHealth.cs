@@ -13,7 +13,16 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
         get => _health;
         private set
         {
+            if (_health == value) return;
+
+            bool isHealed = _health < value ? true : false;
             _health = value;
+
+            if (_health > 0)
+            {
+                OnHealthChange?.Invoke(isHealed);
+            }
+
             OnHealthValueUpdate?.Invoke(_health, _maxHealth);
         }
     }
@@ -23,7 +32,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
     private static readonly int _maxBloodNumber = 3;
 
-    public static event Action OnHealthChange;
+    public static event Action<bool> OnHealthChange;
     public static event Action<int, int> OnHealthValueUpdate;
 
     protected override void Init()
@@ -58,8 +67,6 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
         else
         {
-            OnHealthChange?.Invoke();
-            AudioManager.Instance.Play(AudioType.SFX, "PlayerHurt");
             _playerAnimator.PlayHitAnimation();
         }
     }
