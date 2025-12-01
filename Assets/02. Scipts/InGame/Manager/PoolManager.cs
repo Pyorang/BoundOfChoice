@@ -10,6 +10,7 @@ public enum EPoolType
     Blood2,
     Blood3,
     SkeletonArrow,
+    Tombstone
 }
 
 [System.Serializable] public struct PoolInfo
