@@ -34,7 +34,10 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         ++_currentMonsterCount;
 
         GameObject monster = PoolManager.Instance.GetObject(monsterType);
-        monster.transform.position = transform.position;
+        
+        Vector3 spawnPosition = monster.transform.position;
+        spawnPosition.x = transform.position.x;
+        monster.transform.position = spawnPosition;
 
         return monster;
     }

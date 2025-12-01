@@ -24,6 +24,7 @@ public class MonsterController : MonoBehaviour
 
     [Header("시작 상태")]
     [Space]
+    [SerializeField] private EPoolType _type;
     [SerializeField] private EMonsterState _state;
     [SerializeField] private bool _isSpriteLeft;
 
@@ -228,6 +229,6 @@ public class MonsterController : MonoBehaviour
     public void OnDeathAnimationEnd()
     {
         MonsterSpawner.Instance.CurrentMonsterCount--;
-        Destroy(gameObject);
+        PoolManager.Instance.ReleaseObject(_type, gameObject);
     }
 }

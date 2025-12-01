@@ -54,10 +54,17 @@ public class ObjectPool
 
     public void ReleaseAllActiveObjects()
     {
-        foreach (var obj in _activeObjects)
+        foreach (var activeObject in _activeObjects)
         {
-            obj.SetActive(false);
-            _pool.Enqueue(obj);
+            if (activeObject.TryGetComponent(out MonsterController monster))
+            {
+                monster.HandleDeath();
+            }
+            else
+            {
+                activeObject.SetActive(false);
+            }
+            _pool.Enqueue(activeObject);
         }
         _activeObjects.Clear();
     }

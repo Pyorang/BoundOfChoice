@@ -320,6 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chaseDistance: 7
   _attackDistance: 3
+  _type: 10
   _state: 0
   _isSpriteLeft: 0
   _hitShakeDuration: 0.25
