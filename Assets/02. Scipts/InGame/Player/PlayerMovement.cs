@@ -11,10 +11,10 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 
     [Header("이동 설정")]
     [Space]
-    [SerializeField] private float _moveSpeed = 1.0f;
+    [SerializeField] private int _moveSpeed = 1;
     [SerializeField] private float _jumpForce = 5;
-    [SerializeField] private float _maxMoveSpeed = 10.0f;
-    private readonly float _minMoveSpeed = 1.0f;
+    [SerializeField] private int _maxMoveSpeed = 10;
+    private readonly int _minMoveSpeed = 1;
     private float _xMovement = 0.0f;
 
     public bool Moving => _xMovement != 0.0f || !_isOnGround;
@@ -22,13 +22,13 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
     private int _playerDirection = 1;
     public int PlayerDirection => _playerDirection;
 
-    public float MoveSpeed
+    public int MoveSpeed
     {
         get => _moveSpeed;
         set
         {
             _moveSpeed = Mathf.Clamp(value, _minMoveSpeed, _maxMoveSpeed);
-            OnSpeedChanged?.Invoke((int)_moveSpeed);
+            OnSpeedChanged?.Invoke(_moveSpeed);
         }
     }
 
@@ -103,18 +103,6 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
         }
 
         _rigidBody.linearVelocityX = _xMovement * MoveSpeed;
-    }
-
-    public void IncreaseSpeed(float amount)
-    {
-        if (amount < 0.0f) return;
-        MoveSpeed = Mathf.Min(MoveSpeed + amount, _maxMoveSpeed);
-    }
-
-    public void DecreaseSpeed(float amount)
-    {
-        if (amount < 0.0f) return;
-        MoveSpeed = Mathf.Max(MoveSpeed - amount, _minMoveSpeed);
     }
 
     public void ResetSpeed()

@@ -52,7 +52,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
     public GameObject CreateMonster(int id, Vector2 position)
     {
-        _currentMonsterCount++;
+        CurrentMonsterCount++;
 
         if (!_monsterPrefabDict.TryGetValue(id, out GameObject prefab) || prefab == null)
         {

@@ -189,11 +189,13 @@ public class MonsterController : MonoBehaviour
 
     public void TakeBind(float duration)
     {
+        if (_state == EMonsterState.Death) return;
         _statusEffect.ApplyBind(duration);
     }
 
     private void HandleDotDamage(int damage)
     {
+        if (_state == EMonsterState.Death) return;
         _movement.StopMove();
 
         _state = EMonsterState.Hurt;

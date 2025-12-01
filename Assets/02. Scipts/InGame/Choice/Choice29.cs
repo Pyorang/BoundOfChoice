@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Choice29 : ChoiceBase
 {
-    private static readonly float AAdditionalSpeedAmount = 1.0f;
+    private static readonly int AAdditionalSpeedAmount = 1;
 
-    private static readonly float BAdditionalSpeedAmount = 2.0f;
+    private static readonly int BAdditionalSpeedAmount = 2;
 
     protected override void StepA()
     {
