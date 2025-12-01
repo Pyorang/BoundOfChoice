@@ -6,6 +6,7 @@ public class MonsterAnimator : MonoBehaviour
 
     private static readonly int s_isMoving = Animator.StringToHash("IsMoving");
     private static readonly int s_attack = Animator.StringToHash("Attack");
+    private static readonly int s_specialAttack = Animator.StringToHash("SpecialAttack");
     private static readonly int s_hit = Animator.StringToHash("Hit");
     private static readonly int s_death = Animator.StringToHash("Death");
 
@@ -26,6 +27,11 @@ public class MonsterAnimator : MonoBehaviour
     {
         PlayMoveAnimation(false);
         _animator.SetTrigger(s_attack);
+    }
+
+    public void PlaySpecialAttackAnimation()
+    {
+        _animator.SetTrigger(s_specialAttack);
     }
 
     public void PlayHitAnimation()

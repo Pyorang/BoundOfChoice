@@ -156,6 +156,12 @@ public class MonsterController : MonoBehaviour
         _animator.SetSpriteFlip((_moveDirection.x > 0) == _isSpriteLeft);
     }
 
+    public void HandleCast()
+    {
+        _movement.StopMove();
+        _state = EMonsterState.Attack;
+    }
+
     public void TakeDamage(int damage)
     {
         if (_state == EMonsterState.None) return;
