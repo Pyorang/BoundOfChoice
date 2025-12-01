@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum ESkillType
@@ -16,7 +15,6 @@ public class Mage : CharacterBase
     [Header("스킬 위치 보정")]
     [Space]
     [SerializeField] private Vector2 _spawnOffset = new Vector2(1f, 1f);
-    public Vector2 SpawnOffset => _spawnOffset;
 
     public override void Attack(int direction, int additionalDamage)
     {
@@ -24,7 +22,10 @@ public class Mage : CharacterBase
         {
             AudioManager.Instance.Play(AudioType.SFX, "MagicBolt");
             GameObject magicBolt = PoolManager.Instance.GetObject(EPoolType.MagicBolt);
-            magicBolt.GetComponent<ProjectileBase>().Init((Vector2)transform.position + _spawnOffset * direction, direction, additionalDamage);
+
+            Vector2 directionalSpawnOffset = new Vector2(_spawnOffset.x * direction, _spawnOffset.y);
+            Vector2 spawnPosition = (Vector2)transform.position + directionalSpawnOffset;
+            magicBolt.GetComponent<ProjectileBase>().Init(spawnPosition, direction, additionalDamage);
         }
     }
 }
