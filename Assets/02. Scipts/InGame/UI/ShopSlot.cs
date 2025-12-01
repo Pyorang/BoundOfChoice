@@ -13,6 +13,7 @@ public class ShopSlot : MonoBehaviour
     [Space]
     [SerializeField] private Image _itemImageUI;
     [SerializeField] private TextMeshProUGUI _itemNameTextUI;
+    [SerializeField] private TextMeshProUGUI _itemGoldTextUI;
 
     public ItemBase Item => _item;
 
@@ -35,7 +36,8 @@ public class ShopSlot : MonoBehaviour
         }
         _itemImageUI.sprite = _item.ItemImage;
         _itemImageUI.preserveAspect = true;
-        _itemNameTextUI.text = $"{DataTableManager.Instance.GetItemModel(_item.GetItemID() - 1).Price}G";
+        _itemNameTextUI.text = _item.name;
+        _itemGoldTextUI.text = $"{DataTableManager.Instance.GetItemModel(_item.GetItemID() - 1).Price}G";
     }
 
     public void OnClickPriceButton()
