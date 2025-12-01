@@ -21,7 +21,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
             if(_currentMonsterCount == 0)
             {
                 ChoiceManager.Instance.GetNewChoice();
-                Angel.Instance.DisableLevers();
+                Angel.Instance.EnableLevers();
             }
 
             else

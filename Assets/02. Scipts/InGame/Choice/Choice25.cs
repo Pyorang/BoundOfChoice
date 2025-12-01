@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Choice25 : ChoiceBase
 {
-    private static readonly int _mageAlreadyGainedGoldAmount = 70;
+    private static readonly int MageAlreadyGainedGoldAmount = 70;
 
     protected override void StepA()
     {
-        PlayerCombat.Instance.OpenCharacter(ECharacterType.Mage, _mageAlreadyGainedGoldAmount);
+        PlayerCombat.Instance.OpenCharacter(ECharacterType.Mage, MageAlreadyGainedGoldAmount);
         Debug.Log("네크로 스켈레톤 3마리 소환");
     }
 

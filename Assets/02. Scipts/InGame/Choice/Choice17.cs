@@ -2,21 +2,14 @@ using UnityEngine;
 
 public class Choice17 : ChoiceBase
 {
-    private static readonly float _ASpawnRepeatChance = 0.65f;
+    private static readonly float ASpawnRepeatChance = 0.65f;
 
     protected override void StepA()
     {
-        while(true)
+        do
         {
-            if(Random.value <= _ASpawnRepeatChance)
-            {
-                Debug.Log("검사 스켈레톤 한 마리 소환");
-            }
-            else
-            {
-                break;
-            }
-        }
+            Debug.Log("검사 스켈레톤 한 마리 소환");
+        } while (Random.value <= ASpawnRepeatChance);
     }
 
     protected override void StepB()

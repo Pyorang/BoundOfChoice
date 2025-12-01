@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Choice19 : ChoiceBase
 {
-    private static readonly int _BDamageAmount = 25;
+    private static readonly int BDamageAmount = 25;
 
     protected override void StepA()
     {
@@ -11,6 +11,6 @@ public class Choice19 : ChoiceBase
 
     protected override void StepB()
     {
-        PlayerHealth.Instance.TakeDamage(_BDamageAmount);
+        PlayerHealth.Instance.TakeDamage(BDamageAmount);
     }
 }

@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class Choice10 : ChoiceBase
 {
-    private static readonly int _AGoldAmount = 10;
+    private static readonly int AGoldAmount = 10;
 
-    private static readonly int _BHealAmount = 5;
+    private static readonly int BHealAmount = 5;
 
     protected override void StepA()
     {
-        GoldManager.Instance.GetGold(_AGoldAmount);
+        GoldManager.Instance.GetGold(AGoldAmount);
     }
 
     protected override void StepB()
     {
-        PlayerHealth.Instance.Heal(_BHealAmount);
+        PlayerHealth.Instance.Heal(BHealAmount);
     }
 }

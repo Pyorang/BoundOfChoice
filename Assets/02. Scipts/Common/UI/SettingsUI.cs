@@ -9,7 +9,6 @@ public class SettingsUI : BaseUI
     [Space]
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _keyManualButton;
-    [SerializeField] private Button _returnButton;
 
     [Header("환경설정 보드")]
     [Space]
@@ -79,6 +78,13 @@ public class SettingsUI : BaseUI
     public void Save()
     {
         UserDataManager.Instance.SaveUserData();
+    }
+
+    public void OnClickLobbyButton()
+    {
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
+        SceneLoader.Instance.LoadScene(ESceneType.Lobby);
+        Close();
     }
 
     public void OnClickReturnButton()

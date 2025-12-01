@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Choice30 : ChoiceBase
 {
-    private static readonly float _moveSpeedResetChance = 0.3f;
-    private static readonly float _additionalDamageResetChance = 0.6f;
+    private static readonly float MoveSpeedResetChance = 0.3f;
+    private static readonly float AdditionalDamageResetChance = 0.6f;
 
     protected override void StepA()
     {
-        if(Random.value <= _moveSpeedResetChance)
+        if(Random.value <= MoveSpeedResetChance)
         {
             PlayerMovement.Instance.ResetSpeed();
         }
@@ -15,7 +15,7 @@ public class Choice30 : ChoiceBase
 
     protected override void StepB()
     {
-        if (Random.value <= _additionalDamageResetChance)
+        if (Random.value <= AdditionalDamageResetChance)
         {
             PlayerCombat.Instance.AdditionalPower = 0;
         }

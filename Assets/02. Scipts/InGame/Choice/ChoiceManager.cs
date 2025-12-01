@@ -44,6 +44,12 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         SetChoice(1);
     }
 
+    private void OnDestroy()
+    {
+        OnLeftLeverInteracted = null;
+        OnRightLeverInteracted= null;
+    }
+
     private void InitChoices()
     {
         int tableCount = DataTableManager.Instance.GetChoiceCount();

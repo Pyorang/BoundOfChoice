@@ -4,23 +4,23 @@ using UnityEngine.Rendering.Universal;
 
 public class Choice23 : ChoiceBase
 {
-    private static readonly int _executeCount = 3;
-    private static readonly float _effectDuration = 1.0f;
-    private static readonly float _normalRadius = 7.0f;
-    private static readonly float _narrowedRadius = 4.0f;
-    private static readonly float _widenedRadius = 13.0f;
+    private static readonly int ExecuteCount = 3;
+    private static readonly float EffectDuration = 1.0f;
+    private static readonly float NormalRadius = 7.0f;
+    private static readonly float NarrowedRadius = 4.0f;
+    private static readonly float WidenedRadius = 13.0f;
 
     protected override void StepA()
     {
-        _executeACount = _executeCount;
+        _executeACount = ExecuteCount;
 
         if(Random.value >= 0.5f)
         {
-            PlayerCombat.Instance.ChangePlayerVision(_effectDuration, _narrowedRadius);
+            PlayerCombat.Instance.ChangePlayerVision(EffectDuration, NarrowedRadius);
         }
         else
         {
-            PlayerCombat.Instance.ChangePlayerVision(_effectDuration, _widenedRadius);
+            PlayerCombat.Instance.ChangePlayerVision(EffectDuration, WidenedRadius);
         }
     }
 
@@ -33,7 +33,7 @@ public class Choice23 : ChoiceBase
     {
         if (_executeACount == 0)
         {
-            PlayerCombat.Instance.ChangePlayerVision(_effectDuration, _normalRadius);
+            PlayerCombat.Instance.ChangePlayerVision(EffectDuration, NormalRadius);
         }
     }
 }

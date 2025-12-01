@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Choice12 : ChoiceBase
 {
-    private static readonly float _AEscapeChance = 0.005f;
+    private static readonly float AEscapeChance = 0.005f;
 
-    private static readonly float _BSpiritGainChance = 0.05f;
-    private static readonly int _BSpiritGainAmount = 1;
+    private static readonly float BSpiritGainChance = 0.05f;
+    private static readonly int BSpiritGainAmount = 1;
 
     protected override void StepA()
     {
-        if(Random.value <= _AEscapeChance)
+        if(Random.value <= AEscapeChance)
         {
             SpiritManager.Instance.FillRemainingSpirit();
         }
@@ -17,9 +17,9 @@ public class Choice12 : ChoiceBase
 
     protected override void StepB()
     {
-        if(Random.value <= _BSpiritGainChance)
+        if(Random.value <= BSpiritGainChance)
         {
-            SpiritManager.Instance.GetSpirit(_BSpiritGainAmount);
+            SpiritManager.Instance.GetSpirit(BSpiritGainAmount);
         }
     }
 }

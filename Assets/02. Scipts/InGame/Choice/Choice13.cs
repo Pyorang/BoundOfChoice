@@ -2,25 +2,25 @@ using UnityEngine;
 
 public class Choice13 : ChoiceBase
 {
-    private static readonly float _ASpiritGainChance = 0.5f;
-    private static readonly int _ASpiritGainAmount = 1;
+    private static readonly float ASpiritGainChance = 0.5f;
+    private static readonly int ASpiritGainAmount = 1;
 
-    private static readonly int _BAdditionalDamageAmount = 5;
-    private static readonly float _BAdditionalSpeed = 1f;
-    private static readonly int _BAdditionalMaxHealth = 5;
+    private static readonly int BAdditionalDamageAmount = 5;
+    private static readonly float BAdditionalSpeed = 1f;
+    private static readonly int BAdditionalMaxHealth = 5;
 
     protected override void StepA()
     {
-        if(Random.value <= _ASpiritGainChance)
+        if(Random.value <= ASpiritGainChance)
         {
-            SpiritManager.Instance.GetSpirit(_ASpiritGainAmount);
+            SpiritManager.Instance.GetSpirit(ASpiritGainAmount);
         }
     }
 
     protected override void StepB()
     {
-        PlayerCombat.Instance.AdditionalPower += _BAdditionalDamageAmount;
-        PlayerMovement.Instance.MoveSpeed += _BAdditionalSpeed;
-        PlayerHealth.Instance.MaxHealth += _BAdditionalMaxHealth;
+        PlayerCombat.Instance.AdditionalPower += BAdditionalDamageAmount;
+        PlayerMovement.Instance.MoveSpeed += BAdditionalSpeed;
+        PlayerHealth.Instance.MaxHealth += BAdditionalMaxHealth;
     }
 }

@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class Choice7 : ChoiceBase
 {
-    private static readonly int _executeCount = 5;
-    private static readonly int _damageAmount = 10;
+    private static readonly int ExecuteCount = 5;
+    private static readonly int DamageAmount = 10;
 
     protected override void StepA()
     {
-        _executeACount = _executeCount;
+        _executeACount = ExecuteCount;
         ChoiceManager.OnRightLeverInteracted += GiveDamage;
     }
 
     protected override void StepB()
     {
-        _executeBCount = _executeCount;
+        _executeBCount = ExecuteCount;
         ChoiceManager.OnLeftLeverInteracted += GiveDamage;
     }
 
@@ -35,12 +35,6 @@ public class Choice7 : ChoiceBase
 
     public void GiveDamage()
     {
-        PlayerHealth.Instance.TakeDamage(_damageAmount);
-    }
-
-    ~Choice7()
-    {
-        ChoiceManager.OnLeftLeverInteracted -= GiveDamage;
-        ChoiceManager.OnRightLeverInteracted -= GiveDamage;
+        PlayerHealth.Instance.TakeDamage(DamageAmount);
     }
 }

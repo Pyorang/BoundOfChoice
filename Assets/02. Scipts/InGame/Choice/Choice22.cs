@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Choice22 : ChoiceBase
 {
-    private static readonly float _BDeActivateAllTrapChance = 0.25f;
+    private static readonly float BDeActivateAllTrapChance = 0.25f;
 
     protected override void StepA()
     {
@@ -11,7 +11,7 @@ public class Choice22 : ChoiceBase
 
     protected override void StepB()
     {
-        if (Random.value <= _BDeActivateAllTrapChance)
+        if (Random.value <= BDeActivateAllTrapChance)
         {
             KnightTrapManager.Instance.DeActivateAll();
         }

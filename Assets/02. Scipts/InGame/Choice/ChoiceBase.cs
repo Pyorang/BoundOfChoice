@@ -50,24 +50,25 @@ public abstract class ChoiceBase
 
     public void ProcessLeftTurn()
     {
-        CanAppear = false;
-
-        for(int i = 0; i < _executeACount + 1; i++)
+        if (_executeACount > 0)
         {
-            ExecuteRemainingA();
+            _executeACount--;
+        }
+        if (_executeBCount > 0)
+        {
+            _executeBCount--;
         }
 
-        for(int i = 0; i < _executeBCount + 1; i++)
-        {
-            ExecuteRemainingB();
-        }
+        ExecuteRemainingA();
+        ExecuteRemainingB();
 
-        _executeACount = Mathf.Max(0, --_executeACount);
-        _executeBCount = Mathf.Max(0, --_executeBCount);
-
-        if(_executeACount == 0 && _executeBCount == 0)
+        if (_executeACount == 0 && _executeBCount == 0)
         {
             CanAppear = true;
+        }
+        else
+        {
+            CanAppear = false;
         }
     }
 }
