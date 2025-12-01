@@ -11,6 +11,8 @@ public class FireBallSkill : SkillBase
         GameObject fireBallObject = PoolManager.Instance.GetObject(EPoolType.FireBall);
         ProjectileBase projectile = fireBallObject.GetComponent<ProjectileBase>();
         if (projectile == null) return;
-        projectile.Init(PlayerHealth.Instance.gameObject.transform.position, direction, additionalDamage);
+        Vector2 directionalSpawnOffset = new Vector2(_spawnOffset.x * direction, _spawnOffset.y);
+        Vector2 spawnPosition = (Vector2)PlayerHealth.Instance.transform.position + directionalSpawnOffset; 
+        projectile.Init(spawnPosition, direction, additionalDamage);
     }
 }

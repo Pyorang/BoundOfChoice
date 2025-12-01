@@ -3117,50 +3117,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoolManager
       objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[3].Type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[4].Type
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[5].Type
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[2].InitialCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[3].InitialCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[4].InitialCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[5].InitialCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[3].PoolObjectPrefab
-      value: 
-      objectReference: {fileID: 4719400844096504887, guid: a2c8f9eec05fbb04d9971c415a45c00b, type: 3}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[4].PoolObjectPrefab
-      value: 
-      objectReference: {fileID: 5785812938952624945, guid: 81818e44ebd9b3e4ba54fafc2d82f8f0, type: 3}
-    - target: {fileID: 9140848983273698976, guid: 4b40b7e09baf1444a8bef4a4b14734c8, type: 3}
-      propertyPath: _poolInfos.Array.data[5].PoolObjectPrefab
-      value: 
-      objectReference: {fileID: 1191412266184747600, guid: 06584e83d082a9748a9bc7e8009a5e79, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

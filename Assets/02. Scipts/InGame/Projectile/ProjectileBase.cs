@@ -28,7 +28,7 @@ public abstract class ProjectileBase : MonoBehaviour
     public abstract void Move();
     public abstract void ReleaseObject();
 
-    public void Init(Vector2 position, int direction, int additionalDamage = 0)
+    public virtual void Init(Vector2 position, int direction, int additionalDamage = 0)
     {
         this.transform.position = position;
         _direction = direction;
