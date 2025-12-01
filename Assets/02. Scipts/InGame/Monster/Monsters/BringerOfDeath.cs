@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BringerOfDeath : SkeletonSwordsman
@@ -9,21 +10,27 @@ public class BringerOfDeath : SkeletonSwordsman
     [SerializeField] private float _castInterval;
 
     private MonsterAnimator _animator;
+    private WaitForSeconds _waitInterval;
+    private Coroutine _castCoroutine;
 
     protected override void Init()
     {
         base.Init();
         _animator = GetComponent<MonsterAnimator>();
+        _waitInterval = new WaitForSeconds(_castInterval);
     }
 
     private void OnEnable()
     {
-        InvokeRepeating(nameof(Cast), _castInterval, _castInterval);
+        _castCoroutine = StartCoroutine(CastCoroutine());
     }
 
     private void OnDisable()
     {
-        CancelInvoke(nameof(Cast));
+        if (_castCoroutine == null) return;
+
+        StopCoroutine(_castCoroutine);
+        _castCoroutine = null;
     }
 
     private void Cast()
@@ -39,5 +46,14 @@ public class BringerOfDeath : SkeletonSwordsman
         spawnPoint.x = Random.Range(_minX, _maxX);
 
         spell.GetComponent<ProjectileBase>().Init(spawnPoint, 1, _stats.AttackPower);
+    }
+
+    private IEnumerator CastCoroutine()
+    {
+        while (true)
+        {
+            yield return _waitInterval;
+            Cast();
+        }
     }
 }
