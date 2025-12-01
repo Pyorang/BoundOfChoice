@@ -27,6 +27,7 @@ public class LobbyUIController : MonoBehaviour
 
         AudioManager.Instance.Stop(AudioType.BGM);
         _loadingScene.SetActive(true);
+        AudioManager.Instance.Play(AudioType.SFX, "Loading");
 
         float timeElapsed = 0;
         Color startColor = _loadingText.color;
