@@ -2,20 +2,35 @@ using UnityEngine;
 
 public class Choice8 : ChoiceBase
 {
-    public override void Execute1()
+    private static readonly int ExecuteCount = 10;
+    private static readonly int ADamageAmount = 5;
+
+    private static readonly int BDamageAmount = 40;
+
+    protected override void StepA()
     {
-        KnightTrapManager.Instance.Activate();
-        base.Execute1();
+       _executeACount = ExecuteCount;
+        ChoiceManager.OnLeftLeverInteracted += GiveDamage;
+        ChoiceManager.OnRightLeverInteracted += GiveDamage;
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        float activateAllTrapChance = 0.25f;
+        PlayerHealth.Instance.TakeDamage(BDamageAmount);
+    }
 
-        if (Random.value < activateAllTrapChance)
+    protected override void ExecuteRemainingA()
+    {
+        if (_executeACount == 0)
         {
-            KnightTrapManager.Instance.ActivateAll();
+            ChoiceManager.OnLeftLeverInteracted -= GiveDamage;
+            ChoiceManager.OnRightLeverInteracted -= GiveDamage;
         }
-        base.Execute2();
     }
+
+    private void GiveDamage()
+    {
+        PlayerHealth.Instance.TakeDamage(ADamageAmount);
+    }
+   
 }

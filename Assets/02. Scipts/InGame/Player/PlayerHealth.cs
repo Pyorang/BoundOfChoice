@@ -6,15 +6,27 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     private PlayerAnimator _playerAnimator;
 
     private int _health = 100;
-    private int _maxHealth = 100;
-
     public int Health
     {
         get => _health;
         private set
         {
+            if (_health == value) return;
+
+            bool isHealed = _health < value ? true : false;
             _health = value;
-            OnHealthValueUpdate?.Invoke(_health, _maxHealth);
+            OnHealthValueUpdate?.Invoke(_health, MaxHealth);
+        }
+    }
+
+    private int _maxHealth = 100;
+    public int MaxHealth
+    {
+        get => _maxHealth;
+        set
+        {
+            _maxHealth = value;
+            OnHealthValueUpdate?.Invoke(Health, _maxHealth);
         }
     }
 
@@ -23,7 +35,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
     private static readonly int _maxBloodNumber = 3;
 
-    public static event Action OnHealthChange;
+    public static event Action<bool> OnHealthChange;
     public static event Action<int, int> OnHealthValueUpdate;
 
     protected override void Init()
@@ -35,7 +47,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
     private void Start()
     {
-        OnHealthValueUpdate?.Invoke(Health, _maxHealth);
+        OnHealthValueUpdate?.Invoke(Health, MaxHealth);
     }
 
     public void TakeDamage(int amount)
@@ -58,8 +70,6 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
         else
         {
-            OnHealthChange?.Invoke();
-            AudioManager.Instance.Play(AudioType.SFX, "PlayerHurt");
             _playerAnimator.PlayHitAnimation();
         }
     }
@@ -77,7 +87,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
     public void Heal(int amount)
     {
         if (amount < 0) return;
-        Health = Mathf.Min(Health + amount, _maxHealth);
+        Health = Mathf.Min(Health + amount, MaxHealth);
     }
 
     public void Die()

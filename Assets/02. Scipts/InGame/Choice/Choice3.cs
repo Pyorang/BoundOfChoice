@@ -2,23 +2,28 @@ using UnityEngine;
 
 public class Choice3 : ChoiceBase
 {
-    public override void Execute1()
-    {
-        int RandomValue = Random.Range(1, 101);
-        if(RandomValue <= 90)
-        {
-            PlayerHealth.Instance.TakeDamage(30);
-        }
-        base.Execute1();
-    }
+    private static readonly float DeathChance = 0.1f;
 
-    public override void Execute2()
+    private static readonly float DamageChance = 0.9f;
+    private static readonly int DamageAmount = 30;
+
+    protected override void StepA()
     {
-        int RandomValue = Random.Range(1, 101);
-        if (RandomValue <= 10)
+        if (Random.value <= DeathChance)
         {
             PlayerHealth.Instance.Die();
         }
-        base.Execute2();
+
+        GetNewChoice();
+    }
+
+    protected override void StepB()
+    {
+        if (Random.value <= DamageChance)
+        {
+            PlayerHealth.Instance.TakeDamage(DamageAmount);
+        }
+
+        GetNewChoice();
     }
 }

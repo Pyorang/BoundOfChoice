@@ -3815,6 +3815,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7276472098608205927, guid: 11acf327ce70cf94d83ab8ec9ec6f1df, type: 3}
+      propertyPath: _targetLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8426841365060272055, guid: 11acf327ce70cf94d83ab8ec9ec6f1df, type: 3}
       propertyPath: m_Name
       value: Trap Knight

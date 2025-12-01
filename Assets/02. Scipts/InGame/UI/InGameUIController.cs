@@ -14,6 +14,10 @@ public enum EWindowUIType
 
 public class InGameUIController : MonoBehaviour
 {
+    public const string InventoryOpen = "InventoryOpen";
+    public const string InventoryClose = "InventoryClose";
+    public const string ShopOpen = "ShopOpen";
+    public const string ShopClose = "ShopClose";
     public const string Button = "Button";
 
     private EWindowUIType _currentWindowUI = EWindowUIType.None;
@@ -23,7 +27,6 @@ public class InGameUIController : MonoBehaviour
     [Space]
     [SerializeField] private Image _healthBarImage;
     [SerializeField] private TextMeshProUGUI _healthText;
-    [SerializeField] private GameObject _hurtEffect;
 
     [Header("마나 관련")]
     [Space]
@@ -44,15 +47,15 @@ public class InGameUIController : MonoBehaviour
     private void Awake()
     {
         PlayerHealth.OnHealthValueUpdate += OnUpdateHealthUI;
-        PlayerHealth.OnHealthChange += OnHurt;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
+        PlayerCombat.OnPowerChanged += OnUpdateDamageUI;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
-        SpiritManager.OnSpiritPieceChanged += OnUpdateSpiritUI;
-        InitializeWindowUiToggles();
+        SpiritManager.OnSpiritCountValueChanged += OnUpdateSpiritUI;
+        InitializeWindowUIToggles();
     }
 
-    private void InitializeWindowUiToggles()
+    private void InitializeWindowUIToggles()
     {
         _windowUiToggleActions = new Dictionary<EWindowUIType, Action>
         {
@@ -65,11 +68,11 @@ public class InGameUIController : MonoBehaviour
     private void OnDestroy()
     {
         PlayerHealth.OnHealthValueUpdate -= OnUpdateHealthUI;
-        PlayerHealth.OnHealthChange -= OnHurt;
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
+        PlayerCombat.OnPowerChanged -= OnUpdateDamageUI;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
-        SpiritManager.OnSpiritPieceChanged -= OnUpdateSpiritUI;
+        SpiritManager.OnSpiritCountValueChanged -= OnUpdateSpiritUI;
     }
 
     private void Update()
@@ -111,13 +114,15 @@ public class InGameUIController : MonoBehaviour
     public void OnClickInventoryButton()
     {
         InventoryUI.Instance.ToggleInventory();
-        AudioManager.Instance.Play(AudioType.SFX, Button);
+        string inventorySound = InventoryUI.Instance.gameObject.activeSelf ? InventoryOpen : InventoryClose;
+        AudioManager.Instance.Play(AudioType.SFX, inventorySound);
     }
 
     public void OnClickShopButton()
     {
         ShopUI.Instance.ToggleShop();
-        AudioManager.Instance.Play(AudioType.SFX, Button);
+        string shopSound = ShopUI.Instance.gameObject.activeSelf ? ShopOpen : ShopClose;
+        AudioManager.Instance.Play(AudioType.SFX, shopSound);
     }
 
     public void OnClickInGameSettingsButton()
@@ -159,10 +164,5 @@ public class InGameUIController : MonoBehaviour
     {
         _spiritImage.fillAmount = (float)piece / maxPiece;
 
-    }
-
-    public void OnHurt()
-    {
-        _hurtEffect.gameObject.SetActive(true);
     }
 }

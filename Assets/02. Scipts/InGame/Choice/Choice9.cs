@@ -2,20 +2,19 @@ using UnityEngine;
 
 public class Choice9 : ChoiceBase
 {
-    public override void Execute1()
+    private static readonly int AHealAmount = 10;
+    private static readonly int AGoldAmount = 20;
+
+    private static readonly int BHealAmount = 20;
+
+    protected override void StepA()
     {
-        KnightTrapManager.Instance.Deactivate();
-        base.Execute1();
+        PlayerHealth.Instance.Heal(AHealAmount);
+        GoldManager.Instance.GetGold(AGoldAmount);
     }
 
-    public override void Execute2()
+    protected override void StepB()
     {
-        float activateAllTrapChance = 0.25f;
-
-        if (Random.value < activateAllTrapChance)
-        {
-            KnightTrapManager.Instance.DeActivateAll();
-        }
-        base.Execute2();
+        PlayerHealth.Instance.Heal(BHealAmount);
     }
 }

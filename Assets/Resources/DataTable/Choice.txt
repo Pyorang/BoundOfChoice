@@ -7,43 +7,148 @@
     },
     {
       "ID": "C_2",
-      "Text1": "Collect 7 spirits",
-      "Text2": "Collect 7 spirits"
+      "Text1": "Collect 7 Spirits",
+      "Text2": "Collect 7 Spirits"
     },
     {
       "ID": "C_3",
-      "Text1": "Take 30 damage with a 90% chance",
-      "Text2": "Instant death with a 10% chance"
+      "Text1": "10% chance of Instant Death",
+      "Text2": "90% chance to take 30 Damage"
     },
     {
       "ID": "C_4",
-      "Text1": "Summon 1 Slime",
-      "Text2": "Gain 20 Gold and summon 2 Slimes"
-    },
-    {
-      "ID": "C_5",
-      "Text1": "Take 25 damage or recover 35 HP",
+      "Text1": "Take 25 Damage or recover 35 HP",
       "Text2": "Nothing happens"
     },
     {
+      "ID": "C_5",
+      "Text1": "Recover 15 HP and 20 Mana",
+      "Text2": "Recover 10 HP and 40 Mana"
+    },
+    {
       "ID": "C_6",
-      "Text1": "Gain 20 Gold",
-      "Text2": "Recover 5 HP"
+      "Text1": "20% chance to take 40% of current HP as Damage",
+      "Text2": "80% chance to take 10% of current HP as Damage"
     },
     {
       "ID": "C_7",
-      "Text1": "Gain 1 Spirit Piece",
-      "Text2": "Gain 2 Spirit Pieces with a 45 % chance"
+      "Text1": "For 5 turns, pulling the right lever deals 10 damage",
+      "Text2": "For 5 turns, pulling the left lever deals 10 damage"
     },
     {
       "ID": "C_8",
-      "Text1": "Activate 1 Trap",
-      "Text2": "Activate all Traps with a 25% chance"
+      "Text1": "Take 5 Damage every time you pull the lever for 10 turns",
+      "Text2": "Take 40 Damage"
     },
     {
       "ID": "C_9",
+      "Text1": "Recover 10 HP and gain 20 Gold",
+      "Text2": "Recover 20 HP"
+    },
+    {
+      "ID": "C_10",
+      "Text1": "Gain 10 Gold",
+      "Text2": "Recover 5 HP"
+    },
+    {
+      "ID": "C_11",
+      "Text1": "45% chance to gain 2 Spirits",
+      "Text2": "Gain 1 Spirit"
+    },
+    {
+      "ID": "C_12",
+      "Text1": "0.5% chance to escape",
+      "Text2": "5% chance to gain 1 Spirit"
+    },
+    {
+      "ID": "C_13",
+      "Text1": "50% chance to gain 1 Spirit",
+      "Text2": "Gain 5 Attack Power, 1 Movement Speed, and 5 Max HP"
+    },
+    {
+      "ID": "C_14",
+      "Text1": "Gain 10 Gold and summon 2 Sword Skeletons",
+      "Text2": "Summon 1 Sword Skeleton"
+    },
+    {
+      "ID": "C_15",
+      "Text1": "Gain 20 Gold and summon 2 Random Skeletons",
+      "Text2": "Summon 2 Sword Skeletons"
+    },
+    {
+      "ID": "C_16",
+      "Text1": "Activate 2 Traps and summon 1 Sword Skeleton",
+      "Text2": "Summon 1 Elite Skeleton"
+    },
+    {
+      "ID": "C_17",
+      "Text1": "Summon 1 Sword Skeleton and repeat with a 65% chance",
+      "Text2": "Summon 1 Elite Skeleton and 1 Necro Skeleton"
+    },
+    {
+      "ID": "C_18",
+      "Text1": "Fight a 'Tremendous Foe' and gain a 'Tremendous Reward'",
+      "Text2": "Run away, you coward"
+    },
+    {
+      "ID": "C_19",
+      "Text1": "Summon 1 Sword Skeleton and 2 Archer Skeletons",
+      "Text2": "Take 25 Damage"
+    },
+    {
+      "ID": "C_20",
+      "Text1": "Summon 'One who knows Honor'",
+      "Text2": "Summon 'A Cowardly Gang'"
+    },
+    {
+      "ID": "C_21",
+      "Text1": "Activate 1 Trap",
+      "Text2": "25% chance to Activate all Traps"
+    },
+    {
+      "ID": "C_22",
       "Text1": "Deactivate 1 Trap",
-      "Text2": "Deactivate all Traps with a 25% chance"
+      "Text2": "25% chance to Deactivate all Traps"
+    },
+    {
+      "ID": "C_23",
+      "Text1": "Vision becomes wider or narrower for 3 turns",
+      "Text2": "Nothing happens"
+    },
+    {
+      "ID": "C_24",
+      "Text1": "Gain an Archer Partner and summon 4 Archer Skeletons. If already obtained, gain 50 Gold.",
+      "Text2": "Summon 1 Archer Skeleton"
+    },
+    {
+      "ID": "C_25",
+      "Text1": "Gain a Mage Partner and summon 3 Necro Skeletons. If already obtained, gain 70 Gold.",
+      "Text2": "Summon 1 Necro Skeleton"
+    },
+    {
+      "ID": "C_26",
+      "Text1": "Activate or Deactivate all Traps",
+      "Text2": "Nothing happens"
+    },
+    {
+      "ID": "C_27",
+      "Text1": "Gold is Doubled or Halved",
+      "Text2": "Current HP is Doubled or Halved"
+    },
+    {
+      "ID": "C_28",
+      "Text1": "Gain 2 Attack Power",
+      "Text2": "Gain 0~4 Attack Power"
+    },
+    {
+      "ID": "C_29",
+      "Text1": "Gain 1 Movement Speed",
+      "Text2": "Gain 0~2 Movement Speed"
+    },
+    {
+      "ID": "C_30",
+      "Text1": "30% chance to lose all Movement Speed gained",
+      "Text2": "60% chance to lose all Attack Power gained"
     }
   ]
 }
