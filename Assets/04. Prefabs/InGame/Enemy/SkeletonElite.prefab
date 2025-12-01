@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 189135859049126005}
   - component: {fileID: 3147537235982126455}
   - component: {fileID: 7635037824220777929}
+  - component: {fileID: 6710478147035500334}
   m_Layer: 6
   m_Name: SkeletonElite
   m_TagString: Enemy
@@ -287,15 +288,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3101e852d5c3974fa06c863dce2d717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chaseDistance: 10
-  _attackDistance: 5
   _type: 12
-  _state: 0
   _isSpriteLeft: 0
   _hitShakeDuration: 0.25
   _hitShakeIntensity: 0.1
   _deathShakeDuration: 0.25
   _deathShakeIntensity: 0.75
+--- !u!114 &6710478147035500334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3016634609717171538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb926c843a66034d8d6e3cd938e3fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 0
+  _chaseDistance: 10
+  _attackDistance: 5
 --- !u!1 &3949042925312777733
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 1829100135911544353}
   - component: {fileID: 4055553319261029232}
   - component: {fileID: 4142146841793496267}
+  - component: {fileID: 962619527252944458}
   m_Layer: 6
   m_Name: SkeletonSwordsman
   m_TagString: Enemy
@@ -318,12 +319,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3101e852d5c3974fa06c863dce2d717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chaseDistance: 7
-  _attackDistance: 3
   _type: 10
-  _state: 0
   _isSpriteLeft: 0
   _hitShakeDuration: 0.25
   _hitShakeIntensity: 0.1
   _deathShakeDuration: 0.25
   _deathShakeIntensity: 0.75
+--- !u!114 &962619527252944458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337163316377113064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb926c843a66034d8d6e3cd938e3fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 0
+  _chaseDistance: 7
+  _attackDistance: 3

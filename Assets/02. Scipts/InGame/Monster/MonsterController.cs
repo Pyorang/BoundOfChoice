@@ -1,31 +1,12 @@
 using UnityEngine;
 
-public enum EMonsterState
-{
-    None,
-    Patrol,
-    Chase,
-    Attack,
-    Freeze,
-    Hurt,
-    Death,
-}
-
 [RequireComponent(typeof(MonsterMovement), typeof(MonsterAnimator), typeof(MonsterStats))]
-[RequireComponent(typeof(MonsterStatusEffect))]
+[RequireComponent(typeof(MonsterStatusEffect), typeof(MonsterState))]
 public class MonsterController : MonoBehaviour
 {
-    [Header("플레이어 추격 거리 설정")]
-    [Space]
-    [Tooltip("플레이어를 발견하고 추격을 시작하는 최소 거리입니다.")]
-    [SerializeField] private float _chaseDistance;
-    [Tooltip("플레이어에게 접근을 멈추고 공격을 시작하는 최소 거리입니다.")]
-    [SerializeField] private float _attackDistance;
-
-    [Header("시작 상태")]
+    [Header("몬스터 설정")]
     [Space]
     [SerializeField] private EPoolType _type;
-    [SerializeField] private EMonsterState _state;
     [SerializeField] private bool _isSpriteLeft;
 
     [Header("타격감 설정")]
@@ -36,29 +17,24 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private float _deathShakeIntensity = 0.75f;
 
     private MonsterStats _stats;
+    private MonsterState _state;
     private MonsterMovement _movement;
     private MonsterNavigator _navigator;
     private MonsterAnimator _animator;
     private MonsterStatusEffect _statusEffect;
     private ItemDropper _itemDropper;
-    private Transform _player;
     
     private Vector2 _moveDirection;
-    private float _distanceToPlayer;
 
     private void Awake()
     {
         _stats = GetComponent<MonsterStats>();
+        _state = GetComponent<MonsterState>();
         _movement = GetComponent<MonsterMovement>();
         _navigator = GetComponent<MonsterNavigator>();
         _animator = GetComponent<MonsterAnimator>();
         _statusEffect = GetComponent<MonsterStatusEffect>();
         _itemDropper = GetComponent<ItemDropper>();
-    }
-
-    private void Start()
-    {
-        _player = PlayerMovement.Instance.transform;
     }
 
     private void OnEnable()
@@ -81,36 +57,17 @@ public class MonsterController : MonoBehaviour
 
     private void Update()
     {
-        if (_player == null) return;
-        _distanceToPlayer = _player.position.x - transform.position.x;
-
-        if (_state != EMonsterState.Patrol && _state != EMonsterState.Chase) return;
-        DetermineState();
-    }
-
-    private void DetermineState()
-    {
-        if (IsPlayerInAttackRange())
-        {
-            _state = EMonsterState.Attack;
-        }
-        else if (IsPlayerInSight())
-        {
-            _state = EMonsterState.Chase;
-        }
-        else
-        {
-            _state = EMonsterState.Patrol;
-        }
+        if (_state.State != EMonsterState.Patrol && _state.State != EMonsterState.Chase) return;
+        _state.DetermineState();
         ActionByState();
     }
 
     private void ActionByState()
     {
-        switch (_state)
+        switch (_state.State)
         {
             case EMonsterState.Chase:
-                _moveDirection = _navigator.GetChaseDirection(_distanceToPlayer);
+                _moveDirection = _navigator.GetChaseDirection(_state.DistanceToPlayer);
                 HandleMove();
                 break;
             case EMonsterState.Patrol:
@@ -123,21 +80,11 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    private bool IsPlayerInSight()
-    {
-        return Mathf.Abs(_distanceToPlayer) < _chaseDistance;
-    }
-    
-    private bool IsPlayerInAttackRange()
-    {
-        return Mathf.Abs(_distanceToPlayer) < _attackDistance;
-    }
-
     private void HandleAttack()
     {
         _movement.StopMove();
         _animator.PlayAttackAnimation();
-        _animator.SetSpriteFlip((_distanceToPlayer > 0) == _isSpriteLeft);
+        _animator.SetSpriteFlip((_state.DistanceToPlayer > 0) == _isSpriteLeft);
     }
     
     private void HandleMove()
@@ -155,29 +102,29 @@ public class MonsterController : MonoBehaviour
 
     public void HandleSmash()
     {
-        _moveDirection = _navigator.GetChaseDirection(_distanceToPlayer);
+        _moveDirection = _navigator.GetChaseDirection(_state.GetDistanceToPlayer());
         _animator.SetSpriteFlip((_moveDirection.x > 0) == _isSpriteLeft);
     }
 
     public void HandleCast()
     {
         _movement.StopMove();
-        _state = EMonsterState.Attack;
+        _state.SetState(EMonsterState.Attack);
     }
 
     public void TakeDamage(int damage)
     {
-        if (_state == EMonsterState.None) return;
+        if (_state.State == EMonsterState.None) return;
         _stats.TakeDamage(damage);
     }
 
     private void HandleTakeDamage()
     {
         _movement.StopMove();
-        _movement.ApplyKnockback(_player);
+        _movement.ApplyKnockback(_state.DistanceToPlayer);
 
         CameraController.Instance.StartShake(_hitShakeDuration, _hitShakeIntensity);
-        _state = EMonsterState.Hurt;
+        _state.SetState(EMonsterState.Hurt);
         _animator.PlayHitAnimation();
     }
 
@@ -185,7 +132,7 @@ public class MonsterController : MonoBehaviour
     {
         _movement.StopMove();
 
-        _state = EMonsterState.Death;
+        _state.SetState(EMonsterState.Death);
         _animator.PlayDeathAnimation();
         CameraController.Instance.StartShake(_deathShakeDuration, _deathShakeIntensity);
     }
@@ -205,13 +152,13 @@ public class MonsterController : MonoBehaviour
     {
         _movement.StopMove();
 
-        _state = EMonsterState.Hurt;
+        _state.SetState(EMonsterState.Hurt);
         _animator.PlayHitAnimation();
     }
 
     private void HandleBindStart()
     {
-        _state = EMonsterState.Freeze;
+        _state.SetState(EMonsterState.Freeze);
         _stats.SetMoveSpeed(0);
         _animator.StopAnimation();
     }
@@ -220,12 +167,13 @@ public class MonsterController : MonoBehaviour
     {
         _animator.ResumeAnimation();
         _stats.ResetSpeed();
-        DetermineState();
+        _state.DetermineState();
     }
 
     public void OnAnimationEnd()
     {
-        DetermineState();
+        _state.DetermineState();
+        ActionByState();
     }
 
     public void OnDeathAnimationEnd()

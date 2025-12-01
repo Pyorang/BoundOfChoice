@@ -48,9 +48,9 @@ public class MonsterMovement : MonoBehaviour
         _direction = Vector2.zero;
     }
 
-    public void ApplyKnockback(Transform attacker)
+    public void ApplyKnockback(float distance)
     {
-        float directionX = Mathf.Sign(transform.position.x - attacker.position.x);
+        float directionX = Mathf.Sign(distance);
         _knockBackVelocity = directionX * _knockBackForce;
         _knockBackTimer = _knockBackDuration;
     }
