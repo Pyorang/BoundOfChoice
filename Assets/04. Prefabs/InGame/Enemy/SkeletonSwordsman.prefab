@@ -49,8 +49,9 @@ GameObject:
   - component: {fileID: 8210839736850747861}
   - component: {fileID: 34176429137498931}
   - component: {fileID: 1829100135911544353}
-  - component: {fileID: 4055553319261029232}
   - component: {fileID: 4142146841793496267}
+  - component: {fileID: 962619527252944458}
+  - component: {fileID: 3678582092628245041}
   m_Layer: 6
   m_Name: SkeletonSwordsman
   m_TagString: Enemy
@@ -289,23 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfb0968932fd3c45bc984a2c453141b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4055553319261029232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5337163316377113064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bef77ca569c5a64f87ae54c99f8f703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackPoint: {fileID: 2135177565333353746}
-  _attackBoxSize: {x: 2.5, y: 2.75}
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &4142146841793496267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,11 +302,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3101e852d5c3974fa06c863dce2d717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chaseDistance: 7
-  _attackDistance: 3
-  _state: 0
+  _type: 10
   _isSpriteLeft: 0
   _hitShakeDuration: 0.25
   _hitShakeIntensity: 0.1
   _deathShakeDuration: 0.25
   _deathShakeIntensity: 0.75
+--- !u!114 &962619527252944458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337163316377113064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb926c843a66034d8d6e3cd938e3fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 0
+  _chaseDistance: 7
+  _attackDistance: 3
+--- !u!114 &3678582092628245041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337163316377113064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a61199f76c06a448f2fe1fb5e4ef01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPoint: {fileID: 2135177565333353746}
+  _attackBoxSize: {x: 2.5, y: 2.75}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 8

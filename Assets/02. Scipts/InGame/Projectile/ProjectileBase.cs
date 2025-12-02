@@ -33,7 +33,7 @@ public abstract class ProjectileBase : MonoBehaviour
         this.transform.position = position;
         _direction = direction;
         _renderer.flipX = (direction < 0);
-        _finalDamage += _damage + additionalDamage;
+        _finalDamage = _damage + additionalDamage;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
