@@ -117,12 +117,12 @@
     },
     {
       "ID": "C_24",
-      "Text1": "Gain an Archer Partner and summon 4 Archer Skeletons. If already obtained, gain 50 Gold.",
+      "Text1": "Gain an Archer Partner and summon 4 Archer Skeletons.",
       "Text2": "Summon 1 Archer Skeleton"
     },
     {
       "ID": "C_25",
-      "Text1": "Gain a Mage Partner and summon 3 Necro Skeletons. If already obtained, gain 70 Gold.",
+      "Text1": "Gain a Mage Partner and summon 3 Necro Skeletons.",
       "Text2": "Summon 1 Necro Skeleton"
     },
     {

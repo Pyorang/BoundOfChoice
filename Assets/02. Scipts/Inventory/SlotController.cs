@@ -37,6 +37,7 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IDragHandler,
         _item = item;
         _itemCount = count;
         _itemImageUI.sprite = item.ItemImage;
+        _itemImageUI.preserveAspect = true;
         UpdateCountTextUI();
     }
 

@@ -27,25 +27,25 @@
     {
       "ID": "I_5",
       "Price": 0,
-      "Name": "Magic: Fire Ball",
-      "Description": "If this book is carried, you can cast Fire Crash."
+      "Name": "Fire Scroll",
+      "Description": "If this book is carried, you can cast Fire Ball."
     },
     {
       "ID": "I_6",
       "Price": 0,
-      "Name": "Magic: Ice Age",
-      "Description": "If this book is carried, you can cast Ice Spear."
+      "Name": "Ice Scroll",
+      "Description": "If this book is carried, you can cast Ice Age."
     },
     {
       "ID": "I_7",
       "Price": 0,
-      "Name": "Selection Change Ticket",
+      "Name": "Reroll Ticket",
       "Description": "When used, it changes the current selection to a different selection."
     },
     {
       "ID": "I_8",
       "Price": 0,
-      "Name": "Enemy Removal Ticket",
+      "Name": "Elimination Ticket",
       "Description": "When used, all enemies on the map are instantly killed."
     }
   ]

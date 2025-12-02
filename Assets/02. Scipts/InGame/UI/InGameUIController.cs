@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -22,15 +23,22 @@ public class InGameUIController : MonoBehaviour
 
     private EWindowUIType _currentWindowUI = EWindowUIType.None;
     private Dictionary<EWindowUIType, Action> _windowUiToggleActions;
-    
+
+    [Header("플레이어 초상화")]
+    [Space]
+    [SerializeField] private Image _portrait;
+    [SerializeField] private TextMeshProUGUI _characterName;
+    [SerializeField] private Sprite[] _portraits;
+    [SerializeField] private string[] _characterNames;
+
     [Header("체력 관련")]
     [Space]
-    [SerializeField] private Image _healthBarImage;
+    [SerializeField] private Slider _healthBar;
     [SerializeField] private TextMeshProUGUI _healthText;
 
     [Header("마나 관련")]
     [Space]
-    [SerializeField] private Image _manaBarImage;
+    [SerializeField] private Slider _manaBar;
     [SerializeField] private TextMeshProUGUI _manaText;
 
     [Header("공격력 및 속도 관련")]
@@ -38,8 +46,11 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _speedText;
 
     [Header("골드 관련")]
-    [SerializeField] private Image _goldIconImage;
     [SerializeField] private TextMeshProUGUI _goldText;
+    [SerializeField] private GameObject _goldImage;
+    [SerializeField] private float _targetScale = 1.3f;
+    [SerializeField] private float _effectDuration = 0.15f;
+    private IEnumerator _goldEffect;
 
     [Header("영혼 관련")]
     [SerializeField] private Image _spiritImage;
@@ -49,6 +60,7 @@ public class InGameUIController : MonoBehaviour
         PlayerHealth.OnHealthValueUpdate += OnUpdateHealthUI;
         PlayerMana.OnManaChanged += OnUpdateManaUI;
         PlayerCombat.OnPowerChanged += OnUpdateDamageUI;
+        PlayerCombat.OnCharacterChanged += ChangeCharacterUIInfo;
         PlayerMovement.OnSpeedChanged += OnUpdateSpeedUI;
         GoldManager.OnGoldChanged += OnUpdateGoldUI;
         SpiritManager.OnSpiritCountValueChanged += OnUpdateSpiritUI;
@@ -70,6 +82,7 @@ public class InGameUIController : MonoBehaviour
         PlayerHealth.OnHealthValueUpdate -= OnUpdateHealthUI;
         PlayerMana.OnManaChanged -= OnUpdateManaUI;
         PlayerCombat.OnPowerChanged -= OnUpdateDamageUI;
+        PlayerCombat.OnCharacterChanged -= ChangeCharacterUIInfo;
         PlayerMovement.OnSpeedChanged -= OnUpdateSpeedUI;
         GoldManager.OnGoldChanged -= OnUpdateGoldUI;
         SpiritManager.OnSpiritCountValueChanged -= OnUpdateSpiritUI;
@@ -106,6 +119,12 @@ public class InGameUIController : MonoBehaviour
         }
     }
 
+    private void ChangeCharacterUIInfo(int characterType)
+    {
+        _portrait.sprite = _portraits[characterType];
+        _characterName.text = _characterNames[characterType];
+    }
+
     private void CloseSettingUI()
     {
         _currentWindowUI = EWindowUIType.None;
@@ -135,14 +154,14 @@ public class InGameUIController : MonoBehaviour
 
     public void OnUpdateHealthUI(int health, int maxHealth)
     {
-        _healthBarImage.fillAmount = (float)health / maxHealth;
-        _healthText.text = $"{health} \n/ {maxHealth}";
+        _healthBar.value = (float)health / maxHealth;
+        _healthText.text = $"{health} / {maxHealth}";
     }
 
     public void OnUpdateManaUI(int mana, int maxMana)
     {
-        _manaBarImage.fillAmount = (float)mana / maxMana;
-        _manaText.text = $"{mana} \n/ {maxMana}";
+        _manaBar.value = (float)mana / maxMana;
+        _manaText.text = $"{mana} / {maxMana}";
     }
 
     public void OnUpdateSpeedUI(int speed)
@@ -154,15 +173,40 @@ public class InGameUIController : MonoBehaviour
     {
         _damageText.text = $"{damage}";
     }
-
     public void OnUpdateGoldUI(int gold)
     {
         _goldText.text = gold.ToString("N0");
+        
+        if(_goldEffect != null)
+        {
+            StopCoroutine( _goldEffect );
+            _goldImage.transform.localScale = Vector3.one;
+        }
+
+        _goldEffect = GoldGainEffect();
+        StartCoroutine(_goldEffect);
+    }
+
+    private IEnumerator GoldGainEffect()
+    {
+        float timeElapsed = 0;
+        float halfDuration = _effectDuration / 2;
+
+        while (timeElapsed < _effectDuration)
+        {
+            float pingPongValue = Mathf.PingPong(timeElapsed, halfDuration);
+            float scale = Mathf.Lerp(1, _targetScale, pingPongValue / halfDuration);
+            _goldImage.transform.localScale = new Vector3(scale, scale, scale);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _goldImage.transform.localScale = Vector3.one;
+        _goldEffect = null;
     }
 
     public void OnUpdateSpiritUI(int piece, int maxPiece)
     {
         _spiritImage.fillAmount = (float)piece / maxPiece;
-
     }
 }
