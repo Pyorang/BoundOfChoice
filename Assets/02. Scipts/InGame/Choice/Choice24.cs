@@ -7,11 +7,14 @@ public class Choice24 : ChoiceBase
     protected override void StepA()
     {
         PlayerCombat.Instance.OpenCharacter(ECharacterType.Archer, ArcherAlreadyGainedGoldAmount);
-        Debug.Log("궁수 스켈레톤 4마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
     }
 
     protected override void StepB()
     {
-        Debug.Log("궁수 스켈레톤 1마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
     }
 }

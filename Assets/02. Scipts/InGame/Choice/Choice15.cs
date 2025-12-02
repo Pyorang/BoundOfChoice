@@ -12,6 +12,7 @@ public class Choice15 : ChoiceBase
 
     protected override void StepB()
     {
-        Debug.Log("검사 스켈레톤 두 마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
     }
 }

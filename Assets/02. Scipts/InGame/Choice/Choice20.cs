@@ -4,11 +4,13 @@ public class Choice20 : ChoiceBase
 {
     protected override void StepA()
     {
-        Debug.Log("명예를 아는 자를 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.BringerOfDeath);
     }
 
     protected override void StepB()
     {
-        Debug.Log("비열한 패거리를 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonElite);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
     }
 }

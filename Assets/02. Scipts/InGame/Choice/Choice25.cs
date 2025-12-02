@@ -7,11 +7,13 @@ public class Choice25 : ChoiceBase
     protected override void StepA()
     {
         PlayerCombat.Instance.OpenCharacter(ECharacterType.Mage, MageAlreadyGainedGoldAmount);
-        Debug.Log("네크로 스켈레톤 3마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
     }
 
     protected override void StepB()
     {
-        Debug.Log("네크로 스켈레톤 1마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
     }
 }

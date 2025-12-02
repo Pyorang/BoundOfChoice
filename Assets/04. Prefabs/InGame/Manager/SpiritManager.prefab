@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb01ceebbac8c8d4297b8ae0d2616e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpiritPiece: 4
+  _maxSpiritCount: 7
 --- !u!114 &980440352119541775
 MonoBehaviour:
   m_ObjectHideFlags: 0

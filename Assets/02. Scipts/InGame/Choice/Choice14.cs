@@ -7,11 +7,12 @@ public class Choice14 : ChoiceBase
     protected override void StepA()
     {
         GoldManager.Instance.GetGold(AGoldAmount);
-        Debug.Log("검사 스켈레톤 두 마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
     }
 
     protected override void StepB()
     {
-        Debug.Log("검사 스켈레톤 한 마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
     }
 }

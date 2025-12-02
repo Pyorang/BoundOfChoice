@@ -6,7 +6,9 @@ public class Choice19 : ChoiceBase
 
     protected override void StepA()
     {
-        Debug.Log("검사 스켈레톤 한 마리와 궁수 스켈레톤 두 마리를 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
     }
 
     protected override void StepB()

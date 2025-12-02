@@ -11,11 +11,11 @@ public class Choice16 : ChoiceBase
             KnightTrapManager.Instance.Activate();
         }
 
-        Debug.Log("검사 스켈레톤 한 마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
     }
 
     protected override void StepB()
     {
-        Debug.Log("엘리트 스켈레톤 한 마리 소환");
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonElite);
     }
 }
