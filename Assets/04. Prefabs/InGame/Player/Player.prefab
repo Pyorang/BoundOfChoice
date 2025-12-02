@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac8f548797af6445961366a502255d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnOffset: {x: 0, y: 0}
   _cost: 20
   _damage: 0
   _attackRange: 8
@@ -81,9 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13baef1324c6f74eb83a597d64b8060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnOffset: {x: 0, y: 0}
   _cost: 40
   _damage: 40
-  _spawnOffset: {x: 0, y: 0}
 --- !u!1 &2014739114944699033
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoingWith: 0
   _characterType: 1
-  _spawnOffset: {x: 1, y: 0}
+  _spawnOffset: {x: 1, y: -0.5}
 --- !u!1 &4659175342300605240
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +234,8 @@ MonoBehaviour:
   - {fileID: 1657108375121986337}
   - {fileID: 8589633340993306565}
   - {fileID: 4699530460100683936}
+  _switchEffect: {fileID: 0}
+  playerVision: {fileID: 0}
 --- !u!61 &4510558363928938250
 BoxCollider2D:
   m_ObjectHideFlags: 0
