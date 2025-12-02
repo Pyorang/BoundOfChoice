@@ -139,6 +139,8 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
             AudioManager.Instance.Play(AudioType.SFX, "Typing");
             yield return waitDelay;
         }
+
+        Angel.Instance.EnableLevers();
     }
 
     public int GetCurrentChoiceID()

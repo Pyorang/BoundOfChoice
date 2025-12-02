@@ -5,7 +5,7 @@ public class LeverController : InteractObjectBase
     [Header("왼쪽 레버")]
     [SerializeField] private bool _isLeft;
 
-    private bool canInteract = true;
+    private bool canInteract = false;
 
     private Animator _animator;
 
@@ -20,6 +20,7 @@ public class LeverController : InteractObjectBase
     {
         if(canInteract)
         {
+            Angel.Instance.DisableLevers();
             _animator.SetTrigger(_pull);
             AudioManager.Instance.Play(AudioType.SFX, "Lever");
             CameraController.Instance.StartShake();
