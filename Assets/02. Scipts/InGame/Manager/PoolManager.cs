@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum EPoolType
 {
-    Arrow,
+    ArrowProjectile,
     MagicBolt,
     FireBall,
     Blood1,

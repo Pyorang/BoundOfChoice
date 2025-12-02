@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Arrow : ProjectileBase
+public class ArrowProjectile : ProjectileBase
 {
     [Header("설정")]
     [Space]

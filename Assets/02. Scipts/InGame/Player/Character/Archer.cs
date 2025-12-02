@@ -11,7 +11,7 @@ public class Archer : CharacterBase
         AudioManager.Instance.Play(AudioType.SFX, "ShootArrow");
         if (!InventoryUI.Instance.TryConsumeItem(EItemType.ArrowItem)) return;
 
-        GameObject arrowObject = PoolManager.Instance.GetObject(EPoolType.Arrow);
+        GameObject arrowObject = PoolManager.Instance.GetObject(EPoolType.ArrowProjectile);
         arrowObject.GetComponent<ProjectileBase>().Init((Vector2)transform.position + _spawnOffset * direction, direction, additionalDamage);
     }
 }
