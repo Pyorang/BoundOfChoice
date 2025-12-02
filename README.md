@@ -1,6 +1,3 @@
-# Bound Of Choice
-<br>
-
 ## 💡 커밋 메시지 및 브랜치 명명 규칙 (Bound Of Choice)
 
 팀의 코드 변경 사항을 명확하고 통일성 있게 관리하기 위한 커밋 태그 및 브랜치 명명 규칙입니다.
@@ -35,3 +32,26 @@ feat: 새로운 스킬 이펙트 추가 bugfix: 로그인 시 토큰 만료 오�
 * `feat/player-jump`
 * `bugfix/login-error`
 * `refactor/naming-convention`
+
+---
+
+# PR 양식
+
+### 🚀 주요 변경 내용
+
+- 어떤 점이 추가되거나 바뀌었는지 설명.
+
+---
+
+### 💬 참고 사항
+
+- 편한 이해를 위해 참고 링크나 작업한 내용의 스크린샷을 추가
+- 혹은 리뷰어들에게 강조하고 싶은 부분을 추가한다.
+
+---
+
+### ✅ Checklist (완료 조건)
+
+- [ ] 코드 스타일 가이드 준수했는가?
+- [ ] Reviewers / Assignees / Labels / Milestone 지정 완료했는가?
+- [ ] 기획서의 내용을 준수했는가?

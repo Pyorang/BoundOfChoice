@@ -49,7 +49,7 @@ public class BaseUI : MonoBehaviour
     {
         if (isCloseAll == false)
         {
-            _actionOnClose?.Invoke();
+            SafeInvoke(_actionOnClose);
         }
         _actionOnClose = null;
 
@@ -58,7 +58,22 @@ public class BaseUI : MonoBehaviour
 
     public virtual void OnClickCloseButton()
     {
-        AudioManager.Instance.Play(AudioType.SFX, "ui_closeUi_button_click");
+        AudioManager.Instance.Play(AudioType.SFX, "Button");
         Close();
+    }
+
+    private void SafeInvoke(Action action)
+    {
+        if (action == null) return;
+        try
+        {
+            action.Invoke();
+        }
+        catch (MissingReferenceException)
+        {
+#if UNITY_EDITOR
+            Debug.LogWarning("UI callback target was destroyed - this is usually safe to ignore");
+#endif
+        }
     }
 }

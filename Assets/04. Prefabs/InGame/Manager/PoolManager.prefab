@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8937632008960055562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1688440188099851960}
+  - component: {fileID: 9140848983273698976}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1688440188099851960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937632008960055562}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9140848983273698976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937632008960055562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a899e28d71a35f4caea4adf14173dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolInfos:
+  - Type: 0
+    PoolObjectPrefab: {fileID: 8338366374168078172, guid: 1f50861e3a3e2ca4faa6737c69a7807f, type: 3}
+    InitialCount: 10
+  - Type: 1
+    PoolObjectPrefab: {fileID: 1834993133714401280, guid: 3172cd5a659ad0d4b87c0599ece42c93, type: 3}
+    InitialCount: 10
+  - Type: 2
+    PoolObjectPrefab: {fileID: 6611910325252506188, guid: 12d907e3b9ea1cb4397f03c277179e92, type: 3}
+    InitialCount: 3
+  - Type: 3
+    PoolObjectPrefab: {fileID: 4719400844096504887, guid: a2c8f9eec05fbb04d9971c415a45c00b, type: 3}
+    InitialCount: 5
+  - Type: 4
+    PoolObjectPrefab: {fileID: 5785812938952624945, guid: 81818e44ebd9b3e4ba54fafc2d82f8f0, type: 3}
+    InitialCount: 5
+  - Type: 5
+    PoolObjectPrefab: {fileID: 1191412266184747600, guid: 06584e83d082a9748a9bc7e8009a5e79, type: 3}
+    InitialCount: 5
+  - Type: 6
+    PoolObjectPrefab: {fileID: 8085916913877910401, guid: 3bb2d96c0e611ef4f91e8ce883bc28d8, type: 3}
+    InitialCount: 3
+  - Type: 7
+    PoolObjectPrefab: {fileID: 5378074776663993024, guid: 01a2144d1cc4cee49b12594b891c4cd8, type: 3}
+    InitialCount: 5
+  - Type: 8
+    PoolObjectPrefab: {fileID: 5456099097848049636, guid: 55d0c11e357f7344c8a52c0180db5e97, type: 3}
+    InitialCount: 1
+  - Type: 9
+    PoolObjectPrefab: {fileID: 3849629504262734782, guid: f55e0543018cfa14f9740e4d82d5b543, type: 3}
+    InitialCount: 4
+  - Type: 10
+    PoolObjectPrefab: {fileID: 5337163316377113064, guid: 68cc4534569cba840bd751a36539aea2, type: 3}
+    InitialCount: 5
+  - Type: 11
+    PoolObjectPrefab: {fileID: 6008387672266635162, guid: f91760a6b4c7eb44fb9b08271362c2b0, type: 3}
+    InitialCount: 5
+  - Type: 12
+    PoolObjectPrefab: {fileID: 3016634609717171538, guid: 352be1cea4c117344bdadce4d7707610, type: 3}
+    InitialCount: 2
+  - Type: 13
+    PoolObjectPrefab: {fileID: 7482009537397993159, guid: aed2ae41d7ae08647a891cb4d4250350, type: 3}
+    InitialCount: 5
+  - Type: 14
+    PoolObjectPrefab: {fileID: 8968840046097116836, guid: 6a3901db91da1c94e80e3115878036eb, type: 3}
+    InitialCount: 1
