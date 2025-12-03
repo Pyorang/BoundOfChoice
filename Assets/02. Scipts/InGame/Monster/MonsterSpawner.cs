@@ -6,6 +6,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 {
     [Header("몬스터 간격")]
     [SerializeField] private float _monsterSpacing;
+    [SerializeField] private float _maxSpawnWidth;
 
     private int _currentMonsterCount = 0;
     public int CurrentMonsterCount
@@ -66,12 +67,15 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         float spawnX = transform.position.x;
 
         float totalWidth = (monsterTypes.Length - 1) * _monsterSpacing;
+        totalWidth = Math.Min(totalWidth, _maxSpawnWidth);
+
+        float monsterSpacing = totalWidth / (monsterTypes.Length - 1);
 
         float startOffset = -totalWidth / 2f;
 
         for (int i = 0; i < monsterTypes.Length; ++i)
         {
-            float offsetX = spawnX + startOffset + i * _monsterSpacing;
+            float offsetX = spawnX + startOffset + i * monsterSpacing;
 
             SpawnMonster(monsterTypes[i], offsetX);
         }
@@ -91,5 +95,24 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
             yield return spawnDelayTime;
 
         } while (UnityEngine.Random.value <= spawnRepeatChance);
+    }
+
+    public void asdf()
+    {
+        SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman
+            }
+        );
     }
 }
