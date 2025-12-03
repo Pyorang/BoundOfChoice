@@ -57,7 +57,7 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
     private void Start()
     {
         _moveSpeed = _minMoveSpeed;
-        OnSpeedChanged?.Invoke((int)AdditionalMoveSpeed);
+        OnSpeedChanged?.Invoke(AdditionalMoveSpeed);
     }
 
     private void Update()
