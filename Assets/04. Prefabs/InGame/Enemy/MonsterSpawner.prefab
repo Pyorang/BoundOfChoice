@@ -44,14 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fbcc25562e89b43a187ae4d168f396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monsterPrefabInfos:
-  - ID: 0
-    Prefab: {fileID: 5337163316377113064, guid: 68cc4534569cba840bd751a36539aea2, type: 3}
-  - ID: 1
-    Prefab: {fileID: 6008387672266635162, guid: f91760a6b4c7eb44fb9b08271362c2b0, type: 3}
-  - ID: 2
-    Prefab: {fileID: 3016634609717171538, guid: 352be1cea4c117344bdadce4d7707610, type: 3}
-  - ID: 3
-    Prefab: {fileID: 7482009537397993159, guid: aed2ae41d7ae08647a891cb4d4250350, type: 3}
-  - ID: 4
-    Prefab: {fileID: 8968840046097116836, guid: 6a3901db91da1c94e80e3115878036eb, type: 3}
+  _monsterSpacing: 1.5
+  _maxSpawnWidth: 7.5

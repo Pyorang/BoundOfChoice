@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 5
+  _itemPoolType: 19
   _itemImage: {fileID: 5511694400809781755}
   _showItemCount: 0
   _skill: {fileID: -4303214590827219679}
@@ -118,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13baef1324c6f74eb83a597d64b8060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnOffset: {x: 1.5, y: 0.5}
   _cost: 50
   _damage: 90
-  _spawnOffset: {x: 1.5, y: 0.5}
 --- !u!61 &3447672034653440611
 BoxCollider2D:
   m_ObjectHideFlags: 0

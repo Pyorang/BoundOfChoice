@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class Choice17 : ChoiceBase
 {
-    private static readonly float ASpawnRepeatChance = 0.65f;
+    private static readonly float s_spawnRepeatChance = 0.65f;
+    private static readonly float s_spawnDelay = 1.5f;
+    private static readonly WaitForSeconds s_waitDelayTime = new WaitForSeconds(s_spawnDelay);
 
     protected override void StepLeft()
     {
-        do
-        {
-            MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
-        } while (Random.value <= ASpawnRepeatChance);
+        MonsterSpawner.Instance.SpawnMonstersWithDelay(EPoolType.SkeletonSwrodsman, s_waitDelayTime, s_spawnRepeatChance);
     }
 
     protected override void StepRight()

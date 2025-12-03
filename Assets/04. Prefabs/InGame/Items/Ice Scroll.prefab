@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac8f548797af6445961366a502255d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnOffset: {x: 0, y: 0}
   _cost: 30
   _damage: 0
   _attackRange: 8
@@ -168,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 6
+  _itemPoolType: 20
   _itemImage: {fileID: 1118668361926071604}
   _showItemCount: 0
   _skill: {fileID: 6354701131354539584}
