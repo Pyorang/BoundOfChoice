@@ -16,4 +16,14 @@ public class RangedSpell : MonoBehaviour
 
         spell.GetComponent<ProjectileBase>().Init(spawnPoint, 1, 0);
     }
+
+    private void CastSpellAtPlayerPosition()
+    {
+        GameObject spell = PoolManager.Instance.GetObject(EPoolType.Spell);
+
+        Vector2 spawnPoint = PlayerMovement.Instance.transform.position;
+        spawnPoint.y = spell.transform.position.y;
+
+        spell.GetComponent<ProjectileBase>().Init(spawnPoint, 1, 0);
+    }
 }
