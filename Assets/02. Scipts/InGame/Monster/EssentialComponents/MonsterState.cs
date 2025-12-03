@@ -16,6 +16,7 @@ public class MonsterState : MonoBehaviour
     [Header("시작 상태")]
     [Space]
     [SerializeField] private EMonsterState _state;
+    private EMonsterState _defaultState;
 
     [Header("플레이어 추격 거리 설정")]
     [Space]
@@ -28,9 +29,19 @@ public class MonsterState : MonoBehaviour
     private float _distanceToPlayer;
     public float DistanceToPlayer => _distanceToPlayer;
 
+    private void Awake()
+    {
+        _defaultState = _state;
+    }
+
     private void Start()
     {
         _player = PlayerMovement.Instance.transform;
+    }
+
+    private void OnEnable()
+    {
+        _state = _defaultState;
     }
 
     public void DetermineState()
