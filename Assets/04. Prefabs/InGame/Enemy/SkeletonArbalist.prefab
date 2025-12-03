@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropItem: 18
-  _dropCount: 7
+  _dropCount: 4
   _dropChance: 0.5
 --- !u!114 &2024366942414526228
 MonoBehaviour:
