@@ -8,6 +8,14 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
     [SerializeField] private float _monsterSpacing;
     [SerializeField] private float _maxSpawnWidth;
 
+    private static readonly EPoolType[] SkeletonTypes = new EPoolType[]
+    {
+        EPoolType.SkeletonSwordsman,
+        EPoolType.SkeletonArbalist,
+        EPoolType.SkeletonNecro,
+        EPoolType.SkeletonElite
+    };
+
     private int _currentMonsterCount = 0;
     public int CurrentMonsterCount
     {
@@ -81,6 +89,21 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
             SpawnMonster(monsterTypes[i], offsetX);
         }
+    }
+
+    public void SpawnRandomSkeletons(int count)
+    {
+        if (count <= 0) return;
+
+        Span<EPoolType> spawnList = stackalloc EPoolType[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, SkeletonTypes.Length);
+            spawnList[i] = SkeletonTypes[randomIndex];
+        }
+
+        SpawnMonsters(spawnList);
     }
 
     public void SpawnMonstersWithDelay(EPoolType monsterType, WaitForSeconds spawnDelayTime, float spawnRepeatChance)
