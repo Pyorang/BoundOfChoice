@@ -22,6 +22,6 @@ public class ItemDropper : MonoBehaviour
 
         Vector2 dropPosition = Vector2.zero;
         dropPosition.x = transform.position.x;
-        GameObject item = ItemSpawner.Instance.SpawnItem(_dropItem, dropPosition);
+        ItemSpawner.Instance.SpawnItem(_dropItem, dropPosition);
     }
 }

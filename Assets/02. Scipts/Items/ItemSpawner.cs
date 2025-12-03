@@ -35,6 +35,9 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
 
         if (itemRigidbody == null) return item;
 
+        itemRigidbody.linearVelocity = Vector2.zero;
+        itemRigidbody.angularVelocity = 0f;
+
         Vector2 dropDirection = Random.insideUnitCircle.normalized;
 
         if (dropDirection.y < _minYForce)
