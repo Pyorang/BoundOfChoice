@@ -13,6 +13,12 @@ public class Choice17 : ChoiceBase
 
     protected override void StepRight()
     {
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
+        MonsterSpawner.Instance.SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonNecro,
+                EPoolType.SkeletonElite
+            }
+        );
     }
 }

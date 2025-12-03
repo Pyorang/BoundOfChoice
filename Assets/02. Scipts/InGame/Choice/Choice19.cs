@@ -9,9 +9,9 @@ public class Choice19 : ChoiceBase
         MonsterSpawner.Instance.SpawnMonsters(
             stackalloc EPoolType[]
             {
-                EPoolType.SkeletonSwrodsman,
                 EPoolType.SkeletonArbalist,
-                EPoolType.SkeletonArbalist
+                EPoolType.SkeletonArbalist,
+                EPoolType.SkeletonSwrodsman
             }
         );
     }
