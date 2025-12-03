@@ -13,20 +13,24 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
     [Space]
     [SerializeField] private int _minMoveSpeed = 3;
     [SerializeField] private int _maxMoveSpeed = 13;
-    [SerializeField] private int _moveSpeed = 3;
+    [SerializeField] private int _moveSpeed;
     [SerializeField] private float _jumpForce = 5;
     private float _xMovement = 0.0f;
 
     private int _additionalMoveSpeed = 0;
     public int AdditionalMoveSpeed
     {
-        get { return _additionalMoveSpeed; }
+        get => _additionalMoveSpeed;
         set
         {
-            if (value < 0) return;
+            if (value < 0)
+            {
+                return;
+            }
+
             _additionalMoveSpeed = value;
             OnSpeedChanged?.Invoke(value);
-            _moveSpeed = Mathf.Clamp(_moveSpeed + _additionalMoveSpeed, _minMoveSpeed, _maxMoveSpeed);
+            _moveSpeed = Mathf.Clamp(_minMoveSpeed + _additionalMoveSpeed, _minMoveSpeed, _maxMoveSpeed);
         }
     }
 
@@ -52,6 +56,7 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 
     private void Start()
     {
+        _moveSpeed = _minMoveSpeed;
         OnSpeedChanged?.Invoke((int)AdditionalMoveSpeed);
     }
 
@@ -110,7 +115,7 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 
     public void ResetSpeed()
     {
-        AdditionalMoveSpeed = _minMoveSpeed;
+        AdditionalMoveSpeed = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
