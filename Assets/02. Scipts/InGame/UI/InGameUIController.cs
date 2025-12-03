@@ -97,14 +97,15 @@ public class InGameUIController : MonoBehaviour
                 TryToggleUI(EWindowUIType.Inventory);
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                TryToggleUI(EWindowUIType.Setting);
-            }
-
             if (Input.GetKeyDown(KeyCode.BackQuote))
             {
                 TryToggleUI(EWindowUIType.Shop);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (TryCloseCurrentUI()) return;
+                TryToggleUI(EWindowUIType.Setting);
             }
         }
     }
@@ -117,6 +118,15 @@ public class InGameUIController : MonoBehaviour
             _windowUiToggleActions[type]();
             _currentWindowUI = (_currentWindowUI == type) ? EWindowUIType.None : type;
         }
+    }
+
+    private bool TryCloseCurrentUI()
+    {
+        if (_currentWindowUI == EWindowUIType.None) return false;
+
+        _windowUiToggleActions[_currentWindowUI]();
+        _currentWindowUI = EWindowUIType.None;
+        return true;
     }
 
     private void ChangeCharacterUIInfo(int characterType)
