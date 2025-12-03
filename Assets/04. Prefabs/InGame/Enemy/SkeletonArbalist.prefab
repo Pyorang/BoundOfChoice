@@ -290,6 +290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f249dd6411b66ae448507ee3cc6b87cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _additionalDamageAmount: 0
+  _additionalSpeed: 0
+  _additionalMaxHealth: 0
+  _goldAmount: 0
   _dropItem: 18
   _dropCount: 4
   _dropChance: 0.5
