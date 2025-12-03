@@ -9,7 +9,9 @@ public class MagicBolt : ProjectileBase
     public override void ApplyDamage(Collider2D other)
     {
         if (!other.CompareTag("Enemy")) return;
-        other.GetComponent<MonsterController>()?.TakeDamage(_finalDamage);
+        MonsterController monster = other.GetComponent<MonsterController>();
+        if (monster == null) return;
+        if (!monster.TakeDamage(_finalDamage)) return;
 
         Collider2D[] nearEnemies =
             Physics2D.OverlapCircleAll(this.transform.position, _splashDistance, _enemyLayer);

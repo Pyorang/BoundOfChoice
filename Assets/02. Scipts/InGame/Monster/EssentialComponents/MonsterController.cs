@@ -112,10 +112,12 @@ public class MonsterController : MonoBehaviour
         _state.SetState(EMonsterState.Attack);
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
-        if (_state.State == EMonsterState.None) return;
+        if (_state.State == EMonsterState.Death) return false;
+        if (_state.State == EMonsterState.None) return false;
         _stats.TakeDamage(damage);
+        return true;
     }
 
     private void HandleTakeDamage()
