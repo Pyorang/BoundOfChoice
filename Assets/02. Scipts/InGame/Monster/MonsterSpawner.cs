@@ -64,6 +64,8 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
     public void SpawnMonsters(ReadOnlySpan<EPoolType> monsterTypes)
     {
+        if (monsterTypes.Length <= 1) return;
+
         float spawnX = transform.position.x;
 
         float totalWidth = (monsterTypes.Length - 1) * _monsterSpacing;
