@@ -12,7 +12,12 @@ public class Choice15 : ChoiceBase
 
     protected override void StepRight()
     {
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
+        MonsterSpawner.Instance.SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman
+            }
+        );
     }
 }

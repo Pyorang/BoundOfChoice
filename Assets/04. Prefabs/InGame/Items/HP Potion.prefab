@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 2
+  _itemPoolType: 16
   _itemImage: {fileID: 384535668486497040}
   _showItemCount: 1
   _amount: 60

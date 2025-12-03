@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 1
+  _itemPoolType: 15
   _itemImage: {fileID: 7372512845220210203}
   _showItemCount: 1
   _amount: 30

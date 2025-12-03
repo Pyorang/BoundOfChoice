@@ -17,6 +17,8 @@ public abstract class ItemBase : InteractObjectBase
     public bool ShowItemCount => _showItemCount;
     public ItemModel ItemInfo => _itemModel;
 
+    private GainItemEffect _gainItemEffect;
+
     private void Awake()
     {
         ItemModelInit();
@@ -25,7 +27,9 @@ public abstract class ItemBase : InteractObjectBase
     private void ItemModelInit()
     {
         _itemModel = DataTableManager.Instance.GetItemModel(GetItemID() - 1);
+        _gainItemEffect = GetComponent<GainItemEffect>();
     }
+
     public int GetItemID()
     {
         return (int)_itemType;
@@ -33,8 +37,9 @@ public abstract class ItemBase : InteractObjectBase
 
     public override void GetItem()
     {
+        if (_gainItemEffect == null || !_gainItemEffect.PlayGainEffect()) return;
         InventoryUI.Instance.GetItem(this, 1);
-        gameObject.SetActive(false);
     }
+
     public abstract bool ApplyEffect();
 }

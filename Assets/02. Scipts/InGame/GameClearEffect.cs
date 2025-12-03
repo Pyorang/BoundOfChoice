@@ -6,7 +6,7 @@ public class GameClearEffect : MonoBehaviour
 {
     [Header("이펙트 수치 설정")]
     [SerializeField] private float _duration;
-    [SerializeField] private float _targetGobalIntensity;
+    [SerializeField] private float _targetGlobalIntensity;
     [SerializeField] private float _targetPlayerIntensity;
     [SerializeField] private float _targetOuterRadius;
 
@@ -14,7 +14,7 @@ public class GameClearEffect : MonoBehaviour
     [SerializeField] private Light2D _globalLight;
     [SerializeField] private Light2D _playerLight;
 
-    private float _startGobalIntensity;
+    private float _startGlobalIntensity;
     private float _startPlayerIntensity;
     private float _startOuterRadius;
 
@@ -30,7 +30,7 @@ public class GameClearEffect : MonoBehaviour
 
     private void StartEffect()
     {
-        _startGobalIntensity = _globalLight.intensity;
+        _startGlobalIntensity = _globalLight.intensity;
         _startPlayerIntensity = _playerLight.intensity;
         _startOuterRadius = _playerLight.pointLightOuterRadius;
 
@@ -41,9 +41,9 @@ public class GameClearEffect : MonoBehaviour
     {
         float timer = 0f;
 
-        float invDuration = 1f / _duration;
+        float inverseDuration = 1f / _duration;
 
-        float deltaGlobalIntensity = _targetGobalIntensity - _startGobalIntensity;
+        float deltaGlobalIntensity = _targetGlobalIntensity - _startGlobalIntensity;
         float deltaPlayerIntensity = _targetPlayerIntensity - _startPlayerIntensity;
         float deltaOuterRadius = _targetOuterRadius - _startOuterRadius;
 
@@ -51,13 +51,13 @@ public class GameClearEffect : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            float t = timer * invDuration;
+            float timeRate = timer * inverseDuration;
 
-            if (t > 1f) t = 1f;
+            if (timeRate > 1f) timeRate = 1f;
 
-            _globalLight.intensity = _startGobalIntensity + (deltaGlobalIntensity * t);
-            _playerLight.intensity = _startPlayerIntensity + (deltaPlayerIntensity * t);
-            _playerLight.pointLightOuterRadius = _startOuterRadius + (deltaOuterRadius * t);
+            _globalLight.intensity = _startGlobalIntensity + (deltaGlobalIntensity * timeRate);
+            _playerLight.intensity = _startPlayerIntensity + (deltaPlayerIntensity * timeRate);
+            _playerLight.pointLightOuterRadius = _startOuterRadius + (deltaOuterRadius * timeRate);
 
             yield return null;
         }

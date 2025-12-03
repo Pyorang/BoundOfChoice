@@ -49,12 +49,12 @@ public class SpiritEffect : MonoBehaviour
         while (timer < _effectDuration)
         {
             timer += Time.deltaTime;
-            float t = timer / _effectDuration;
+            float timeRate = timer / _effectDuration;
 
-            float curvedT = _speedCurve.Evaluate(t);
+            float curvedTimeRate = _speedCurve.Evaluate(timeRate);
 
-            Vector3 currentPosition = GetBezierPoint(startPosition, _controlPoint1, _controlPoint2, endPosition, curvedT);
-            effect.transform.position = currentPosition;
+            Vector3 newPosition = GetBezierPoint(startPosition, _controlPoint1, _controlPoint2, endPosition, curvedTimeRate);
+            effect.transform.position = newPosition;
 
             yield return null;
         }
