@@ -7,12 +7,12 @@ public class PlayerAnimator : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
 
-    private static readonly int s_attack = Animator.StringToHash("Attack");
-    private static readonly int s_hit = Animator.StringToHash("Hit");
-    private static readonly int s_death = Animator.StringToHash("Death");
-    private static readonly int s_jump = Animator.StringToHash("Jump");
-    private static readonly int s_isRun = Animator.StringToHash("IsRun");
-    private static readonly int s_isOnGround = Animator.StringToHash("IsOnGround");
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int Hit = Animator.StringToHash("Hit");
+    private static readonly int Death = Animator.StringToHash("Death");
+    private static readonly int Jump = Animator.StringToHash("Jump");
+    private static readonly int IsRun = Animator.StringToHash("IsRun");
+    private static readonly int IsOnGround = Animator.StringToHash("IsOnGround");
 
     private void Awake()
     {
@@ -22,40 +22,40 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayAttackAnimation()
     {
-        _animator.SetTrigger(s_attack);
+        _animator.SetTrigger(Attack);
     }
 
     public void PlayHitAnimation()
     {
-        _animator.SetTrigger(s_hit);
+        _animator.SetTrigger(Hit);
     }
 
     public void PlayDeathAnimation()
     {
-        _animator.SetTrigger(s_death);
+        _animator.SetTrigger(Death);
     }
 
     public void PlayJumpAnimation()
     {
-        if (!_animator.GetBool(s_isOnGround)) return;
-        _animator.SetTrigger(s_jump);
-        _animator.SetBool(s_isOnGround, false);
+        if (!_animator.GetBool(IsOnGround)) return;
+        _animator.SetTrigger(Jump);
+        _animator.SetBool(IsOnGround, false);
     }
 
     public void StopJumpAnimation()
     {
-        _animator.SetBool(s_isOnGround, true);
+        _animator.SetBool(IsOnGround, true);
     }
 
     public void PlayRunAnimation(bool flip)
     {
-        _animator.SetBool(s_isRun, true);
+        _animator.SetBool(IsRun, true);
         _spriteRenderer.flipX = flip;
     }
 
     public void StopRunAnimation()
     {
-        _animator.SetBool(s_isRun, false);
+        _animator.SetBool(IsRun, false);
     }
 
     public void ChangeAnimatorController(int index)

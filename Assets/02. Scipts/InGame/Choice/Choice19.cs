@@ -11,7 +11,7 @@ public class Choice19 : ChoiceBase
             {
                 EPoolType.SkeletonArbalist,
                 EPoolType.SkeletonArbalist,
-                EPoolType.SkeletonSwrodsman
+                EPoolType.SkeletonSwordsman
             }
         );
     }

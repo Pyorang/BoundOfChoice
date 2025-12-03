@@ -11,7 +11,7 @@ public class Choice16 : ChoiceBase
             KnightTrapManager.Instance.Activate();
         }
 
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwordsman);
     }
 
     protected override void StepRight()

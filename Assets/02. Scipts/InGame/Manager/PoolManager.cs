@@ -13,7 +13,7 @@ public enum EPoolType
     SkeletonArrow,
     Tombstone,
     Spell,
-    SkeletonSwrodsman,
+    SkeletonSwordsman,
     SkeletonArbalist,
     SkeletonElite,
     SkeletonNecro,

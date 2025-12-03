@@ -4,11 +4,11 @@ public class MonsterAnimator : MonoBehaviour
 {
     private Animator _animator;
 
-    private static readonly int s_isMoving = Animator.StringToHash("IsMoving");
-    private static readonly int s_attack = Animator.StringToHash("Attack");
-    private static readonly int s_specialAttack = Animator.StringToHash("SpecialAttack");
-    private static readonly int s_hit = Animator.StringToHash("Hit");
-    private static readonly int s_death = Animator.StringToHash("Death");
+    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int SpecialAttack = Animator.StringToHash("SpecialAttack");
+    private static readonly int Hit = Animator.StringToHash("Hit");
+    private static readonly int Death = Animator.StringToHash("Death");
 
     private const float FlipRotation = 180f;
     private const float NormalRotation = 0f;
@@ -20,28 +20,28 @@ public class MonsterAnimator : MonoBehaviour
 
     public void PlayMoveAnimation(bool isMoving)
     {
-        _animator.SetBool(s_isMoving, isMoving);
+        _animator.SetBool(IsMoving, isMoving);
     }
 
     public void PlayAttackAnimation()
     {
         PlayMoveAnimation(false);
-        _animator.SetTrigger(s_attack);
+        _animator.SetTrigger(Attack);
     }
 
     public void PlaySpecialAttackAnimation()
     {
-        _animator.SetTrigger(s_specialAttack);
+        _animator.SetTrigger(SpecialAttack);
     }
 
     public void PlayHitAnimation()
     {
-        _animator.SetTrigger(s_hit);
+        _animator.SetTrigger(Hit);
     }
 
     public void PlayDeathAnimation()
     {
-        _animator.SetTrigger(s_death);
+        _animator.SetTrigger(Death);
     }
 
     public void StopAnimation()

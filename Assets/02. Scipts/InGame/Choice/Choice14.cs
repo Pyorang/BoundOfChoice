@@ -10,14 +10,14 @@ public class Choice14 : ChoiceBase
         MonsterSpawner.Instance.SpawnMonsters(
             stackalloc EPoolType[]
             {
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman
+                EPoolType.SkeletonSwordsman,
+                EPoolType.SkeletonSwordsman
             }
         );
     }
 
     protected override void StepRight()
     {
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
+        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwordsman);
     }
 }

@@ -8,7 +8,7 @@ public class Choice17 : ChoiceBase
 
     protected override void StepLeft()
     {
-        MonsterSpawner.Instance.SpawnMonstersWithDelay(EPoolType.SkeletonSwrodsman, s_waitDelayTime, s_spawnRepeatChance);
+        MonsterSpawner.Instance.SpawnMonstersWithDelay(EPoolType.SkeletonSwordsman, s_waitDelayTime, s_spawnRepeatChance);
     }
 
     protected override void StepRight()
