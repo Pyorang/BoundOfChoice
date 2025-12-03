@@ -324,6 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _castInterval: 5
+  _startDelayRange: 2
 --- !u!114 &6776825082136196133
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,10 +6,12 @@ public class SpellCaster : MonoBehaviour
     [Header("주문 공격 설정")]
     [Space]
     [SerializeField] private float _castInterval;
+    [SerializeField] private float _startDelayRange;
 
     private MonsterAnimator _animator;
     private WaitForSeconds _waitInterval;
     private Coroutine _castCoroutine;
+
 
     private void Awake()
     {
@@ -37,6 +39,14 @@ public class SpellCaster : MonoBehaviour
 
     private IEnumerator CastCoroutine()
     {
+        float randomDelay = Random.Range(0f, _startDelayRange);
+        float timer = 0f;
+        while (timer < randomDelay)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
         while (true)
         {
             yield return _waitInterval;
