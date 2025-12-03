@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 {
+    [Header("몬스터 스폰 위치")]
+    [SerializeField] private float _minSpawnX;
+    [SerializeField] private float _maxSpawnX;
+    private const float HalfRate = 0.5f;
+
     [Header("몬스터 간격")]
     [SerializeField] private float _monsterSpacing;
     [SerializeField] private float _maxSpawnWidth;
@@ -42,24 +47,16 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         base.Init();
     }
 
-    public GameObject SpawnMonster(EPoolType monsterType)
-    {
-        CurrentMonsterCount++;
-
-        GameObject monster = PoolManager.Instance.GetObject(monsterType);
-
-        Vector3 spawnPosition = monster.transform.position;
-        spawnPosition.x = transform.position.x;
-        monster.transform.position = spawnPosition;
-
-        return monster;
-    }
-
-    public GameObject SpawnMonster(EPoolType monsterType, float positionX)
+    public GameObject SpawnMonster(EPoolType monsterType, float positionX = float.NaN)
     {
         ++CurrentMonsterCount;
 
         GameObject monster = PoolManager.Instance.GetObject(monsterType);
+
+        if(float.IsNaN(positionX))
+        {
+            positionX = UnityEngine.Random.Range(_minSpawnX, _maxSpawnX);
+        }
 
         monster.transform.position = new Vector3(
             positionX,
@@ -74,7 +71,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
     {
         if (monsterTypes.Length <= 1) return;
 
-        float spawnX = transform.position.x;
+        float baseSpawnX = transform.position.x;
 
         float totalWidth = (monsterTypes.Length - 1) * _monsterSpacing;
         totalWidth = Math.Min(totalWidth, _maxSpawnWidth);
@@ -83,11 +80,12 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
         float startOffset = -totalWidth / 2f;
 
+        float sign = UnityEngine.Random.value < HalfRate ? 1 : -1;
+
         for (int i = 0; i < monsterTypes.Length; ++i)
         {
-            float offsetX = spawnX + startOffset + i * monsterSpacing;
-
-            SpawnMonster(monsterTypes[i], offsetX);
+            float spawnX = baseSpawnX + startOffset + i * monsterSpacing;
+            SpawnMonster(monsterTypes[i], spawnX * sign);
         }
     }
 
