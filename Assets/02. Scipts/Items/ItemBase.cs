@@ -4,7 +4,6 @@ public abstract class ItemBase : InteractObjectBase
 {
     [Header("아이템 타입")]
     [SerializeField] private EItemType _itemType;
-    [SerializeField] private EPoolType _itemPoolType;
     private ItemModel _itemModel;
 
     [Header("아이템 이미지")]
@@ -18,7 +17,7 @@ public abstract class ItemBase : InteractObjectBase
     public bool ShowItemCount => _showItemCount;
     public ItemModel ItemInfo => _itemModel;
 
-    private static readonly string s_itemSound = "GainItem";
+    private GainItemEffect _gainItemEffect;
 
     private void Awake()
     {
@@ -28,6 +27,7 @@ public abstract class ItemBase : InteractObjectBase
     private void ItemModelInit()
     {
         _itemModel = DataTableManager.Instance.GetItemModel(GetItemID() - 1);
+        _gainItemEffect = GetComponent<GainItemEffect>();
     }
 
     public int GetItemID()
@@ -37,9 +37,8 @@ public abstract class ItemBase : InteractObjectBase
 
     public override void GetItem()
     {
-        AudioManager.Instance.Play(AudioType.SFX, s_itemSound);
+        if (_gainItemEffect == null || !_gainItemEffect.PlayGainEffect()) return;
         InventoryUI.Instance.GetItem(this, 1);
-        PoolManager.Instance.ReleaseObject(_itemPoolType, gameObject);
     }
 
     public abstract bool ApplyEffect();
