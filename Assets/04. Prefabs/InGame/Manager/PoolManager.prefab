@@ -90,3 +90,27 @@ MonoBehaviour:
   - Type: 14
     PoolObjectPrefab: {fileID: 8968840046097116836, guid: 6a3901db91da1c94e80e3115878036eb, type: 3}
     InitialCount: 1
+  - Type: 15
+    PoolObjectPrefab: {fileID: 3251068186013340284, guid: 2b25ee10e76df6d42a3a567eecfe8958, type: 3}
+    InitialCount: 0
+  - Type: 16
+    PoolObjectPrefab: {fileID: 3776646624497574961, guid: 72d82e48c93a59848ba6e3e144d11ed3, type: 3}
+    InitialCount: 0
+  - Type: 17
+    PoolObjectPrefab: {fileID: 4365059584085031791, guid: 7feb3f36013f2ba479b17defcbc28ef6, type: 3}
+    InitialCount: 0
+  - Type: 18
+    PoolObjectPrefab: {fileID: 6451897020152732300, guid: 782fc604b9104ce40ba18d862f106bab, type: 3}
+    InitialCount: 20
+  - Type: 19
+    PoolObjectPrefab: {fileID: 5427847787184718103, guid: 9202ec21a74090f4da9ea582c50782fe, type: 3}
+    InitialCount: 0
+  - Type: 20
+    PoolObjectPrefab: {fileID: 4411452716167821065, guid: af53e744fc0d40e4d98bd6d88808fa11, type: 3}
+    InitialCount: 0
+  - Type: 21
+    PoolObjectPrefab: {fileID: 3783661250427009729, guid: 9e437b332bafdc247bfab13d906e5a96, type: 3}
+    InitialCount: 0
+  - Type: 22
+    PoolObjectPrefab: {fileID: 7477457598763893956, guid: 7c5582ef731cddc4d9897ca083403001, type: 3}
+    InitialCount: 0
