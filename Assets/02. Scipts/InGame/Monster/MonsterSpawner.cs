@@ -96,23 +96,4 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
         } while (UnityEngine.Random.value <= spawnRepeatChance);
     }
-
-    public void asdf()
-    {
-        SpawnMonsters(
-            stackalloc EPoolType[]
-            {
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman,
-                EPoolType.SkeletonSwrodsman
-            }
-        );
-    }
 }

@@ -76,7 +76,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0625, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &5060480692063009718
 GameObject:
@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 4
+  _itemPoolType: 18
   _itemImage: {fileID: 8274043986205607747}
   _showItemCount: 1
 --- !u!50 &713700899592858753
