@@ -7,9 +7,15 @@ public class Choice25 : ChoiceBase
     protected override void StepA()
     {
         PlayerCombat.Instance.OpenCharacter(ECharacterType.Mage, MageAlreadyGainedGoldAmount);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
+
+        MonsterSpawner.Instance.SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonNecro,
+                EPoolType.SkeletonNecro,
+                EPoolType.SkeletonNecro
+            }
+        );
     }
 
     protected override void StepB()

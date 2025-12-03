@@ -9,8 +9,13 @@ public class Choice20 : ChoiceBase
 
     protected override void StepB()
     {
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonElite);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
+        MonsterSpawner.Instance.SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonElite,
+                EPoolType.SkeletonNecro,
+                EPoolType.SkeletonArbalist
+            }
+        );
     }
 }

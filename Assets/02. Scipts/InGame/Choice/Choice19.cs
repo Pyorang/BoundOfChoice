@@ -6,9 +6,14 @@ public class Choice19 : ChoiceBase
 
     protected override void StepA()
     {
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
+        MonsterSpawner.Instance.SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonArbalist,
+                EPoolType.SkeletonArbalist
+            }
+        );
     }
 
     protected override void StepB()

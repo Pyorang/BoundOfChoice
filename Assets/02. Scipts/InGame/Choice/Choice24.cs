@@ -7,10 +7,15 @@ public class Choice24 : ChoiceBase
     protected override void StepA()
     {
         PlayerCombat.Instance.OpenCharacter(ECharacterType.Archer, ArcherAlreadyGainedGoldAmount);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
+        MonsterSpawner.Instance.SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonArbalist,
+                EPoolType.SkeletonArbalist,
+                EPoolType.SkeletonArbalist,
+                EPoolType.SkeletonArbalist
+            }
+        );
     }
 
     protected override void StepB()

@@ -7,8 +7,13 @@ public class Choice14 : ChoiceBase
     protected override void StepA()
     {
         GoldManager.Instance.GetGold(AGoldAmount);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
-        MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
+        MonsterSpawner.Instance.SpawnMonsters(
+            stackalloc EPoolType[]
+            {
+                EPoolType.SkeletonSwrodsman,
+                EPoolType.SkeletonSwrodsman
+            }
+        );
     }
 
     protected override void StepB()

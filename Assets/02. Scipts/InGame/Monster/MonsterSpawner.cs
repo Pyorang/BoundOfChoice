@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
@@ -59,7 +60,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         return monster;
     }
 
-    public void SpawnMonsters(EPoolType[] monsterTypes)
+    public void SpawnMonsters(ReadOnlySpan<EPoolType> monsterTypes)
     {
         float SpawnX = transform.position.x;
 
