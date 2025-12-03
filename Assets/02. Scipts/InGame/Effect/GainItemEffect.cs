@@ -20,8 +20,13 @@ public class GainItemEffect : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         _playerTransform = PlayerMovement.Instance.transform;
     }
+
     private void OnEnable()
     {
         _isCollecting = false;

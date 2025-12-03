@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1459541515187164eb26f4b11fac5b37, type: 3}
   m_Name: SkeletonArbalist
   m_EditorClassIdentifier: 
-  _maxHealth: 300
-  _attackPower: 5
-  _moveSpeed: 2
+  _maxHealth: 120
+  _attackPower: 0
+  _moveSpeed: 3

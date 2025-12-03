@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1459541515187164eb26f4b11fac5b37, type: 3}
   m_Name: SkeletonNecro
   m_EditorClassIdentifier: 
-  _maxHealth: 350
-  _attackPower: 5
-  _moveSpeed: 1
+  _maxHealth: 150
+  _attackPower: 7
+  _moveSpeed: 3
