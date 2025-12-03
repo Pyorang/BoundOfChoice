@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6399380264233352311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8, y: -0.5, z: 0}
+  m_LocalPosition: {x: -3.3, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _state: 1
   _chaseDistance: 15
-  _attackDistance: 3
+  _attackDistance: 5
 --- !u!114 &6310419592373278200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPoint: {fileID: 3981700613233826456}
-  _attackBoxSize: {x: 5, y: 5}
+  _attackBoxSize: {x: 6, y: 5}
   _targetLayer:
     serializedVersion: 2
     m_Bits: 8

@@ -17,7 +17,9 @@ public class MagicBolt : ProjectileBase
     {
         if (_isDamageApplied) return;
         if (!other.CompareTag("Enemy")) return;
-        other.GetComponent<MonsterController>()?.TakeDamage(_finalDamage);
+        MonsterController monster = other.GetComponent<MonsterController>();
+        if (monster == null) return;
+        if (!monster.TakeDamage(_finalDamage)) return;
         _isDamageApplied = true;
         _animator.SetTrigger("Explode");
 

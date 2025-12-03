@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum EItemType
@@ -14,42 +13,39 @@ public enum EItemType
     EliminationTicket,
 }
 
-[System.Serializable]
-public struct ItemPrefabInfo
-{
-    public EItemType ItemType;
-    public GameObject Prefab;
-}
-
 public class ItemSpawner : SingletonBehaviour<ItemSpawner>
 {
-    [SerializeField] private List<ItemPrefabInfo> _itemPrefabInfos;
-    private Dictionary<EItemType, GameObject> _itemPrefabDict;
+    [Header("드롭 연출 설정")]
+    [Space]
+    [SerializeField] private float _dropForce;
+    [SerializeField] private float _minYForce;
 
     protected override void Init()
     {
         IsDestroyOnLoad = true;
         base.Init();
-
-        _itemPrefabDict = new Dictionary<EItemType, GameObject>();
-        foreach (var info in _itemPrefabInfos)
-        {
-            if (!_itemPrefabDict.TryAdd(info.ItemType, info.Prefab))
-            {
-                Debug.LogWarning($"중복된 아이템({info.ItemType})이 존재합니다.");
-            }
-        }
     }
 
-    public GameObject CreateItem(EItemType itemType, Vector2 position)
+    public GameObject SpawnItem(EPoolType itemType, Vector2 position)
     {
-        if (!_itemPrefabDict.TryGetValue(itemType, out GameObject prefab) || prefab == null)
+        GameObject item = PoolManager.Instance.GetObject(itemType);
+        item.transform.position = position;
+
+        Rigidbody2D itemRigidbody = item.GetComponent<Rigidbody2D>();
+
+        if (itemRigidbody == null) return item;
+
+        itemRigidbody.linearVelocity = Vector2.zero;
+        itemRigidbody.angularVelocity = 0f;
+
+        Vector2 dropDirection = Random.insideUnitCircle.normalized;
+
+        if (dropDirection.y < _minYForce)
         {
-            Debug.LogError($"아이템({itemType})이 없거나 프리팹이 null 입니다.");
-            return null;
+            dropDirection.y = _minYForce;
         }
 
-        GameObject item = Instantiate(prefab, position, Quaternion.identity, transform);
+        itemRigidbody.AddForce(dropDirection * _dropForce, ForceMode2D.Impulse);
 
         return item;
     }

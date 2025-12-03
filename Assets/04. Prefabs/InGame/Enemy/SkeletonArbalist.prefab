@@ -290,11 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f249dd6411b66ae448507ee3cc6b87cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dropItem: 4
+  _dropItem: 18
   _dropCount: 7
   _dropChance: 0.5
-  _dropForce: 5
-  _minYForce: 0.75
 --- !u!114 &2024366942414526228
 MonoBehaviour:
   m_ObjectHideFlags: 0

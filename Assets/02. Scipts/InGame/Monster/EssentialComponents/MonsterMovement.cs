@@ -50,7 +50,7 @@ public class MonsterMovement : MonoBehaviour
 
     public void ApplyKnockback(float distance)
     {
-        float directionX = Mathf.Sign(distance);
+        float directionX = -Mathf.Sign(distance);
         _knockBackVelocity = directionX * _knockBackForce;
         _knockBackTimer = _knockBackDuration;
     }

@@ -18,6 +18,14 @@ public enum EPoolType
     SkeletonElite,
     SkeletonNecro,
     BringerOfDeath,
+    Apple,
+    HealthPotion,
+    ManaPotion,
+    ArrowItem,
+    FireMagicScroll,
+    IceMagicScroll,
+    RerollTicket,
+    EliminationTicket,
 }
 
 [System.Serializable] public struct PoolInfo

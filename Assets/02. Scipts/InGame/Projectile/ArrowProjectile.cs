@@ -26,7 +26,7 @@ public class ArrowProjectile : ProjectileBase
         {
             MonsterController monster = other.GetComponent<MonsterController>();
             if (monster == null) return;
-            monster.TakeDamage(_finalDamage);
+            if (!monster.TakeDamage(_finalDamage)) return;
             _isDamageApplied = true;
         }
         ReleaseObject();

@@ -16,8 +16,8 @@ public class FireBall : ProjectileBase
         if (!other.CompareTag("Enemy")) return;
         MonsterController monster = other.GetComponent<MonsterController>();
         if (monster == null) return;
+        if (!monster.TakeDamage(_finalDamage)) return;
         monster.TakeDotDamage(_dotDamagePerTick, _dotDuration, _dotTickInterval);
-        monster.TakeDamage(_finalDamage);
         _isDamageApplied = true;
         _animator.SetTrigger("Explode");
     }

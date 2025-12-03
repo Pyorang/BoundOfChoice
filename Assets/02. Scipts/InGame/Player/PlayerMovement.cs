@@ -11,26 +11,33 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 
     [Header("이동 설정")]
     [Space]
-    [SerializeField] private int _moveSpeed = 1;
+    [SerializeField] private int _minMoveSpeed = 3;
+    [SerializeField] private int _maxMoveSpeed = 13;
+    [SerializeField] private int _moveSpeed;
     [SerializeField] private float _jumpForce = 5;
-    [SerializeField] private int _maxMoveSpeed = 10;
-    private readonly int _minMoveSpeed = 1;
     private float _xMovement = 0.0f;
+
+    private int _additionalMoveSpeed = 0;
+    public int AdditionalMoveSpeed
+    {
+        get => _additionalMoveSpeed;
+        set
+        {
+            if (value < 0)
+            {
+                return;
+            }
+
+            _additionalMoveSpeed = value;
+            OnSpeedChanged?.Invoke(value);
+            _moveSpeed = Mathf.Clamp(_minMoveSpeed + _additionalMoveSpeed, _minMoveSpeed, _maxMoveSpeed);
+        }
+    }
 
     public bool Moving => _xMovement != 0.0f || !_isOnGround;
 
     private int _playerDirection = 1;
     public int PlayerDirection => _playerDirection;
-
-    public int MoveSpeed
-    {
-        get => _moveSpeed;
-        set
-        {
-            _moveSpeed = Mathf.Clamp(value, _minMoveSpeed, _maxMoveSpeed);
-            OnSpeedChanged?.Invoke(_moveSpeed);
-        }
-    }
 
     private Rigidbody2D _rigidBody;
 
@@ -49,7 +56,8 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 
     private void Start()
     {
-        OnSpeedChanged?.Invoke((int)MoveSpeed);
+        _moveSpeed = _minMoveSpeed;
+        OnSpeedChanged?.Invoke(AdditionalMoveSpeed);
     }
 
     private void Update()
@@ -102,12 +110,12 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
             _playerAnimator.StopRunAnimation();
         }
 
-        _rigidBody.linearVelocityX = _xMovement * MoveSpeed;
+        _rigidBody.linearVelocityX = _xMovement * _moveSpeed;
     }
 
     public void ResetSpeed()
     {
-        MoveSpeed = _minMoveSpeed;
+        AdditionalMoveSpeed = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
