@@ -38,13 +38,13 @@
     },
     {
       "ID": "I_7",
-      "Price": 75,
+      "Price": 0,
       "Name": "Reroll Ticket",
       "Description": "When used, it changes the current selection to a different selection."
     },
     {
       "ID": "I_8",
-      "Price": 100,
+      "Price": 0,
       "Name": "Elimination Ticket",
       "Description": "When used, all enemies on the map are instantly killed."
     }
