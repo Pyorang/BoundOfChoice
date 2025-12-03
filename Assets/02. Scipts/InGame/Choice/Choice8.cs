@@ -7,21 +7,21 @@ public class Choice8 : ChoiceBase
 
     private static readonly int BDamageAmount = 40;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
-       _executeACount = ExecuteCount;
+       _executeLeftCount = ExecuteCount;
         ChoiceManager.OnLeftLeverInteracted += GiveDamage;
         ChoiceManager.OnRightLeverInteracted += GiveDamage;
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         PlayerHealth.Instance.TakeDamage(BDamageAmount);
     }
 
-    protected override void ExecuteRemainingA()
+    protected override void ExecuteLeftRemaining()
     {
-        if (_executeACount == 0)
+        if (_executeLeftCount == 0)
         {
             ChoiceManager.OnLeftLeverInteracted -= GiveDamage;
             ChoiceManager.OnRightLeverInteracted -= GiveDamage;

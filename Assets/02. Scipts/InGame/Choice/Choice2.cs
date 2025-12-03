@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Choice2 : ChoiceBase
 {
-    protected override void StepA()
+    protected override void StepLeft()
     {
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
     }
 }

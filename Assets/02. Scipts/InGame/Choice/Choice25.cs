@@ -4,7 +4,7 @@ public class Choice25 : ChoiceBase
 {
     private static readonly int MageAlreadyGainedGoldAmount = 70;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         PlayerCombat.Instance.OpenCharacter(ECharacterType.Mage, MageAlreadyGainedGoldAmount);
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
@@ -12,7 +12,7 @@ public class Choice25 : ChoiceBase
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonNecro);
     }

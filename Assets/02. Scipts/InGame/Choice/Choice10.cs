@@ -6,12 +6,12 @@ public class Choice10 : ChoiceBase
 
     private static readonly int BHealAmount = 5;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         GoldManager.Instance.GetGold(AGoldAmount);
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         PlayerHealth.Instance.Heal(BHealAmount);
     }

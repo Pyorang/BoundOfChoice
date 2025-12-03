@@ -12,30 +12,30 @@ public abstract class ChoiceBase
         }
     }
 
-    protected int _executeACount = 0;
-    protected int _executeBCount = 0;
+    protected int _executeLeftCount = 0;
+    protected int _executeRightCount = 0;
 
-    protected abstract void StepA();
-    protected abstract void StepB();
+    protected abstract void StepLeft();
+    protected abstract void StepRight();
 
-    public virtual void ExecuteA()
+    public virtual void ExecuteLeft()
     {
-        StepA();
+        StepLeft();
         GetNewChoice();
     }
 
-    public virtual void ExecuteB()
+    public virtual void ExecuteRight()
     {
-        StepB();
+        StepRight();
         GetNewChoice();
     }
 
-    protected virtual void ExecuteRemainingA()
+    protected virtual void ExecuteLeftRemaining()
     {
 
     }
 
-    protected virtual void ExecuteRemainingB()
+    protected virtual void ExecuteRightRemaining()
     {
 
     }
@@ -50,19 +50,19 @@ public abstract class ChoiceBase
 
     public void ProcessLeftTurn()
     {
-        if (_executeACount > 0)
+        if (_executeLeftCount > 0)
         {
-            _executeACount--;
+            _executeLeftCount--;
         }
-        if (_executeBCount > 0)
+        if (_executeRightCount > 0)
         {
-            _executeBCount--;
+            _executeRightCount--;
         }
 
-        ExecuteRemainingA();
-        ExecuteRemainingB();
+        ExecuteLeftRemaining();
+        ExecuteRightRemaining();
 
-        if (_executeACount == 0 && _executeBCount == 0)
+        if (_executeLeftCount == 0 && _executeRightCount == 0)
         {
             CanAppear = true;
         }

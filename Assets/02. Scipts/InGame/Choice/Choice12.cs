@@ -7,7 +7,7 @@ public class Choice12 : ChoiceBase
     private static readonly float BSpiritGainChance = 0.05f;
     private static readonly int BSpiritGainAmount = 1;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if(Random.value <= AEscapeChance)
         {
@@ -15,7 +15,7 @@ public class Choice12 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         if(Random.value <= BSpiritGainChance)
         {

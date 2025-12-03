@@ -6,7 +6,7 @@ public class Choice4 : ChoiceBase
     private static readonly int DamageAmount = 25;
     private static readonly int HealAmount = 35;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if(Random.value <= DamageChance)
         {
@@ -18,7 +18,7 @@ public class Choice4 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
 
     }

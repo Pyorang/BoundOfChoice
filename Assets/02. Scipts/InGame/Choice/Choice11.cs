@@ -7,7 +7,7 @@ public class Choice11 : ChoiceBase
 
     private static readonly int BSpiritGainAmount = 1;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if(Random.value <= ASpiritGainChance)
         {
@@ -15,7 +15,7 @@ public class Choice11 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         SpiritManager.Instance.GetSpirit(BSpiritGainAmount);
     }

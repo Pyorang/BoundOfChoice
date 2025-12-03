@@ -109,7 +109,7 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         _currentChoice = _choices[GetCurrentChoiceID() - 1];
     }
 
-    public void UpdateChoiceText(string textA, string textB)
+    public void UpdateChoiceText(string textLeft, string textRight)
     {
         if(_typingCoroutineLeft != null)
         {
@@ -120,8 +120,8 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
             StopCoroutine(_typingCoroutineRight);
         }
 
-        _typingCoroutineLeft = TypingEffect(_textLeft, textA, _typingDelay);
-        _typingCoroutineRight = TypingEffect(_textRight, textB, _typingDelay);
+        _typingCoroutineLeft = TypingEffect(_textLeft, textLeft, _typingDelay);
+        _typingCoroutineRight = TypingEffect(_textRight, textRight, _typingDelay);
 
         _typeLeftDone = false;
         _typeRightDone = false;
@@ -172,12 +172,12 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         if (IsLeftChoice)
         {
             OnLeftLeverInteracted?.Invoke();
-            _currentChoice.ExecuteA();
+            _currentChoice.ExecuteLeft();
         }
         else
         {
             OnRightLeverInteracted?.Invoke();
-            _currentChoice.ExecuteB();
+            _currentChoice.ExecuteRight();
         }
     }
 

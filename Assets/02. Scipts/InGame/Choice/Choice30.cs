@@ -5,7 +5,7 @@ public class Choice30 : ChoiceBase
     private static readonly float MoveSpeedResetChance = 0.3f;
     private static readonly float AdditionalDamageResetChance = 0.6f;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if(Random.value <= MoveSpeedResetChance)
         {
@@ -13,7 +13,7 @@ public class Choice30 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         if (Random.value <= AdditionalDamageResetChance)
         {
