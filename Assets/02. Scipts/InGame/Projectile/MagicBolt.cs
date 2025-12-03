@@ -2,16 +2,26 @@ using UnityEngine;
 
 public class MagicBolt : ProjectileBase
 {
+
+    [Header("애니메이터")]
+    [Space]
+    [SerializeField] private Animator _animator;
+
+    [Header("스플래쉬 데미지")]
+    [Space]
     [SerializeField] private float _splashDistance = 2.0f;
     [SerializeField] private float _splashDamageReduction = 0.5f;
     [SerializeField] private LayerMask _enemyLayer;
 
     public override void ApplyDamage(Collider2D other)
     {
+        if (_isDamageApplied) return;
         if (!other.CompareTag("Enemy")) return;
         MonsterController monster = other.GetComponent<MonsterController>();
         if (monster == null) return;
         if (!monster.TakeDamage(_finalDamage)) return;
+        _isDamageApplied = true;
+        _animator.SetTrigger("Explode");
 
         Collider2D[] nearEnemies =
             Physics2D.OverlapCircleAll(this.transform.position, _splashDistance, _enemyLayer);
@@ -21,12 +31,11 @@ public class MagicBolt : ProjectileBase
             if (nearEnemy == other) continue;
             nearEnemy.GetComponent<MonsterController>()?.TakeDamage(Mathf.RoundToInt(_damage * _splashDamageReduction));
         }
-
-        ReleaseObject();
     }
 
     public override void Move()
     {
+        if (_isDamageApplied) return;
         transform.Translate(Vector2.right * (_direction * _speed * Time.deltaTime));
     }
 

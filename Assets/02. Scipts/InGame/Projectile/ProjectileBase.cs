@@ -6,6 +6,7 @@ public abstract class ProjectileBase : MonoBehaviour
     [Space]
     [SerializeField] protected int _damage;
     protected int _finalDamage;
+    protected bool _isDamageApplied = false;
 
     [Header("이동")]
     [Space]
@@ -30,6 +31,7 @@ public abstract class ProjectileBase : MonoBehaviour
 
     public virtual void Init(Vector2 position, int direction, int additionalDamage = 0)
     {
+        _isDamageApplied = false;
         this.transform.position = position;
         _direction = direction;
         _renderer.flipX = (direction < 0);
