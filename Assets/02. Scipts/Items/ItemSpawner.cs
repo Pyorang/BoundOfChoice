@@ -26,7 +26,7 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
         base.Init();
     }
 
-    public GameObject SpawnItem(EPoolType itemType, Vector2 position)
+    public GameObject SpawnItem(EPoolType itemType, Vector3 position)
     {
         GameObject item = PoolManager.Instance.GetObject(itemType);
         item.transform.position = position;
