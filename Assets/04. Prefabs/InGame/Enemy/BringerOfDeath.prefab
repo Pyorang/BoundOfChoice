@@ -371,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minX: -20
   _maxX: 20
+  _poolType: 9
 --- !u!114 &1922580247676962100
 MonoBehaviour:
   m_ObjectHideFlags: 0

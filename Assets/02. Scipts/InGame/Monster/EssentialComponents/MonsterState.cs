@@ -46,9 +46,13 @@ public class MonsterState : MonoBehaviour
 
     public void DetermineState()
     {
-        if (_player == null) return;
-        _distanceToPlayer = _player.position.x - transform.position.x;
+        if (_player == null)
+        {
+            _state = EMonsterState.Patrol;
+            return;
+        }
 
+        _distanceToPlayer = _player.position.x - transform.position.x;
         if (IsPlayerInAttackRange())
         {
             _state = EMonsterState.Attack;
@@ -75,12 +79,18 @@ public class MonsterState : MonoBehaviour
 
     public float GetDistanceToPlayer()
     {
+        if (_player == null) return _distanceToPlayer;
         return _player.position.x - transform.position.x;
     }
 
     public void SetState(EMonsterState state)
     {
         _state = state;
+    }
+
+    public void ReleasePlayer()
+    {
+        _player = null;
     }
 
     public EMonsterState State => _state;

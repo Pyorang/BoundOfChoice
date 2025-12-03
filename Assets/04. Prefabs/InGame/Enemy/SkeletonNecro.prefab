@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 6456677892926679433}
   - component: {fileID: 4078161619843859942}
   - component: {fileID: 6818511307077864049}
-  - component: {fileID: 6776825082136196133}
+  - component: {fileID: 4810112849775283341}
   m_Layer: 6
   m_Name: SkeletonNecro
   m_TagString: Enemy
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _castInterval: 5
   _startDelayRange: 2
---- !u!114 &6776825082136196133
+--- !u!114 &4810112849775283341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,9 +334,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7482009537397993159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b65a480c5b2c47045b719dfec663b8a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1acb5c3e0ffb6134aaf002f40f1b5a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minX: -20
+  _maxX: 20
+  _poolType: 8
 --- !u!1 &8017264353889787166
 GameObject:
   m_ObjectHideFlags: 0

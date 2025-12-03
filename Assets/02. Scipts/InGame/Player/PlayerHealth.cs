@@ -36,6 +36,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
 
     private static readonly int _maxBloodNumber = 3;
 
+    public static event Action OnDeath;
     public static event Action<bool> OnHealthChange;
     public static event Action<int, int> OnHealthValueUpdate;
 
@@ -65,6 +66,7 @@ public class PlayerHealth : SingletonBehaviour<PlayerHealth>
         {
             UIManager.Instance.OpenUI<GameOverUI>(new BaseUIData());
             _isDeath = true;
+            OnDeath?.Invoke();
             AudioManager.Instance.Play(AudioType.SFX, "PlayerDie");
             _playerAnimator.PlayDeathAnimation();
         }
