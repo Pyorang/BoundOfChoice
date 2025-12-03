@@ -20,7 +20,7 @@ public class Choice13 : ChoiceBase
     protected override void StepRight()
     {
         PlayerCombat.Instance.AdditionalPower += BAdditionalDamageAmount;
-        PlayerMovement.Instance.MoveSpeed += BAdditionalSpeed;
+        PlayerMovement.Instance.AdditionalMoveSpeed += BAdditionalSpeed;
         PlayerHealth.Instance.MaxHealth += BAdditionalMaxHealth;
     }
 }

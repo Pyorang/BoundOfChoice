@@ -4527,6 +4527,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerVision
       objectReference: {fileID: 0}
+    - target: {fileID: 4802543602573509518, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
+      propertyPath: _jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802543602573509518, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
+      propertyPath: _moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802543602573509518, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
+      propertyPath: _maxMoveSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802543602573509518, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
+      propertyPath: _minMoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8572364200155463690, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4566,6 +4582,10 @@ PrefabInstance:
     - target: {fileID: 8572364200155463690, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8999589725191860525, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8999589725191860525, guid: b97cfd9e9a9ac14478d3cb05511317c6, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
