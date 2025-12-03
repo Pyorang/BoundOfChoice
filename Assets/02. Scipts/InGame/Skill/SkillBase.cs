@@ -9,7 +9,6 @@ public abstract class SkillBase : MonoBehaviour
     [Header("공격")]
     [Space]
     [SerializeField] private int _cost;
-    [SerializeField] protected int _damage;
 
     public void UseSkill()
     {

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoingWith: 0
   _characterType: 2
-  _magicBoltCost: 20
+  _magicBoltCost: 15
   _spawnOffset: {x: 1, y: 1}
 --- !u!114 &1231203226812644738
 MonoBehaviour:
@@ -63,13 +63,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnOffset: {x: 0, y: 0}
-  _cost: 20
-  _damage: 0
+  _cost: 30
   _attackRange: 8
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  _bindDuration: 2
+  _bindDuration: 3
 --- !u!114 &8284565954351412865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +83,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnOffset: {x: 0, y: 0}
   _cost: 40
-  _damage: 40
 --- !u!1 &2014739114944699033
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,9 +212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a28b26f694c374bae92d47bbcfda6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minMoveSpeed: 3
+  _maxMoveSpeed: 10
   _moveSpeed: 7
   _jumpForce: 7
-  _maxMoveSpeed: 10
 --- !u!114 &1271196531910990680
 MonoBehaviour:
   m_ObjectHideFlags: 0
