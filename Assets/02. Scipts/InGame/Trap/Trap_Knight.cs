@@ -42,6 +42,7 @@ public class Trap_Knight : MonoBehaviour
 
     public void Attack()
     {
+        AudioManager.Instance.Play(AudioType.SFX, "TrapAttack");
         CameraController.Instance.StartShake();
 
         // 2. 공격 중심 위치 및 방향 계산 (Attack과 Gizmo에서 동일하게 사용)
@@ -75,6 +76,11 @@ public class Trap_Knight : MonoBehaviour
         }
     }
 
+    private void PlayTrapActivatedSound()
+    {
+        AudioManager.Instance.Play(AudioType.SFX, "TrapActivated");
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
@@ -83,6 +89,7 @@ public class Trap_Knight : MonoBehaviour
             if (!CanAttack()) return;
 
             _animator.SetTrigger(AttackTrigger);
+            AudioManager.Instance.Play(AudioType.SFX, "TrapReady");
             SaveLastAttackTime();
         }
     }
