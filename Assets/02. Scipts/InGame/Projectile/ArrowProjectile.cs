@@ -12,8 +12,10 @@ public class ArrowProjectile : ProjectileBase
 
     public override void ApplyDamage(Collider2D other)
     {
+        if (_isHit) return;
         if (!other.CompareTag(_targetTag)) return;
 
+        _isHit = true;
         AudioManager.Instance.Play(AudioType.SFX, "ArrowHit");
 
         if (_targetTag == "Player")
