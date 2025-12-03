@@ -13,6 +13,6 @@ public class Choice29 : ChoiceBase
 
     protected override void StepRight()
     {
-        PlayerMovement.Instance.AdditionalMoveSpeed += Random.Range(0, BAdditionalSpeedAmount);
+        PlayerMovement.Instance.AdditionalMoveSpeed += Random.Range(0, BAdditionalSpeedAmount + 1);
     }
 }
