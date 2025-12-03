@@ -12,21 +12,22 @@ public class ArrowProjectile : ProjectileBase
 
     public override void ApplyDamage(Collider2D other)
     {
-        if (_isHit) return;
+        if (_isDamageApplied) return;
         if (!other.CompareTag(_targetTag)) return;
 
-        _isHit = true;
         AudioManager.Instance.Play(AudioType.SFX, "ArrowHit");
 
         if (_targetTag == "Player")
         {
             PlayerHealth.Instance.TakeDamage(_finalDamage);
+            _isDamageApplied = true;
         }
         else if(_targetTag == "Enemy")
         {
             MonsterController monster = other.GetComponent<MonsterController>();
             if (monster == null) return;
             monster.TakeDamage(_finalDamage);
+            _isDamageApplied = true;
         }
         ReleaseObject();
     }
