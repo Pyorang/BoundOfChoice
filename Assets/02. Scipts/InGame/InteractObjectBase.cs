@@ -16,9 +16,8 @@ public abstract class InteractObjectBase : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
         if (_player == null) return;
-
+        if (_player.gameObject != other.gameObject) return;
         _player.RemoveInteractableObject(this);
         _player = null;
     }
