@@ -8,13 +8,13 @@ public class Choice5 : ChoiceBase
     private static readonly int BHealAmount = 10;
     private static readonly int BManaRegenerateAmount = 40;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         PlayerHealth.Instance.Heal(AHealAmount);
         PlayerMana.Instance.RegenerateMana(AManaRegenerateAmount);
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         PlayerHealth.Instance.Heal(BHealAmount);
         PlayerMana.Instance.RegenerateMana(BManaRegenerateAmount);

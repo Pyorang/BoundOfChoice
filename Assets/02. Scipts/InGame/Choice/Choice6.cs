@@ -8,7 +8,7 @@ public class Choice6 : ChoiceBase
     private static readonly float BDamageChance = 0.8f;
     private static readonly float BDamageRatio = 0.1f;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if (Random.value <= ADamageChance)
         {
@@ -16,7 +16,7 @@ public class Choice6 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         if (Random.value <= BDamageChance)
         {

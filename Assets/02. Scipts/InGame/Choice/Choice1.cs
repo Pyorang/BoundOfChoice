@@ -4,22 +4,22 @@ public class Choice1 : ChoiceBase
 {
     private static readonly int NextChoiceID = 2;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
 
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
 
     }
 
-    public override void ExecuteA()
+    public override void ExecuteLeft()
     {
         ChoiceManager.Instance.SetChoice(NextChoiceID);
     }
 
-    public override void ExecuteB()
+    public override void ExecuteRight()
     {
         ChoiceManager.Instance.SetChoice(NextChoiceID);
     }

@@ -4,7 +4,7 @@ public class Choice16 : ChoiceBase
 {
     private static readonly int AActivateTrapAmount = 2;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         for(int i = 0; i < AActivateTrapAmount; i++)
         {
@@ -14,7 +14,7 @@ public class Choice16 : ChoiceBase
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonSwrodsman);
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonElite);
     }

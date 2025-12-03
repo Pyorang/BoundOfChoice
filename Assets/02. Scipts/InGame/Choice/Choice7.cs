@@ -5,29 +5,29 @@ public class Choice7 : ChoiceBase
     private static readonly int ExecuteCount = 5;
     private static readonly int DamageAmount = 10;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
-        _executeACount = ExecuteCount;
+        _executeLeftCount = ExecuteCount;
         ChoiceManager.OnRightLeverInteracted += GiveDamage;
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
-        _executeBCount = ExecuteCount;
+        _executeRightCount = ExecuteCount;
         ChoiceManager.OnLeftLeverInteracted += GiveDamage;
     }
 
-    protected override void ExecuteRemainingA()
+    protected override void ExecuteLeftRemaining()
     {
-        if(_executeACount == 0)
+        if(_executeLeftCount == 0)
         {
             ChoiceManager.OnRightLeverInteracted -= GiveDamage;
         }
     }
 
-    protected override void ExecuteRemainingB()
+    protected override void ExecuteRightRemaining()
     {
-        if (_executeBCount == 0)
+        if (_executeRightCount == 0)
         {
             ChoiceManager.OnLeftLeverInteracted -= GiveDamage;
         }

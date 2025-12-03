@@ -10,9 +10,9 @@ public class Choice23 : ChoiceBase
     private static readonly float NarrowedRadius = 4.0f;
     private static readonly float WidenedRadius = 13.0f;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
-        _executeACount = ExecuteCount;
+        _executeLeftCount = ExecuteCount;
 
         if(Random.value >= 0.5f)
         {
@@ -24,14 +24,14 @@ public class Choice23 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         
     }
 
-    protected override void ExecuteRemainingA()
+    protected override void ExecuteLeftRemaining()
     {
-        if (_executeACount == 0)
+        if (_executeLeftCount == 0)
         {
             PlayerCombat.Instance.ChangePlayerVision(EffectDuration, NormalRadius);
         }

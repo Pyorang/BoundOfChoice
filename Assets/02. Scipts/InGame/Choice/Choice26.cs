@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Choice26 : ChoiceBase
 {
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if(Random.value <= 0.5f)
         {
@@ -14,7 +14,7 @@ public class Choice26 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         
     }

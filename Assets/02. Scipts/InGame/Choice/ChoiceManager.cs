@@ -8,14 +8,16 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 {
     [Header("선택을 표시할 Text")]
     [Space]
-    [SerializeField] private TextMeshProUGUI _text1;
-    [SerializeField] private TextMeshProUGUI _text2;
+    [SerializeField] private TextMeshProUGUI _textLeft;
+    [SerializeField] private TextMeshProUGUI _textRight;
     [SerializeField] private float _typingDelay = 0.1f;
 
     public bool IsLeftChoice;
 
-    private IEnumerator _typingCoroutine1;
-    private IEnumerator _typingCoroutine2;
+    private IEnumerator _typingCoroutineLeft;
+    private IEnumerator _typingCoroutineRight;
+    private bool _typeLeftDone;
+    private bool _typeRightDone;
 
     private ChoiceModel _currentChoiceModel;
     
@@ -107,22 +109,25 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         _currentChoice = _choices[GetCurrentChoiceID() - 1];
     }
 
-    public void UpdateChoiceText(string text1, string text2)
+    public void UpdateChoiceText(string textLeft, string textRight)
     {
-        if(_typingCoroutine1 != null)
+        if(_typingCoroutineLeft != null)
         {
-            StopCoroutine(_typingCoroutine1);
+            StopCoroutine(_typingCoroutineLeft);
         }
-        if(_typingCoroutine2 != null)
+        if(_typingCoroutineRight != null)
         {
-            StopCoroutine(_typingCoroutine2);
+            StopCoroutine(_typingCoroutineRight);
         }
 
-        _typingCoroutine1 = TypingEffect(_text1, text1, _typingDelay);
-        _typingCoroutine2 = TypingEffect(_text2, text2, _typingDelay);
+        _typingCoroutineLeft = TypingEffect(_textLeft, textLeft, _typingDelay);
+        _typingCoroutineRight = TypingEffect(_textRight, textRight, _typingDelay);
 
-        StartCoroutine(_typingCoroutine1);
-        StartCoroutine(_typingCoroutine2);
+        _typeLeftDone = false;
+        _typeRightDone = false;
+
+        StartCoroutine(_typingCoroutineLeft);
+        StartCoroutine(_typingCoroutineRight);
     }
 
     private IEnumerator TypingEffect(TextMeshProUGUI textObject, string fullText, float delay)
@@ -140,7 +145,19 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
             yield return waitDelay;
         }
 
-        Angel.Instance.EnableLevers();
+        if(textObject == _textLeft)
+        {
+            _typeLeftDone = true;
+        }
+        if(textObject == _textRight)
+        {
+            _typeRightDone = true;
+        }
+
+        if(_typeLeftDone && _typeRightDone)
+        {
+            Angel.Instance.EnableLevers();
+        }
     }
 
     public int GetCurrentChoiceID()
@@ -155,12 +172,12 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         if (IsLeftChoice)
         {
             OnLeftLeverInteracted?.Invoke();
-            _currentChoice.ExecuteA();
+            _currentChoice.ExecuteLeft();
         }
         else
         {
             OnRightLeverInteracted?.Invoke();
-            _currentChoice.ExecuteB();
+            _currentChoice.ExecuteRight();
         }
     }
 

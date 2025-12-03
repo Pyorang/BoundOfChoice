@@ -4,7 +4,7 @@ public class Choice24 : ChoiceBase
 {
     private static readonly int ArcherAlreadyGainedGoldAmount = 50;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         PlayerCombat.Instance.OpenCharacter(ECharacterType.Archer, ArcherAlreadyGainedGoldAmount);
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
@@ -13,7 +13,7 @@ public class Choice24 : ChoiceBase
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         MonsterSpawner.Instance.SpawnMonster(EPoolType.SkeletonArbalist);
     }

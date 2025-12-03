@@ -9,7 +9,7 @@ public class Choice13 : ChoiceBase
     private static readonly int BAdditionalSpeed = 1;
     private static readonly int BAdditionalMaxHealth = 5;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if(Random.value <= ASpiritGainChance)
         {
@@ -17,7 +17,7 @@ public class Choice13 : ChoiceBase
         }
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         PlayerCombat.Instance.AdditionalPower += BAdditionalDamageAmount;
         PlayerMovement.Instance.MoveSpeed += BAdditionalSpeed;

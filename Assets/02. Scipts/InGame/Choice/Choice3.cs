@@ -7,7 +7,7 @@ public class Choice3 : ChoiceBase
     private static readonly float DamageChance = 0.9f;
     private static readonly int DamageAmount = 30;
 
-    protected override void StepA()
+    protected override void StepLeft()
     {
         if (Random.value <= DeathChance)
         {
@@ -17,7 +17,7 @@ public class Choice3 : ChoiceBase
         GetNewChoice();
     }
 
-    protected override void StepB()
+    protected override void StepRight()
     {
         if (Random.value <= DamageChance)
         {
