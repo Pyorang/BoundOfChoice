@@ -37,9 +37,13 @@ public class MonsterNavigator : MonoBehaviour
     {
         Vector2 viewPos = _mainCamera.WorldToViewportPoint(transform.position);
 
-        if (viewPos.x < 0 || viewPos.x > 1)
+        if(viewPos.x < 0)
         {
-            _patrolDirection = -_patrolDirection;
+            _patrolDirection = Vector2.right;
+        }
+        else if(viewPos.x > 1)
+        {
+            _patrolDirection = Vector2.left;
         }
 
         return _patrolDirection;
