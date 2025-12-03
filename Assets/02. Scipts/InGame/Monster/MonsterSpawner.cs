@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
@@ -37,7 +38,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
         CurrentMonsterCount++;
 
         GameObject monster = PoolManager.Instance.GetObject(monsterType);
-        
+
         Vector3 spawnPosition = monster.transform.position;
         spawnPosition.x = transform.position.x;
         monster.transform.position = spawnPosition;
@@ -62,7 +63,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
     public void SpawnMonsters(ReadOnlySpan<EPoolType> monsterTypes)
     {
-        float SpawnX = transform.position.x;
+        float spawnX = transform.position.x;
 
         float totalWidth = (monsterTypes.Length - 1) * _monsterSpacing;
 
@@ -70,9 +71,25 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
         for (int i = 0; i < monsterTypes.Length; ++i)
         {
-            float offsetX = SpawnX + startOffset + i * _monsterSpacing;
+            float offsetX = spawnX + startOffset + i * _monsterSpacing;
 
             SpawnMonster(monsterTypes[i], offsetX);
         }
+    }
+
+    public void SpawnMonstersWithDelay(EPoolType monsterType, WaitForSeconds spawnDelayTime, float spawnRepeatChance)
+    {
+        StartCoroutine(SpawnMonstersCoroutine(monsterType, spawnDelayTime, spawnRepeatChance));
+    }
+
+    private IEnumerator SpawnMonstersCoroutine(EPoolType monsterType, WaitForSeconds spawnDelayTime, float spawnRepeatChance)
+    {
+        do
+        {
+            SpawnMonster(monsterType);
+
+            yield return spawnDelayTime;
+
+        } while (UnityEngine.Random.value <= spawnRepeatChance);
     }
 }
