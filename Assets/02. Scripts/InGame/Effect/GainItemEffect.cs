@@ -14,7 +14,7 @@ public class GainItemEffect : MonoBehaviour
     private Transform _playerTransform;
     private bool _isCollecting = false;
 
-    private static readonly string s_itemSound = "GainItem";
+    private static readonly string s_itemSound = "Item";
 
     private void Awake()
     {

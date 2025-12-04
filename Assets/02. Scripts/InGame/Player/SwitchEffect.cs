@@ -32,6 +32,7 @@ public class SwitchEffect : MonoBehaviour
             _light.intensity = 0;
         }
 
+        AudioManager.Instance.Play(AudioType.SFX, "Change");
         _effectCoroutine = SwitchingEffect();
         StartCoroutine(_effectCoroutine);
     }
