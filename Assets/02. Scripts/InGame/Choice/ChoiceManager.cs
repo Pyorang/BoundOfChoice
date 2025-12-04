@@ -10,7 +10,7 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
     [Space]
     [SerializeField] private TextMeshProUGUI _textLeft;
     [SerializeField] private TextMeshProUGUI _textRight;
-    [SerializeField] private float _typingDelay = 0.1f;
+    [SerializeField] private float _totalTypingTime = 2.5f;
 
     public bool IsLeftChoice;
 
@@ -111,17 +111,17 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 
     public void UpdateChoiceText(string textLeft, string textRight)
     {
-        if(_typingCoroutineLeft != null)
+        if (_typingCoroutineLeft != null)
         {
             StopCoroutine(_typingCoroutineLeft);
         }
-        if(_typingCoroutineRight != null)
+        if (_typingCoroutineRight != null)
         {
             StopCoroutine(_typingCoroutineRight);
         }
 
-        _typingCoroutineLeft = TypingEffect(_textLeft, textLeft, _typingDelay);
-        _typingCoroutineRight = TypingEffect(_textRight, textRight, _typingDelay);
+        _typingCoroutineLeft = TypingEffect(_textLeft, textLeft);
+        _typingCoroutineRight = TypingEffect(_textRight, textRight);
 
         _typeLeftDone = false;
         _typeRightDone = false;
@@ -130,11 +130,13 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
         StartCoroutine(_typingCoroutineRight);
     }
 
-    private IEnumerator TypingEffect(TextMeshProUGUI textObject, string fullText, float delay)
+    private IEnumerator TypingEffect(TextMeshProUGUI textObject, string fullText)
     {
         textObject.text = "";
         var sb = new System.Text.StringBuilder();
 
+        int textLength = fullText.Length;
+        float delay = _totalTypingTime / textLength;
         WaitForSeconds waitDelay = new WaitForSeconds(delay);
 
         foreach (char c in fullText)
@@ -145,16 +147,16 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
             yield return waitDelay;
         }
 
-        if(textObject == _textLeft)
+        if (textObject == _textLeft)
         {
             _typeLeftDone = true;
         }
-        if(textObject == _textRight)
+        if (textObject == _textRight)
         {
             _typeRightDone = true;
         }
 
-        if(_typeLeftDone && _typeRightDone)
+        if (_typeLeftDone && _typeRightDone)
         {
             Angel.Instance.EnableLevers();
         }
@@ -196,7 +198,7 @@ public class ChoiceManager : SingletonBehaviour<ChoiceManager>
 
     private void ManageAppearList(int choiceID, bool canAppear)
     {
-        if(!canAppear)
+        if (!canAppear)
         {
             _nonAppearableChoicesID.Add(choiceID + 1);
         }
