@@ -4,7 +4,13 @@ public class RerollTicket : ItemBase
 {
     public override bool ApplyEffect()
     {
-        ChoiceManager.Instance.GetNewChoice();
+        if (ItemEffectController.Instance.IsEffecting)
+        {
+            return false;
+        }
+
+        ItemEffectController.Instance.UseRerollTicket();
+
         return true;
     }
 }
