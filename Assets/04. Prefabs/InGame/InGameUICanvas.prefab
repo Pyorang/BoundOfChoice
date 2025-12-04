@@ -3927,6 +3927,10 @@ PrefabInstance:
       propertyPath: _canvasRectTransform
       value: 
       objectReference: {fileID: 4296851649650034381}
+    - target: {fileID: 6960698114492266708, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7061382407350478310, guid: a508428f07b43bc48b624991c012b6e1, type: 3}
       propertyPath: _canvasRectTransform
       value: 
