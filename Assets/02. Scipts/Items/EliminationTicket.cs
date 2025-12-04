@@ -4,7 +4,7 @@ public class EliminationTicket : ItemBase
 {
     public override bool ApplyEffect()
     {
-        if(ItemEffectController.Instance.IsEffecting)
+        if (ItemEffectController.Instance.IsEffecting)
         {
             return false;
         }
