@@ -5,13 +5,13 @@ public class ItemEffectController : SingletonBehaviour<ItemEffectController>
 {
     [Header("이펙트 관련 오브젝트들")]
     [Space]
-    [SerializeField] private GameObject RerollEffect;
-    [SerializeField] private GameObject EliminateEffect;
+    [SerializeField] private GameObject _rerollEffect;
+    [SerializeField] private GameObject _eliminateEffect;
 
     [Header("연출 효과 시간")]
     [Space]
-    [SerializeField] private float RerollDuration;
-    [SerializeField] private float EliminateDuration;
+    [SerializeField] private float _rerollDuration;
+    [SerializeField] private float _eliminateDuration;
 
     private bool _isEffecting;
     public bool IsEffecting => _isEffecting;
@@ -35,12 +35,12 @@ public class ItemEffectController : SingletonBehaviour<ItemEffectController>
     private IEnumerator StartRerollEffect()
     {
         _isEffecting = true;
-        RerollEffect.SetActive(true);
+        _rerollEffect.SetActive(true);
         AudioManager.Instance.Play(AudioType.SFX, "RerollTicket");
 
         float timeElapsed = 0;
 
-        while(timeElapsed < RerollDuration)
+        while (timeElapsed < _rerollDuration)
         {
             timeElapsed += Time.deltaTime;
             yield return null;
@@ -49,18 +49,18 @@ public class ItemEffectController : SingletonBehaviour<ItemEffectController>
         ChoiceManager.Instance.GetNewChoice();
 
         _isEffecting = false;
-        RerollEffect.SetActive(false);
+        _rerollEffect.SetActive(false);
     }
 
     private IEnumerator StartEliminateEffect()
     {
         _isEffecting = true;
-        EliminateEffect.SetActive(true);
+        _eliminateEffect.SetActive(true);
         AudioManager.Instance.Play(AudioType.SFX, "EliminateTicket");
 
         float timeElapsed = 0;
 
-        while (timeElapsed < EliminateDuration)
+        while (timeElapsed < _eliminateDuration)
         {
             timeElapsed += Time.deltaTime;
             yield return null;
@@ -73,6 +73,6 @@ public class ItemEffectController : SingletonBehaviour<ItemEffectController>
         PoolManager.Instance.ReleaseAllObjects(EPoolType.BringerOfDeath);
 
         _isEffecting = false;
-        EliminateEffect.SetActive(false);
+        _eliminateEffect.SetActive(false);
     }
 }
