@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BringerOfDeath
   m_EditorClassIdentifier: 
   _maxHealth: 750
-  _attackPower: 10
+  _attackPower: 15
   _moveSpeed: 2

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SkeletonElite
   m_EditorClassIdentifier: 
   _maxHealth: 300
-  _attackPower: 10
+  _attackPower: 12
   _moveSpeed: 1

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SkeletonSwordsman
   m_EditorClassIdentifier: 
   _maxHealth: 180
-  _attackPower: 5
+  _attackPower: 6
   _moveSpeed: 2

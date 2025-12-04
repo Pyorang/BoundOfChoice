@@ -28,8 +28,8 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
                 return;
             }
 
-            _additionalMoveSpeed = value;
-            OnSpeedChanged?.Invoke(value);
+            _additionalMoveSpeed = Mathf.Min(_maxMoveSpeed - _minMoveSpeed, value);
+            OnSpeedChanged?.Invoke(_additionalMoveSpeed);
             _moveSpeed = Mathf.Clamp(_minMoveSpeed + _additionalMoveSpeed, _minMoveSpeed, _maxMoveSpeed);
         }
     }

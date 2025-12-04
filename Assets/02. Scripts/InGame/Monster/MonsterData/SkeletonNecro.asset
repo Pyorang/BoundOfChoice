@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SkeletonNecro
   m_EditorClassIdentifier: 
   _maxHealth: 150
-  _attackPower: 7
+  _attackPower: 8
   _moveSpeed: 3

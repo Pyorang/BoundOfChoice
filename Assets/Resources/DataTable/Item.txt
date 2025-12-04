@@ -2,13 +2,13 @@
   "data": [
     {
       "ID": "I_1",
-      "Price": 15,
+      "Price": 25,
       "Name": "Apple",
       "Description": "Recovers 30 HP."
     },
     {
       "ID": "I_2",
-      "Price": 25,
+      "Price": 40,
       "Name": "HP Potion",
       "Description": "Recovers 60 HP."
     },
@@ -20,25 +20,25 @@
     },
     {
       "ID": "I_4",
-      "Price": 10,
+      "Price": 15,
       "Name": "Arrow",
       "Description": "Required to shoot a bow. One is consumed per attack with a bow."
     },
     {
       "ID": "I_5",
-      "Price": 75,
+      "Price": 45,
       "Name": "Fire Scroll",
       "Description": "If this book is carried, you can cast Fire Ball."
     },
     {
       "ID": "I_6",
-      "Price": 75,
+      "Price": 45,
       "Name": "Ice Scroll",
       "Description": "If this book is carried, you can cast Ice Age."
     },
     {
       "ID": "I_7",
-      "Price": 75,
+      "Price": 60,
       "Name": "Reroll Ticket",
       "Description": "When used, it changes the current selection to a different selection."
     },
