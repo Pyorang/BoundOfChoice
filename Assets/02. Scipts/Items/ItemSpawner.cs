@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum EItemType
 {
@@ -20,6 +21,9 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
     [SerializeField] private float _dropForce;
     [SerializeField] private float _minYForce;
 
+    [SerializeField] private float _minX;
+    [SerializeField] private float _maxX;
+
     protected override void Init()
     {
         IsDestroyOnLoad = true;
@@ -31,9 +35,15 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
         GameObject item = PoolManager.Instance.GetObject(itemType);
         item.transform.position = position;
 
+        SpawnEffect(item, position);
+        return item;
+    }
+
+    private void SpawnEffect(GameObject item, Vector3 position)
+    {
         Rigidbody2D itemRigidbody = item.GetComponent<Rigidbody2D>();
 
-        if (itemRigidbody == null) return item;
+        if (itemRigidbody == null) return;
 
         itemRigidbody.linearVelocity = Vector2.zero;
         itemRigidbody.angularVelocity = 0f;
@@ -45,8 +55,18 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
             dropDirection.y = _minYForce;
         }
 
-        itemRigidbody.AddForce(dropDirection * _dropForce, ForceMode2D.Impulse);
+        if (_maxX < position.x)
+        {
+            item.transform.position = new Vector3(_maxX, position.y, position.z);
+            dropDirection.x -= 1f;
+        }
 
-        return item;
+        else if (_minX > position.x)
+        {
+            item.transform.position = new Vector3(_minX, position.y, position.z);
+            dropDirection.x += 1f;
+        }
+
+        itemRigidbody.AddForce(dropDirection * _dropForce, ForceMode2D.Impulse);
     }
 }

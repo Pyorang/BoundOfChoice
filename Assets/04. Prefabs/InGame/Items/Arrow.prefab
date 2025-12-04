@@ -154,7 +154,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.1, y: 0.1}
+  m_Size: {x: 1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!1 &6451897020152732300
 GameObject:
@@ -304,4 +304,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForce: 10
   _fadeDuration: 0.25
+  _attractSpeed: 5
   _itemPoolType: 18
