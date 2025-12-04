@@ -68,7 +68,7 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  _bindDuration: 3
+  _bindDuration: 7
 --- !u!114 &8284565954351412865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1209655503
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8948dad9bf649f942b95ae2868427a67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
