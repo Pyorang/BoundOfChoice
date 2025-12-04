@@ -112,7 +112,6 @@ public class InGameUIController : MonoBehaviour
 
     private void TryToggleUI(EWindowUIType type)
     {
-        if (_currentWindowUI == EWindowUIType.Setting) return;
         if (_currentWindowUI == EWindowUIType.None || _currentWindowUI == type)
         {
             _windowUiToggleActions[type]();
@@ -156,10 +155,18 @@ public class InGameUIController : MonoBehaviour
 
     public void OnClickInGameSettingsButton()
     {
-        var uiData = new BaseUIData();
-        uiData.ActionOnClose = CloseSettingUI;
-        UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
-        AudioManager.Instance.Play(AudioType.SFX, Button);
+        BaseUI settingUI = UIManager.Instance.GetActiveUI<InGameSettingsUI>();
+        if (settingUI == null)
+        {
+            var uiData = new BaseUIData();
+            uiData.ActionOnClose = CloseSettingUI;
+            UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
+            AudioManager.Instance.Play(AudioType.SFX, Button);
+        }
+        else
+        {
+            settingUI.Close();
+        }
     }
 
     public void OnUpdateHealthUI(int health, int maxHealth)
