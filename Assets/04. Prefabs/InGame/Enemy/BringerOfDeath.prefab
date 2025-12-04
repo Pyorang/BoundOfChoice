@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 2850755233113497383}
   - component: {fileID: 3799060527907515020}
   - component: {fileID: 1922580247676962100}
+  - component: {fileID: 3034383765362882119}
   m_Layer: 6
   m_Name: BringerOfDeath
   m_TagString: Enemy
@@ -388,3 +389,18 @@ MonoBehaviour:
   _additionalSpeed: 3
   _additionalMaxHealth: 10
   _goldAmount: 25
+--- !u!114 &3034383765362882119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8968840046097116836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a5908190d87884db8f7569d8c111a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSound: BringerAttack
+  _deathSound: BringerDeath
+  _castSound: Cast

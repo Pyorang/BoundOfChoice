@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 4142146841793496267}
   - component: {fileID: 962619527252944458}
   - component: {fileID: 3678582092628245041}
+  - component: {fileID: -3527689495443847617}
   m_Layer: 6
   m_Name: SkeletonSwordsman
   m_TagString: Enemy
@@ -340,3 +341,17 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &-3527689495443847617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337163316377113064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a5908190d87884db8f7569d8c111a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSound: SkeletonSword
+  _deathSound: SkeletonDeath

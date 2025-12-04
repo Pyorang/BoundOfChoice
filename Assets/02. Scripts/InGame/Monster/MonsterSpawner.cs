@@ -13,6 +13,9 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
     [SerializeField] private float _monsterSpacing;
     [SerializeField] private float _maxSpawnWidth;
 
+    private static readonly string SpawnSound = "SkeletonSpawn";
+    private static readonly string BringerSpawnSound = "BringerSpawn";
+
     private static readonly EPoolType[] SkeletonTypes = new EPoolType[]
     {
         EPoolType.SkeletonSwordsman,
@@ -55,6 +58,8 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
         if(float.IsNaN(positionX))
         {
+            string soundToPlay = monsterType == EPoolType.BringerOfDeath ? BringerSpawnSound : SpawnSound;
+            AudioManager.Instance.Play(AudioType.SFX, soundToPlay);
             positionX = UnityEngine.Random.Range(_minSpawnX, _maxSpawnX);
         }
 
@@ -70,6 +75,7 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
     public void SpawnMonsters(ReadOnlySpan<EPoolType> monsterTypes)
     {
         if (monsterTypes.Length <= 1) return;
+        AudioManager.Instance.Play(AudioType.SFX, SpawnSound);
 
         float baseSpawnX = transform.position.x;
 

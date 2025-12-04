@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 4358631164131459471}
   - component: {fileID: 2024366942414526228}
   - component: {fileID: 5350653618491920352}
+  - component: {fileID: 4616523047880107556}
   m_Layer: 6
   m_Name: SkeletonArbalist
   m_TagString: Enemy
@@ -326,6 +327,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackOffset: {fileID: 4728416969208271786}
   _type: 7
+--- !u!114 &4616523047880107556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008387672266635162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a5908190d87884db8f7569d8c111a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSound: SkeletonCrossbow
+  _deathSound: SkeletonDeath
+  _castSound: 
 --- !u!1 &8721415942770215541
 GameObject:
   m_ObjectHideFlags: 0
