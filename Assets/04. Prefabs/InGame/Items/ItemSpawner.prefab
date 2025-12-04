@@ -46,3 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dropForce: 5
   _minYForce: 0.75
+  _minX: -19.5
+  _maxX: 19.5
+  _CorrectionForce: 1
