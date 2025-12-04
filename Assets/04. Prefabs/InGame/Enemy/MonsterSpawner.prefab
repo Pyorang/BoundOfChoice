@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fbcc25562e89b43a187ae4d168f396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monsterSpacing: 1.5
+  _minSpawnX: -20
+  _maxSpawnX: 20
+  _monsterSpacing: 2
   _maxSpawnWidth: 7.5
