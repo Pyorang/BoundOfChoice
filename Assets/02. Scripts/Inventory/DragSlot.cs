@@ -22,7 +22,7 @@ public class DragSlot : SingletonBehaviour<DragSlot>
 
     public void EndDrag()
     {
-        AudioManager.Instance.Play(AudioType.SFX, "Button");
+        AudioManager.Instance.Play(AudioType.SFX, "Item");
         gameObject.SetActive(false);
         _dragImageUI.sprite = null;
     }

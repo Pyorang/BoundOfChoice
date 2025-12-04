@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class Tombstone : ProjectileBase
 {
+    private static readonly string TombstoneSound = "Tombstone";
+
+    private void PlayTombstoneSound()
+    {
+        AudioManager.Instance.Play(AudioType.SFX, TombstoneSound);
+    }
+
     public override void ApplyDamage(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;

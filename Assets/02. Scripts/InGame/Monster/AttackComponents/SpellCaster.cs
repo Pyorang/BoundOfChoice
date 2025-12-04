@@ -12,6 +12,7 @@ public class SpellCaster : MonoBehaviour
     private WaitForSeconds _waitInterval;
     private Coroutine _castCoroutine;
 
+    private static readonly string CastSound = "Cast";
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class SpellCaster : MonoBehaviour
 
     private void Cast()
     {
+        AudioManager.Instance.Play(AudioType.SFX, CastSound);
         _animator.PlaySpecialAttackAnimation();
     }
 

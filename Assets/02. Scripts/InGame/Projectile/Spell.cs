@@ -1,12 +1,12 @@
 using UnityEngine;
 
 public class Spell : ProjectileBase
-{
-    private Transform _target;
+{    
+    private static readonly string SpellSound = "Spell";
 
-    private void Start()
+    private void PlaySpellSound()
     {
-        _target = PlayerMovement.Instance.transform;
+        AudioManager.Instance.Play(AudioType.SFX, SpellSound);
     }
 
     public override void ApplyDamage(Collider2D other)
