@@ -33,9 +33,13 @@ public class SpellCaster : MonoBehaviour
         _castCoroutine = null;
     }
 
-    private void Cast()
+    private void PlayCastSound()
     {
         AudioManager.Instance.Play(AudioType.SFX, CastSound);
+    }
+
+    private void Cast()
+    {
         _animator.PlaySpecialAttackAnimation();
     }
 
