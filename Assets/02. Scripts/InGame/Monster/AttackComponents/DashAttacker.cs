@@ -4,12 +4,12 @@ public class DashAttacker : MeleeAttacker
 {
     private bool _isDash = false;
 
-    private static readonly string _dashSound = "SkeletonDash";
-    private static readonly string _crashSound = "SkeletonCrash";
+    private static readonly string DashSound = "SkeletonDash";
+    private static readonly string CrashSound = "SkeletonCrash";
 
     public void StartDash()
     {
-        AudioManager.Instance.Play(AudioType.SFX, _dashSound);
+        AudioManager.Instance.Play(AudioType.SFX, DashSound);
         _isDash = true;
     }
 
@@ -21,7 +21,7 @@ public class DashAttacker : MeleeAttacker
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!_isDash || !other.gameObject.CompareTag(PlayerTag)) return;
-        AudioManager.Instance.Play(AudioType.SFX, _crashSound);
+        AudioManager.Instance.Play(AudioType.SFX, CrashSound);
         PlayerHealth.Instance.TakeDamage(_stats.AttackPower);
     }
 }
