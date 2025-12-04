@@ -48,3 +48,4 @@ MonoBehaviour:
   _minYForce: 0.75
   _minX: -19.5
   _maxX: 19.5
+  _CorrectionForce: 1
