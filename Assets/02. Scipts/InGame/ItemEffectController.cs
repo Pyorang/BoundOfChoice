@@ -24,55 +24,44 @@ public class ItemEffectController : SingletonBehaviour<ItemEffectController>
 
     public void UseRerollTicket()
     {
-        StartCoroutine(StartRerollEffect());
+        StartCoroutine(
+            StartEffect(_rerollEffect, _rerollDuration, "RerollTicket",
+                () => ChoiceManager.Instance.GetNewChoice()
+            )
+        );
     }
 
     public void UseEliminateTicket()
     {
-        StartCoroutine(StartEliminateEffect());
+        StartCoroutine(
+            StartEffect(_eliminateEffect, _eliminateDuration, "EliminateTicket",
+                () =>
+                {
+                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonSwordsman);
+                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonArbalist);
+                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonElite);
+                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonNecro);
+                    PoolManager.Instance.ReleaseAllObjects(EPoolType.BringerOfDeath);
+                }
+            )
+        );
     }
 
-    private IEnumerator StartRerollEffect()
+    private IEnumerator StartEffect(GameObject effect, float duration, string audioName, System.Action onComplete)
     {
         _isEffecting = true;
-        _rerollEffect.SetActive(true);
-        AudioManager.Instance.Play(AudioType.SFX, "RerollTicket");
+        effect.SetActive(true);
+        AudioManager.Instance.Play(AudioType.SFX, audioName);
 
-        float timeElapsed = 0;
-
-        while (timeElapsed < _rerollDuration)
+        float timeElapsed = 0f;
+        while (timeElapsed < duration)
         {
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
-        ChoiceManager.Instance.GetNewChoice();
-
-        _isEffecting = false;
-        _rerollEffect.SetActive(false);
-    }
-
-    private IEnumerator StartEliminateEffect()
-    {
-        _isEffecting = true;
-        _eliminateEffect.SetActive(true);
-        AudioManager.Instance.Play(AudioType.SFX, "EliminateTicket");
-
-        float timeElapsed = 0;
-
-        while (timeElapsed < _eliminateDuration)
-        {
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonSwordsman);
-        PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonArbalist);
-        PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonElite);
-        PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonNecro);
-        PoolManager.Instance.ReleaseAllObjects(EPoolType.BringerOfDeath);
-
-        _isEffecting = false;
-        _eliminateEffect.SetActive(false);
+        onComplete?.Invoke();
+        _isEffecting = false; 
+        effect.SetActive(false);
     }
 }

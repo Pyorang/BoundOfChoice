@@ -5047,10 +5047,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bef57c5892fb4c40bcb865307c031d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RerollEffect: {fileID: 132476904}
-  EliminateEffect: {fileID: 1665148164}
-  RerollDuration: 0.5
-  EliminateDuration: 1
+  _rerollEffect: {fileID: 132476904}
+  _eliminateEffect: {fileID: 1665148164}
+  _rerollDuration: 1
+  _eliminateDuration: 1
 --- !u!1001 &2949859490506548035
 PrefabInstance:
   m_ObjectHideFlags: 0
