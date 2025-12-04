@@ -32,14 +32,6 @@ public class SettingsUI : BaseUI
         _vibrationToggle.isOn = _userSettingsData.IsVibrationOn;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Close();
-        }
-    }
-
     public void OnClickBGMChangeButton(bool changeUp)
     {
         float changeAmount = changeUp ? AudioChangeAmount : -AudioChangeAmount;

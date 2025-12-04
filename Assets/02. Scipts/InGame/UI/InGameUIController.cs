@@ -97,26 +97,35 @@ public class InGameUIController : MonoBehaviour
                 TryToggleUI(EWindowUIType.Inventory);
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                TryToggleUI(EWindowUIType.Setting);
-            }
-
             if (Input.GetKeyDown(KeyCode.BackQuote))
             {
                 TryToggleUI(EWindowUIType.Shop);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (TryCloseCurrentUI()) return;
+                TryToggleUI(EWindowUIType.Setting);
             }
         }
     }
 
     private void TryToggleUI(EWindowUIType type)
     {
-        if (_currentWindowUI == EWindowUIType.Setting) return;
         if (_currentWindowUI == EWindowUIType.None || _currentWindowUI == type)
         {
             _windowUiToggleActions[type]();
             _currentWindowUI = (_currentWindowUI == type) ? EWindowUIType.None : type;
         }
+    }
+
+    private bool TryCloseCurrentUI()
+    {
+        if (_currentWindowUI == EWindowUIType.None) return false;
+
+        _windowUiToggleActions[_currentWindowUI]();
+        _currentWindowUI = EWindowUIType.None;
+        return true;
     }
 
     private void ChangeCharacterUIInfo(int characterType)
@@ -146,10 +155,18 @@ public class InGameUIController : MonoBehaviour
 
     public void OnClickInGameSettingsButton()
     {
-        var uiData = new BaseUIData();
-        uiData.ActionOnClose = CloseSettingUI;
-        UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
-        AudioManager.Instance.Play(AudioType.SFX, Button);
+        BaseUI settingUI = UIManager.Instance.GetActiveUI<InGameSettingsUI>();
+        if (settingUI == null)
+        {
+            var uiData = new BaseUIData();
+            uiData.ActionOnClose = CloseSettingUI;
+            UIManager.Instance.OpenUI<InGameSettingsUI>(uiData);
+            AudioManager.Instance.Play(AudioType.SFX, Button);
+        }
+        else
+        {
+            settingUI.Close();
+        }
     }
 
     public void OnUpdateHealthUI(int health, int maxHealth)
