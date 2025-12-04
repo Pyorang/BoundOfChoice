@@ -7,9 +7,13 @@ public class RangedSpell : MonoBehaviour
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
 
+    [Header("투사체 타입")]
+    [Space]
+    [SerializeField] private EPoolType _poolType;
+
     private void CastSpell()
     {
-        GameObject spell = PoolManager.Instance.GetObject(EPoolType.Spell);
+        GameObject spell = PoolManager.Instance.GetObject(_poolType);
 
         Vector2 spawnPoint = transform.position;
         spawnPoint.x = Random.Range(_minX, _maxX);
@@ -19,7 +23,13 @@ public class RangedSpell : MonoBehaviour
 
     private void CastSpellAtPlayerPosition()
     {
-        GameObject spell = PoolManager.Instance.GetObject(EPoolType.Spell);
+        if (PlayerHealth.Instance.IsDeath)
+        {
+            CastSpell();
+            return;
+        }
+
+        GameObject spell = PoolManager.Instance.GetObject(_poolType);
 
         Vector2 spawnPoint = PlayerMovement.Instance.transform.position;
         spawnPoint.y = spell.transform.position.y;

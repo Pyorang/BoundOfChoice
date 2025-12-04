@@ -44,6 +44,7 @@ public class MonsterController : MonoBehaviour
         _statusEffect.OnDotDamageTick += HandleDotDamage;
         _statusEffect.OnBindStart += HandleBindStart;
         _statusEffect.OnBindEnd += HandleBindEnd;
+        PlayerHealth.OnDeath += HandlePlayerDeath;
     }
 
     private void OnDisable()
@@ -53,6 +54,7 @@ public class MonsterController : MonoBehaviour
         _statusEffect.OnDotDamageTick -= HandleDotDamage;
         _statusEffect.OnBindStart -= HandleBindStart;
         _statusEffect.OnBindEnd -= HandleBindEnd;
+        PlayerHealth.OnDeath -= HandlePlayerDeath;
     }
 
     private void Update()
@@ -172,6 +174,12 @@ public class MonsterController : MonoBehaviour
         _animator.ResumeAnimation();
         _stats.ResetSpeed();
         _state.DetermineState();
+    }
+
+    private void HandlePlayerDeath()
+    {
+        _state.SetState(EMonsterState.Patrol);
+        _state.ReleasePlayer();
     }
 
     private void OnAnimationEnd()

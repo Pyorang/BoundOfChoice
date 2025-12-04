@@ -9,9 +9,9 @@ public class PlayerAnimator : MonoBehaviour
 
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Hit = Animator.StringToHash("Hit");
-    private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int Jump = Animator.StringToHash("Jump");
     private static readonly int IsRun = Animator.StringToHash("IsRun");
+    private static readonly int IsDeath = Animator.StringToHash("IsDeath");
     private static readonly int IsOnGround = Animator.StringToHash("IsOnGround");
 
     private void Awake()
@@ -32,7 +32,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayDeathAnimation()
     {
-        _animator.SetTrigger(Death);
+        _animator.SetBool(IsDeath, true);
     }
 
     public void PlayJumpAnimation()
