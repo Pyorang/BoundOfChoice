@@ -23,7 +23,7 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
 
-    [SerializeField] private float _CorrectionForce;
+    [SerializeField] private float _correctionForce;
 
     protected override void Init()
     {
@@ -59,13 +59,13 @@ public class ItemSpawner : SingletonBehaviour<ItemSpawner>
         if (_maxX < position.x)
         {
             item.transform.position = new Vector3(_maxX, position.y, position.z);
-            dropDirection.x -= _CorrectionForce;
+            dropDirection.x -= _correctionForce;
         }
 
         else if (_minX > position.x)
         {
             item.transform.position = new Vector3(_minX, position.y, position.z);
-            dropDirection.x += _CorrectionForce;
+            dropDirection.x += _correctionForce;
         }
 
         itemRigidbody.AddForce(dropDirection * _dropForce, ForceMode2D.Impulse);
