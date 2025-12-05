@@ -2,13 +2,13 @@
   "data": [
     {
       "ID": "I_1",
-      "Price": 25,
+      "Price": 30,
       "Name": "Apple",
       "Description": "Recovers 30 HP."
     },
     {
       "ID": "I_2",
-      "Price": 40,
+      "Price": 45,
       "Name": "HP Potion",
       "Description": "Recovers 60 HP."
     },
@@ -26,25 +26,25 @@
     },
     {
       "ID": "I_5",
-      "Price": 45,
+      "Price": 40,
       "Name": "Fire Scroll",
       "Description": "If this book is carried, you can cast Fire Ball."
     },
     {
       "ID": "I_6",
-      "Price": 45,
+      "Price": 40,
       "Name": "Ice Scroll",
       "Description": "If this book is carried, you can cast Ice Age."
     },
     {
       "ID": "I_7",
-      "Price": 60,
+      "Price": 25,
       "Name": "Reroll Ticket",
       "Description": "When used, it changes the current selection to a different selection."
     },
     {
       "ID": "I_8",
-      "Price": 100,
+      "Price": 40,
       "Name": "Elimination Ticket",
       "Description": "When used, all enemies on the map are instantly killed."
     }
