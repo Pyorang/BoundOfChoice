@@ -98,13 +98,13 @@ public class GameOverUI : BaseUI
 
     public void OnClickRestartButton()
     {
-        UIManager.Instance.CloseUI(this);
+        UIManager.Instance.CloseAllUI();
         SceneLoader.Instance.ReloadScene();
     }
 
     public void OnClickExitButton()
     {
-        UIManager.Instance.CloseUI(this);
+        UIManager.Instance.CloseAllUI();
         SceneLoader.Instance.LoadScene(ESceneType.Lobby);
     }
 }

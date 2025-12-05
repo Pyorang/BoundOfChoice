@@ -62,6 +62,7 @@ public class PlayerMovement : SingletonBehaviour<PlayerMovement>
 
     private void Update()
     {
+        if (Mathf.Approximately(Time.timeScale, 0f)) return;
         GetKeyInput();
     }
 

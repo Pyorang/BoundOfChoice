@@ -22,6 +22,16 @@ public class InventoryUI : SingletonBehaviour<InventoryUI>
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void OnDisable()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void ClearInventory()
     {
         foreach (SlotController slot in _slots)

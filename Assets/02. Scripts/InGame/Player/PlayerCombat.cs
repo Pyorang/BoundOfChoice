@@ -59,7 +59,7 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
         foreach (CharacterBase partner in _partners)
         {
-            if(partner.GoingWith == false)
+            if (partner.GoingWith == false)
             {
                 partner.DeactivateCharacter();
             }
@@ -68,7 +68,9 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     private void Update()
     {
-        if(!PlayerHealth.Instance.IsDeath)
+        if (Mathf.Approximately(Time.timeScale, 0f)) return;
+
+        if (!PlayerHealth.Instance.IsDeath)
         {
             GetCharacterChangeInput();
             GetAttackKeyInput();
@@ -77,7 +79,7 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     private void GetCharacterChangeInput()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _partners[(int)_currentCharacter].DeactivateCharacter();
 
@@ -109,7 +111,7 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
     {
         ECharacterType nextCharacter = (ECharacterType)(((int)_currentCharacter + 1) % _partners.Length);
         
-        while(true)
+        while (true)
         {
             if (_partners[(int)nextCharacter].GoingWith == false)
             {
@@ -148,7 +150,7 @@ public class PlayerCombat : SingletonBehaviour<PlayerCombat>
 
     public void OpenCharacter(ECharacterType character, int goldAmount)
     {
-        if(_partners[(int)character].GoingWith)
+        if (_partners[(int)character].GoingWith)
         {
             GoldManager.Instance.GetGold(goldAmount);
             return;
