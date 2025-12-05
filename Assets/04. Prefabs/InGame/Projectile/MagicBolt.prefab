@@ -107,7 +107,7 @@ MonoBehaviour:
   _damage: 80
   _speed: 8
   _animator: {fileID: 8539093574450493041}
-  _splashDistance: 2
+  _splashDistance: 3
   _splashDamageReduction: 0.5
   _enemyLayer:
     serializedVersion: 2

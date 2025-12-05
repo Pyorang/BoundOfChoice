@@ -9,7 +9,7 @@ public class MagicBolt : ProjectileBase
 
     [Header("스플래쉬 데미지")]
     [Space]
-    [SerializeField] private float _splashDistance = 2.0f;
+    [SerializeField] private float _splashDistance = 3.0f;
     [SerializeField] private float _splashDamageReduction = 0.5f;
     [SerializeField] private LayerMask _enemyLayer;
 
