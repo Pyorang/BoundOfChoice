@@ -1,12 +1,16 @@
 using UnityEngine;
 
 public class Spell : ProjectileBase
-{    
-    private static readonly string SpellSound = "Spell";
+{
+    [Header("타입 설정")]
+    [SerializeField] private EPoolType _poolType;
+
+    [Header("사운드 설정")]
+    [SerializeField] private string _spellSound = "Spell";
 
     private void PlaySpellSound()
     {
-        AudioManager.Instance.Play(AudioType.SFX, SpellSound);
+        AudioManager.Instance.Play(AudioType.SFX, _spellSound);
     }
 
     public override void ApplyDamage(Collider2D other)
@@ -31,6 +35,6 @@ public class Spell : ProjectileBase
 
     public override void ReleaseObject()
     {
-        PoolManager.Instance.ReleaseObject(EPoolType.Spell, this.gameObject);
+        PoolManager.Instance.ReleaseObject(_poolType, this.gameObject);
     }
 }
