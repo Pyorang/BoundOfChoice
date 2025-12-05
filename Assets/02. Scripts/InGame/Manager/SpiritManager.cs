@@ -15,7 +15,7 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
 
     [Header("소환 딜레이")]
     [Space]
-    [SerializeField] private float _spiritSpawnDelay = 0.25f;
+    [SerializeField] private float _spiritSpawnDelay = 0.5f;
     private Coroutine _spiritSpawnCoroutine;
 
     protected override void Init()

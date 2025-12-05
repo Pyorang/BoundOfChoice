@@ -1183,6 +1183,10 @@ PrefabInstance:
       propertyPath: _maxSpiritPiece
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6792361448046357225, guid: fbc774a9c791168439fb8ddd8ec82e6b, type: 3}
+      propertyPath: _spiritSpawnDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5018,7 +5022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textLeft: {fileID: 1374444728}
   _textRight: {fileID: 1337557739}
-  _typingDelay: 0.1
+  _totalTypingTime: 2.5
   IsLeftChoice: 0
 --- !u!114 &2069429845
 MonoBehaviour:
