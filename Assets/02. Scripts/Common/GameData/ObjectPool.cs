@@ -56,16 +56,14 @@ public class ObjectPool
     {
         foreach (var activeObject in _activeObjects)
         {
-            if (activeObject.TryGetComponent(out MonsterController monster))
-            {
-                monster.HandleDeath();
-            }
-            else
-            {
-                activeObject.SetActive(false);
-            }
+            activeObject.SetActive(false);
             _pool.Enqueue(activeObject);
         }
         _activeObjects.Clear();
+    }
+
+    public HashSet<GameObject> GetActiveObjects()
+    {
+        return _activeObjects;
     }
 }

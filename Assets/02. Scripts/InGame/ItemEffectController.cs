@@ -37,11 +37,11 @@ public class ItemEffectController : SingletonBehaviour<ItemEffectController>
             StartEffect(_eliminateEffect, _eliminateDuration, "EliminateTicket",
                 () =>
                 {
-                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonSwordsman);
-                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonArbalist);
-                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonElite);
-                    PoolManager.Instance.ReleaseAllObjects(EPoolType.SkeletonNecro);
-                    PoolManager.Instance.ReleaseAllObjects(EPoolType.BringerOfDeath);
+                    MonsterSpawner.Instance.DestroyAllMonsters(EPoolType.SkeletonSwordsman);
+                    MonsterSpawner.Instance.DestroyAllMonsters(EPoolType.SkeletonArbalist);
+                    MonsterSpawner.Instance.DestroyAllMonsters(EPoolType.SkeletonElite);
+                    MonsterSpawner.Instance.DestroyAllMonsters(EPoolType.SkeletonNecro);
+                    MonsterSpawner.Instance.DestroyAllMonsters(EPoolType.BringerOfDeath);
                 }
             )
         );

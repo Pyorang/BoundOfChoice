@@ -79,4 +79,13 @@ public class PoolManager : SingletonBehaviour<PoolManager>
             pool.ReleaseAllActiveObjects();
         }
     }
+
+    public HashSet<GameObject> GetActiveObjects(EPoolType type)
+    {
+        if (_pools.TryGetValue(type, out ObjectPool pool))
+        {
+            return pool.GetActiveObjects();
+        }
+        return null;
+    }
 }

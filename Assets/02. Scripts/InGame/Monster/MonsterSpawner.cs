@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
@@ -125,4 +126,17 @@ public class MonsterSpawner : SingletonBehaviour<MonsterSpawner>
 
         } while (UnityEngine.Random.value <= spawnRepeatChance);
     }
-}
+
+    public void DestroyAllMonsters(EPoolType monsterType)
+    {
+        HashSet<GameObject> activeMonsters = PoolManager.Instance.GetActiveObjects(monsterType);
+
+        foreach (var monster in activeMonsters)
+        {
+            if (monster.TryGetComponent(out MonsterController controller))
+            {
+                controller.HandleDeath();
+            }
+        }
+    }
+} 
