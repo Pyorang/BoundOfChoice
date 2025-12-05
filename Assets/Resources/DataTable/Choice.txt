@@ -87,7 +87,7 @@
     },
     {
       "ID": "C_18",
-      "Text1": "Fight a 'Tremendous Foe' and gain a 'Tremendous Reward'",
+      "Text1": "Fight a 'Powerful Enemy' and gain a 'Valuable Reward'",
       "Text2": "Run away, you coward"
     },
     {
@@ -98,7 +98,7 @@
     {
       "ID": "C_20",
       "Text1": "Summon 'One who knows Honor'",
-      "Text2": "Summon 'A Cowardly Gang'"
+      "Text2": "Summon 'A Skeleton Gang'"
     },
     {
       "ID": "C_21",
