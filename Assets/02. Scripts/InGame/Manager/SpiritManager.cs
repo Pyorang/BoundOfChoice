@@ -42,7 +42,6 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
         for (int i = 0; i < amount; i++)
         {
             AudioManager.Instance.Play(AudioType.SFX, "Spirit");
-            _currentSpiritCount = Mathf.Min(_currentSpiritCount + 1, _maxSpiritCount);
             OnSpiritGained?.Invoke();
             yield return delay;
         }
@@ -56,6 +55,7 @@ public class SpiritManager : SingletonBehaviour<SpiritManager>
 
     public void RefreshSpiritUI()
     {
+        _currentSpiritCount = Mathf.Min(_currentSpiritCount + 1, _maxSpiritCount);
         OnSpiritCountValueChanged?.Invoke(_currentSpiritCount, _maxSpiritCount);
 
         if (_currentSpiritCount == _maxSpiritCount)
